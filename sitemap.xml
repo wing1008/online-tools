@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://wing1008.github.io/online-tools/</loc>
+    <loc>https://online-tools-nu.vercel.app/</loc>
     <lastmod>2025-01-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://wing1008.github.io/online-tools/#tool-about</loc>
+    <loc>https://online-tools-nu.vercel.app/#tool-about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wing1008.github.io/online-tools/#tool-faq</loc>
+    <loc>https://online-tools-nu.vercel.app/#tool-faq</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wing1008.github.io/online-tools/#tool-guide</loc>
+    <loc>https://online-tools-nu.vercel.app/#tool-guide</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wing1008.github.io/online-tools/#tool-changelog</loc>
+    <loc>https://online-tools-nu.vercel.app/#tool-changelog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wing1008.github.io/online-tools/#tool-privacy</loc>
+    <loc>https://online-tools-nu.vercel.app/#tool-privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://wing1008.github.io/online-tools/#tool-contact</loc>
+    <loc>https://online-tools-nu.vercel.app/#tool-contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

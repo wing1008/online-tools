@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://wing1008.github.io/online-tools/sitemap.xml
+Sitemap: https://online-tools-nu.vercel.app/sitemap.xml
