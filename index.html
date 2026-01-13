@@ -134,164 +134,247 @@
         </header>
 
         <div id="main-grid">
+            <div class="section-title">텍스트</div>
+            <div class="tools-grid">
+                <div class="tool-card" onclick="showTool('text')"><h3>글자수 세기</h3><p>공백, 바이트</p></div>
+                <div class="tool-card" onclick="showTool('text-convert')"><h3>텍스트 변환</h3><p>대소문자, 뒤집기, 모스 등</p></div>
+                <div class="tool-card" onclick="showTool('replace')"><h3>찾아 바꾸기</h3><p>치환</p></div>
+                <div class="tool-card" onclick="showTool('diff')"><h3>텍스트 비교</h3><p>차이점 찾기</p></div>
+                <div class="tool-card" onclick="showTool('duplicate')"><h3>중복/정렬</h3><p>줄 처리</p></div>
+                <div class="tool-card" onclick="showTool('encrypt')"><h3>암호화</h3><p>AES</p></div>
+                <div class="tool-card" onclick="showTool('word-freq')"><h3>단어 분석</h3><p>빈도, 난이도</p></div>
+                <div class="tool-card" onclick="showTool('special')"><h3>특수문자</h3><p>유니코드</p></div>
+                <div class="tool-card" onclick="showTool('lorem')"><h3>더미 텍스트</h3><p>Lorem, 한글</p></div>
+                <div class="tool-card" onclick="showTool('markdown')"><h3>Markdown</h3><p>미리보기</p></div>
+                <div class="tool-card" onclick="showTool('ocr')"><h3>OCR</h3><p>이미지→텍스트</p></div>
+            </div>
+
+            <div class="section-title">이미지</div>
+            <div class="tools-grid">
+                <div class="tool-card" onclick="showTool('img-edit')"><h3>이미지 편집</h3><p>크기, 자르기, 회전</p></div>
+                <div class="tool-card" onclick="showTool('img-filter')"><h3>이미지 필터</h3><p>흑백, 세피아, 픽셀화</p></div>
+                <div class="tool-card" onclick="showTool('img-convert')"><h3>포맷 변환</h3><p>JPG, PNG, WebP</p></div>
+                <div class="tool-card" onclick="showTool('bg-remove')"><h3>누끼</h3><p>배경 제거</p></div>
+                <div class="tool-card" onclick="showTool('img-watermark')"><h3>워터마크</h3><p>텍스트 삽입</p></div>
+                <div class="tool-card" onclick="showTool('color-extract')"><h3>색상 추출</h3><p>팔레트 생성</p></div>
+                <div class="tool-card" onclick="showTool('favicon')"><h3>파비콘</h3><p>ICO 생성</p></div>
+                <div class="tool-card" onclick="showTool('placeholder')"><h3>플레이스홀더</h3><p>더미 이미지</p></div>
+                <div class="tool-card" onclick="showTool('qr')"><h3>QR/바코드</h3><p>생성</p></div>
+            </div>
+
+            <div class="section-title">개발</div>
+            <div class="tools-grid">
+                <div class="tool-card" onclick="showTool('encoder')"><h3>인코더</h3><p>Base64, URL, Hash</p></div>
+                <div class="tool-card" onclick="showTool('data-convert')"><h3>데이터 변환</h3><p>JSON, XML, YAML, CSV</p></div>
+                <div class="tool-card" onclick="showTool('json')"><h3>JSON 도구</h3><p>정리, Path, TS변환</p></div>
+                <div class="tool-card" onclick="showTool('css-gen')"><h3>CSS 생성기</h3><p>그라데이션, 쉐도우 등</p></div>
+                <div class="tool-card" onclick="showTool('seo-tools')"><h3>SEO 도구</h3><p>메타, robots, sitemap</p></div>
+                <div class="tool-card" onclick="showTool('regex')"><h3>정규식</h3><p>테스트/생성</p></div>
+                <div class="tool-card" onclick="showTool('minify')"><h3>코드 압축</h3><p>JS, CSS, HTML</p></div>
+                <div class="tool-card" onclick="showTool('code-diff')"><h3>코드 비교</h3><p>Diff</p></div>
+                <div class="tool-card" onclick="showTool('timestamp')"><h3>타임스탬프</h3><p>Unix ↔ Date</p></div>
+                <div class="tool-card" onclick="showTool('color')"><h3>색상 변환</h3><p>HEX, RGB, HSL</p></div>
+                <div class="tool-card" onclick="showTool('cron')"><h3>Cron</h3><p>표현식</p></div>
+                <div class="tool-card" onclick="showTool('dev-info')"><h3>개발 정보</h3><p>HTTP, IP, UA</p></div>
+            </div>
+
+            <div class="section-title">계산</div>
+            <div class="tools-grid">
+                <div class="tool-card" onclick="showTool('calculator')"><h3>종합 계산기</h3><p>금융, BMI, 연봉 등</p></div>
+                <div class="tool-card" onclick="showTool('unit')"><h3>단위 변환</h3><p>길이, 무게, 온도</p></div>
+                <div class="tool-card" onclick="showTool('number-convert')"><h3>숫자 변환</h3><p>진법, 로마, 한글</p></div>
+                <div class="tool-card" onclick="showTool('date')"><h3>날짜 계산</h3><p>D-Day, 기간</p></div>
+                <div class="tool-card" onclick="showTool('statistics')"><h3>통계</h3><p>평균, 표준편차</p></div>
+                <div class="tool-card" onclick="showTool('programmer-calc')"><h3>프로그래머</h3><p>비트 연산</p></div>
+            </div>
+
+            <div class="section-title">유틸리티</div>
+            <div class="tools-grid">
+                <div class="tool-card" onclick="showTool('timer')"><h3>타이머</h3><p>뽀모도로, 스톱워치</p></div>
+                <div class="tool-card" onclick="showTool('worldclock')"><h3>세계 시간</h3><p>타임존</p></div>
+                <div class="tool-card" onclick="showTool('password')"><h3>비밀번호</h3><p>생성/강도/유출확인</p></div>
+                <div class="tool-card" onclick="showTool('notepad')"><h3>메모장</h3><p>로컬 저장</p></div>
+                <div class="tool-card" onclick="showTool('todo')"><h3>할 일</h3><p>목록 관리</p></div>
+                <div class="tool-card" onclick="showTool('emoji')"><h3>이모지</h3><p>검색/복사</p></div>
+                <div class="tool-card" onclick="showTool('engkor')"><h3>한↔영</h3><p>오타 교정</p></div>
+            </div>
+
+            <div class="section-title">테스트</div>
+            <div class="tools-grid">
+                <div class="tool-card" onclick="showTool('input-test')"><h3>입력 테스트</h3><p>키보드, 클릭, 타이핑</p></div>
+                <div class="tool-card" onclick="showTool('device-test')"><h3>장치 테스트</h3><p>카메라, 마이크, 속도</p></div>
+                <div class="tool-card" onclick="showTool('browser-info')"><h3>브라우저 정보</h3><p>화면, 쿠키, 저장소</p></div>
+                <div class="tool-card" onclick="showTool('tts')"><h3>TTS</h3><p>텍스트→음성</p></div>
+                <div class="tool-card" onclick="showTool('qr-scan')"><h3>QR 스캔</h3><p>카메라 인식</p></div>
+            </div>
+
             <div class="section-title">PDF</div>
             <div class="tools-grid">
                 <div class="tool-card" onclick="showTool('pdf-merge')"><h3>PDF 병합</h3><p>여러 PDF를 하나로</p></div>
                 <div class="tool-card" onclick="showTool('pdf-convert')"><h3>PDF 변환</h3><p>이미지 → PDF</p></div>
             </div>
-
-            <div class="section-title">생성</div>
-            <div class="tools-grid">
-                <div class="tool-card" onclick="showTool('qr')"><h3>QR코드</h3><p>링크, 텍스트</p></div>
-                <div class="tool-card" onclick="showTool('password')"><h3>비밀번호</h3><p>랜덤 생성</p></div>
-                <div class="tool-card" onclick="showTool('uuid')"><h3>UUID</h3><p>고유 식별자</p></div>
-                <div class="tool-card" onclick="showTool('lorem')"><h3>Lorem Ipsum</h3><p>더미 텍스트</p></div>
-                <div class="tool-card" onclick="showTool('random')"><h3>랜덤 숫자</h3><p>숫자/추첨</p></div>
-                <div class="tool-card" onclick="showTool('fake')"><h3>가짜 데이터</h3><p>이름, 이메일 등</p></div>
-                <div class="tool-card" onclick="showTool('gradient')"><h3>그라데이션</h3><p>CSS 생성</p></div>
-                <div class="tool-card" onclick="showTool('shadow')"><h3>박스 쉐도우</h3><p>CSS 생성</p></div>
-            </div>
-
-            <div class="section-title">텍스트</div>
-            <div class="tools-grid">
-                <div class="tool-card" onclick="showTool('text')"><h3>글자수</h3><p>공백, 바이트, 읽기시간</p></div>
-                <div class="tool-card" onclick="showTool('case')"><h3>대소문자</h3><p>변환</p></div>
-                <div class="tool-card" onclick="showTool('replace')"><h3>치환</h3><p>찾아 바꾸기</p></div>
-                <div class="tool-card" onclick="showTool('markdown')"><h3>Markdown</h3><p>미리보기</p></div>
-                <div class="tool-card" onclick="showTool('duplicate')"><h3>중복 제거</h3><p>중복 줄 삭제</p></div>
-                <div class="tool-card" onclick="showTool('sort')"><h3>줄 정렬</h3><p>가나다순, 역순</p></div>
-                <div class="tool-card" onclick="showTool('diff')"><h3>텍스트 비교</h3><p>차이점 찾기</p></div>
-                <div class="tool-card" onclick="showTool('ocr')"><h3>OCR</h3><p>이미지→텍스트</p></div>
-                <div class="tool-card" onclick="showTool('vertical')"><h3>세로쓰기</h3><p>글자 변환</p></div>
-                <div class="tool-card" onclick="showTool('special')"><h3>특수문자</h3><p>모음/복사</p></div>
-                <div class="tool-card" onclick="showTool('unicode')"><h3>유니코드</h3><p>변환기</p></div>
-                <div class="tool-card" onclick="showTool('lorem-kr')"><h3>한글 Lorem</h3><p>더미 텍스트</p></div>
-                <div class="tool-card" onclick="showTool('encrypt')"><h3>텍스트 암호화</h3><p>AES 암호화</p></div>
-                <div class="tool-card" onclick="showTool('reverse')"><h3>문장 뒤집기</h3><p>텍스트 반전</p></div>
-                <div class="tool-card" onclick="showTool('linebreak')"><h3>줄바꿈</h3><p>추가/제거</p></div>
-                <div class="tool-card" onclick="showTool('whitespace')"><h3>공백/탭</h3><p>변환</p></div>
-                <div class="tool-card" onclick="showTool('escape')"><h3>이스케이프</h3><p>문자 변환</p></div>
-                <div class="tool-card" onclick="showTool('ascii')"><h3>ASCII Art</h3><p>텍스트 변환</p></div>
-                <div class="tool-card" onclick="showTool('morse')"><h3>모스 부호</h3><p>변환</p></div>
-                <div class="tool-card" onclick="showTool('binary-text')"><h3>이진수 텍스트</h3><p>변환</p></div>
-                <div class="tool-card" onclick="showTool('num-korean')"><h3>숫자 한글</h3><p>일이삼/백이십삼</p></div>
-                <div class="tool-card" onclick="showTool('word-freq')"><h3>단어 빈도</h3><p>분석</p></div>
-                <div class="tool-card" onclick="showTool('readability')"><h3>읽기 수준</h3><p>난이도 분석</p></div>
-            </div>
-
-            <div class="section-title">이미지</div>
-            <div class="tools-grid">
-                <div class="tool-card" onclick="showTool('img-resize')"><h3>이미지 리사이즈</h3><p>크기 조절</p></div>
-                <div class="tool-card" onclick="showTool('img-compress')"><h3>이미지 압축</h3><p>용량 줄이기</p></div>
-                <div class="tool-card" onclick="showTool('img-convert')"><h3>이미지 변환</h3><p>JPG, PNG, WebP</p></div>
-                <div class="tool-card" onclick="showTool('img-base64')"><h3>이미지 Base64</h3><p>인코딩</p></div>
-                <div class="tool-card" onclick="showTool('img-crop')"><h3>이미지 자르기</h3><p>크롭</p></div>
-                <div class="tool-card" onclick="showTool('favicon')"><h3>파비콘 생성</h3><p>ICO, PNG</p></div>
-                <div class="tool-card" onclick="showTool('bg-remove')"><h3>누끼</h3><p>배경 제거</p></div>
-                <div class="tool-card" onclick="showTool('placeholder')"><h3>플레이스홀더</h3><p>더미 이미지</p></div>
-                <div class="tool-card" onclick="showTool('img-rotate')"><h3>회전/뒤집기</h3><p>이미지 변형</p></div>
-                <div class="tool-card" onclick="showTool('img-filter')"><h3>이미지 필터</h3><p>흑백, 세피아</p></div>
-                <div class="tool-card" onclick="showTool('img-watermark')"><h3>워터마크</h3><p>텍스트 삽입</p></div>
-                <div class="tool-card" onclick="showTool('color-extract')"><h3>색상 추출</h3><p>이미지에서</p></div>
-                <div class="tool-card" onclick="showTool('exif')"><h3>EXIF 뷰어</h3><p>메타데이터</p></div>
-                <div class="tool-card" onclick="showTool('auto-palette')"><h3>자동 팔레트</h3><p>주요 색상 추출</p></div>
-                <div class="tool-card" onclick="showTool('pixelate')"><h3>픽셀화</h3><p>모자이크</p></div>
-                <div class="tool-card" onclick="showTool('img-pdf')"><h3>이미지→PDF</h3><p>변환</p></div>
-            </div>
-
-            <div class="section-title">인코딩</div>
-            <div class="tools-grid">
-                <div class="tool-card" onclick="showTool('base64')"><h3>Base64</h3><p>인코딩/디코딩</p></div>
-                <div class="tool-card" onclick="showTool('url')"><h3>URL</h3><p>인코딩/디코딩</p></div>
-                <div class="tool-card" onclick="showTool('hash')"><h3>해시</h3><p>MD5, SHA</p></div>
-                <div class="tool-card" onclick="showTool('html')"><h3>HTML</h3><p>이스케이프</p></div>
-                <div class="tool-card" onclick="showTool('jwt')"><h3>JWT</h3><p>디코더</p></div>
-            </div>
-
-            <div class="section-title">개발</div>
-            <div class="tools-grid">
-                <div class="tool-card" onclick="showTool('json')"><h3>JSON</h3><p>정리/압축</p></div>
-                <div class="tool-card" onclick="showTool('json-xml')"><h3>JSON ↔ XML</h3><p>변환</p></div>
-                <div class="tool-card" onclick="showTool('minify')"><h3>코드 압축</h3><p>JS, CSS, HTML</p></div>
-                <div class="tool-card" onclick="showTool('timestamp')"><h3>타임스탬프</h3><p>Unix ↔ Date</p></div>
-                <div class="tool-card" onclick="showTool('color')"><h3>색상</h3><p>HEX, RGB, HSL</p></div>
-                <div class="tool-card" onclick="showTool('regex')"><h3>정규식</h3><p>테스트</p></div>
-                <div class="tool-card" onclick="showTool('cron')"><h3>Cron</h3><p>표현식 생성</p></div>
-                <div class="tool-card" onclick="showTool('meta')"><h3>메타 태그</h3><p>SEO 생성기</p></div>
-                <div class="tool-card" onclick="showTool('css-unit')"><h3>CSS 단위</h3><p>px, rem, em</p></div>
-                <div class="tool-card" onclick="showTool('http-status')"><h3>HTTP 상태코드</h3><p>코드 조회</p></div>
-                <div class="tool-card" onclick="showTool('ip-info')"><h3>내 IP</h3><p>IP 주소 조회</p></div>
-                <div class="tool-card" onclick="showTool('useragent')"><h3>User-Agent</h3><p>브라우저 정보</p></div>
-                <div class="tool-card" onclick="showTool('slug')"><h3>Slug 생성</h3><p>URL 친화적</p></div>
-                <div class="tool-card" onclick="showTool('sql')"><h3>SQL 포맷터</h3><p>정리/압축</p></div>
-                <div class="tool-card" onclick="showTool('env')"><h3>.env 파서</h3><p>환경변수 파싱</p></div>
-                <div class="tool-card" onclick="showTool('md-html')"><h3>MD→HTML</h3><p>마크다운 변환</p></div>
-                <div class="tool-card" onclick="showTool('html-md')"><h3>HTML→MD</h3><p>마크다운 변환</p></div>
-                <div class="tool-card" onclick="showTool('flexbox')"><h3>Flexbox</h3><p>CSS 생성기</p></div>
-                <div class="tool-card" onclick="showTool('grid')"><h3>Grid</h3><p>CSS 생성기</p></div>
-                <div class="tool-card" onclick="showTool('regex-gen')"><h3>정규식 생성</h3><p>패턴 선택</p></div>
-                <div class="tool-card" onclick="showTool('barcode')"><h3>바코드</h3><p>생성기</p></div>
-                <div class="tool-card" onclick="showTool('yaml-json')"><h3>YAML ↔ JSON</h3><p>변환</p></div>
-                <div class="tool-card" onclick="showTool('csv-json')"><h3>CSV ↔ JSON</h3><p>변환</p></div>
-                <div class="tool-card" onclick="showTool('html-table')"><h3>HTML 테이블</h3><p>생성기</p></div>
-                <div class="tool-card" onclick="showTool('border-radius')"><h3>Border Radius</h3><p>CSS 생성</p></div>
-                <div class="tool-card" onclick="showTool('text-shadow')"><h3>Text Shadow</h3><p>CSS 생성</p></div>
-                <div class="tool-card" onclick="showTool('json-ts')"><h3>JSON→TS</h3><p>인터페이스 생성</p></div>
-                <div class="tool-card" onclick="showTool('robots')"><h3>robots.txt</h3><p>생성기</p></div>
-                <div class="tool-card" onclick="showTool('sitemap')"><h3>sitemap.xml</h3><p>생성기</p></div>
-                <div class="tool-card" onclick="showTool('htaccess')"><h3>.htaccess</h3><p>생성기</p></div>
-                <div class="tool-card" onclick="showTool('json-path')"><h3>JSON Path</h3><p>경로 찾기</p></div>
-                <div class="tool-card" onclick="showTool('code-diff')"><h3>코드 Diff</h3><p>비교</p></div>
-                <div class="tool-card" onclick="showTool('neumorphism')"><h3>Neumorphism</h3><p>CSS 생성</p></div>
-                <div class="tool-card" onclick="showTool('glassmorphism')"><h3>Glassmorphism</h3><p>CSS 생성</p></div>
-            </div>
-
-            <div class="section-title">계산</div>
-            <div class="tools-grid">
-                <div class="tool-card" onclick="showTool('calculator')"><h3>종합 계산기</h3><p>모든 계산 도구</p></div>
-                <div class="tool-card" onclick="showTool('unit')"><h3>단위 변환</h3><p>길이, 무게, 온도</p></div>
-                <div class="tool-card" onclick="showTool('number')"><h3>진법 변환</h3><p>2, 8, 10, 16</p></div>
-                <div class="tool-card" onclick="showTool('date')"><h3>날짜 계산</h3><p>D-Day, 기간</p></div>
-                <div class="tool-card" onclick="showTool('roman')"><h3>로마숫자</h3><p>변환</p></div>
-                <div class="tool-card" onclick="showTool('filesize')"><h3>파일 크기</h3><p>KB/MB/GB</p></div>
-                <div class="tool-card" onclick="showTool('ratio')"><h3>비율 계산</h3><p>A:B 비율</p></div>
-                <div class="tool-card" onclick="showTool('statistics')"><h3>평균/표준편차</h3><p>통계 계산</p></div>
-                <div class="tool-card" onclick="showTool('gpa')"><h3>학점 계산</h3><p>GPA</p></div>
-                <div class="tool-card" onclick="showTool('aspect-ratio')"><h3>화면 비율</h3><p>16:9, 4:3</p></div>
-                <div class="tool-card" onclick="showTool('programmer-calc')"><h3>프로그래머 계산기</h3><p>비트 연산</p></div>
-            </div>
-
-            <div class="section-title">유틸리티</div>
-            <div class="tools-grid">
-                <div class="tool-card" onclick="showTool('pomodoro')"><h3>뽀모도로</h3><p>집중 타이머</p></div>
-                <div class="tool-card" onclick="showTool('stopwatch')"><h3>스톱워치</h3><p>시간 측정</p></div>
-                <div class="tool-card" onclick="showTool('pwcheck')"><h3>비밀번호 강도</h3><p>안전성 검사</p></div>
-                <div class="tool-card" onclick="showTool('countdown')"><h3>카운트다운</h3><p>타이머</p></div>
-                <div class="tool-card" onclick="showTool('worldclock')"><h3>세계 시간</h3><p>타임존 변환</p></div>
-                <div class="tool-card" onclick="showTool('notepad')"><h3>메모장</h3><p>로컬 저장</p></div>
-                <div class="tool-card" onclick="showTool('palette')"><h3>색상 팔레트</h3><p>컬러 조합</p></div>
-                <div class="tool-card" onclick="showTool('emoji')"><h3>이모지</h3><p>검색/복사</p></div>
-                <div class="tool-card" onclick="showTool('engkor')"><h3>한↔영 변환</h3><p>오타 교정</p></div>
-                <div class="tool-card" onclick="showTool('screen')"><h3>화면 정보</h3><p>해상도/크기</p></div>
-                <div class="tool-card" onclick="showTool('keyboard')"><h3>키보드 테스트</h3><p>키 확인</p></div>
-                <div class="tool-card" onclick="showTool('cps')"><h3>CPS 테스트</h3><p>클릭 속도</p></div>
-                <div class="tool-card" onclick="showTool('reaction')"><h3>반응속도</h3><p>테스트</p></div>
-                <div class="tool-card" onclick="showTool('typing')"><h3>타이핑</h3><p>속도 테스트</p></div>
-                <div class="tool-card" onclick="showTool('randcolor')"><h3>랜덤 색상</h3><p>생성기</p></div>
-                <div class="tool-card" onclick="showTool('storage')"><h3>로컬 저장소</h3><p>뷰어</p></div>
-                <div class="tool-card" onclick="showTool('speedtest')"><h3>네트워크 속도</h3><p>테스트</p></div>
-                <div class="tool-card" onclick="showTool('camera')"><h3>카메라</h3><p>테스트</p></div>
-                <div class="tool-card" onclick="showTool('mic')"><h3>마이크</h3><p>테스트</p></div>
-                <div class="tool-card" onclick="showTool('tts')"><h3>TTS</h3><p>텍스트→음성</p></div>
-                <div class="tool-card" onclick="showTool('qr-scan')"><h3>QR 스캔</h3><p>카메라로 인식</p></div>
-                <div class="tool-card" onclick="showTool('cookie')"><h3>쿠키 뷰어</h3><p>관리</p></div>
-                <div class="tool-card" onclick="showTool('browser-info')"><h3>브라우저 정보</h3><p>상세 정보</p></div>
-                <div class="tool-card" onclick="showTool('todo')"><h3>할 일 목록</h3><p>저장</p></div>
-                <div class="tool-card" onclick="showTool('pwned')"><h3>비밀번호 유출</h3><p>확인 (HIBP)</p></div>
-            </div>
         </div>
 
         <!-- Tool Sections -->
+
+        <!-- Text Convert (Combined) -->
+        <div class="tool-section" id="tool-text-convert">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>텍스트 변환</h2>
+            <select id="text-convert-type" onchange="showTextConvertType()">
+                <option value="case">대소문자 변환</option>
+                <option value="reverse">문장 뒤집기</option>
+                <option value="linebreak">줄바꿈 처리</option>
+                <option value="whitespace">공백/탭 변환</option>
+                <option value="escape">이스케이프 문자</option>
+                <option value="morse">모스 부호</option>
+                <option value="binary">이진수 텍스트</option>
+                <option value="numkor">숫자 → 한글</option>
+                <option value="ascii">ASCII Art</option>
+                <option value="vertical">세로쓰기</option>
+            </select>
+            <div id="text-convert-content"></div>
+        </div>
+
+        <!-- Image Edit (Combined) -->
+        <div class="tool-section" id="tool-img-edit">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>이미지 편집</h2>
+            <input type="file" id="imgedit-file" accept="image/*" onchange="loadImgEdit(this)">
+            <img id="imgedit-preview" class="img-preview" style="display:none;">
+            <select id="imgedit-type" onchange="showImgEditType()">
+                <option value="resize">크기 조절</option>
+                <option value="crop">자르기</option>
+                <option value="rotate">회전/뒤집기</option>
+                <option value="compress">압축</option>
+            </select>
+            <div id="imgedit-content"></div>
+            <canvas id="imgedit-canvas" style="display:none;"></canvas>
+            <a id="imgedit-download" class="btn" style="display:none;text-decoration:none;">다운로드</a>
+        </div>
+
+        <!-- Encoder (Combined) -->
+        <div class="tool-section" id="tool-encoder">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>인코더/디코더</h2>
+            <select id="encoder-type" onchange="showEncoderType()">
+                <option value="base64">Base64</option>
+                <option value="url">URL 인코딩</option>
+                <option value="html">HTML 이스케이프</option>
+                <option value="hash">해시 (MD5, SHA)</option>
+                <option value="jwt">JWT 디코더</option>
+            </select>
+            <div id="encoder-content"></div>
+        </div>
+
+        <!-- Data Convert (Combined) -->
+        <div class="tool-section" id="tool-data-convert">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>데이터 변환</h2>
+            <select id="data-convert-type" onchange="showDataConvertType()">
+                <option value="json-xml">JSON ↔ XML</option>
+                <option value="yaml-json">YAML ↔ JSON</option>
+                <option value="csv-json">CSV ↔ JSON</option>
+                <option value="json-ts">JSON → TypeScript</option>
+            </select>
+            <div id="data-convert-content"></div>
+        </div>
+
+        <!-- CSS Generator (Combined) -->
+        <div class="tool-section" id="tool-css-gen">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>CSS 생성기</h2>
+            <select id="css-gen-type" onchange="showCssGenType()">
+                <option value="gradient">그라데이션</option>
+                <option value="shadow">박스 쉐도우</option>
+                <option value="border-radius">Border Radius</option>
+                <option value="text-shadow">Text Shadow</option>
+                <option value="flexbox">Flexbox</option>
+                <option value="grid">Grid</option>
+                <option value="neumorphism">Neumorphism</option>
+                <option value="glassmorphism">Glassmorphism</option>
+            </select>
+            <div id="css-gen-content"></div>
+        </div>
+
+        <!-- SEO Tools (Combined) -->
+        <div class="tool-section" id="tool-seo-tools">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>SEO 도구</h2>
+            <select id="seo-type" onchange="showSeoType()">
+                <option value="meta">메타 태그 생성</option>
+                <option value="robots">robots.txt</option>
+                <option value="sitemap">sitemap.xml</option>
+                <option value="htaccess">.htaccess</option>
+                <option value="slug">Slug 생성</option>
+            </select>
+            <div id="seo-content"></div>
+        </div>
+
+        <!-- Dev Info (Combined) -->
+        <div class="tool-section" id="tool-dev-info">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>개발 정보</h2>
+            <select id="devinfo-type" onchange="showDevInfoType()">
+                <option value="http">HTTP 상태코드</option>
+                <option value="ip">내 IP 주소</option>
+                <option value="useragent">User-Agent</option>
+                <option value="css-unit">CSS 단위 변환</option>
+            </select>
+            <div id="devinfo-content"></div>
+        </div>
+
+        <!-- Number Convert (Combined) -->
+        <div class="tool-section" id="tool-number-convert">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>숫자 변환</h2>
+            <select id="numconv-type" onchange="showNumConvType()">
+                <option value="base">진법 변환 (2,8,10,16)</option>
+                <option value="roman">로마숫자</option>
+                <option value="korean">한글 숫자</option>
+                <option value="filesize">파일 크기</option>
+            </select>
+            <div id="numconv-content"></div>
+        </div>
+
+        <!-- Timer (Combined) -->
+        <div class="tool-section" id="tool-timer">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>타이머</h2>
+            <select id="timer-type" onchange="showTimerType()">
+                <option value="pomodoro">뽀모도로</option>
+                <option value="stopwatch">스톱워치</option>
+                <option value="countdown">카운트다운</option>
+            </select>
+            <div id="timer-content"></div>
+        </div>
+
+        <!-- Input Test (Combined) -->
+        <div class="tool-section" id="tool-input-test">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>입력 테스트</h2>
+            <select id="inputtest-type" onchange="showInputTestType()">
+                <option value="keyboard">키보드</option>
+                <option value="cps">CPS (클릭 속도)</option>
+                <option value="reaction">반응속도</option>
+                <option value="typing">타이핑 속도</option>
+            </select>
+            <div id="inputtest-content"></div>
+        </div>
+
+        <!-- Device Test (Combined) -->
+        <div class="tool-section" id="tool-device-test">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>장치 테스트</h2>
+            <select id="devicetest-type" onchange="showDeviceTestType()">
+                <option value="camera">카메라</option>
+                <option value="mic">마이크</option>
+                <option value="speed">네트워크 속도</option>
+                <option value="screen">화면 정보</option>
+            </select>
+            <div id="devicetest-content"></div>
+        </div>
+
         <!-- PDF Merge -->
         <div class="tool-section" id="tool-pdf-merge">
             <button class="back-btn" onclick="showMain()">← 목록</button>
@@ -4955,6 +5038,481 @@
                 }
             } catch (e) { result.textContent = '확인 실패: ' + e.message; }
         }
+
+        // === COMBINED TOOLS ===
+
+        // Text Convert Combined
+        const textConvertTemplates = {
+            case: `<textarea id="tc-input" placeholder="텍스트 입력"></textarea>
+                <button class="btn" onclick="tcCase('upper')">대문자</button>
+                <button class="btn" onclick="tcCase('lower')">소문자</button>
+                <button class="btn" onclick="tcCase('title')">Title Case</button>
+                <div class="result-box"><div id="tc-result">-</div></div>
+                <button class="copy-btn" onclick="copyText('tc-result')">복사</button>`,
+            reverse: `<textarea id="tc-input" placeholder="텍스트 입력" oninput="tcReverse()"></textarea>
+                <div class="options">
+                    <label><input type="radio" name="tc-rev" value="char" checked onchange="tcReverse()"> 글자</label>
+                    <label><input type="radio" name="tc-rev" value="word" onchange="tcReverse()"> 단어</label>
+                    <label><input type="radio" name="tc-rev" value="line" onchange="tcReverse()"> 줄</label>
+                </div>
+                <div class="result-box"><div id="tc-result">-</div></div>
+                <button class="copy-btn" onclick="copyText('tc-result')">복사</button>`,
+            linebreak: `<textarea id="tc-input" placeholder="텍스트 입력"></textarea>
+                <button class="btn" onclick="tcLineBreak('add')">줄바꿈 추가</button>
+                <button class="btn" onclick="tcLineBreak('remove')">줄바꿈 제거</button>
+                <button class="btn" onclick="tcLineBreak('trim')">빈 줄 제거</button>
+                <div class="result-box"><pre id="tc-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
+                <button class="copy-btn" onclick="copyText('tc-result')">복사</button>`,
+            whitespace: `<textarea id="tc-input" placeholder="텍스트 입력"></textarea>
+                <button class="btn" onclick="tcWs('s2t')">공백→탭</button>
+                <button class="btn" onclick="tcWs('t2s')">탭→공백</button>
+                <button class="btn" onclick="tcWs('trim')">연속 공백 제거</button>
+                <div class="result-box"><pre id="tc-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
+                <button class="copy-btn" onclick="copyText('tc-result')">복사</button>`,
+            escape: `<textarea id="tc-input" placeholder="텍스트 입력"></textarea>
+                <button class="btn" onclick="tcEscape('esc')">이스케이프</button>
+                <button class="btn" onclick="tcEscape('unesc')">언이스케이프</button>
+                <div class="result-box"><pre id="tc-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
+                <button class="copy-btn" onclick="copyText('tc-result')">복사</button>`,
+            morse: `<textarea id="tc-input" placeholder="텍스트 또는 모스 부호 (· -)"></textarea>
+                <button class="btn" onclick="tcMorse('to')">텍스트→모스</button>
+                <button class="btn" onclick="tcMorse('from')">모스→텍스트</button>
+                <div class="result-box"><div id="tc-result">-</div></div>
+                <button class="copy-btn" onclick="copyText('tc-result')">복사</button>`,
+            binary: `<textarea id="tc-input" placeholder="텍스트 또는 이진수 (01001000 ...)"></textarea>
+                <button class="btn" onclick="tcBinary('to')">텍스트→이진수</button>
+                <button class="btn" onclick="tcBinary('from')">이진수→텍스트</button>
+                <div class="result-box"><div id="tc-result">-</div></div>
+                <button class="copy-btn" onclick="copyText('tc-result')">복사</button>`,
+            numkor: `<input type="text" id="tc-input" placeholder="숫자 입력 (예: 12345)" oninput="tcNumKor()">
+                <div class="result-box">
+                    <div style="margin-bottom:8px;"><span style="color:#555;">자리별:</span> <span id="tc-digit">-</span></div>
+                    <div><span style="color:#555;">읽기:</span> <span id="tc-read">-</span></div>
+                </div>`,
+            ascii: `<input type="text" id="tc-input" placeholder="텍스트 입력" oninput="tcAscii()">
+                <div class="result-box"><pre id="tc-result" style="white-space:pre;margin:0;font-size:0.6rem;line-height:1;">-</pre></div>
+                <button class="copy-btn" onclick="copyText('tc-result')">복사</button>`,
+            vertical: `<textarea id="tc-input" placeholder="텍스트 입력" oninput="tcVertical()"></textarea>
+                <div class="result-box"><pre id="tc-result" style="white-space:pre;margin:0;">-</pre></div>
+                <button class="copy-btn" onclick="copyText('tc-result')">복사</button>`
+        };
+        function showTextConvertType() {
+            const type = document.getElementById('text-convert-type').value;
+            document.getElementById('text-convert-content').innerHTML = textConvertTemplates[type] || '';
+        }
+        showTextConvertType();
+        function tcCase(t) {
+            const v = document.getElementById('tc-input').value;
+            let r = t === 'upper' ? v.toUpperCase() : t === 'lower' ? v.toLowerCase() : v.replace(/\b\w/g, c => c.toUpperCase());
+            document.getElementById('tc-result').textContent = r;
+        }
+        function tcReverse() {
+            const v = document.getElementById('tc-input').value;
+            const t = document.querySelector('input[name="tc-rev"]:checked').value;
+            let r = t === 'char' ? v.split('').reverse().join('') : t === 'word' ? v.split(' ').reverse().join(' ') : v.split('\n').reverse().join('\n');
+            document.getElementById('tc-result').textContent = r || '-';
+        }
+        function tcLineBreak(t) {
+            const v = document.getElementById('tc-input').value;
+            let r = t === 'add' ? v.split(' ').join('\n') : t === 'remove' ? v.replace(/\n/g, ' ') : v.split('\n').filter(l => l.trim()).join('\n');
+            document.getElementById('tc-result').textContent = r;
+        }
+        function tcWs(t) {
+            const v = document.getElementById('tc-input').value;
+            let r = t === 's2t' ? v.replace(/    /g, '\t') : t === 't2s' ? v.replace(/\t/g, '    ') : v.replace(/  +/g, ' ');
+            document.getElementById('tc-result').textContent = r;
+        }
+        function tcEscape(t) {
+            const v = document.getElementById('tc-input').value;
+            let r = t === 'esc' ? v.replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/\r/g, '\\r').replace(/\t/g, '\\t').replace(/"/g, '\\"') : v.replace(/\\n/g, '\n').replace(/\\r/g, '\r').replace(/\\t/g, '\t').replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+            document.getElementById('tc-result').textContent = r;
+        }
+        function tcMorse(t) {
+            const v = document.getElementById('tc-input').value;
+            let r = t === 'to' ? v.toUpperCase().split('').map(c => morseCode[c] || c).join(' ') : v.split(' ').map(m => morseToChar[m] || m).join('');
+            document.getElementById('tc-result').textContent = r;
+        }
+        function tcBinary(t) {
+            const v = document.getElementById('tc-input').value;
+            let r = t === 'to' ? v.split('').map(c => c.charCodeAt(0).toString(2).padStart(8, '0')).join(' ') : v.split(/\s+/).map(b => String.fromCharCode(parseInt(b, 2))).join('');
+            document.getElementById('tc-result').textContent = r;
+        }
+        function tcNumKor() {
+            const input = document.getElementById('tc-input').value.replace(/[^0-9]/g, '');
+            if (!input) { document.getElementById('tc-digit').textContent = '-'; document.getElementById('tc-read').textContent = '-'; return; }
+            document.getElementById('tc-digit').textContent = input.split('').map(d => korDigits[parseInt(d)]).join('');
+            let readResult = '';
+            const str = input.replace(/^0+/, '') || '0';
+            if (str === '0') { document.getElementById('tc-read').textContent = '영'; return; }
+            const chunks = [];
+            for (let i = str.length; i > 0; i -= 4) chunks.unshift(str.slice(Math.max(0, i - 4), i));
+            chunks.forEach((chunk, idx) => {
+                const bigUnitIdx = chunks.length - 1 - idx;
+                let chunkStr = '';
+                const digits = chunk.padStart(4, '0').split('').map(Number);
+                digits.forEach((d, i) => {
+                    const unitIdx = 3 - i;
+                    if (d === 0) return;
+                    if (d === 1 && unitIdx > 0) chunkStr += korUnits[unitIdx];
+                    else chunkStr += korDigits[d] + korUnits[unitIdx];
+                });
+                if (chunkStr) readResult += chunkStr + korBigUnits[bigUnitIdx];
+            });
+            document.getElementById('tc-read').textContent = readResult || '영';
+        }
+        function tcAscii() {
+            const text = document.getElementById('tc-input').value.toUpperCase();
+            if(!text) { document.getElementById('tc-result').textContent = '-'; return; }
+            let result = ['','','','',''];
+            for(const c of text) {
+                const art = asciiFont[c] || ['?','?','?','?','?'];
+                for(let i = 0; i < 5; i++) result[i] += art[i] + ' ';
+            }
+            document.getElementById('tc-result').textContent = result.join('\n');
+        }
+        function tcVertical() {
+            const text = document.getElementById('tc-input').value;
+            const lines = text.split('\n');
+            const maxLen = Math.max(...lines.map(l => l.length));
+            let result = [];
+            for(let i = 0; i < maxLen; i++) {
+                result.push(lines.map(l => l[i] || ' ').join(' '));
+            }
+            document.getElementById('tc-result').textContent = result.join('\n');
+        }
+
+        // Encoder Combined
+        const encoderTemplates = {
+            base64: `<textarea id="enc-input" placeholder="텍스트 입력"></textarea>
+                <button class="btn" onclick="encBase64('enc')">인코딩</button>
+                <button class="btn" onclick="encBase64('dec')">디코딩</button>
+                <div class="result-box"><div id="enc-result">-</div></div>
+                <button class="copy-btn" onclick="copyText('enc-result')">복사</button>`,
+            url: `<textarea id="enc-input" placeholder="텍스트 입력"></textarea>
+                <button class="btn" onclick="encUrl('enc')">인코딩</button>
+                <button class="btn" onclick="encUrl('dec')">디코딩</button>
+                <div class="result-box"><div id="enc-result">-</div></div>
+                <button class="copy-btn" onclick="copyText('enc-result')">복사</button>`,
+            html: `<textarea id="enc-input" placeholder="텍스트 입력"></textarea>
+                <button class="btn" onclick="encHtml('enc')">이스케이프</button>
+                <button class="btn" onclick="encHtml('dec')">언이스케이프</button>
+                <div class="result-box"><div id="enc-result">-</div></div>
+                <button class="copy-btn" onclick="copyText('enc-result')">복사</button>`,
+            hash: `<textarea id="enc-input" placeholder="텍스트 입력" oninput="encHash()"></textarea>
+                <div class="result-box">
+                    <div style="margin-bottom:8px;"><span style="color:#555;">MD5:</span> <span id="enc-md5">-</span></div>
+                    <div style="margin-bottom:8px;"><span style="color:#555;">SHA-1:</span> <span id="enc-sha1">-</span></div>
+                    <div><span style="color:#555;">SHA-256:</span> <span id="enc-sha256">-</span></div>
+                </div>`,
+            jwt: `<textarea id="enc-input" placeholder="JWT 토큰 입력" oninput="encJwt()"></textarea>
+                <div class="result-box"><pre id="enc-result" style="white-space:pre-wrap;margin:0;">-</pre></div>`
+        };
+        function showEncoderType() {
+            const type = document.getElementById('encoder-type').value;
+            document.getElementById('encoder-content').innerHTML = encoderTemplates[type] || '';
+        }
+        showEncoderType();
+        function encBase64(t) {
+            const v = document.getElementById('enc-input').value;
+            try { document.getElementById('enc-result').textContent = t === 'enc' ? btoa(unescape(encodeURIComponent(v))) : decodeURIComponent(escape(atob(v))); } catch(e) { document.getElementById('enc-result').textContent = '오류'; }
+        }
+        function encUrl(t) {
+            const v = document.getElementById('enc-input').value;
+            document.getElementById('enc-result').textContent = t === 'enc' ? encodeURIComponent(v) : decodeURIComponent(v);
+        }
+        function encHtml(t) {
+            const v = document.getElementById('enc-input').value;
+            if (t === 'enc') {
+                document.getElementById('enc-result').textContent = v.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+            } else {
+                const txt = document.createElement('textarea');
+                txt.innerHTML = v;
+                document.getElementById('enc-result').textContent = txt.value;
+            }
+        }
+        async function encHash() {
+            const v = document.getElementById('enc-input').value;
+            if (!v) return;
+            const enc = new TextEncoder();
+            const data = enc.encode(v);
+            const sha1 = await crypto.subtle.digest('SHA-1', data);
+            const sha256 = await crypto.subtle.digest('SHA-256', data);
+            document.getElementById('enc-sha1').textContent = Array.from(new Uint8Array(sha1)).map(b => b.toString(16).padStart(2, '0')).join('');
+            document.getElementById('enc-sha256').textContent = Array.from(new Uint8Array(sha256)).map(b => b.toString(16).padStart(2, '0')).join('');
+            document.getElementById('enc-md5').textContent = CryptoJS.MD5(v).toString();
+        }
+        function encJwt() {
+            const v = document.getElementById('enc-input').value;
+            try {
+                const parts = v.split('.');
+                if (parts.length !== 3) throw new Error();
+                const header = JSON.parse(atob(parts[0]));
+                const payload = JSON.parse(atob(parts[1]));
+                document.getElementById('enc-result').textContent = 'Header:\n' + JSON.stringify(header, null, 2) + '\n\nPayload:\n' + JSON.stringify(payload, null, 2);
+            } catch(e) { document.getElementById('enc-result').textContent = '유효하지 않은 JWT'; }
+        }
+
+        // Number Convert Combined
+        const numConvTemplates = {
+            base: `<input type="text" id="nc-input" placeholder="숫자 입력" oninput="ncBase()">
+                <select id="nc-from" onchange="ncBase()"><option value="10">10진수</option><option value="2">2진수</option><option value="8">8진수</option><option value="16">16진수</option></select>
+                <div class="result-box" id="nc-result">-</div>`,
+            roman: `<input type="text" id="nc-input" placeholder="숫자 또는 로마숫자" oninput="ncRoman()">
+                <div class="result-box"><div id="nc-result">-</div></div>`,
+            korean: `<input type="text" id="nc-input" placeholder="숫자 입력" oninput="ncKorean()">
+                <div class="result-box">
+                    <div style="margin-bottom:8px;"><span style="color:#555;">자리별:</span> <span id="nc-digit">-</span></div>
+                    <div><span style="color:#555;">읽기:</span> <span id="nc-read">-</span></div>
+                </div>`,
+            filesize: `<input type="number" id="nc-input" placeholder="크기">
+                <select id="nc-unit"><option value="B">Bytes</option><option value="KB">KB</option><option value="MB">MB</option><option value="GB">GB</option><option value="TB">TB</option></select>
+                <button class="btn btn-primary" onclick="ncFileSize()">변환</button>
+                <div class="result-box" id="nc-result">-</div>`
+        };
+        function showNumConvType() {
+            const type = document.getElementById('numconv-type').value;
+            document.getElementById('numconv-content').innerHTML = numConvTemplates[type] || '';
+        }
+        showNumConvType();
+        function ncBase() {
+            const v = document.getElementById('nc-input').value.trim();
+            const base = parseInt(document.getElementById('nc-from').value);
+            if (!v) { document.getElementById('nc-result').innerHTML = '-'; return; }
+            try {
+                const num = parseInt(v, base);
+                if (isNaN(num)) throw new Error();
+                document.getElementById('nc-result').innerHTML = `<div style="margin:5px 0;"><span style="color:#6a9fb5;">10진수:</span> ${num}</div><div style="margin:5px 0;"><span style="color:#6a9fb5;">2진수:</span> ${num.toString(2)}</div><div style="margin:5px 0;"><span style="color:#6a9fb5;">8진수:</span> ${num.toString(8)}</div><div style="margin:5px 0;"><span style="color:#6a9fb5;">16진수:</span> ${num.toString(16).toUpperCase()}</div>`;
+            } catch(e) { document.getElementById('nc-result').innerHTML = '유효하지 않은 입력'; }
+        }
+        function ncRoman() {
+            const input = document.getElementById('nc-input').value.trim();
+            if (!input) { document.getElementById('nc-result').textContent = '-'; return; }
+            if (/^\d+$/.test(input)) {
+                let num = parseInt(input);
+                if (num < 1 || num > 3999) { document.getElementById('nc-result').textContent = '1-3999 범위만'; return; }
+                const map = [[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];
+                let roman = '';
+                for (const [val, sym] of map) { while (num >= val) { roman += sym; num -= val; } }
+                document.getElementById('nc-result').textContent = roman;
+            } else {
+                const map = {I:1,V:5,X:10,L:50,C:100,D:500,M:1000};
+                let num = 0;
+                const s = input.toUpperCase();
+                for (let i = 0; i < s.length; i++) {
+                    const curr = map[s[i]] || 0;
+                    const next = map[s[i+1]] || 0;
+                    num += curr < next ? -curr : curr;
+                }
+                document.getElementById('nc-result').textContent = num;
+            }
+        }
+        function ncKorean() {
+            const input = document.getElementById('nc-input').value.replace(/[^0-9]/g, '');
+            if (!input) { document.getElementById('nc-digit').textContent = '-'; document.getElementById('nc-read').textContent = '-'; return; }
+            document.getElementById('nc-digit').textContent = input.split('').map(d => korDigits[parseInt(d)]).join('');
+            let readResult = '';
+            const str = input.replace(/^0+/, '') || '0';
+            if (str === '0') { document.getElementById('nc-read').textContent = '영'; return; }
+            const chunks = [];
+            for (let i = str.length; i > 0; i -= 4) chunks.unshift(str.slice(Math.max(0, i - 4), i));
+            chunks.forEach((chunk, idx) => {
+                const bigUnitIdx = chunks.length - 1 - idx;
+                let chunkStr = '';
+                const digits = chunk.padStart(4, '0').split('').map(Number);
+                digits.forEach((d, i) => {
+                    const unitIdx = 3 - i;
+                    if (d === 0) return;
+                    if (d === 1 && unitIdx > 0) chunkStr += korUnits[unitIdx];
+                    else chunkStr += korDigits[d] + korUnits[unitIdx];
+                });
+                if (chunkStr) readResult += chunkStr + korBigUnits[bigUnitIdx];
+            });
+            document.getElementById('nc-read').textContent = readResult || '영';
+        }
+        function ncFileSize() {
+            const val = parseFloat(document.getElementById('nc-input').value);
+            const unit = document.getElementById('nc-unit').value;
+            if (!val) { document.getElementById('nc-result').innerHTML = '-'; return; }
+            const units = {B:1, KB:1024, MB:1024**2, GB:1024**3, TB:1024**4};
+            const bytes = val * units[unit];
+            let html = '';
+            for (const [u, m] of Object.entries(units)) {
+                const v = bytes / m;
+                html += `<div style="margin:5px 0;"><span style="color:#6a9fb5;">${u}:</span> ${v < 0.01 ? v.toExponential(2) : v.toLocaleString(undefined, {maximumFractionDigits:2})}</div>`;
+            }
+            document.getElementById('nc-result').innerHTML = html;
+        }
+
+        // Timer Combined
+        const timerTemplates = {
+            pomodoro: `<div class="timer-display" id="tmr-display">25:00</div>
+                <div class="timer-controls">
+                    <button class="btn btn-primary" onclick="tmrPomoStart()">시작</button>
+                    <button class="btn" onclick="tmrPomoPause()">일시정지</button>
+                    <button class="btn" onclick="tmrPomoReset()">리셋</button>
+                </div>
+                <div class="options" style="margin-top:15px;">
+                    <label><input type="radio" name="tmr-pomo" value="25" checked onchange="tmrPomoSet(25)"> 25분</label>
+                    <label><input type="radio" name="tmr-pomo" value="5" onchange="tmrPomoSet(5)"> 5분</label>
+                    <label><input type="radio" name="tmr-pomo" value="15" onchange="tmrPomoSet(15)"> 15분</label>
+                </div>`,
+            stopwatch: `<div class="timer-display" id="tmr-display">00:00:00</div>
+                <div class="timer-controls">
+                    <button class="btn btn-primary" onclick="tmrSwStart()">시작</button>
+                    <button class="btn" onclick="tmrSwPause()">일시정지</button>
+                    <button class="btn" onclick="tmrSwReset()">리셋</button>
+                    <button class="btn" onclick="tmrSwLap()">랩</button>
+                </div>
+                <div id="tmr-laps" style="margin-top:15px;"></div>`,
+            countdown: `<div class="row">
+                    <input type="number" id="tmr-h" placeholder="시" value="0" min="0" style="text-align:center;">
+                    <input type="number" id="tmr-m" placeholder="분" value="5" min="0" style="text-align:center;">
+                    <input type="number" id="tmr-s" placeholder="초" value="0" min="0" style="text-align:center;">
+                </div>
+                <div class="timer-display" id="tmr-display">00:05:00</div>
+                <div class="timer-controls">
+                    <button class="btn btn-primary" onclick="tmrCdStart()">시작</button>
+                    <button class="btn" onclick="tmrCdPause()">일시정지</button>
+                    <button class="btn" onclick="tmrCdReset()">리셋</button>
+                </div>`
+        };
+        let tmrInterval = null, tmrTime = 0, tmrLaps = [];
+        function showTimerType() {
+            const type = document.getElementById('timer-type').value;
+            document.getElementById('timer-content').innerHTML = timerTemplates[type] || '';
+            clearInterval(tmrInterval);
+            tmrTime = 0; tmrLaps = [];
+            if (type === 'pomodoro') tmrTime = 25 * 60;
+        }
+        showTimerType();
+        function tmrFormat(s) { return `${String(Math.floor(s/3600)).padStart(2,'0')}:${String(Math.floor((s%3600)/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`; }
+        function tmrPomoSet(m) { clearInterval(tmrInterval); tmrTime = m * 60; document.getElementById('tmr-display').textContent = `${m}:00`; }
+        function tmrPomoStart() { clearInterval(tmrInterval); tmrInterval = setInterval(() => { if (tmrTime > 0) { tmrTime--; const m = Math.floor(tmrTime / 60), s = tmrTime % 60; document.getElementById('tmr-display').textContent = `${m}:${String(s).padStart(2,'0')}`; } else { clearInterval(tmrInterval); alert('시간 끝!'); } }, 1000); }
+        function tmrPomoPause() { clearInterval(tmrInterval); }
+        function tmrPomoReset() { clearInterval(tmrInterval); const m = parseInt(document.querySelector('input[name="tmr-pomo"]:checked').value); tmrTime = m * 60; document.getElementById('tmr-display').textContent = `${m}:00`; }
+        function tmrSwStart() { clearInterval(tmrInterval); tmrInterval = setInterval(() => { tmrTime++; document.getElementById('tmr-display').textContent = tmrFormat(tmrTime); }, 1000); }
+        function tmrSwPause() { clearInterval(tmrInterval); }
+        function tmrSwReset() { clearInterval(tmrInterval); tmrTime = 0; tmrLaps = []; document.getElementById('tmr-display').textContent = '00:00:00'; document.getElementById('tmr-laps').innerHTML = ''; }
+        function tmrSwLap() { tmrLaps.push(tmrTime); let html = ''; tmrLaps.forEach((t, i) => html += `<div style="color:#666;font-size:0.85rem;">#${i+1}: ${tmrFormat(t)}</div>`); document.getElementById('tmr-laps').innerHTML = html; }
+        function tmrCdStart() { const h = parseInt(document.getElementById('tmr-h').value) || 0; const m = parseInt(document.getElementById('tmr-m').value) || 0; const s = parseInt(document.getElementById('tmr-s').value) || 0; if (tmrTime === 0) tmrTime = h * 3600 + m * 60 + s; clearInterval(tmrInterval); tmrInterval = setInterval(() => { if (tmrTime > 0) { tmrTime--; document.getElementById('tmr-display').textContent = tmrFormat(tmrTime); } else { clearInterval(tmrInterval); alert('시간 끝!'); } }, 1000); }
+        function tmrCdPause() { clearInterval(tmrInterval); }
+        function tmrCdReset() { clearInterval(tmrInterval); tmrTime = 0; const h = parseInt(document.getElementById('tmr-h').value) || 0; const m = parseInt(document.getElementById('tmr-m').value) || 0; const s = parseInt(document.getElementById('tmr-s').value) || 0; tmrTime = h * 3600 + m * 60 + s; document.getElementById('tmr-display').textContent = tmrFormat(tmrTime); }
+
+        // Input Test Combined
+        const inputTestTemplates = {
+            keyboard: `<div class="info-box">아무 키나 눌러보세요</div>
+                <div class="password-display" id="it-display">-</div>
+                <div class="stats-row">
+                    <div class="stat-box"><div class="number" id="it-code">-</div><div class="label">Key Code</div></div>
+                    <div class="stat-box"><div class="number" id="it-key">-</div><div class="label">Key</div></div>
+                    <div class="stat-box"><div class="number" id="it-which">-</div><div class="label">Which</div></div>
+                </div>`,
+            cps: `<div id="it-cps-area" style="background:#1a1a1a;border-radius:10px;padding:50px;text-align:center;cursor:pointer;user-select:none;">
+                    <div style="font-size:2rem;color:#ddd;" id="it-count">0</div>
+                    <div style="color:#666;margin-top:10px;" id="it-status">클릭하여 시작</div>
+                </div>
+                <div class="stats-row" style="margin-top:15px;">
+                    <div class="stat-box"><div class="number" id="it-result">-</div><div class="label">CPS</div></div>
+                    <div class="stat-box"><div class="number" id="it-time">10</div><div class="label">남은 시간</div></div>
+                </div>
+                <button class="btn" onclick="itCpsReset()">리셋</button>`,
+            reaction: `<div id="it-react-area" style="background:#c55;border-radius:10px;padding:80px;text-align:center;cursor:pointer;user-select:none;">
+                    <div style="font-size:1.2rem;color:#fff;" id="it-react-text">클릭하여 시작</div>
+                </div>
+                <div class="stats-row" style="margin-top:15px;">
+                    <div class="stat-box"><div class="number" id="it-react-result">-</div><div class="label">반응속도 (ms)</div></div>
+                </div>`,
+            typing: `<div id="it-typing-text" style="background:#1a1a1a;padding:15px;border-radius:8px;font-size:1.1rem;color:#888;line-height:1.8;margin-bottom:15px;">The quick brown fox jumps over the lazy dog.</div>
+                <textarea id="it-typing-input" placeholder="위 문장을 타이핑하세요" style="min-height:80px;"></textarea>
+                <div class="stats-row" style="margin-top:15px;">
+                    <div class="stat-box"><div class="number" id="it-wpm">-</div><div class="label">WPM</div></div>
+                    <div class="stat-box"><div class="number" id="it-accuracy">-</div><div class="label">정확도</div></div>
+                </div>
+                <button class="btn" onclick="itTypingReset()">다시 시작</button>`
+        };
+        let itCpsCount = 0, itCpsStarted = false, itCpsInterval = null, itCpsTime = 10;
+        let itReactState = 0, itReactTimeout = null, itReactStart = 0;
+        let itTypingStart = 0;
+        function showInputTestType() {
+            const type = document.getElementById('inputtest-type').value;
+            document.getElementById('inputtest-content').innerHTML = inputTestTemplates[type] || '';
+            if (type === 'keyboard') document.addEventListener('keydown', itKeyHandler);
+            else document.removeEventListener('keydown', itKeyHandler);
+            if (type === 'cps') document.getElementById('it-cps-area').addEventListener('click', itCpsClick);
+            if (type === 'reaction') document.getElementById('it-react-area').addEventListener('click', itReactClick);
+            if (type === 'typing') document.getElementById('it-typing-input').addEventListener('input', itTypingCheck);
+            itCpsCount = 0; itCpsStarted = false; itCpsTime = 10; clearInterval(itCpsInterval);
+            itReactState = 0; clearTimeout(itReactTimeout);
+            itTypingStart = 0;
+        }
+        showInputTestType();
+        function itKeyHandler(e) { document.getElementById('it-display').textContent = e.key; document.getElementById('it-code').textContent = e.keyCode; document.getElementById('it-key').textContent = e.key; document.getElementById('it-which').textContent = e.which; }
+        function itCpsClick() {
+            if (!itCpsStarted) { itCpsStarted = true; itCpsCount = 0; itCpsTime = 10; document.getElementById('it-status').textContent = '클릭!'; itCpsInterval = setInterval(() => { itCpsTime--; document.getElementById('it-time').textContent = itCpsTime; if (itCpsTime <= 0) { clearInterval(itCpsInterval); itCpsStarted = false; document.getElementById('it-result').textContent = (itCpsCount / 10).toFixed(2); document.getElementById('it-status').textContent = '완료!'; } }, 1000); }
+            if (itCpsStarted && itCpsTime > 0) { itCpsCount++; document.getElementById('it-count').textContent = itCpsCount; }
+        }
+        function itCpsReset() { clearInterval(itCpsInterval); itCpsCount = 0; itCpsStarted = false; itCpsTime = 10; document.getElementById('it-count').textContent = '0'; document.getElementById('it-status').textContent = '클릭하여 시작'; document.getElementById('it-result').textContent = '-'; document.getElementById('it-time').textContent = '10'; }
+        function itReactClick() {
+            const area = document.getElementById('it-react-area');
+            const text = document.getElementById('it-react-text');
+            if (itReactState === 0) { itReactState = 1; area.style.background = '#c55'; text.textContent = '초록색이 되면 클릭!'; itReactTimeout = setTimeout(() => { itReactState = 2; area.style.background = '#5a5'; text.textContent = '지금!'; itReactStart = Date.now(); }, 1000 + Math.random() * 3000); }
+            else if (itReactState === 1) { clearTimeout(itReactTimeout); itReactState = 0; area.style.background = '#c55'; text.textContent = '너무 빨라요! 다시 클릭하세요'; }
+            else if (itReactState === 2) { const time = Date.now() - itReactStart; document.getElementById('it-react-result').textContent = time; itReactState = 0; area.style.background = '#c55'; text.textContent = '클릭하여 다시 시작'; }
+        }
+        function itTypingCheck() {
+            if (itTypingStart === 0) itTypingStart = Date.now();
+            const target = document.getElementById('it-typing-text').textContent;
+            const input = document.getElementById('it-typing-input').value;
+            const elapsed = (Date.now() - itTypingStart) / 1000 / 60;
+            const words = input.split(' ').length;
+            document.getElementById('it-wpm').textContent = Math.round(words / elapsed) || '-';
+            let correct = 0;
+            for (let i = 0; i < input.length; i++) if (input[i] === target[i]) correct++;
+            document.getElementById('it-accuracy').textContent = input.length > 0 ? Math.round(correct / input.length * 100) + '%' : '-';
+        }
+        function itTypingReset() { itTypingStart = 0; document.getElementById('it-typing-input').value = ''; document.getElementById('it-wpm').textContent = '-'; document.getElementById('it-accuracy').textContent = '-'; }
+
+        // Device Test Combined
+        const deviceTestTemplates = {
+            camera: `<video id="dt-video" style="width:100%;border-radius:8px;background:#000;" autoplay playsinline></video>
+                <div style="margin-top:15px;">
+                    <button class="btn btn-primary" onclick="dtCameraStart()">시작</button>
+                    <button class="btn" onclick="dtCameraStop()">정지</button>
+                    <button class="btn" onclick="dtCameraCapture()">캡처</button>
+                </div>
+                <canvas id="dt-canvas" style="display:none;"></canvas>
+                <a id="dt-download" class="btn" style="display:none;text-decoration:none;">다운로드</a>`,
+            mic: `<button class="btn btn-primary" onclick="dtMicStart()">마이크 시작</button>
+                <button class="btn" onclick="dtMicStop()">정지</button>
+                <div class="stats-row" style="margin-top:15px;">
+                    <div class="stat-box"><div class="number" id="dt-mic-level">-</div><div class="label">레벨</div></div>
+                </div>
+                <div id="dt-mic-visual" style="height:30px;background:#1a1a1a;border-radius:5px;margin-top:10px;overflow:hidden;"></div>`,
+            speed: `<button class="btn btn-primary" id="dt-speed-btn" onclick="dtSpeedTest()">테스트 시작</button>
+                <div class="stats-row" style="margin-top:15px;">
+                    <div class="stat-box"><div class="number" id="dt-speed-result">-</div><div class="label">Mbps (추정)</div></div>
+                </div>
+                <div id="dt-speed-status" style="color:#666;margin-top:10px;text-align:center;">-</div>`,
+            screen: `<div class="stats-row" id="dt-screen-info"></div>`
+        };
+        let dtStream = null, dtMicContext = null, dtMicAnalyser = null;
+        function showDeviceTestType() {
+            const type = document.getElementById('devicetest-type').value;
+            document.getElementById('devicetest-content').innerHTML = deviceTestTemplates[type] || '';
+            if (dtStream) { dtStream.getTracks().forEach(t => t.stop()); dtStream = null; }
+            if (dtMicContext) { dtMicContext.close(); dtMicContext = null; }
+            dtMicAnalyser = null;
+            if (type === 'screen') dtShowScreen();
+        }
+        showDeviceTestType();
+        async function dtCameraStart() { try { dtStream = await navigator.mediaDevices.getUserMedia({ video: true }); document.getElementById('dt-video').srcObject = dtStream; } catch(e) { alert('카메라 접근 실패: ' + e.message); } }
+        function dtCameraStop() { if (dtStream) { dtStream.getTracks().forEach(t => t.stop()); dtStream = null; } document.getElementById('dt-video').srcObject = null; }
+        function dtCameraCapture() { const video = document.getElementById('dt-video'); if (!video.srcObject) return; const canvas = document.getElementById('dt-canvas'); canvas.width = video.videoWidth; canvas.height = video.videoHeight; canvas.getContext('2d').drawImage(video, 0, 0); const link = document.getElementById('dt-download'); link.href = canvas.toDataURL('image/png'); link.download = 'capture.png'; link.style.display = 'inline-block'; }
+        async function dtMicStart() { try { dtStream = await navigator.mediaDevices.getUserMedia({ audio: true }); dtMicContext = new AudioContext(); const source = dtMicContext.createMediaStreamSource(dtStream); dtMicAnalyser = dtMicContext.createAnalyser(); source.connect(dtMicAnalyser); dtMicAnalyser.fftSize = 256; dtMicUpdate(); } catch(e) { alert('마이크 접근 실패: ' + e.message); } }
+        function dtMicUpdate() { if (!dtMicAnalyser) return; const data = new Uint8Array(dtMicAnalyser.frequencyBinCount); dtMicAnalyser.getByteFrequencyData(data); const avg = data.reduce((a, b) => a + b, 0) / data.length; document.getElementById('dt-mic-level').textContent = Math.round(avg); document.getElementById('dt-mic-visual').innerHTML = `<div style="width:${avg}%;height:100%;background:linear-gradient(90deg,#5a5,#ca5,#c55);transition:width 0.1s;"></div>`; requestAnimationFrame(dtMicUpdate); }
+        function dtMicStop() { if (dtStream) { dtStream.getTracks().forEach(t => t.stop()); dtStream = null; } if (dtMicContext) { dtMicContext.close(); dtMicContext = null; } dtMicAnalyser = null; document.getElementById('dt-mic-level').textContent = '-'; document.getElementById('dt-mic-visual').innerHTML = ''; }
+        async function dtSpeedTest() { const btn = document.getElementById('dt-speed-btn'); const status = document.getElementById('dt-speed-status'); btn.disabled = true; status.textContent = '테스트 중...'; try { const start = performance.now(); const res = await fetch('https://www.cloudflare.com/cdn-cgi/trace?' + Date.now()); const data = await res.text(); const dur = (performance.now() - start) / 1000; const mbps = ((new Blob([data]).size * 8) / dur / 1000000).toFixed(2); document.getElementById('dt-speed-result').textContent = mbps; status.textContent = '완료 (추정치)'; } catch(e) { status.textContent = '테스트 실패'; } btn.disabled = false; }
+        function dtShowScreen() { const info = { '화면 해상도': `${screen.width} x ${screen.height}`, '브라우저 창': `${window.innerWidth} x ${window.innerHeight}`, '색상 깊이': screen.colorDepth + ' bit', 'DPR': window.devicePixelRatio, '터치 지원': 'ontouchstart' in window ? '예' : '아니오' }; let html = ''; for (const [k, v] of Object.entries(info)) html += `<div class="stat-box"><div class="number" style="font-size:0.9rem;">${v}</div><div class="label">${k}</div></div>`; document.getElementById('dt-screen-info').innerHTML = html; }
 
         // Copy
         function copyText(id){navigator.clipboard.writeText(document.getElementById(id).textContent).then(()=>alert('복사됨'));}
