@@ -166,6 +166,12 @@
                 <div class="tool-card" onclick="showTool('special')"><h3>특수문자</h3><p>모음/복사</p></div>
                 <div class="tool-card" onclick="showTool('unicode')"><h3>유니코드</h3><p>변환기</p></div>
                 <div class="tool-card" onclick="showTool('lorem-kr')"><h3>한글 Lorem</h3><p>더미 텍스트</p></div>
+                <div class="tool-card" onclick="showTool('encrypt')"><h3>텍스트 암호화</h3><p>AES 암호화</p></div>
+                <div class="tool-card" onclick="showTool('reverse')"><h3>문장 뒤집기</h3><p>텍스트 반전</p></div>
+                <div class="tool-card" onclick="showTool('linebreak')"><h3>줄바꿈</h3><p>추가/제거</p></div>
+                <div class="tool-card" onclick="showTool('whitespace')"><h3>공백/탭</h3><p>변환</p></div>
+                <div class="tool-card" onclick="showTool('escape')"><h3>이스케이프</h3><p>문자 변환</p></div>
+                <div class="tool-card" onclick="showTool('ascii')"><h3>ASCII Art</h3><p>텍스트 변환</p></div>
             </div>
 
             <div class="section-title">이미지</div>
@@ -178,6 +184,10 @@
                 <div class="tool-card" onclick="showTool('favicon')"><h3>파비콘 생성</h3><p>ICO, PNG</p></div>
                 <div class="tool-card" onclick="showTool('bg-remove')"><h3>누끼</h3><p>배경 제거</p></div>
                 <div class="tool-card" onclick="showTool('placeholder')"><h3>플레이스홀더</h3><p>더미 이미지</p></div>
+                <div class="tool-card" onclick="showTool('img-rotate')"><h3>회전/뒤집기</h3><p>이미지 변형</p></div>
+                <div class="tool-card" onclick="showTool('img-filter')"><h3>이미지 필터</h3><p>흑백, 세피아</p></div>
+                <div class="tool-card" onclick="showTool('img-watermark')"><h3>워터마크</h3><p>텍스트 삽입</p></div>
+                <div class="tool-card" onclick="showTool('color-extract')"><h3>색상 추출</h3><p>이미지에서</p></div>
             </div>
 
             <div class="section-title">인코딩</div>
@@ -212,26 +222,21 @@
                 <div class="tool-card" onclick="showTool('grid')"><h3>Grid</h3><p>CSS 생성기</p></div>
                 <div class="tool-card" onclick="showTool('regex-gen')"><h3>정규식 생성</h3><p>패턴 선택</p></div>
                 <div class="tool-card" onclick="showTool('barcode')"><h3>바코드</h3><p>생성기</p></div>
+                <div class="tool-card" onclick="showTool('yaml-json')"><h3>YAML ↔ JSON</h3><p>변환</p></div>
+                <div class="tool-card" onclick="showTool('csv-json')"><h3>CSV ↔ JSON</h3><p>변환</p></div>
+                <div class="tool-card" onclick="showTool('html-table')"><h3>HTML 테이블</h3><p>생성기</p></div>
+                <div class="tool-card" onclick="showTool('border-radius')"><h3>Border Radius</h3><p>CSS 생성</p></div>
+                <div class="tool-card" onclick="showTool('text-shadow')"><h3>Text Shadow</h3><p>CSS 생성</p></div>
             </div>
 
             <div class="section-title">계산</div>
             <div class="tools-grid">
-                <div class="tool-card" onclick="showTool('percent')"><h3>퍼센트</h3><p>비율 계산</p></div>
-                <div class="tool-card" onclick="showTool('unit')"><h3>단위</h3><p>길이, 무게, 온도</p></div>
-                <div class="tool-card" onclick="showTool('number')"><h3>진법</h3><p>2, 8, 10, 16</p></div>
-                <div class="tool-card" onclick="showTool('date')"><h3>날짜</h3><p>D-Day, 기간</p></div>
-                <div class="tool-card" onclick="showTool('age')"><h3>나이 계산</h3><p>만나이, 음력/양력</p></div>
-                <div class="tool-card" onclick="showTool('bmi')"><h3>BMI</h3><p>체질량지수</p></div>
-                <div class="tool-card" onclick="showTool('loan')"><h3>대출 이자</h3><p>원리금 계산</p></div>
-                <div class="tool-card" onclick="showTool('discount')"><h3>할인율</h3><p>세일 가격</p></div>
-                <div class="tool-card" onclick="showTool('tip')"><h3>팁 계산</h3><p>더치페이</p></div>
-                <div class="tool-card" onclick="showTool('vat')"><h3>부가세</h3><p>세금 계산</p></div>
-                <div class="tool-card" onclick="showTool('currency')"><h3>환율</h3><p>실시간 변환</p></div>
-                <div class="tool-card" onclick="showTool('salary')"><h3>연봉↔월급</h3><p>실수령액</p></div>
-                <div class="tool-card" onclick="showTool('severance')"><h3>퇴직금</h3><p>계산기</p></div>
-                <div class="tool-card" onclick="showTool('savings')"><h3>적금 이자</h3><p>만기금액</p></div>
-                <div class="tool-card" onclick="showTool('stock')"><h3>주식 수익률</h3><p>계산기</p></div>
-                <div class="tool-card" onclick="showTool('calorie')"><h3>칼로리</h3><p>음식 계산</p></div>
+                <div class="tool-card" onclick="showTool('calculator')"><h3>종합 계산기</h3><p>모든 계산 도구</p></div>
+                <div class="tool-card" onclick="showTool('unit')"><h3>단위 변환</h3><p>길이, 무게, 온도</p></div>
+                <div class="tool-card" onclick="showTool('number')"><h3>진법 변환</h3><p>2, 8, 10, 16</p></div>
+                <div class="tool-card" onclick="showTool('date')"><h3>날짜 계산</h3><p>D-Day, 기간</p></div>
+                <div class="tool-card" onclick="showTool('roman')"><h3>로마숫자</h3><p>변환</p></div>
+                <div class="tool-card" onclick="showTool('filesize')"><h3>파일 크기</h3><p>KB/MB/GB</p></div>
             </div>
 
             <div class="section-title">유틸리티</div>
@@ -251,6 +256,12 @@
                 <div class="tool-card" onclick="showTool('reaction')"><h3>반응속도</h3><p>테스트</p></div>
                 <div class="tool-card" onclick="showTool('typing')"><h3>타이핑</h3><p>속도 테스트</p></div>
                 <div class="tool-card" onclick="showTool('randcolor')"><h3>랜덤 색상</h3><p>생성기</p></div>
+                <div class="tool-card" onclick="showTool('storage')"><h3>로컬 저장소</h3><p>뷰어</p></div>
+                <div class="tool-card" onclick="showTool('speedtest')"><h3>네트워크 속도</h3><p>테스트</p></div>
+                <div class="tool-card" onclick="showTool('camera')"><h3>카메라</h3><p>테스트</p></div>
+                <div class="tool-card" onclick="showTool('mic')"><h3>마이크</h3><p>테스트</p></div>
+                <div class="tool-card" onclick="showTool('tts')"><h3>TTS</h3><p>텍스트→음성</p></div>
+                <div class="tool-card" onclick="showTool('qr-scan')"><h3>QR 스캔</h3><p>카메라로 인식</p></div>
             </div>
         </div>
 
@@ -1497,6 +1508,333 @@
             <div class="password-display" id="randcolor-hex">#667EEA</div>
             <button class="btn btn-primary" onclick="generateRandomColor()">새 색상</button>
             <button class="copy-btn" onclick="copyText('randcolor-hex')">복사</button>
+        </div>
+
+        <!-- Text Encrypt -->
+        <div class="tool-section" id="tool-encrypt">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>텍스트 암호화</h2>
+            <textarea id="encrypt-input" placeholder="텍스트 입력"></textarea>
+            <input type="password" id="encrypt-key" placeholder="암호 키">
+            <button class="btn" onclick="encryptText()">암호화</button>
+            <button class="btn" onclick="decryptText()">복호화</button>
+            <div class="result-box"><div id="encrypt-result">-</div></div>
+            <button class="copy-btn" onclick="copyText('encrypt-result')">복사</button>
+        </div>
+
+        <!-- Text Reverse -->
+        <div class="tool-section" id="tool-reverse">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>문장 뒤집기</h2>
+            <textarea id="reverse-input" placeholder="텍스트 입력" oninput="reverseText()"></textarea>
+            <div class="options">
+                <label><input type="radio" name="reverse-type" value="char" checked onchange="reverseText()"> 글자 단위</label>
+                <label><input type="radio" name="reverse-type" value="word" onchange="reverseText()"> 단어 단위</label>
+                <label><input type="radio" name="reverse-type" value="line" onchange="reverseText()"> 줄 단위</label>
+            </div>
+            <div class="result-box"><div id="reverse-result">-</div></div>
+            <button class="copy-btn" onclick="copyText('reverse-result')">복사</button>
+        </div>
+
+        <!-- Line Break -->
+        <div class="tool-section" id="tool-linebreak">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>줄바꿈 추가/제거</h2>
+            <textarea id="linebreak-input" placeholder="텍스트 입력"></textarea>
+            <button class="btn" onclick="addLineBreaks()">줄바꿈 추가</button>
+            <button class="btn" onclick="removeLineBreaks()">줄바꿈 제거</button>
+            <button class="btn" onclick="trimLines()">빈 줄 제거</button>
+            <div class="result-box"><pre id="linebreak-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
+            <button class="copy-btn" onclick="copyText('linebreak-result')">복사</button>
+        </div>
+
+        <!-- Whitespace -->
+        <div class="tool-section" id="tool-whitespace">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>공백/탭 변환</h2>
+            <textarea id="ws-input" placeholder="텍스트 입력"></textarea>
+            <button class="btn" onclick="spacesToTabs()">공백→탭</button>
+            <button class="btn" onclick="tabsToSpaces()">탭→공백</button>
+            <button class="btn" onclick="removeExtraSpaces()">연속 공백 제거</button>
+            <div class="result-box"><pre id="ws-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
+            <button class="copy-btn" onclick="copyText('ws-result')">복사</button>
+        </div>
+
+        <!-- Escape -->
+        <div class="tool-section" id="tool-escape">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>이스케이프 문자 변환</h2>
+            <textarea id="esc-input" placeholder="텍스트 입력"></textarea>
+            <button class="btn" onclick="escapeChars()">이스케이프</button>
+            <button class="btn" onclick="unescapeChars()">언이스케이프</button>
+            <div class="result-box"><pre id="esc-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
+            <button class="copy-btn" onclick="copyText('esc-result')">복사</button>
+        </div>
+
+        <!-- ASCII Art -->
+        <div class="tool-section" id="tool-ascii">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>ASCII Art 생성</h2>
+            <input type="text" id="ascii-input" placeholder="텍스트 입력" oninput="generateAsciiArt()">
+            <div class="result-box"><pre id="ascii-result" style="white-space:pre;margin:0;font-size:0.6rem;line-height:1;">-</pre></div>
+            <button class="copy-btn" onclick="copyText('ascii-result')">복사</button>
+        </div>
+
+        <!-- Image Rotate -->
+        <div class="tool-section" id="tool-img-rotate">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>이미지 회전/뒤집기</h2>
+            <input type="file" id="rotate-file" accept="image/*" onchange="loadRotateImage(this)">
+            <img id="rotate-preview" class="img-preview" style="display:none;">
+            <div style="margin:15px 0;">
+                <button class="btn" onclick="rotateImage(90)">↻ 90°</button>
+                <button class="btn" onclick="rotateImage(-90)">↺ -90°</button>
+                <button class="btn" onclick="flipImage('h')">↔ 좌우</button>
+                <button class="btn" onclick="flipImage('v')">↕ 상하</button>
+            </div>
+            <canvas id="rotate-canvas" style="display:none;"></canvas>
+            <a id="rotate-download" class="btn" style="display:none;text-decoration:none;">다운로드</a>
+        </div>
+
+        <!-- Image Filter -->
+        <div class="tool-section" id="tool-img-filter">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>이미지 필터</h2>
+            <input type="file" id="filter-file" accept="image/*" onchange="loadFilterImage(this)">
+            <img id="filter-preview" class="img-preview" style="display:none;">
+            <div style="margin:15px 0;">
+                <button class="btn" onclick="applyFilter('grayscale')">흑백</button>
+                <button class="btn" onclick="applyFilter('sepia')">세피아</button>
+                <button class="btn" onclick="applyFilter('invert')">반전</button>
+                <button class="btn" onclick="applyFilter('blur')">블러</button>
+                <button class="btn" onclick="applyFilter('brightness')">밝게</button>
+                <button class="btn" onclick="applyFilter('contrast')">대비</button>
+            </div>
+            <canvas id="filter-canvas" style="display:none;"></canvas>
+            <a id="filter-download" class="btn" style="display:none;text-decoration:none;">다운로드</a>
+        </div>
+
+        <!-- Watermark -->
+        <div class="tool-section" id="tool-img-watermark">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>이미지 워터마크</h2>
+            <input type="file" id="wm-file" accept="image/*" onchange="loadWatermarkImage(this)">
+            <img id="wm-preview" class="img-preview" style="display:none;">
+            <input type="text" id="wm-text" placeholder="워터마크 텍스트">
+            <div class="row">
+                <select id="wm-position">
+                    <option value="br">우하단</option>
+                    <option value="bl">좌하단</option>
+                    <option value="tr">우상단</option>
+                    <option value="tl">좌상단</option>
+                    <option value="center">중앙</option>
+                </select>
+                <input type="number" id="wm-opacity" value="50" min="10" max="100" placeholder="투명도 %">
+            </div>
+            <button class="btn btn-primary" onclick="addWatermark()">워터마크 추가</button>
+            <canvas id="wm-canvas" style="display:none;"></canvas>
+            <a id="wm-download" class="btn" style="display:none;text-decoration:none;">다운로드</a>
+        </div>
+
+        <!-- Color Extract -->
+        <div class="tool-section" id="tool-color-extract">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>이미지 색상 추출</h2>
+            <input type="file" id="ce-file" accept="image/*" onchange="loadColorExtractImage(this)">
+            <img id="ce-preview" class="img-preview" style="display:none;cursor:crosshair;">
+            <canvas id="ce-canvas" style="display:none;"></canvas>
+            <div class="info-box">이미지를 클릭하면 해당 위치의 색상이 추출됩니다</div>
+            <div id="ce-colors" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:15px;"></div>
+        </div>
+
+        <!-- YAML JSON -->
+        <div class="tool-section" id="tool-yaml-json">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>YAML ↔ JSON 변환</h2>
+            <textarea id="yaml-input" placeholder="YAML 또는 JSON 입력"></textarea>
+            <button class="btn" onclick="yamlToJson()">YAML → JSON</button>
+            <button class="btn" onclick="jsonToYaml()">JSON → YAML</button>
+            <div class="result-box"><pre id="yaml-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
+            <button class="copy-btn" onclick="copyText('yaml-result')">복사</button>
+        </div>
+
+        <!-- CSV JSON -->
+        <div class="tool-section" id="tool-csv-json">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>CSV ↔ JSON 변환</h2>
+            <textarea id="csv-input" placeholder="CSV 또는 JSON 입력"></textarea>
+            <button class="btn" onclick="csvToJson()">CSV → JSON</button>
+            <button class="btn" onclick="jsonToCsv()">JSON → CSV</button>
+            <div class="result-box"><pre id="csv-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
+            <button class="copy-btn" onclick="copyText('csv-result')">복사</button>
+        </div>
+
+        <!-- HTML Table -->
+        <div class="tool-section" id="tool-html-table">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>HTML 테이블 생성기</h2>
+            <div class="row">
+                <input type="number" id="table-rows" value="3" min="1" max="20" placeholder="행">
+                <input type="number" id="table-cols" value="3" min="1" max="10" placeholder="열">
+            </div>
+            <div class="options">
+                <label><input type="checkbox" id="table-header" checked> 헤더 포함</label>
+                <label><input type="checkbox" id="table-border" checked> 테두리</label>
+            </div>
+            <button class="btn btn-primary" onclick="generateHtmlTable()">생성</button>
+            <div class="result-box"><pre id="table-result" style="white-space:pre-wrap;margin:0;font-size:0.75rem;">-</pre></div>
+            <button class="copy-btn" onclick="copyText('table-result')">복사</button>
+        </div>
+
+        <!-- Border Radius -->
+        <div class="tool-section" id="tool-border-radius">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>Border Radius 생성기</h2>
+            <div class="row">
+                <div><label style="color:#666;font-size:0.8rem;">좌상</label><input type="range" id="br-tl" value="20" min="0" max="100" oninput="updateBorderRadius()"></div>
+                <div><label style="color:#666;font-size:0.8rem;">우상</label><input type="range" id="br-tr" value="20" min="0" max="100" oninput="updateBorderRadius()"></div>
+            </div>
+            <div class="row">
+                <div><label style="color:#666;font-size:0.8rem;">좌하</label><input type="range" id="br-bl" value="20" min="0" max="100" oninput="updateBorderRadius()"></div>
+                <div><label style="color:#666;font-size:0.8rem;">우하</label><input type="range" id="br-br" value="20" min="0" max="100" oninput="updateBorderRadius()"></div>
+            </div>
+            <div id="br-preview" style="width:150px;height:150px;background:#667eea;margin:20px auto;"></div>
+            <div class="result-box"><code id="br-result">-</code></div>
+            <button class="copy-btn" onclick="copyText('br-result')">복사</button>
+        </div>
+
+        <!-- Text Shadow -->
+        <div class="tool-section" id="tool-text-shadow">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>Text Shadow 생성기</h2>
+            <div class="slider-row"><span>X:</span><input type="range" id="ts-x" value="2" min="-20" max="20" oninput="updateTextShadow()"><span id="ts-x-val">2px</span></div>
+            <div class="slider-row"><span>Y:</span><input type="range" id="ts-y" value="2" min="-20" max="20" oninput="updateTextShadow()"><span id="ts-y-val">2px</span></div>
+            <div class="slider-row"><span>Blur:</span><input type="range" id="ts-blur" value="4" min="0" max="20" oninput="updateTextShadow()"><span id="ts-blur-val">4px</span></div>
+            <input type="color" id="ts-color" value="#000000" onchange="updateTextShadow()">
+            <div id="ts-preview" style="font-size:2rem;color:#fff;text-align:center;padding:30px;background:#1a1a1a;border-radius:8px;margin:15px 0;">Text Shadow</div>
+            <div class="result-box"><code id="ts-result">-</code></div>
+            <button class="copy-btn" onclick="copyText('ts-result')">복사</button>
+        </div>
+
+        <!-- Calculator (Combined) -->
+        <div class="tool-section" id="tool-calculator">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>종합 계산기</h2>
+            <select id="calc-type" onchange="showCalcType()">
+                <option value="percent">퍼센트</option>
+                <option value="bmi">BMI</option>
+                <option value="loan">대출 이자</option>
+                <option value="discount">할인율</option>
+                <option value="tip">팁/더치페이</option>
+                <option value="vat">부가세</option>
+                <option value="currency">환율</option>
+                <option value="salary">연봉/월급</option>
+                <option value="severance">퇴직금</option>
+                <option value="savings">적금 이자</option>
+                <option value="stock">주식 수익률</option>
+                <option value="age">나이</option>
+                <option value="calorie">칼로리</option>
+                <option value="fuel">자동차 연비</option>
+                <option value="hourly">시급/일급</option>
+            </select>
+            <div id="calc-content"></div>
+        </div>
+
+        <!-- Roman Numerals -->
+        <div class="tool-section" id="tool-roman">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>로마숫자 변환</h2>
+            <input type="text" id="roman-input" placeholder="숫자 또는 로마숫자" oninput="convertRoman()">
+            <div class="result-box"><div id="roman-result">-</div></div>
+        </div>
+
+        <!-- File Size -->
+        <div class="tool-section" id="tool-filesize">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>파일 크기 변환</h2>
+            <div class="row">
+                <input type="number" id="fs-value" placeholder="값" oninput="convertFileSize()">
+                <select id="fs-unit" onchange="convertFileSize()">
+                    <option value="B">Bytes</option>
+                    <option value="KB" selected>KB</option>
+                    <option value="MB">MB</option>
+                    <option value="GB">GB</option>
+                    <option value="TB">TB</option>
+                </select>
+            </div>
+            <div class="result-box" id="fs-result">-</div>
+        </div>
+
+        <!-- Storage Viewer -->
+        <div class="tool-section" id="tool-storage">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>로컬 저장소 뷰어</h2>
+            <button class="btn btn-primary" onclick="loadStorage()">새로고침</button>
+            <div id="storage-list" style="margin-top:15px;"></div>
+        </div>
+
+        <!-- Speed Test -->
+        <div class="tool-section" id="tool-speedtest">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>네트워크 속도 테스트</h2>
+            <div class="info-box">대략적인 다운로드 속도를 측정합니다</div>
+            <button class="btn btn-primary" onclick="runSpeedTest()" id="speed-btn">테스트 시작</button>
+            <div id="speed-status" style="text-align:center;margin:15px 0;color:#666;"></div>
+            <div class="stats-row">
+                <div class="stat-box"><div class="number" id="speed-result">-</div><div class="label">Mbps</div></div>
+            </div>
+        </div>
+
+        <!-- Camera -->
+        <div class="tool-section" id="tool-camera">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>카메라 테스트</h2>
+            <video id="camera-video" style="width:100%;border-radius:8px;background:#000;" autoplay playsinline></video>
+            <div style="margin-top:15px;">
+                <button class="btn btn-primary" onclick="startCamera()">카메라 시작</button>
+                <button class="btn" onclick="stopCamera()">정지</button>
+                <button class="btn" onclick="capturePhoto()">캡처</button>
+            </div>
+            <canvas id="camera-canvas" style="display:none;"></canvas>
+            <a id="camera-download" class="btn" style="display:none;text-decoration:none;margin-top:10px;">다운로드</a>
+        </div>
+
+        <!-- Mic -->
+        <div class="tool-section" id="tool-mic">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>마이크 테스트</h2>
+            <div id="mic-visual" style="height:100px;background:#1a1a1a;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;"></div>
+            <div style="margin-top:15px;">
+                <button class="btn btn-primary" onclick="startMic()">마이크 시작</button>
+                <button class="btn" onclick="stopMic()">정지</button>
+            </div>
+            <div class="stat-box" style="margin-top:15px;"><div class="number" id="mic-level">-</div><div class="label">음량 레벨</div></div>
+        </div>
+
+        <!-- TTS -->
+        <div class="tool-section" id="tool-tts">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>텍스트 → 음성 (TTS)</h2>
+            <textarea id="tts-input" placeholder="읽을 텍스트 입력"></textarea>
+            <div class="row">
+                <select id="tts-voice"></select>
+                <input type="range" id="tts-rate" min="0.5" max="2" step="0.1" value="1">
+            </div>
+            <button class="btn btn-primary" onclick="speakText()">읽기</button>
+            <button class="btn" onclick="stopSpeech()">정지</button>
+        </div>
+
+        <!-- QR Scan -->
+        <div class="tool-section" id="tool-qr-scan">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>QR 코드 스캔</h2>
+            <video id="qr-video" style="width:100%;border-radius:8px;background:#000;" autoplay playsinline></video>
+            <div style="margin-top:15px;">
+                <button class="btn btn-primary" onclick="startQrScan()">스캔 시작</button>
+                <button class="btn" onclick="stopQrScan()">정지</button>
+            </div>
+            <div class="result-box"><div id="qr-scan-result">-</div></div>
+            <button class="copy-btn" onclick="copyText('qr-scan-result')">복사</button>
         </div>
 
         <!-- About -->
@@ -2853,6 +3191,809 @@
                 status.innerHTML = `오류: ${e.message}<br><small>브라우저가 WebGPU/WASM을 지원하지 않을 수 있습니다.</small>`;
             }
             btn.disabled = false;
+        }
+
+        // Text Encrypt/Decrypt (AES)
+        function encryptText() {
+            const text = document.getElementById('encrypt-input').value;
+            const key = document.getElementById('encrypt-key').value;
+            if(!text || !key) return;
+            const encrypted = CryptoJS.AES.encrypt(text, key).toString();
+            document.getElementById('encrypt-result').textContent = encrypted;
+        }
+        function decryptText() {
+            const text = document.getElementById('encrypt-input').value;
+            const key = document.getElementById('encrypt-key').value;
+            if(!text || !key) return;
+            try {
+                const decrypted = CryptoJS.AES.decrypt(text, key).toString(CryptoJS.enc.Utf8);
+                document.getElementById('encrypt-result').textContent = decrypted || '복호화 실패';
+            } catch(e) { document.getElementById('encrypt-result').textContent = '복호화 실패'; }
+        }
+
+        // Text Reverse
+        function reverseText() {
+            const text = document.getElementById('reverse-input').value;
+            const type = document.querySelector('input[name="reverse-type"]:checked').value;
+            let result;
+            if(type === 'char') result = text.split('').reverse().join('');
+            else if(type === 'word') result = text.split(' ').reverse().join(' ');
+            else result = text.split('\n').reverse().join('\n');
+            document.getElementById('reverse-result').textContent = result || '-';
+        }
+
+        // Line Break
+        function addLineBreaks() {
+            const text = document.getElementById('linebreak-input').value;
+            document.getElementById('linebreak-result').textContent = text.split(' ').join('\n');
+        }
+        function removeLineBreaks() {
+            const text = document.getElementById('linebreak-input').value;
+            document.getElementById('linebreak-result').textContent = text.replace(/\n/g, ' ');
+        }
+        function trimLines() {
+            const text = document.getElementById('linebreak-input').value;
+            document.getElementById('linebreak-result').textContent = text.split('\n').filter(l => l.trim()).join('\n');
+        }
+
+        // Whitespace
+        function spacesToTabs() {
+            const text = document.getElementById('ws-input').value;
+            document.getElementById('ws-result').textContent = text.replace(/    /g, '\t');
+        }
+        function tabsToSpaces() {
+            const text = document.getElementById('ws-input').value;
+            document.getElementById('ws-result').textContent = text.replace(/\t/g, '    ');
+        }
+        function removeExtraSpaces() {
+            const text = document.getElementById('ws-input').value;
+            document.getElementById('ws-result').textContent = text.replace(/  +/g, ' ');
+        }
+
+        // Escape Characters
+        function escapeChars() {
+            const text = document.getElementById('esc-input').value;
+            const result = text.replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/\r/g, '\\r').replace(/\t/g, '\\t').replace(/"/g, '\\"').replace(/'/g, "\\'");
+            document.getElementById('esc-result').textContent = result;
+        }
+        function unescapeChars() {
+            const text = document.getElementById('esc-input').value;
+            const result = text.replace(/\\n/g, '\n').replace(/\\r/g, '\r').replace(/\\t/g, '\t').replace(/\\"/g, '"').replace(/\\'/g, "'").replace(/\\\\/g, '\\');
+            document.getElementById('esc-result').textContent = result;
+        }
+
+        // ASCII Art
+        const asciiFont = {
+            'A': ['  █  ','█ █ ','████','█  █','█  █'],
+            'B': ['███ ','█  █','███ ','█  █','███ '],
+            'C': [' ███','█   ','█   ','█   ',' ███'],
+            'D': ['███ ','█  █','█  █','█  █','███ '],
+            'E': ['████','█   ','███ ','█   ','████'],
+            'F': ['████','█   ','███ ','█   ','█   '],
+            'G': [' ███','█   ','█ ██','█  █',' ███'],
+            'H': ['█  █','█  █','████','█  █','█  █'],
+            'I': ['███',' █ ',' █ ',' █ ','███'],
+            'J': ['  ██','   █','   █','█  █',' ██ '],
+            'K': ['█  █','█ █ ','██  ','█ █ ','█  █'],
+            'L': ['█   ','█   ','█   ','█   ','████'],
+            'M': ['█   █','██ ██','█ █ █','█   █','█   █'],
+            'N': ['█   █','██  █','█ █ █','█  ██','█   █'],
+            'O': [' ██ ','█  █','█  █','█  █',' ██ '],
+            'P': ['███ ','█  █','███ ','█   ','█   '],
+            'Q': [' ██ ','█  █','█  █','█ █ ',' ███'],
+            'R': ['███ ','█  █','███ ','█ █ ','█  █'],
+            'S': [' ███','█   ',' ██ ','   █','███ '],
+            'T': ['█████','  █  ','  █  ','  █  ','  █  '],
+            'U': ['█  █','█  █','█  █','█  █',' ██ '],
+            'V': ['█   █','█   █','█   █',' █ █ ','  █  '],
+            'W': ['█   █','█   █','█ █ █','██ ██','█   █'],
+            'X': ['█   █',' █ █ ','  █  ',' █ █ ','█   █'],
+            'Y': ['█   █',' █ █ ','  █  ','  █  ','  █  '],
+            'Z': ['█████','   █ ','  █  ',' █   ','█████'],
+            ' ': ['   ','   ','   ','   ','   '],
+            '0': [' ██ ','█  █','█  █','█  █',' ██ '],
+            '1': [' █ ','██ ',' █ ',' █ ','███'],
+            '2': [' ██ ','█  █','  █ ',' █  ','████'],
+            '3': ['███ ','   █',' ██ ','   █','███ '],
+            '4': ['█  █','█  █','████','   █','   █'],
+            '5': ['████','█   ','███ ','   █','███ '],
+            '6': [' ██ ','█   ','███ ','█  █',' ██ '],
+            '7': ['████','   █','  █ ',' █  ',' █  '],
+            '8': [' ██ ','█  █',' ██ ','█  █',' ██ '],
+            '9': [' ██ ','█  █',' ███','   █',' ██ ']
+        };
+        function generateAsciiArt() {
+            const text = document.getElementById('ascii-input').value.toUpperCase();
+            if(!text) { document.getElementById('ascii-result').textContent = '-'; return; }
+            let result = ['','','','',''];
+            for(const c of text) {
+                const art = asciiFont[c] || ['?','?','?','?','?'];
+                for(let i = 0; i < 5; i++) result[i] += art[i] + ' ';
+            }
+            document.getElementById('ascii-result').textContent = result.join('\n');
+        }
+
+        // Image Rotate
+        let rotateImg = null;
+        function loadRotateImage(input) {
+            const file = input.files[0]; if(!file) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                rotateImg = new Image();
+                rotateImg.src = e.target.result;
+                document.getElementById('rotate-preview').src = e.target.result;
+                document.getElementById('rotate-preview').style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+        function rotateImage(deg) {
+            if(!rotateImg) return;
+            const canvas = document.getElementById('rotate-canvas');
+            const ctx = canvas.getContext('2d');
+            if(Math.abs(deg) === 90) {
+                canvas.width = rotateImg.height;
+                canvas.height = rotateImg.width;
+            } else {
+                canvas.width = rotateImg.width;
+                canvas.height = rotateImg.height;
+            }
+            ctx.translate(canvas.width/2, canvas.height/2);
+            ctx.rotate(deg * Math.PI / 180);
+            ctx.drawImage(rotateImg, -rotateImg.width/2, -rotateImg.height/2);
+            const dataUrl = canvas.toDataURL('image/png');
+            document.getElementById('rotate-preview').src = dataUrl;
+            rotateImg.src = dataUrl;
+            const link = document.getElementById('rotate-download');
+            link.href = dataUrl; link.download = 'rotated.png'; link.style.display = 'inline-block';
+        }
+        function flipImage(dir) {
+            if(!rotateImg) return;
+            const canvas = document.getElementById('rotate-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = rotateImg.width;
+            canvas.height = rotateImg.height;
+            if(dir === 'h') { ctx.translate(canvas.width, 0); ctx.scale(-1, 1); }
+            else { ctx.translate(0, canvas.height); ctx.scale(1, -1); }
+            ctx.drawImage(rotateImg, 0, 0);
+            const dataUrl = canvas.toDataURL('image/png');
+            document.getElementById('rotate-preview').src = dataUrl;
+            rotateImg.src = dataUrl;
+            const link = document.getElementById('rotate-download');
+            link.href = dataUrl; link.download = 'flipped.png'; link.style.display = 'inline-block';
+        }
+
+        // Image Filter
+        let filterImg = null;
+        function loadFilterImage(input) {
+            const file = input.files[0]; if(!file) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                filterImg = new Image();
+                filterImg.src = e.target.result;
+                document.getElementById('filter-preview').src = e.target.result;
+                document.getElementById('filter-preview').style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+        function applyFilter(type) {
+            if(!filterImg) return;
+            const canvas = document.getElementById('filter-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = filterImg.width;
+            canvas.height = filterImg.height;
+            ctx.filter = type === 'grayscale' ? 'grayscale(100%)' :
+                         type === 'sepia' ? 'sepia(100%)' :
+                         type === 'invert' ? 'invert(100%)' :
+                         type === 'blur' ? 'blur(3px)' :
+                         type === 'brightness' ? 'brightness(150%)' :
+                         type === 'contrast' ? 'contrast(150%)' : 'none';
+            ctx.drawImage(filterImg, 0, 0);
+            const dataUrl = canvas.toDataURL('image/png');
+            document.getElementById('filter-preview').src = dataUrl;
+            const link = document.getElementById('filter-download');
+            link.href = dataUrl; link.download = `filtered-${type}.png`; link.style.display = 'inline-block';
+        }
+
+        // Watermark
+        let wmImg = null;
+        function loadWatermarkImage(input) {
+            const file = input.files[0]; if(!file) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                wmImg = new Image();
+                wmImg.src = e.target.result;
+                document.getElementById('wm-preview').src = e.target.result;
+                document.getElementById('wm-preview').style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+        function addWatermark() {
+            if(!wmImg) return;
+            const text = document.getElementById('wm-text').value || 'Watermark';
+            const pos = document.getElementById('wm-position').value;
+            const opacity = document.getElementById('wm-opacity').value / 100;
+            const canvas = document.getElementById('wm-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = wmImg.width;
+            canvas.height = wmImg.height;
+            ctx.drawImage(wmImg, 0, 0);
+            ctx.globalAlpha = opacity;
+            ctx.fillStyle = '#ffffff';
+            ctx.font = `${Math.max(20, wmImg.width / 20)}px Arial`;
+            ctx.textBaseline = 'middle';
+            const metrics = ctx.measureText(text);
+            let x, y;
+            if(pos === 'br') { x = canvas.width - metrics.width - 20; y = canvas.height - 30; }
+            else if(pos === 'bl') { x = 20; y = canvas.height - 30; }
+            else if(pos === 'tr') { x = canvas.width - metrics.width - 20; y = 30; }
+            else if(pos === 'tl') { x = 20; y = 30; }
+            else { x = (canvas.width - metrics.width) / 2; y = canvas.height / 2; }
+            ctx.shadowColor = 'rgba(0,0,0,0.5)';
+            ctx.shadowBlur = 4;
+            ctx.fillText(text, x, y);
+            const dataUrl = canvas.toDataURL('image/png');
+            document.getElementById('wm-preview').src = dataUrl;
+            const link = document.getElementById('wm-download');
+            link.href = dataUrl; link.download = 'watermarked.png'; link.style.display = 'inline-block';
+        }
+
+        // Color Extract
+        let ceImg = null;
+        function loadColorExtractImage(input) {
+            const file = input.files[0]; if(!file) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                ceImg = new Image();
+                ceImg.onload = () => {
+                    const canvas = document.getElementById('ce-canvas');
+                    canvas.width = ceImg.width;
+                    canvas.height = ceImg.height;
+                    canvas.getContext('2d').drawImage(ceImg, 0, 0);
+                };
+                ceImg.src = e.target.result;
+                const preview = document.getElementById('ce-preview');
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                preview.onclick = function(e) {
+                    const rect = preview.getBoundingClientRect();
+                    const scaleX = ceImg.width / rect.width;
+                    const scaleY = ceImg.height / rect.height;
+                    const x = Math.floor((e.clientX - rect.left) * scaleX);
+                    const y = Math.floor((e.clientY - rect.top) * scaleY);
+                    const ctx = document.getElementById('ce-canvas').getContext('2d');
+                    const pixel = ctx.getImageData(x, y, 1, 1).data;
+                    const hex = '#' + [pixel[0], pixel[1], pixel[2]].map(v => v.toString(16).padStart(2,'0')).join('');
+                    const container = document.getElementById('ce-colors');
+                    container.innerHTML += `<div style="display:flex;align-items:center;gap:8px;background:#1a1a1a;padding:8px 12px;border-radius:6px;cursor:pointer;" onclick="navigator.clipboard.writeText('${hex}');alert('복사됨')"><div style="width:30px;height:30px;background:${hex};border-radius:4px;"></div><span>${hex}</span></div>`;
+                };
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // YAML JSON
+        function yamlToJson() {
+            const input = document.getElementById('yaml-input').value.trim();
+            try {
+                const lines = input.split('\n');
+                const result = {};
+                let currentIndent = 0;
+                let stack = [result];
+                let currentKey = '';
+                for(const line of lines) {
+                    if(!line.trim() || line.trim().startsWith('#')) continue;
+                    const indent = line.search(/\S/);
+                    const trimmed = line.trim();
+                    if(trimmed.includes(':')) {
+                        const [key, ...valParts] = trimmed.split(':');
+                        const val = valParts.join(':').trim();
+                        if(val) {
+                            stack[0][key.trim()] = val.replace(/^["']|["']$/g, '');
+                        } else {
+                            stack[0][key.trim()] = {};
+                            stack.unshift(stack[0][key.trim()]);
+                        }
+                    }
+                }
+                document.getElementById('yaml-result').textContent = JSON.stringify(result, null, 2);
+            } catch(e) { document.getElementById('yaml-result').textContent = 'YAML 파싱 오류'; }
+        }
+        function jsonToYaml() {
+            try {
+                const obj = JSON.parse(document.getElementById('yaml-input').value);
+                function toYaml(o, indent = 0) {
+                    let yaml = '';
+                    for(const [k, v] of Object.entries(o)) {
+                        if(typeof v === 'object' && v !== null && !Array.isArray(v)) {
+                            yaml += '  '.repeat(indent) + k + ':\n' + toYaml(v, indent + 1);
+                        } else if(Array.isArray(v)) {
+                            yaml += '  '.repeat(indent) + k + ':\n';
+                            v.forEach(item => yaml += '  '.repeat(indent + 1) + '- ' + item + '\n');
+                        } else {
+                            yaml += '  '.repeat(indent) + k + ': ' + v + '\n';
+                        }
+                    }
+                    return yaml;
+                }
+                document.getElementById('yaml-result').textContent = toYaml(obj);
+            } catch(e) { document.getElementById('yaml-result').textContent = 'JSON 파싱 오류'; }
+        }
+
+        // CSV JSON
+        function csvToJson() {
+            const input = document.getElementById('csv-input').value.trim();
+            try {
+                const lines = input.split('\n');
+                const headers = lines[0].split(',').map(h => h.trim());
+                const result = [];
+                for(let i = 1; i < lines.length; i++) {
+                    const values = lines[i].split(',').map(v => v.trim());
+                    const obj = {};
+                    headers.forEach((h, idx) => obj[h] = values[idx] || '');
+                    result.push(obj);
+                }
+                document.getElementById('csv-result').textContent = JSON.stringify(result, null, 2);
+            } catch(e) { document.getElementById('csv-result').textContent = 'CSV 파싱 오류'; }
+        }
+        function jsonToCsv() {
+            try {
+                const arr = JSON.parse(document.getElementById('csv-input').value);
+                if(!Array.isArray(arr) || arr.length === 0) throw new Error();
+                const headers = Object.keys(arr[0]);
+                let csv = headers.join(',') + '\n';
+                arr.forEach(obj => csv += headers.map(h => obj[h] || '').join(',') + '\n');
+                document.getElementById('csv-result').textContent = csv;
+            } catch(e) { document.getElementById('csv-result').textContent = 'JSON 파싱 오류 (배열 형식 필요)'; }
+        }
+
+        // HTML Table
+        function generateHtmlTable() {
+            const rows = +document.getElementById('table-rows').value || 3;
+            const cols = +document.getElementById('table-cols').value || 3;
+            const hasHeader = document.getElementById('table-header').checked;
+            const hasBorder = document.getElementById('table-border').checked;
+            let html = `<table${hasBorder ? ' border="1"' : ''}>\n`;
+            for(let r = 0; r < rows; r++) {
+                html += '  <tr>\n';
+                for(let c = 0; c < cols; c++) {
+                    const tag = (r === 0 && hasHeader) ? 'th' : 'td';
+                    html += `    <${tag}>${tag === 'th' ? '헤더' + (c+1) : '내용'}</${tag}>\n`;
+                }
+                html += '  </tr>\n';
+            }
+            html += '</table>';
+            document.getElementById('table-result').textContent = html;
+        }
+
+        // Border Radius
+        function updateBorderRadius() {
+            const tl = document.getElementById('br-tl').value;
+            const tr = document.getElementById('br-tr').value;
+            const bl = document.getElementById('br-bl').value;
+            const br = document.getElementById('br-br').value;
+            const css = `border-radius: ${tl}px ${tr}px ${br}px ${bl}px;`;
+            document.getElementById('br-preview').style.borderRadius = `${tl}px ${tr}px ${br}px ${bl}px`;
+            document.getElementById('br-result').textContent = css;
+        }
+        updateBorderRadius();
+
+        // Text Shadow
+        function updateTextShadow() {
+            const x = document.getElementById('ts-x').value;
+            const y = document.getElementById('ts-y').value;
+            const blur = document.getElementById('ts-blur').value;
+            const color = document.getElementById('ts-color').value;
+            document.getElementById('ts-x-val').textContent = x + 'px';
+            document.getElementById('ts-y-val').textContent = y + 'px';
+            document.getElementById('ts-blur-val').textContent = blur + 'px';
+            const css = `text-shadow: ${x}px ${y}px ${blur}px ${color};`;
+            document.getElementById('ts-preview').style.textShadow = `${x}px ${y}px ${blur}px ${color}`;
+            document.getElementById('ts-result').textContent = css;
+        }
+        updateTextShadow();
+
+        // Combined Calculator
+        const calcTemplates = {
+            percent: `<div class="info-box">퍼센트 계산</div>
+                <input type="number" id="cc-p1" placeholder="숫자" oninput="calcCombined('percent')">
+                <input type="number" id="cc-p2" placeholder="퍼센트 (%)" oninput="calcCombined('percent')">
+                <div class="result-box"><div id="cc-result">-</div></div>`,
+            bmi: `<div class="info-box">BMI 계산 (키/체중)</div>
+                <input type="number" id="cc-h" placeholder="키 (cm)">
+                <input type="number" id="cc-w" placeholder="체중 (kg)">
+                <button class="btn btn-primary" onclick="calcCombined('bmi')">계산</button>
+                <div class="result-box"><div id="cc-result">-</div></div>`,
+            loan: `<div class="info-box">대출 이자 계산</div>
+                <input type="number" id="cc-la" placeholder="대출금액 (원)">
+                <input type="number" id="cc-lr" placeholder="연이율 (%)">
+                <input type="number" id="cc-lm" placeholder="기간 (개월)">
+                <button class="btn btn-primary" onclick="calcCombined('loan')">계산</button>
+                <div class="result-box"><div id="cc-result">-</div></div>`,
+            discount: `<div class="info-box">할인가 계산</div>
+                <input type="number" id="cc-do" placeholder="원가 (원)">
+                <input type="number" id="cc-dr" placeholder="할인율 (%)">
+                <button class="btn btn-primary" onclick="calcCombined('discount')">계산</button>
+                <div class="result-box"><div id="cc-result">-</div></div>`,
+            tip: `<div class="info-box">팁/더치페이 계산</div>
+                <input type="number" id="cc-ta" placeholder="금액 (원)">
+                <input type="number" id="cc-tr" placeholder="팁 (%)">
+                <input type="number" id="cc-tp" placeholder="인원" value="1">
+                <button class="btn btn-primary" onclick="calcCombined('tip')">계산</button>
+                <div class="result-box"><div id="cc-result">-</div></div>`,
+            vat: `<div class="info-box">부가세 계산</div>
+                <input type="number" id="cc-va" placeholder="금액 (원)">
+                <div class="options"><label><input type="radio" name="cc-vt" value="ex" checked> 부가세 별도</label><label><input type="radio" name="cc-vt" value="in"> 부가세 포함</label></div>
+                <button class="btn btn-primary" onclick="calcCombined('vat')">계산</button>
+                <div class="result-box"><div id="cc-result">-</div></div>`,
+            currency: `<div class="info-box">환율 계산 (실시간)</div>
+                <input type="number" id="cc-ca" placeholder="금액">
+                <select id="cc-cf"><option value="USD">USD</option><option value="KRW">KRW</option><option value="JPY">JPY</option><option value="EUR">EUR</option><option value="CNY">CNY</option></select>
+                <select id="cc-ct"><option value="KRW">KRW</option><option value="USD">USD</option><option value="JPY">JPY</option><option value="EUR">EUR</option><option value="CNY">CNY</option></select>
+                <button class="btn btn-primary" onclick="calcCombined('currency')">계산</button>
+                <div class="result-box"><div id="cc-result">-</div></div>`,
+            salary: `<div class="info-box">연봉/월급 계산</div>
+                <input type="number" id="cc-sa" placeholder="연봉 (원)">
+                <label><input type="checkbox" id="cc-st" checked> 4대보험/세금 적용</label>
+                <button class="btn btn-primary" onclick="calcCombined('salary')">계산</button>
+                <div class="result-box"><div id="cc-result">-</div></div>`,
+            severance: `<div class="info-box">퇴직금 계산</div>
+                <input type="date" id="cc-ss" placeholder="입사일">
+                <input type="date" id="cc-se" placeholder="퇴사일">
+                <input type="number" id="cc-sm" placeholder="최근 3개월 평균 월급">
+                <button class="btn btn-primary" onclick="calcCombined('severance')">계산</button>
+                <div class="result-box"><div id="cc-result">-</div></div>`,
+            savings: `<div class="info-box">적금 이자 계산</div>
+                <input type="number" id="cc-sva" placeholder="월 납입액">
+                <input type="number" id="cc-svr" placeholder="연이율 (%)">
+                <input type="number" id="cc-svm" placeholder="기간 (개월)">
+                <button class="btn btn-primary" onclick="calcCombined('savings')">계산</button>
+                <div class="result-box"><div id="cc-result">-</div></div>`,
+            stock: `<div class="info-box">주식 수익률 계산</div>
+                <input type="number" id="cc-stb" placeholder="매수가">
+                <input type="number" id="cc-sts" placeholder="매도가">
+                <input type="number" id="cc-stq" placeholder="수량" value="1">
+                <button class="btn btn-primary" onclick="calcCombined('stock')">계산</button>
+                <div class="result-box"><div id="cc-result">-</div></div>`,
+            age: `<div class="info-box">나이 계산 (만나이/한국나이)</div>
+                <input type="date" id="cc-ab" placeholder="생년월일">
+                <button class="btn btn-primary" onclick="calcCombined('age')">계산</button>
+                <div class="result-box"><div id="cc-result">-</div></div>`,
+            calorie: `<div class="info-box">기초대사량 계산</div>
+                <div class="options"><label><input type="radio" name="cc-cg" value="m" checked> 남성</label><label><input type="radio" name="cc-cg" value="f"> 여성</label></div>
+                <input type="number" id="cc-ca" placeholder="나이">
+                <input type="number" id="cc-ch" placeholder="키 (cm)">
+                <input type="number" id="cc-cw" placeholder="체중 (kg)">
+                <button class="btn btn-primary" onclick="calcCombined('calorie')">계산</button>
+                <div class="result-box"><div id="cc-result">-</div></div>`,
+            fuel: `<div class="info-box">자동차 연비 계산</div>
+                <input type="number" id="cc-fd" placeholder="주행거리 (km)">
+                <input type="number" id="cc-ff" placeholder="주유량 (L)">
+                <button class="btn btn-primary" onclick="calcCombined('fuel')">계산</button>
+                <div class="result-box"><div id="cc-result">-</div></div>`,
+            hourly: `<div class="info-box">시급/일급 계산</div>
+                <input type="number" id="cc-hh" placeholder="시급 (원)">
+                <input type="number" id="cc-ht" placeholder="근무시간">
+                <button class="btn btn-primary" onclick="calcCombined('hourly')">계산</button>
+                <div class="result-box"><div id="cc-result">-</div></div>`
+        };
+        function showCalcType() {
+            const type = document.getElementById('calc-type').value;
+            document.getElementById('calc-content').innerHTML = calcTemplates[type] || '';
+        }
+        showCalcType();
+        async function calcCombined(type) {
+            const r = document.getElementById('cc-result');
+            if(type === 'percent') {
+                const n = +document.getElementById('cc-p1').value;
+                const p = +document.getElementById('cc-p2').value;
+                r.textContent = n && p ? `${n}의 ${p}% = ${(n * p / 100).toLocaleString()}` : '-';
+            } else if(type === 'bmi') {
+                const h = +document.getElementById('cc-h').value / 100;
+                const w = +document.getElementById('cc-w').value;
+                if(h && w) {
+                    const bmi = w / (h * h);
+                    const status = bmi < 18.5 ? '저체중' : bmi < 23 ? '정상' : bmi < 25 ? '과체중' : '비만';
+                    r.textContent = `BMI: ${bmi.toFixed(1)} (${status})`;
+                }
+            } else if(type === 'loan') {
+                const p = +document.getElementById('cc-la').value;
+                const rate = +document.getElementById('cc-lr').value / 100 / 12;
+                const n = +document.getElementById('cc-lm').value;
+                if(p && rate && n) {
+                    const monthly = p * rate * Math.pow(1 + rate, n) / (Math.pow(1 + rate, n) - 1);
+                    r.innerHTML = `월 납입금: ${Math.round(monthly).toLocaleString()}원<br>총 상환액: ${Math.round(monthly * n).toLocaleString()}원<br>총 이자: ${Math.round(monthly * n - p).toLocaleString()}원`;
+                }
+            } else if(type === 'discount') {
+                const o = +document.getElementById('cc-do').value;
+                const d = +document.getElementById('cc-dr').value;
+                if(o) r.innerHTML = `할인가: ${Math.round(o * (1 - d/100)).toLocaleString()}원<br>할인액: ${Math.round(o * d / 100).toLocaleString()}원`;
+            } else if(type === 'tip') {
+                const a = +document.getElementById('cc-ta').value;
+                const t = +document.getElementById('cc-tr').value;
+                const p = +document.getElementById('cc-tp').value || 1;
+                if(a) {
+                    const total = a * (1 + t/100);
+                    r.innerHTML = `총액: ${Math.round(total).toLocaleString()}원<br>1인당: ${Math.round(total/p).toLocaleString()}원`;
+                }
+            } else if(type === 'vat') {
+                const a = +document.getElementById('cc-va').value;
+                const t = document.querySelector('input[name="cc-vt"]:checked').value;
+                if(a) {
+                    const supply = t === 'ex' ? a : Math.round(a / 1.1);
+                    const tax = t === 'ex' ? Math.round(a * 0.1) : a - supply;
+                    const total = supply + tax;
+                    r.innerHTML = `공급가: ${supply.toLocaleString()}원<br>부가세: ${tax.toLocaleString()}원<br>합계: ${total.toLocaleString()}원`;
+                }
+            } else if(type === 'currency') {
+                const a = +document.getElementById('cc-ca').value;
+                const f = document.getElementById('cc-cf').value;
+                const t = document.getElementById('cc-ct').value;
+                if(a) {
+                    try {
+                        const res = await fetch(`https://api.exchangerate-api.com/v4/latest/${f}`);
+                        const data = await res.json();
+                        r.textContent = `${a.toLocaleString()} ${f} = ${(a * data.rates[t]).toLocaleString(undefined, {maximumFractionDigits:2})} ${t}`;
+                    } catch(e) { r.textContent = '환율 조회 실패'; }
+                }
+            } else if(type === 'salary') {
+                const y = +document.getElementById('cc-sa').value;
+                const withTax = document.getElementById('cc-st').checked;
+                if(y) {
+                    const m = y / 12;
+                    const net = withTax ? m * 0.91 : m;
+                    r.innerHTML = `월급: ${Math.round(m).toLocaleString()}원<br>실수령(예상): ${Math.round(net).toLocaleString()}원`;
+                }
+            } else if(type === 'severance') {
+                const s = new Date(document.getElementById('cc-ss').value);
+                const e = new Date(document.getElementById('cc-se').value);
+                const m = +document.getElementById('cc-sm').value;
+                if(s && e && m) {
+                    const days = Math.floor((e - s) / 86400000);
+                    const years = days / 365;
+                    r.innerHTML = `근속연수: ${years.toFixed(1)}년<br>퇴직금: ${Math.round(m * 30 * years).toLocaleString()}원`;
+                }
+            } else if(type === 'savings') {
+                const a = +document.getElementById('cc-sva').value;
+                const rate = +document.getElementById('cc-svr').value / 100;
+                const n = +document.getElementById('cc-svm').value;
+                if(a && rate && n) {
+                    const principal = a * n;
+                    let interest = 0;
+                    for(let i = 1; i <= n; i++) interest += a * rate / 12 * (n - i + 1);
+                    r.innerHTML = `원금합계: ${principal.toLocaleString()}원<br>이자(세전): ${Math.round(interest).toLocaleString()}원<br>만기금액: ${Math.round(principal + interest * 0.846).toLocaleString()}원`;
+                }
+            } else if(type === 'stock') {
+                const b = +document.getElementById('cc-stb').value;
+                const s = +document.getElementById('cc-sts').value;
+                const q = +document.getElementById('cc-stq').value || 1;
+                if(b && s) {
+                    const profit = (s - b) * q;
+                    const rate = ((s - b) / b * 100).toFixed(2);
+                    r.innerHTML = `<span style="color:${profit >= 0 ? '#5a5' : '#c55'}">수익금: ${profit.toLocaleString()}원<br>수익률: ${rate}%</span>`;
+                }
+            } else if(type === 'age') {
+                const b = new Date(document.getElementById('cc-ab').value);
+                if(b) {
+                    const today = new Date();
+                    const korean = today.getFullYear() - b.getFullYear() + 1;
+                    let full = today.getFullYear() - b.getFullYear();
+                    if(today.getMonth() < b.getMonth() || (today.getMonth() === b.getMonth() && today.getDate() < b.getDate())) full--;
+                    r.innerHTML = `만 나이: ${full}세<br>한국 나이: ${korean}세`;
+                }
+            } else if(type === 'calorie') {
+                const g = document.querySelector('input[name="cc-cg"]:checked').value;
+                const a = +document.getElementById('cc-ca').value;
+                const h = +document.getElementById('cc-ch').value;
+                const w = +document.getElementById('cc-cw').value;
+                if(a && h && w) {
+                    const bmr = g === 'm' ? 66.47 + (13.75 * w) + (5 * h) - (6.76 * a) : 655.1 + (9.56 * w) + (1.85 * h) - (4.68 * a);
+                    r.textContent = `기초대사량: ${Math.round(bmr)} kcal/일`;
+                }
+            } else if(type === 'fuel') {
+                const d = +document.getElementById('cc-fd').value;
+                const f = +document.getElementById('cc-ff').value;
+                if(d && f) r.textContent = `연비: ${(d / f).toFixed(2)} km/L`;
+            } else if(type === 'hourly') {
+                const h = +document.getElementById('cc-hh').value;
+                const t = +document.getElementById('cc-ht').value;
+                if(h && t) r.innerHTML = `일급: ${(h * t).toLocaleString()}원<br>주급(5일): ${(h * t * 5).toLocaleString()}원<br>월급(22일): ${(h * t * 22).toLocaleString()}원`;
+            }
+        }
+
+        // Roman Numerals
+        function convertRoman() {
+            const input = document.getElementById('roman-input').value.trim();
+            if(!input) { document.getElementById('roman-result').textContent = '-'; return; }
+            if(/^\d+$/.test(input)) {
+                let num = parseInt(input);
+                if(num < 1 || num > 3999) { document.getElementById('roman-result').textContent = '1-3999 범위만'; return; }
+                const map = [[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];
+                let roman = '';
+                for(const [val, sym] of map) { while(num >= val) { roman += sym; num -= val; } }
+                document.getElementById('roman-result').textContent = roman;
+            } else {
+                const map = {I:1,V:5,X:10,L:50,C:100,D:500,M:1000};
+                let num = 0;
+                const s = input.toUpperCase();
+                for(let i = 0; i < s.length; i++) {
+                    const curr = map[s[i]] || 0;
+                    const next = map[s[i+1]] || 0;
+                    num += curr < next ? -curr : curr;
+                }
+                document.getElementById('roman-result').textContent = num;
+            }
+        }
+
+        // File Size
+        function convertFileSize() {
+            const val = +document.getElementById('fs-value').value;
+            const unit = document.getElementById('fs-unit').value;
+            if(!val) { document.getElementById('fs-result').textContent = '-'; return; }
+            const units = {B:1, KB:1024, MB:1024**2, GB:1024**3, TB:1024**4};
+            const bytes = val * units[unit];
+            const html = Object.entries(units).map(([u, m]) => {
+                const v = bytes / m;
+                return `<div style="margin:5px 0;"><span style="color:#6a9fb5;">${u}:</span> ${v < 0.01 ? v.toExponential(2) : v.toLocaleString(undefined, {maximumFractionDigits:2})}</div>`;
+            }).join('');
+            document.getElementById('fs-result').innerHTML = html;
+        }
+
+        // LocalStorage Viewer
+        function loadStorage() {
+            const list = document.getElementById('storage-list');
+            if(localStorage.length === 0) { list.innerHTML = '<div style="color:#666;">저장된 항목 없음</div>'; return; }
+            let html = '';
+            for(let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                const val = localStorage.getItem(key);
+                const preview = val.length > 50 ? val.substring(0, 50) + '...' : val;
+                html += `<div class="file-item"><div><strong style="color:#6a9fb5;">${key}</strong><br><span style="color:#666;font-size:0.8rem;">${preview}</span></div><button onclick="localStorage.removeItem('${key}');loadStorage()">삭제</button></div>`;
+            }
+            list.innerHTML = html;
+        }
+
+        // Speed Test
+        async function runSpeedTest() {
+            const btn = document.getElementById('speed-btn');
+            const status = document.getElementById('speed-status');
+            const result = document.getElementById('speed-result');
+            btn.disabled = true;
+            status.textContent = '테스트 중...';
+            result.textContent = '-';
+            try {
+                const testUrl = 'https://www.cloudflare.com/cdn-cgi/trace?' + Date.now();
+                const startTime = performance.now();
+                const response = await fetch(testUrl);
+                const data = await response.text();
+                const endTime = performance.now();
+                const duration = (endTime - startTime) / 1000;
+                const bytes = new Blob([data]).size;
+                const bitsPerSec = (bytes * 8) / duration;
+                const mbps = (bitsPerSec / 1000000).toFixed(2);
+                result.textContent = mbps;
+                status.textContent = '완료 (추정치)';
+            } catch(e) { status.textContent = '테스트 실패'; }
+            btn.disabled = false;
+        }
+
+        // Camera
+        let cameraStream = null;
+        async function startCamera() {
+            try {
+                cameraStream = await navigator.mediaDevices.getUserMedia({ video: true });
+                document.getElementById('camera-video').srcObject = cameraStream;
+            } catch(e) { alert('카메라 접근 실패: ' + e.message); }
+        }
+        function stopCamera() {
+            if(cameraStream) { cameraStream.getTracks().forEach(t => t.stop()); cameraStream = null; }
+            document.getElementById('camera-video').srcObject = null;
+        }
+        function capturePhoto() {
+            const video = document.getElementById('camera-video');
+            if(!video.srcObject) return;
+            const canvas = document.getElementById('camera-canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0);
+            const link = document.getElementById('camera-download');
+            link.href = canvas.toDataURL('image/png');
+            link.download = 'capture.png';
+            link.style.display = 'inline-block';
+        }
+
+        // Microphone
+        let micStream = null, micContext = null, micAnalyser = null;
+        async function startMic() {
+            try {
+                micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                micContext = new AudioContext();
+                const source = micContext.createMediaStreamSource(micStream);
+                micAnalyser = micContext.createAnalyser();
+                source.connect(micAnalyser);
+                micAnalyser.fftSize = 256;
+                updateMicLevel();
+            } catch(e) { alert('마이크 접근 실패: ' + e.message); }
+        }
+        function updateMicLevel() {
+            if(!micAnalyser) return;
+            const data = new Uint8Array(micAnalyser.frequencyBinCount);
+            micAnalyser.getByteFrequencyData(data);
+            const avg = data.reduce((a, b) => a + b, 0) / data.length;
+            document.getElementById('mic-level').textContent = Math.round(avg);
+            const visual = document.getElementById('mic-visual');
+            visual.innerHTML = `<div style="width:${avg}%;height:100%;background:linear-gradient(90deg,#5a5,#ca5,#c55);transition:width 0.1s;"></div>`;
+            requestAnimationFrame(updateMicLevel);
+        }
+        function stopMic() {
+            if(micStream) { micStream.getTracks().forEach(t => t.stop()); micStream = null; }
+            if(micContext) { micContext.close(); micContext = null; }
+            micAnalyser = null;
+            document.getElementById('mic-level').textContent = '-';
+            document.getElementById('mic-visual').innerHTML = '';
+        }
+
+        // TTS
+        function initTtsVoices() {
+            const voices = speechSynthesis.getVoices();
+            const select = document.getElementById('tts-voice');
+            select.innerHTML = voices.map((v, i) => `<option value="${i}">${v.name} (${v.lang})</option>`).join('');
+        }
+        speechSynthesis.onvoiceschanged = initTtsVoices;
+        initTtsVoices();
+        function speakText() {
+            const text = document.getElementById('tts-input').value;
+            if(!text) return;
+            const utterance = new SpeechSynthesisUtterance(text);
+            const voices = speechSynthesis.getVoices();
+            const voiceIdx = document.getElementById('tts-voice').value;
+            if(voices[voiceIdx]) utterance.voice = voices[voiceIdx];
+            utterance.rate = parseFloat(document.getElementById('tts-rate').value);
+            speechSynthesis.speak(utterance);
+        }
+        function stopSpeech() { speechSynthesis.cancel(); }
+
+        // QR Scan
+        let qrStream = null, qrScanning = false;
+        async function startQrScan() {
+            try {
+                qrStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+                document.getElementById('qr-video').srcObject = qrStream;
+                qrScanning = true;
+                scanQrFrame();
+            } catch(e) { alert('카메라 접근 실패: ' + e.message); }
+        }
+        function stopQrScan() {
+            if(qrStream) { qrStream.getTracks().forEach(t => t.stop()); qrStream = null; }
+            qrScanning = false;
+            document.getElementById('qr-video').srcObject = null;
+        }
+        async function scanQrFrame() {
+            if(!qrScanning) return;
+            const video = document.getElementById('qr-video');
+            if(video.readyState === video.HAVE_ENOUGH_DATA) {
+                const canvas = document.createElement('canvas');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(video, 0, 0);
+                try {
+                    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                    if(typeof jsQR !== 'undefined') {
+                        const code = jsQR(imageData.data, canvas.width, canvas.height);
+                        if(code) {
+                            document.getElementById('qr-scan-result').textContent = code.data;
+                            stopQrScan();
+                            return;
+                        }
+                    }
+                } catch(e) {}
+            }
+            requestAnimationFrame(scanQrFrame);
+        }
+        // Load jsQR library
+        if(!window.jsQR) {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js';
+            document.head.appendChild(script);
         }
 
         // Copy
