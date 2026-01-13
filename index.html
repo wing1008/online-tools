@@ -35,13 +35,14 @@
         .nav-search:focus { outline: none; border-color: #333; }
         .nav-search-wrap { position: relative; }
         .nav-search-wrap::before { content: '⌕'; position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #444; font-size: 0.9rem; }
-        .nav-tabs { display: flex; gap: 4px; }
-        .nav-tab { padding: 6px 14px; background: transparent; border: 1px solid #333; border-radius: 4px; color: #666; font-size: 0.8rem; cursor: pointer; transition: all 0.15s; }
-        .nav-tab:hover { color: #999; border-color: #444; }
-        .nav-tab.active { background: #2563eb; border-color: #2563eb; color: #fff; }
-        body.light .nav-tab { border-color: #ddd; color: #888; }
-        body.light .nav-tab:hover { border-color: #bbb; color: #555; }
-        body.light .nav-tab.active { background: #2563eb; border-color: #2563eb; color: #fff; }
+        .nav-tabs { display: flex; gap: 16px; }
+        .nav-tab { padding: 0 0 8px 0; background: transparent; border: none; color: #555; font-size: 0.85rem; cursor: pointer; transition: all 0.15s; position: relative; }
+        .nav-tab:hover { color: #999; }
+        .nav-tab.active { color: #fff; }
+        .nav-tab.active::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; background: #3b82f6; border-radius: 50%; }
+        body.light .nav-tab { color: #888; }
+        body.light .nav-tab:hover { color: #555; }
+        body.light .nav-tab.active { color: #222; }
         .nav-right { display: flex; align-items: center; gap: 10px; }
         nav a { color: #555; text-decoration: none; font-size: 0.8rem; }
         nav a:hover { color: #888; }
@@ -86,8 +87,8 @@
         .section-title[data-section="util"] { border-bottom-color: #ec4899; }
         .section-title[data-section="test"] { border-bottom-color: #14b8a6; }
         .section-title[data-section="pdf"] { border-bottom-color: #ef4444; }
-        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 6px; }
-        .tool-card { background: #111; border-radius: 4px; padding: 8px 10px; cursor: pointer; border: 1px solid #333; transition: all 0.12s; display: flex; align-items: center; justify-content: center; gap: 6px; text-align: center; }
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+        .tool-card { background: #111; border-radius: 5px; padding: 10px 12px; cursor: pointer; border: 1px solid #333; transition: all 0.12s; display: flex; align-items: center; justify-content: center; gap: 7px; text-align: center; }
         /* Card Category Border Colors */
         .tool-card[data-cat="text"] { border-color: #5b8def55; }
         .tool-card[data-cat="image"] { border-color: #4ade8055; }
@@ -104,14 +105,14 @@
         .tool-card[data-cat="util"]:hover { border-color: #ec489988; }
         .tool-card[data-cat="test"]:hover { border-color: #14b8a688; }
         .tool-card[data-cat="pdf"]:hover { border-color: #ef444488; }
-        .tool-card h3 { font-size: 0.8rem; color: #bbb; font-weight: 400; }
+        .tool-card h3 { font-size: 0.9rem; color: #bbb; font-weight: 400; }
         .tool-card p { display: none; }
-        .tool-card .icon { font-size: 0.9rem; }
+        .tool-card .icon { font-size: 1rem; }
         .tools-grid.detail-view { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
         .tools-grid.detail-view .tool-card { flex-direction: column; align-items: center; padding: 14px 12px; gap: 6px; min-height: 100px; }
         .tools-grid.detail-view .tool-card .icon { font-size: 1.2rem; }
-        .tools-grid.detail-view .tool-card h3 { font-size: 0.85rem; font-weight: 500; color: #ccc; }
-        .tools-grid.detail-view .tool-card p { display: block; font-size: 0.7rem; color: #666; margin-top: 4px; line-height: 1.4; }
+        .tools-grid.detail-view .tool-card h3 { font-size: 0.9rem; font-weight: 500; color: #ccc; }
+        .tools-grid.detail-view .tool-card p { display: block; font-size: 0.75rem; color: #666; margin-top: 4px; line-height: 1.4; }
         body.light .tools-grid.detail-view .tool-card p { color: #888; }
         .tool-section { display: none; background: #111; border-radius: 10px; padding: 25px; margin: 20px 0; border: 1px solid #1a1a1a; }
         .tool-section.active { display: block; }
