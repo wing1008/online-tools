@@ -37,7 +37,14 @@
         header { padding: 8px 0 16px; }
         header p { color: #444; font-size: 0.8rem; }
         .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 8px; flex-wrap: wrap; }
-        .sort-select { padding: 5px 8px; border-radius: 4px; border: 1px solid #222; background: #111; color: #888; font-size: 0.75rem; cursor: pointer; }
+        .sort-controls { display: flex; gap: 8px; }
+        .sort-group { display: flex; background: #111; border-radius: 4px; border: 1px solid #222; overflow: hidden; }
+        .sort-btn { padding: 5px 10px; background: transparent; border: none; color: #666; font-size: 0.75rem; cursor: pointer; transition: all 0.15s; }
+        .sort-btn:hover { color: #999; }
+        .sort-btn.active { background: #252525; color: #ccc; }
+        body.light .sort-group { background: #f5f5f5; border-color: #ddd; }
+        body.light .sort-btn { color: #888; }
+        body.light .sort-btn.active { background: #fff; color: #333; }
         .section-title { color: #555; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; margin: 20px 0 8px; font-weight: 500; padding-left: 0; padding-bottom: 6px; border-bottom: 2px solid #444; display: block; width: 40%; min-width: 200px; max-width: 400px; }
         /* Section Title Colors */
         .section-title[data-section="text"] { border-bottom-color: #5b8def; }
@@ -189,7 +196,6 @@
         body.light .filter-tabs { border-color: #e5e5e5; }
         body.light .filter-tab { color: #888; }
         body.light .filter-tab.active { color: #222; border-bottom-color: #222; }
-        body.light .sort-select { background: #fff; border-color: #ddd; color: #555; }
         body.light footer { border-color: #e5e5e5; }
         body.light footer p, body.light footer a { color: #aaa; }
         body.light .info-box { background: #f5f5f5; border-color: #ddd; }
@@ -237,11 +243,16 @@
                     <button class="filter-tab" data-cat="test" onclick="filterCategory('test')">테스트</button>
                     <button class="filter-tab" data-cat="pdf" onclick="filterCategory('pdf')">PDF</button>
                 </div>
-                <select class="sort-select" id="sort-select" onchange="sortTools()">
-                    <option value="category">카테고리순</option>
-                    <option value="name">이름순</option>
-                    <option value="detail">상세보기</option>
-                </select>
+                <div class="sort-controls">
+                    <div class="sort-group">
+                        <button class="sort-btn active" data-sort="category" onclick="setSort('category')">카테고리</button>
+                        <button class="sort-btn" data-sort="name" onclick="setSort('name')">이름순</button>
+                    </div>
+                    <div class="sort-group">
+                        <button class="sort-btn active" data-view="normal" onclick="setView('normal')">일반</button>
+                        <button class="sort-btn" data-view="detail" onclick="setView('detail')">상세</button>
+                    </div>
+                </div>
             </div>
         </header>
 
@@ -2864,31 +2875,126 @@
             });
         }
 
-        // Category Filter
+        // Category Filter & Sort
         let currentCategory = 'all';
         let currentSort = 'category';
+        let currentView = 'normal';
+
+        function setSort(sort) {
+            currentSort = sort;
+            document.querySelectorAll('.sort-btn[data-sort]').forEach(b => b.classList.toggle('active', b.dataset.sort === sort));
+            applyView();
+        }
+
+        function setView(view) {
+            currentView = view;
+            document.querySelectorAll('.sort-btn[data-view]').forEach(b => b.classList.toggle('active', b.dataset.view === view));
+            applyView();
+        }
+
         function filterCategory(cat) {
             currentCategory = cat;
             document.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
+            applyView();
+        }
 
+        function applyView() {
             const sections = document.querySelectorAll('#main-grid .section-title[data-section]');
             const grids = document.querySelectorAll('#main-grid .tools-grid[data-section]');
             const container = document.getElementById('all-tools-container');
 
-            if (currentSort !== 'category') {
+            // Remove detail-view from all grids
+            grids.forEach(g => g.classList.remove('detail-view'));
+            container.querySelectorAll('.tools-grid').forEach(g => g.classList.remove('detail-view'));
+
+            if (currentSort === 'category') {
+                // Category sort
+                container.style.display = 'none';
+                if (currentCategory === 'all') {
+                    sections.forEach(s => s.style.display = '');
+                    grids.forEach(g => g.style.display = '');
+                } else {
+                    sections.forEach(s => s.style.display = s.dataset.section === currentCategory ? '' : 'none');
+                    grids.forEach(g => g.style.display = g.dataset.section === currentCategory ? '' : 'none');
+                }
+                // Apply detail view if needed
+                if (currentView === 'detail') {
+                    grids.forEach(g => g.classList.add('detail-view'));
+                }
+            } else {
+                // Name sort
                 sections.forEach(s => s.style.display = 'none');
                 grids.forEach(g => g.style.display = 'none');
                 container.style.display = '';
-                sortTools();
-            } else if (cat === 'all') {
-                container.style.display = 'none';
-                sections.forEach(s => s.style.display = '');
-                grids.forEach(g => g.style.display = '');
-            } else {
-                container.style.display = 'none';
-                sections.forEach(s => s.style.display = s.dataset.section === cat ? '' : 'none');
-                grids.forEach(g => g.style.display = g.dataset.section === cat ? '' : 'none');
+                renderNameSort();
             }
+        }
+
+        function renderNameSort() {
+            const container = document.getElementById('all-tools-container');
+            let cards = Array.from(document.querySelectorAll('#main-grid .tools-grid[data-section] .tool-card'));
+
+            if (currentCategory !== 'all') {
+                cards = cards.filter(c => c.dataset.cat === currentCategory);
+            }
+
+            const isKorean = currentLang === 'ko';
+            if (isKorean) {
+                cards.sort((a, b) => {
+                    const aName = a.dataset.name || '';
+                    const bName = b.dataset.name || '';
+                    const aIsKor = /^[가-힣]/.test(aName);
+                    const bIsKor = /^[가-힣]/.test(bName);
+                    if (aIsKor && !bIsKor) return -1;
+                    if (!aIsKor && bIsKor) return 1;
+                    return aName.localeCompare(bName, aIsKor ? 'ko' : 'en');
+                });
+            } else {
+                cards.sort((a, b) => {
+                    const aName = a.dataset.name || '';
+                    const bName = b.dataset.name || '';
+                    const aIsKor = /^[가-힣]/.test(aName);
+                    const bIsKor = /^[가-힣]/.test(bName);
+                    if (!aIsKor && bIsKor) return -1;
+                    if (aIsKor && !bIsKor) return 1;
+                    return aName.localeCompare(bName, aIsKor ? 'ko' : 'en');
+                });
+            }
+
+            container.innerHTML = '';
+            let currentLetterGroup = null;
+            let currentGrid = null;
+
+            cards.forEach(card => {
+                const name = card.dataset.name || '';
+                const letter = getFirstLetter(name, /^[가-힣]/.test(name));
+
+                if (letter !== currentLetterGroup) {
+                    currentLetterGroup = letter;
+                    const color = letterColors[letter] || '#666';
+
+                    const title = document.createElement('div');
+                    title.className = 'section-title';
+                    title.textContent = letter;
+                    title.style.borderBottomColor = color;
+                    container.appendChild(title);
+
+                    currentGrid = document.createElement('div');
+                    currentGrid.className = 'tools-grid' + (currentView === 'detail' ? ' detail-view' : '');
+                    container.appendChild(currentGrid);
+                }
+
+                const clone = card.cloneNode(true);
+                const color = letterColors[currentLetterGroup] || '#666';
+                clone.style.borderColor = color + '55';
+                clone.onclick = () => openTool(card.dataset.tool);
+                const favBtn = clone.querySelector('.fav-btn');
+                if (favBtn) {
+                    favBtn.onclick = (e) => { e.stopPropagation(); toggleFav(card.dataset.tool); };
+                }
+                currentGrid.appendChild(clone);
+            });
+            updateFavButtons();
         }
 
         // Letter colors for alphabetical grouping
@@ -2916,117 +3022,6 @@
             }
             if (/[A-Z]/.test(first)) return first;
             return '#';
-        }
-
-        // Sort Tools
-        function sortTools() {
-            currentSort = document.getElementById('sort-select').value;
-            const sections = document.querySelectorAll('#main-grid .section-title[data-section]');
-            const grids = document.querySelectorAll('#main-grid .tools-grid[data-section]');
-            const container = document.getElementById('all-tools-container');
-
-            // Remove detail-view from all grids
-            grids.forEach(g => g.classList.remove('detail-view'));
-
-            if (currentSort === 'category') {
-                container.style.display = 'none';
-                filterCategory(currentCategory);
-                return;
-            }
-
-            if (currentSort === 'detail') {
-                // Detail view - show categories with descriptions
-                container.style.display = 'none';
-                sections.forEach(s => s.style.display = '');
-                grids.forEach(g => {
-                    g.style.display = '';
-                    g.classList.add('detail-view');
-                });
-                if (currentCategory !== 'all') {
-                    sections.forEach(s => s.style.display = s.dataset.section === currentCategory ? '' : 'none');
-                    grids.forEach(g => g.style.display = g.dataset.section === currentCategory ? '' : 'none');
-                }
-                return;
-            }
-
-            // Hide category sections, show container
-            sections.forEach(s => s.style.display = 'none');
-            grids.forEach(g => g.style.display = 'none');
-            container.style.display = '';
-
-            // Collect all tool cards
-            let cards = Array.from(document.querySelectorAll('#main-grid .tools-grid[data-section] .tool-card'));
-
-            // Filter by category if not 'all'
-            if (currentCategory !== 'all') {
-                cards = cards.filter(c => c.dataset.cat === currentCategory);
-            }
-
-            const isKorean = currentLang === 'ko';
-
-            // Sort based on language
-            if (isKorean) {
-                // Korean first: ㄱㄴㄷ... then A-Z
-                cards.sort((a, b) => {
-                    const aName = a.dataset.name || '';
-                    const bName = b.dataset.name || '';
-                    const aIsKor = /^[가-힣]/.test(aName);
-                    const bIsKor = /^[가-힣]/.test(bName);
-                    if (aIsKor && !bIsKor) return -1;
-                    if (!aIsKor && bIsKor) return 1;
-                    return aName.localeCompare(bName, aIsKor ? 'ko' : 'en');
-                });
-            } else {
-                // English first: A-Z then ㄱㄴㄷ...
-                cards.sort((a, b) => {
-                    const aName = a.dataset.name || '';
-                    const bName = b.dataset.name || '';
-                    const aIsKor = /^[가-힣]/.test(aName);
-                    const bIsKor = /^[가-힣]/.test(bName);
-                    if (!aIsKor && bIsKor) return -1;
-                    if (aIsKor && !bIsKor) return 1;
-                    return aName.localeCompare(bName, aIsKor ? 'ko' : 'en');
-                });
-            }
-
-            // Group by first letter and render vertically like categories
-            container.innerHTML = '';
-            let currentLetterGroup = null;
-            let currentGrid = null;
-
-            cards.forEach(card => {
-                const name = card.dataset.name || '';
-                const letter = getFirstLetter(name, /^[가-힣]/.test(name));
-
-                // Create new section for new letter
-                if (letter !== currentLetterGroup) {
-                    currentLetterGroup = letter;
-                    const color = letterColors[letter] || '#666';
-
-                    // Section title
-                    const title = document.createElement('div');
-                    title.className = 'section-title';
-                    title.textContent = letter;
-                    title.style.borderBottomColor = color;
-                    container.appendChild(title);
-
-                    // Tools grid
-                    currentGrid = document.createElement('div');
-                    currentGrid.className = 'tools-grid';
-                    container.appendChild(currentGrid);
-                }
-
-                const clone = card.cloneNode(true);
-                const color = letterColors[currentLetterGroup] || '#666';
-                clone.style.borderColor = color + '55';
-                clone.onclick = () => openTool(card.dataset.tool);
-                const favBtn = clone.querySelector('.fav-btn');
-                if (favBtn) {
-                    favBtn.onclick = (e) => { e.stopPropagation(); toggleFav(card.dataset.tool); };
-                }
-                currentGrid.appendChild(clone);
-            });
-            updateFavButtons();
         }
 
         // Keyboard shortcut
