@@ -4545,7 +4545,7 @@
             btn.disabled = true;
             status.innerHTML = '처리 중... (AI 모델 로딩 중)<br><small style="color:#555;">처음 실행시 모델 다운로드로 시간이 걸릴 수 있습니다.</small>';
             try {
-                const { removeBackground } = await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/+esm');
+                const { removeBackground } = await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.5.1/+esm');
                 const blob = await fetch(bgRemoveImg.src).then(r => r.blob());
                 const result = await removeBackground(blob, { progress: (key, current, total) => { status.textContent = `처리 중... ${key} ${Math.round(current/total*100)}%`; } });
                 const url = URL.createObjectURL(result);
