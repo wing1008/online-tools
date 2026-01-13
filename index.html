@@ -45,8 +45,8 @@
         .section-title[data-section="util"] { border-bottom-color: #ec4899; }
         .section-title[data-section="test"] { border-bottom-color: #14b8a6; }
         .section-title[data-section="pdf"] { border-bottom-color: #ef4444; }
-        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
-        .tool-card { background: #111; border-radius: 6px; padding: 14px 12px; cursor: pointer; border: 1px solid #333; transition: all 0.12s; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 6px; text-align: center; min-height: 90px; }
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 6px; }
+        .tool-card { background: #111; border-radius: 4px; padding: 8px 10px; cursor: pointer; border: 1px solid #333; transition: all 0.12s; display: flex; align-items: center; justify-content: center; gap: 6px; text-align: center; }
         /* Card Category Border Colors */
         .tool-card[data-cat="text"] { border-color: #5b8def55; }
         .tool-card[data-cat="image"] { border-color: #4ade8055; }
@@ -63,16 +63,16 @@
         .tool-card[data-cat="util"]:hover { border-color: #ec489988; }
         .tool-card[data-cat="test"]:hover { border-color: #14b8a688; }
         .tool-card[data-cat="pdf"]:hover { border-color: #ef444488; }
-        .tool-card .icon { font-size: 1.2rem; margin-bottom: 2px; }
-        .tool-card h3 { font-size: 0.85rem; color: #ccc; font-weight: 500; line-height: 1.3; }
-        .tool-card p { font-size: 0.7rem; color: #666; margin-top: 4px; line-height: 1.4; }
-        body.light .tool-card p { color: #888; }
-        .tools-grid.detail-view { grid-template-columns: 1fr; gap: 8px; }
-        .tools-grid.detail-view .tool-card { flex-direction: row; justify-content: flex-start; padding: 14px 18px; gap: 14px; min-height: auto; }
-        .tools-grid.detail-view .tool-card .icon { font-size: 1.5rem; min-width: 36px; margin-bottom: 0; }
-        .tools-grid.detail-view .tool-card h3 { font-size: 0.95rem; }
-        .tools-grid.detail-view .tool-card p { margin-top: 2px; }
+        .tool-card h3 { font-size: 0.8rem; color: #bbb; font-weight: 400; }
+        .tool-card p { display: none; }
+        .tool-card .icon { font-size: 0.9rem; }
+        .tools-grid.detail-view { grid-template-columns: 1fr; gap: 10px; }
+        .tools-grid.detail-view .tool-card { flex-direction: row; justify-content: flex-start; padding: 14px 18px; gap: 14px; }
+        .tools-grid.detail-view .tool-card .icon { font-size: 1.5rem; min-width: 36px; }
+        .tools-grid.detail-view .tool-card h3 { font-size: 0.95rem; font-weight: 500; color: #ccc; }
+        .tools-grid.detail-view .tool-card p { display: block; font-size: 0.8rem; color: #666; margin-top: 4px; }
         .tools-grid.detail-view .tool-card .card-text { text-align: left; }
+        body.light .tools-grid.detail-view .tool-card p { color: #888; }
         .tool-section { display: none; background: #111; border-radius: 10px; padding: 25px; margin: 20px 0; border: 1px solid #1a1a1a; }
         .tool-section.active { display: block; }
         .tool-section h2 { font-size: 1.1rem; color: #ddd; font-weight: 500; margin-bottom: 20px; }
