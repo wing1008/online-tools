@@ -3,741 +3,725 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToolBox - 개발자를 위한 온라인 도구</title>
-    <meta name="description" content="개발하면서 자주 쓰는 도구들 모아봤습니다. QR코드, 글자수 세기, 비밀번호 생성 등 무료로 사용하세요.">
-    <meta name="keywords" content="QR코드 생성기, 글자수 세기, 비밀번호 생성기, 개발자 도구, JSON 포맷터, Base64">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236c5ce7'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-weight='bold'>T</text></svg>">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8968767404465379"
-     crossorigin="anonymous"></script>
+    <title>ToolBox - 개발자 도구 모음</title>
+    <meta name="description" content="개발하면서 자주 쓰는 도구들 모아봤습니다. QR코드, 글자수 세기, PDF 변환 등 무료로 사용하세요.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%23222'/><text x='50' y='65' font-size='45' text-anchor='middle' fill='%23888' font-family='Arial' font-weight='bold'>T</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8968767404465379" crossorigin="anonymous"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background: #0f0f1a;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #0a0a0a;
             min-height: 100vh;
-            color: #e0e0e0;
-            line-height: 1.6;
+            color: #999;
+            line-height: 1.5;
         }
-        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #222;
-            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 1px solid #1a1a1a;
+            margin-bottom: 40px;
         }
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #fff;
-        }
-        .logo span { color: #6c5ce7; }
-        nav a {
-            color: #888;
-            text-decoration: none;
-            margin-left: 25px;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-        }
-        nav a:hover { color: #fff; }
+        .logo { font-size: 1.1rem; font-weight: 600; color: #fff; letter-spacing: -0.5px; }
+        nav a { color: #555; text-decoration: none; margin-left: 20px; font-size: 0.85rem; }
+        nav a:hover { color: #888; }
 
-        header {
-            text-align: center;
-            padding: 50px 0 30px;
-        }
-        header h1 {
-            font-size: 2rem;
-            margin-bottom: 12px;
-            color: #fff;
-            font-weight: 700;
-        }
-        header p {
-            color: #777;
-            font-size: 1rem;
-            max-width: 500px;
-            margin: 0 auto;
-        }
+        header { text-align: center; padding: 30px 0 40px; }
+        header h1 { font-size: 1.5rem; color: #ddd; font-weight: 600; margin-bottom: 8px; }
+        header p { color: #555; font-size: 0.9rem; }
 
-        .category-title {
-            color: #555;
-            font-size: 0.85rem;
+        .section-title {
+            color: #444;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin: 30px 0 15px;
-            padding-left: 5px;
+            letter-spacing: 2px;
+            margin: 35px 0 12px;
+            font-weight: 500;
         }
 
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
         }
         .tool-card {
-            background: #1a1a2e;
-            border-radius: 12px;
-            padding: 20px;
+            background: #111;
+            border-radius: 8px;
+            padding: 16px 18px;
             cursor: pointer;
-            border: 1px solid #2a2a3e;
-            transition: all 0.2s;
+            border: 1px solid #1a1a1a;
+            transition: all 0.15s;
         }
-        .tool-card:hover {
-            transform: translateY(-3px);
-            border-color: #6c5ce7;
-            background: #1f1f35;
-        }
-        .tool-card h3 {
-            font-size: 1rem;
-            margin-bottom: 6px;
-            color: #fff;
-        }
-        .tool-card p {
-            color: #666;
-            font-size: 0.85rem;
-        }
+        .tool-card:hover { background: #161616; border-color: #252525; }
+        .tool-card h3 { font-size: 0.9rem; color: #ccc; font-weight: 500; margin-bottom: 3px; }
+        .tool-card p { color: #555; font-size: 0.75rem; }
 
         .tool-section {
             display: none;
-            background: #1a1a2e;
-            border-radius: 12px;
-            padding: 28px;
+            background: #111;
+            border-radius: 10px;
+            padding: 25px;
             margin: 20px 0;
-            border: 1px solid #2a2a3e;
+            border: 1px solid #1a1a1a;
         }
         .tool-section.active { display: block; }
-        .tool-section h2 {
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-            color: #fff;
-        }
+        .tool-section h2 { font-size: 1.1rem; color: #ddd; font-weight: 500; margin-bottom: 20px; }
 
         .back-btn {
             background: transparent;
-            border: 1px solid #333;
-            color: #888;
-            padding: 8px 16px;
-            border-radius: 6px;
+            border: 1px solid #222;
+            color: #666;
+            padding: 6px 12px;
+            border-radius: 5px;
             cursor: pointer;
-            margin-bottom: 18px;
-            font-size: 0.9rem;
-            transition: all 0.2s;
+            margin-bottom: 15px;
+            font-size: 0.8rem;
         }
-        .back-btn:hover { border-color: #555; color: #fff; }
+        .back-btn:hover { border-color: #333; color: #888; }
 
         input, textarea, select {
             width: 100%;
-            padding: 14px;
-            border-radius: 8px;
-            border: 1px solid #333;
-            background: #0f0f1a;
-            color: #fff;
-            font-size: 0.95rem;
-            margin-bottom: 12px;
+            padding: 12px 14px;
+            border-radius: 6px;
+            border: 1px solid #222;
+            background: #0a0a0a;
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
             font-family: inherit;
         }
-        input:focus, textarea:focus { outline: none; border-color: #6c5ce7; }
-        textarea { min-height: 120px; resize: vertical; }
+        input:focus, textarea:focus { outline: none; border-color: #333; }
+        textarea { min-height: 100px; resize: vertical; }
+        input[type="file"] { padding: 10px; }
+        input[type="color"] { padding: 5px; height: 45px; }
 
         .btn {
-            background: #6c5ce7;
-            border: none;
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 8px;
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            color: #aaa;
+            padding: 10px 18px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 500;
-            transition: background 0.2s;
-            margin-right: 8px;
-            margin-bottom: 8px;
+            transition: all 0.15s;
+            margin-right: 6px;
+            margin-bottom: 6px;
         }
-        .btn:hover { background: #5b4cdb; }
-        .btn-secondary {
-            background: #333;
-        }
-        .btn-secondary:hover { background: #444; }
+        .btn:hover { background: #222; border-color: #333; color: #ccc; }
+        .btn-primary { background: #2a2a2a; border-color: #333; color: #ddd; }
 
         .result-box {
-            background: #0f0f1a;
-            border-radius: 8px;
-            padding: 18px;
-            margin-top: 18px;
+            background: #0a0a0a;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 15px;
+            border: 1px solid #1a1a1a;
             word-break: break-all;
-            border: 1px solid #222;
+            font-size: 0.85rem;
         }
 
-        #qrcode { display: flex; justify-content: center; margin: 20px 0; }
-        #qrcode canvas { border-radius: 8px; }
+        #qrcode { display: flex; justify-content: center; margin: 15px 0; }
+        #qrcode canvas { border-radius: 6px; }
 
         .stats-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 10px;
-            margin-top: 18px;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 8px;
+            margin-top: 15px;
         }
         .stat-box {
-            background: #0f0f1a;
+            background: #0a0a0a;
             padding: 12px;
-            border-radius: 8px;
+            border-radius: 6px;
             text-align: center;
-            border: 1px solid #222;
+            border: 1px solid #1a1a1a;
         }
-        .stat-box .number { font-size: 1.5rem; font-weight: 700; color: #6c5ce7; }
-        .stat-box .label { color: #666; font-size: 0.75rem; margin-top: 4px; }
+        .stat-box .number { font-size: 1.3rem; font-weight: 600; color: #ddd; }
+        .stat-box .label { color: #555; font-size: 0.7rem; margin-top: 2px; }
 
         .copy-btn {
-            background: #222;
+            background: #1a1a1a;
             border: none;
-            color: #aaa;
-            padding: 7px 14px;
-            border-radius: 5px;
+            color: #666;
+            padding: 5px 10px;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 0.85rem;
-            margin-top: 10px;
+            font-size: 0.75rem;
+            margin-top: 8px;
         }
-        .copy-btn:hover { background: #333; color: #fff; }
+        .copy-btn:hover { color: #999; }
 
-        .color-preview { width: 100%; height: 80px; border-radius: 8px; margin-bottom: 12px; }
-        .color-info { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-        .color-info div { background: #0f0f1a; padding: 10px; border-radius: 6px; text-align: center; border: 1px solid #222; }
-        .color-info .label { color: #666; font-size: 0.75rem; }
+        .row { display: flex; gap: 10px; flex-wrap: wrap; }
+        .row > * { flex: 1; min-width: 150px; }
 
-        .password-options { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 12px; }
-        .password-options label { display: flex; align-items: center; gap: 6px; cursor: pointer; color: #999; font-size: 0.9rem; }
-        .password-options input[type="checkbox"] { width: auto; margin: 0; }
+        .file-list { margin: 10px 0; }
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: #0f0f0f;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            font-size: 0.8rem;
+        }
+        .file-item button {
+            background: none;
+            border: none;
+            color: #555;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .file-item button:hover { color: #888; }
+
+        .info-box {
+            background: #0f0f0f;
+            border-left: 2px solid #333;
+            padding: 12px 15px;
+            margin: 15px 0;
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .color-preview { width: 100%; height: 60px; border-radius: 6px; margin-bottom: 10px; }
+        .color-info { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .color-info div { background: #0a0a0a; padding: 10px; border-radius: 5px; text-align: center; border: 1px solid #1a1a1a; font-size: 0.8rem; }
+        .color-info .label { color: #555; font-size: 0.65rem; display: block; margin-bottom: 3px; }
+
+        .options { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+        .options label { display: flex; align-items: center; gap: 5px; color: #666; font-size: 0.85rem; cursor: pointer; }
+        .options input[type="checkbox"] { width: auto; margin: 0; }
+
         .password-display {
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 1.2rem;
+            font-family: 'SF Mono', 'Consolas', monospace;
+            font-size: 1.1rem;
             text-align: center;
-            padding: 18px;
-            background: #0f0f1a;
-            border-radius: 8px;
-            margin: 18px 0;
-            word-break: break-all;
-            border: 1px solid #222;
-            color: #6c5ce7;
+            padding: 15px;
+            background: #0a0a0a;
+            border-radius: 6px;
+            margin: 15px 0;
+            border: 1px solid #1a1a1a;
+            color: #ddd;
+            letter-spacing: 1px;
         }
-
-        .case-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
-
-        .timestamp-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        @media (max-width: 600px) { .timestamp-row { grid-template-columns: 1fr; } }
 
         footer {
             text-align: center;
-            padding: 50px 0 30px;
-            border-top: 1px solid #1a1a1a;
+            padding: 40px 0 30px;
+            border-top: 1px solid #111;
             margin-top: 50px;
         }
-        footer p { color: #444; font-size: 0.85rem; }
-        footer a { color: #555; text-decoration: none; margin: 0 10px; }
-        footer a:hover { color: #888; }
+        footer p { color: #333; font-size: 0.8rem; }
+        footer a { color: #444; text-decoration: none; margin: 0 8px; font-size: 0.8rem; }
+        footer a:hover { color: #666; }
 
-        @media (max-width: 768px) {
-            header h1 { font-size: 1.6rem; }
-            .tools-grid { grid-template-columns: 1fr; }
-            nav { flex-direction: column; gap: 15px; }
+        @media (max-width: 600px) {
+            .tools-grid { grid-template-columns: 1fr 1fr; }
+            nav { flex-direction: column; gap: 12px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <nav>
-            <div class="logo">Tool<span>Box</span></div>
+            <div class="logo">ToolBox</div>
             <div>
                 <a href="#" onclick="showMain(); return false;">도구</a>
-                <a href="#" onclick="showAbout(); return false;">소개</a>
-                <a href="#" onclick="showPrivacy(); return false;">개인정보처리방침</a>
+                <a href="#" onclick="showTool('about'); return false;">소개</a>
+                <a href="#" onclick="showTool('privacy'); return false;">개인정보</a>
             </div>
         </nav>
 
         <header id="main-header">
             <h1>개발할 때 필요한 도구들</h1>
-            <p>매번 찾아다니기 귀찮아서 만들었습니다. 그냥 편하게 쓰세요.</p>
+            <p>그냥 편하게 쓰세요</p>
         </header>
 
         <div id="main-grid">
-            <div class="category-title">생성</div>
+            <div class="section-title">PDF</div>
+            <div class="tools-grid">
+                <div class="tool-card" onclick="showTool('pdf-merge')">
+                    <h3>PDF 병합</h3>
+                    <p>여러 PDF를 하나로</p>
+                </div>
+                <div class="tool-card" onclick="showTool('pdf-convert')">
+                    <h3>PDF 변환</h3>
+                    <p>이미지/문서 → PDF</p>
+                </div>
+            </div>
+
+            <div class="section-title">생성</div>
             <div class="tools-grid">
                 <div class="tool-card" onclick="showTool('qr')">
-                    <h3>QR코드 생성</h3>
-                    <p>링크나 텍스트를 QR코드로</p>
+                    <h3>QR코드</h3>
+                    <p>링크, 텍스트</p>
                 </div>
                 <div class="tool-card" onclick="showTool('password')">
-                    <h3>비밀번호 생성</h3>
-                    <p>안전한 랜덤 비밀번호</p>
+                    <h3>비밀번호</h3>
+                    <p>랜덤 생성</p>
                 </div>
                 <div class="tool-card" onclick="showTool('uuid')">
-                    <h3>UUID 생성</h3>
-                    <p>고유 식별자 생성</p>
+                    <h3>UUID</h3>
+                    <p>고유 식별자</p>
                 </div>
                 <div class="tool-card" onclick="showTool('lorem')">
                     <h3>Lorem Ipsum</h3>
-                    <p>더미 텍스트 생성</p>
+                    <p>더미 텍스트</p>
                 </div>
             </div>
 
-            <div class="category-title">텍스트</div>
+            <div class="section-title">텍스트</div>
             <div class="tools-grid">
                 <div class="tool-card" onclick="showTool('text')">
-                    <h3>글자수 세기</h3>
-                    <p>공백, 바이트 포함 분석</p>
+                    <h3>글자수</h3>
+                    <p>공백, 바이트</p>
                 </div>
                 <div class="tool-card" onclick="showTool('case')">
-                    <h3>대소문자 변환</h3>
-                    <p>대문자, 소문자, 타이틀</p>
+                    <h3>대소문자</h3>
+                    <p>변환</p>
                 </div>
                 <div class="tool-card" onclick="showTool('replace')">
-                    <h3>텍스트 치환</h3>
+                    <h3>치환</h3>
                     <p>찾아 바꾸기</p>
                 </div>
                 <div class="tool-card" onclick="showTool('diff')">
-                    <h3>텍스트 비교</h3>
-                    <p>두 텍스트 차이점 찾기</p>
+                    <h3>비교</h3>
+                    <p>차이점 찾기</p>
                 </div>
             </div>
 
-            <div class="category-title">인코딩 / 변환</div>
+            <div class="section-title">인코딩</div>
             <div class="tools-grid">
                 <div class="tool-card" onclick="showTool('base64')">
                     <h3>Base64</h3>
                     <p>인코딩/디코딩</p>
                 </div>
                 <div class="tool-card" onclick="showTool('url')">
-                    <h3>URL 인코딩</h3>
-                    <p>URL 인코딩/디코딩</p>
+                    <h3>URL</h3>
+                    <p>인코딩/디코딩</p>
                 </div>
                 <div class="tool-card" onclick="showTool('hash')">
-                    <h3>해시 생성</h3>
-                    <p>MD5, SHA-1, SHA-256</p>
+                    <h3>해시</h3>
+                    <p>MD5, SHA</p>
                 </div>
                 <div class="tool-card" onclick="showTool('html')">
-                    <h3>HTML 이스케이프</h3>
-                    <p>HTML 엔티티 변환</p>
+                    <h3>HTML</h3>
+                    <p>이스케이프</p>
                 </div>
             </div>
 
-            <div class="category-title">개발자 도구</div>
+            <div class="section-title">개발</div>
             <div class="tools-grid">
                 <div class="tool-card" onclick="showTool('json')">
-                    <h3>JSON 정리</h3>
-                    <p>보기 좋게 정리/압축</p>
+                    <h3>JSON</h3>
+                    <p>정리/압축</p>
                 </div>
                 <div class="tool-card" onclick="showTool('timestamp')">
-                    <h3>타임스탬프 변환</h3>
-                    <p>Unix 시간 ↔ 날짜</p>
+                    <h3>타임스탬프</h3>
+                    <p>Unix ↔ 날짜</p>
                 </div>
                 <div class="tool-card" onclick="showTool('color')">
-                    <h3>색상 변환</h3>
+                    <h3>색상</h3>
                     <p>HEX, RGB, HSL</p>
                 </div>
                 <div class="tool-card" onclick="showTool('regex')">
-                    <h3>정규식 테스트</h3>
-                    <p>정규표현식 테스트</p>
+                    <h3>정규식</h3>
+                    <p>테스트</p>
                 </div>
             </div>
 
-            <div class="category-title">계산</div>
+            <div class="section-title">계산</div>
             <div class="tools-grid">
                 <div class="tool-card" onclick="showTool('percent')">
-                    <h3>퍼센트 계산</h3>
-                    <p>비율, 증감률 계산</p>
+                    <h3>퍼센트</h3>
+                    <p>비율 계산</p>
                 </div>
                 <div class="tool-card" onclick="showTool('unit')">
-                    <h3>단위 변환</h3>
+                    <h3>단위</h3>
                     <p>길이, 무게, 온도</p>
                 </div>
                 <div class="tool-card" onclick="showTool('number')">
-                    <h3>진법 변환</h3>
-                    <p>2진수, 8진수, 16진수</p>
+                    <h3>진법</h3>
+                    <p>2, 8, 10, 16</p>
                 </div>
                 <div class="tool-card" onclick="showTool('date')">
-                    <h3>날짜 계산</h3>
-                    <p>D-Day, 날짜 차이</p>
+                    <h3>날짜</h3>
+                    <p>D-Day, 기간</p>
                 </div>
             </div>
         </div>
 
-        <!-- QR Code Tool -->
-        <div class="tool-section" id="tool-qr">
-            <button class="back-btn" onclick="showMain()">← 목록으로</button>
-            <h2>QR코드 생성</h2>
-            <input type="text" id="qr-input" placeholder="URL이나 텍스트 입력">
-            <button class="btn" onclick="generateQR()">생성</button>
-            <div id="qrcode"></div>
-            <div style="text-align: center;">
-                <button class="copy-btn" onclick="downloadQR()" style="display:none;" id="download-qr">PNG 다운로드</button>
-            </div>
+        <!-- PDF Merge -->
+        <div class="tool-section" id="tool-pdf-merge">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>PDF 병합</h2>
+            <input type="file" id="pdf-files" accept=".pdf" multiple>
+            <div class="file-list" id="pdf-file-list"></div>
+            <button class="btn btn-primary" onclick="mergePDFs()">병합하기</button>
+            <div id="pdf-merge-status"></div>
         </div>
 
-        <!-- Password Generator -->
+        <!-- PDF Convert -->
+        <div class="tool-section" id="tool-pdf-convert">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>PDF 변환</h2>
+
+            <div class="info-box">
+                <strong>브라우저에서 변환 가능:</strong> 이미지 (JPG, PNG, GIF, BMP, WebP)<br><br>
+                <strong>오피스 파일 (HWP, Word, Excel, PPT):</strong><br>
+                해당 프로그램에서 직접 PDF로 저장해야 합니다.<br>
+                • 한글: 파일 → 다른 이름으로 저장 → PDF<br>
+                • Word/Excel/PPT: 파일 → 내보내기 → PDF<br>
+                • 무료 온라인: smallpdf.com, ilovepdf.com
+            </div>
+
+            <input type="file" id="convert-files" accept="image/*" multiple>
+            <div class="file-list" id="convert-file-list"></div>
+            <button class="btn btn-primary" onclick="convertToPDF()">이미지 → PDF 변환</button>
+            <div id="convert-status"></div>
+        </div>
+
+        <!-- QR -->
+        <div class="tool-section" id="tool-qr">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>QR코드 생성</h2>
+            <input type="text" id="qr-input" placeholder="URL 또는 텍스트">
+            <button class="btn btn-primary" onclick="generateQR()">생성</button>
+            <div id="qrcode"></div>
+            <div style="text-align:center;"><button class="copy-btn" onclick="downloadQR()" style="display:none;" id="download-qr">다운로드</button></div>
+        </div>
+
+        <!-- Password -->
         <div class="tool-section" id="tool-password">
-            <button class="back-btn" onclick="showMain()">← 목록으로</button>
+            <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>비밀번호 생성</h2>
             <input type="number" id="pw-length" value="16" min="4" max="128" placeholder="길이">
-            <div class="password-options">
+            <div class="options">
                 <label><input type="checkbox" id="pw-upper" checked> 대문자</label>
                 <label><input type="checkbox" id="pw-lower" checked> 소문자</label>
                 <label><input type="checkbox" id="pw-number" checked> 숫자</label>
                 <label><input type="checkbox" id="pw-symbol" checked> 특수문자</label>
             </div>
-            <button class="btn" onclick="generatePassword()">생성</button>
+            <button class="btn btn-primary" onclick="generatePassword()">생성</button>
             <div class="password-display" id="password-result">-</div>
-            <div style="text-align: center;"><button class="copy-btn" onclick="copyText('password-result')">복사</button></div>
+            <div style="text-align:center;"><button class="copy-btn" onclick="copyText('password-result')">복사</button></div>
         </div>
 
-        <!-- UUID Generator -->
+        <!-- UUID -->
         <div class="tool-section" id="tool-uuid">
-            <button class="back-btn" onclick="showMain()">← 목록으로</button>
+            <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>UUID 생성</h2>
-            <input type="number" id="uuid-count" value="5" min="1" max="100" placeholder="생성 개수">
-            <button class="btn" onclick="generateUUID()">생성</button>
-            <div class="result-box">
-                <pre id="uuid-result" style="white-space: pre-wrap;">-</pre>
-                <button class="copy-btn" onclick="copyText('uuid-result')">복사</button>
-            </div>
+            <input type="number" id="uuid-count" value="5" min="1" max="100" placeholder="개수">
+            <button class="btn btn-primary" onclick="generateUUID()">생성</button>
+            <div class="result-box"><pre id="uuid-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
+            <button class="copy-btn" onclick="copyText('uuid-result')">복사</button>
         </div>
 
-        <!-- Lorem Ipsum -->
+        <!-- Lorem -->
         <div class="tool-section" id="tool-lorem">
-            <button class="back-btn" onclick="showMain()">← 목록으로</button>
+            <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>Lorem Ipsum</h2>
             <input type="number" id="lorem-count" value="3" min="1" max="20" placeholder="문단 수">
-            <button class="btn" onclick="generateLorem()">생성</button>
-            <div class="result-box">
-                <div id="lorem-result">Lorem ipsum dolor sit amet...</div>
-                <button class="copy-btn" onclick="copyText('lorem-result')">복사</button>
-            </div>
+            <button class="btn btn-primary" onclick="generateLorem()">생성</button>
+            <div class="result-box"><div id="lorem-result">-</div></div>
+            <button class="copy-btn" onclick="copyText('lorem-result')">복사</button>
         </div>
 
-        <!-- Text Analyzer -->
+        <!-- Text -->
         <div class="tool-section" id="tool-text">
-            <button class="back-btn" onclick="showMain()">← 목록으로</button>
+            <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>글자수 세기</h2>
-            <textarea id="text-input" placeholder="여기에 텍스트 붙여넣기" oninput="analyzeText()"></textarea>
+            <textarea id="text-input" placeholder="텍스트 입력" oninput="analyzeText()"></textarea>
             <div class="stats-row">
-                <div class="stat-box"><div class="number" id="char-count">0</div><div class="label">글자 (공백포함)</div></div>
-                <div class="stat-box"><div class="number" id="char-no-space">0</div><div class="label">글자 (공백제외)</div></div>
+                <div class="stat-box"><div class="number" id="char-count">0</div><div class="label">글자(공백포함)</div></div>
+                <div class="stat-box"><div class="number" id="char-no-space">0</div><div class="label">글자(공백제외)</div></div>
                 <div class="stat-box"><div class="number" id="word-count">0</div><div class="label">단어</div></div>
-                <div class="stat-box"><div class="number" id="sentence-count">0</div><div class="label">문장</div></div>
                 <div class="stat-box"><div class="number" id="line-count">0</div><div class="label">줄</div></div>
                 <div class="stat-box"><div class="number" id="byte-count">0</div><div class="label">바이트</div></div>
             </div>
         </div>
 
-        <!-- Case Converter -->
+        <!-- Case -->
         <div class="tool-section" id="tool-case">
-            <button class="back-btn" onclick="showMain()">← 목록으로</button>
+            <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>대소문자 변환</h2>
             <textarea id="case-input" placeholder="텍스트 입력"></textarea>
-            <div class="case-buttons">
+            <div>
                 <button class="btn" onclick="convertCase('upper')">대문자</button>
                 <button class="btn" onclick="convertCase('lower')">소문자</button>
-                <button class="btn" onclick="convertCase('title')">Title Case</button>
-                <button class="btn" onclick="convertCase('sentence')">Sentence case</button>
+                <button class="btn" onclick="convertCase('title')">Title</button>
                 <button class="btn" onclick="convertCase('toggle')">토글</button>
             </div>
-            <div class="result-box">
-                <div id="case-result">결과</div>
-                <button class="copy-btn" onclick="copyText('case-result')">복사</button>
-            </div>
+            <div class="result-box"><div id="case-result">-</div></div>
+            <button class="copy-btn" onclick="copyText('case-result')">복사</button>
         </div>
 
-        <!-- Text Replace -->
+        <!-- Replace -->
         <div class="tool-section" id="tool-replace">
-            <button class="back-btn" onclick="showMain()">← 목록으로</button>
+            <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>텍스트 치환</h2>
             <textarea id="replace-input" placeholder="원본 텍스트"></textarea>
-            <input type="text" id="replace-find" placeholder="찾을 텍스트">
-            <input type="text" id="replace-with" placeholder="바꿀 텍스트">
-            <button class="btn" onclick="replaceText()">치환</button>
-            <div class="result-box">
-                <div id="replace-result">결과</div>
-                <button class="copy-btn" onclick="copyText('replace-result')">복사</button>
+            <div class="row">
+                <input type="text" id="replace-find" placeholder="찾을 텍스트">
+                <input type="text" id="replace-with" placeholder="바꿀 텍스트">
             </div>
+            <button class="btn btn-primary" onclick="replaceText()">치환</button>
+            <div class="result-box"><div id="replace-result">-</div></div>
+            <button class="copy-btn" onclick="copyText('replace-result')">복사</button>
         </div>
 
-        <!-- Text Diff -->
+        <!-- Diff -->
         <div class="tool-section" id="tool-diff">
-            <button class="back-btn" onclick="showMain()">← 목록으로</button>
+            <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>텍스트 비교</h2>
-            <div class="timestamp-row">
+            <div class="row">
                 <textarea id="diff-text1" placeholder="텍스트 1"></textarea>
                 <textarea id="diff-text2" placeholder="텍스트 2"></textarea>
             </div>
-            <button class="btn" onclick="compareText()">비교</button>
-            <div class="result-box">
-                <div id="diff-result">결과</div>
-            </div>
+            <button class="btn btn-primary" onclick="compareText()">비교</button>
+            <div class="result-box"><div id="diff-result">-</div></div>
         </div>
 
         <!-- Base64 -->
         <div class="tool-section" id="tool-base64">
-            <button class="back-btn" onclick="showMain()">← 목록으로</button>
-            <h2>Base64 인코딩/디코딩</h2>
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>Base64</h2>
             <textarea id="base64-input" placeholder="텍스트 입력"></textarea>
-            <div>
-                <button class="btn" onclick="encodeBase64()">인코딩</button>
-                <button class="btn" onclick="decodeBase64()">디코딩</button>
-            </div>
-            <div class="result-box">
-                <div id="base64-result">결과</div>
-                <button class="copy-btn" onclick="copyText('base64-result')">복사</button>
-            </div>
+            <button class="btn" onclick="encodeBase64()">인코딩</button>
+            <button class="btn" onclick="decodeBase64()">디코딩</button>
+            <div class="result-box"><div id="base64-result">-</div></div>
+            <button class="copy-btn" onclick="copyText('base64-result')">복사</button>
         </div>
 
-        <!-- URL Encoding -->
+        <!-- URL -->
         <div class="tool-section" id="tool-url">
-            <button class="back-btn" onclick="showMain()">← 목록으로</button>
-            <h2>URL 인코딩/디코딩</h2>
-            <textarea id="url-input" placeholder="URL 또는 텍스트 입력"></textarea>
-            <div>
-                <button class="btn" onclick="encodeURL()">인코딩</button>
-                <button class="btn" onclick="decodeURL()">디코딩</button>
-            </div>
-            <div class="result-box">
-                <div id="url-result">결과</div>
-                <button class="copy-btn" onclick="copyText('url-result')">복사</button>
-            </div>
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>URL 인코딩</h2>
+            <textarea id="url-input" placeholder="URL 또는 텍스트"></textarea>
+            <button class="btn" onclick="encodeURL()">인코딩</button>
+            <button class="btn" onclick="decodeURL()">디코딩</button>
+            <div class="result-box"><div id="url-result">-</div></div>
+            <button class="copy-btn" onclick="copyText('url-result')">복사</button>
         </div>
 
         <!-- Hash -->
         <div class="tool-section" id="tool-hash">
-            <button class="back-btn" onclick="showMain()">← 목록으로</button>
+            <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>해시 생성</h2>
             <textarea id="hash-input" placeholder="텍스트 입력" oninput="generateHash()"></textarea>
             <div class="result-box">
-                <div style="margin-bottom: 12px;"><div style="color: #666; font-size: 0.8rem;">MD5</div><div id="md5-result">-</div></div>
-                <div style="margin-bottom: 12px;"><div style="color: #666; font-size: 0.8rem;">SHA-1</div><div id="sha1-result">-</div></div>
-                <div><div style="color: #666; font-size: 0.8rem;">SHA-256</div><div id="sha256-result">-</div></div>
+                <div style="margin-bottom:8px;"><span style="color:#555;">MD5:</span> <span id="md5-result">-</span></div>
+                <div style="margin-bottom:8px;"><span style="color:#555;">SHA-1:</span> <span id="sha1-result">-</span></div>
+                <div><span style="color:#555;">SHA-256:</span> <span id="sha256-result">-</span></div>
             </div>
         </div>
 
-        <!-- HTML Escape -->
+        <!-- HTML -->
         <div class="tool-section" id="tool-html">
-            <button class="back-btn" onclick="showMain()">← 목록으로</button>
+            <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>HTML 이스케이프</h2>
-            <textarea id="html-input" placeholder="HTML 또는 텍스트 입력"></textarea>
-            <div>
-                <button class="btn" onclick="escapeHTML()">이스케이프</button>
-                <button class="btn" onclick="unescapeHTML()">언이스케이프</button>
-            </div>
-            <div class="result-box">
-                <div id="html-result">결과</div>
-                <button class="copy-btn" onclick="copyText('html-result')">복사</button>
-            </div>
+            <textarea id="html-input" placeholder="HTML 입력"></textarea>
+            <button class="btn" onclick="escapeHTML()">이스케이프</button>
+            <button class="btn" onclick="unescapeHTML()">언이스케이프</button>
+            <div class="result-box"><div id="html-result">-</div></div>
+            <button class="copy-btn" onclick="copyText('html-result')">복사</button>
         </div>
 
         <!-- JSON -->
         <div class="tool-section" id="tool-json">
-            <button class="back-btn" onclick="showMain()">← 목록으로</button>
+            <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>JSON 정리</h2>
             <textarea id="json-input" placeholder='{"key": "value"}'></textarea>
-            <div>
-                <button class="btn" onclick="formatJSON()">보기좋게</button>
-                <button class="btn" onclick="minifyJSON()">압축</button>
-            </div>
-            <div class="result-box">
-                <pre id="json-result" style="white-space: pre-wrap;">결과</pre>
-                <button class="copy-btn" onclick="copyText('json-result')">복사</button>
-            </div>
+            <button class="btn" onclick="formatJSON()">정리</button>
+            <button class="btn" onclick="minifyJSON()">압축</button>
+            <div class="result-box"><pre id="json-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
+            <button class="copy-btn" onclick="copyText('json-result')">복사</button>
         </div>
 
         <!-- Timestamp -->
         <div class="tool-section" id="tool-timestamp">
-            <button class="back-btn" onclick="showMain()">← 목록으로</button>
-            <h2>타임스탬프 변환</h2>
-            <div class="timestamp-row">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>타임스탬프</h2>
+            <div class="row">
                 <div>
-                    <label style="color: #888; font-size: 0.85rem;">Unix Timestamp</label>
-                    <input type="number" id="ts-unix" placeholder="1234567890">
-                    <button class="btn" onclick="unixToDate()">→ 날짜로</button>
+                    <input type="number" id="ts-unix" placeholder="Unix Timestamp">
+                    <button class="btn" onclick="unixToDate()">→ 날짜</button>
                 </div>
                 <div>
-                    <label style="color: #888; font-size: 0.85rem;">날짜/시간</label>
                     <input type="datetime-local" id="ts-date">
-                    <button class="btn" onclick="dateToUnix()">→ Unix로</button>
+                    <button class="btn" onclick="dateToUnix()">→ Unix</button>
                 </div>
             </div>
             <div class="result-box">
-                <div>현재 시간: <span id="current-ts"></span></div>
-                <div style="margin-top: 10px;" id="ts-result"></div>
+                <div>현재: <span id="current-ts">-</span></div>
+                <div style="margin-top:8px;" id="ts-result"></div>
             </div>
         </div>
 
         <!-- Color -->
         <div class="tool-section" id="tool-color">
-            <button class="back-btn" onclick="showMain()">← 목록으로</button>
+            <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>색상 변환</h2>
-            <input type="color" id="color-picker" value="#6c5ce7" onchange="convertColor()">
-            <div class="color-preview" id="color-preview" style="background: #6c5ce7;"></div>
+            <input type="color" id="color-picker" value="#888888" onchange="convertColor()">
+            <div class="color-preview" id="color-preview" style="background:#888;"></div>
             <div class="color-info">
-                <div><div class="label">HEX</div><div id="hex-value">#6C5CE7</div></div>
-                <div><div class="label">RGB</div><div id="rgb-value">rgb(108, 92, 231)</div></div>
-                <div><div class="label">HSL</div><div id="hsl-value">hsl(247, 75%, 63%)</div></div>
+                <div><span class="label">HEX</span><span id="hex-value">#888888</span></div>
+                <div><span class="label">RGB</span><span id="rgb-value">rgb(136,136,136)</span></div>
+                <div><span class="label">HSL</span><span id="hsl-value">hsl(0,0%,53%)</span></div>
             </div>
         </div>
 
         <!-- Regex -->
         <div class="tool-section" id="tool-regex">
-            <button class="back-btn" onclick="showMain()">← 목록으로</button>
+            <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>정규식 테스트</h2>
-            <input type="text" id="regex-pattern" placeholder="정규식 패턴 (예: \d+)" oninput="testRegex()">
-            <input type="text" id="regex-flags" placeholder="플래그 (예: gi)" value="g" oninput="testRegex()">
+            <div class="row">
+                <input type="text" id="regex-pattern" placeholder="패턴 (예: \d+)" oninput="testRegex()">
+                <input type="text" id="regex-flags" value="g" placeholder="플래그" style="max-width:80px;" oninput="testRegex()">
+            </div>
             <textarea id="regex-text" placeholder="테스트할 텍스트" oninput="testRegex()"></textarea>
-            <div class="result-box">
-                <div id="regex-result">매치 결과</div>
-            </div>
+            <div class="result-box"><div id="regex-result">-</div></div>
         </div>
 
-        <!-- Percent Calculator -->
+        <!-- Percent -->
         <div class="tool-section" id="tool-percent">
-            <button class="back-btn" onclick="showMain()">← 목록으로</button>
+            <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>퍼센트 계산</h2>
-            <div style="margin-bottom: 20px;">
-                <label style="color: #888; font-size: 0.85rem;">A의 B%는?</label>
-                <div style="display: flex; gap: 10px; align-items: center; margin-top: 8px;">
-                    <input type="number" id="p1-a" placeholder="A" style="margin: 0;">
-                    <span style="color: #666;">의</span>
-                    <input type="number" id="p1-b" placeholder="B" style="margin: 0;">
-                    <span style="color: #666;">% =</span>
-                    <span id="p1-result" style="color: #6c5ce7; font-weight: bold;">?</span>
+            <div style="margin-bottom:15px;">
+                <div style="color:#555;font-size:0.8rem;margin-bottom:5px;">A의 B%는?</div>
+                <div class="row" style="align-items:center;">
+                    <input type="number" id="p1-a" placeholder="A">
+                    <span style="color:#444;">의</span>
+                    <input type="number" id="p1-b" placeholder="B">
+                    <span style="color:#444;">% =</span>
+                    <span id="p1-result" style="color:#ddd;font-weight:600;">?</span>
                 </div>
             </div>
-            <div style="margin-bottom: 20px;">
-                <label style="color: #888; font-size: 0.85rem;">A는 B의 몇 %?</label>
-                <div style="display: flex; gap: 10px; align-items: center; margin-top: 8px;">
-                    <input type="number" id="p2-a" placeholder="A" style="margin: 0;">
-                    <span style="color: #666;">는</span>
-                    <input type="number" id="p2-b" placeholder="B" style="margin: 0;">
-                    <span style="color: #666;">의</span>
-                    <span id="p2-result" style="color: #6c5ce7; font-weight: bold;">?</span>
-                    <span style="color: #666;">%</span>
+            <div style="margin-bottom:15px;">
+                <div style="color:#555;font-size:0.8rem;margin-bottom:5px;">A는 B의 몇%?</div>
+                <div class="row" style="align-items:center;">
+                    <input type="number" id="p2-a" placeholder="A">
+                    <span style="color:#444;">는</span>
+                    <input type="number" id="p2-b" placeholder="B">
+                    <span style="color:#444;">의</span>
+                    <span id="p2-result" style="color:#ddd;font-weight:600;">?</span>
+                    <span style="color:#444;">%</span>
                 </div>
             </div>
-            <div>
-                <label style="color: #888; font-size: 0.85rem;">A에서 B로 증감률</label>
-                <div style="display: flex; gap: 10px; align-items: center; margin-top: 8px;">
-                    <input type="number" id="p3-a" placeholder="A" style="margin: 0;">
-                    <span style="color: #666;">→</span>
-                    <input type="number" id="p3-b" placeholder="B" style="margin: 0;">
-                    <span style="color: #666;">=</span>
-                    <span id="p3-result" style="color: #6c5ce7; font-weight: bold;">?</span>
-                    <span style="color: #666;">%</span>
-                </div>
-            </div>
-            <button class="btn" style="margin-top: 20px;" onclick="calcPercent()">계산</button>
+            <button class="btn btn-primary" onclick="calcPercent()">계산</button>
         </div>
 
-        <!-- Unit Converter -->
+        <!-- Unit -->
         <div class="tool-section" id="tool-unit">
-            <button class="back-btn" onclick="showMain()">← 목록으로</button>
+            <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>단위 변환</h2>
-            <select id="unit-type" onchange="updateUnitOptions()" style="margin-bottom: 15px;">
+            <select id="unit-type" onchange="updateUnitOptions()">
                 <option value="length">길이</option>
                 <option value="weight">무게</option>
                 <option value="temp">온도</option>
                 <option value="data">데이터</option>
             </select>
-            <div style="display: flex; gap: 10px; align-items: center;">
-                <input type="number" id="unit-value" placeholder="값" style="margin: 0;" oninput="convertUnit()">
-                <select id="unit-from" style="margin: 0;" onchange="convertUnit()"></select>
-                <span style="color: #666;">=</span>
-                <span id="unit-result" style="color: #6c5ce7; font-weight: bold; font-size: 1.1rem;">?</span>
-                <select id="unit-to" style="margin: 0;" onchange="convertUnit()"></select>
+            <div class="row" style="align-items:center;">
+                <input type="number" id="unit-value" placeholder="값" oninput="convertUnit()">
+                <select id="unit-from" onchange="convertUnit()"></select>
+                <span style="color:#444;">=</span>
+                <span id="unit-result" style="color:#ddd;font-weight:600;font-size:1.1rem;">?</span>
+                <select id="unit-to" onchange="convertUnit()"></select>
             </div>
         </div>
 
-        <!-- Number Base -->
+        <!-- Number -->
         <div class="tool-section" id="tool-number">
-            <button class="back-btn" onclick="showMain()">← 목록으로</button>
+            <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>진법 변환</h2>
-            <input type="text" id="num-input" placeholder="숫자 입력" oninput="convertBase()">
-            <select id="num-base" onchange="convertBase()">
-                <option value="10">10진수</option>
-                <option value="2">2진수</option>
-                <option value="8">8진수</option>
-                <option value="16">16진수</option>
-            </select>
+            <div class="row">
+                <input type="text" id="num-input" placeholder="숫자" oninput="convertBase()">
+                <select id="num-base" onchange="convertBase()">
+                    <option value="10">10진수</option>
+                    <option value="2">2진수</option>
+                    <option value="8">8진수</option>
+                    <option value="16">16진수</option>
+                </select>
+            </div>
             <div class="result-box">
-                <div style="margin-bottom: 8px;"><span style="color: #666;">2진수:</span> <span id="bin-result">-</span></div>
-                <div style="margin-bottom: 8px;"><span style="color: #666;">8진수:</span> <span id="oct-result">-</span></div>
-                <div style="margin-bottom: 8px;"><span style="color: #666;">10진수:</span> <span id="dec-result">-</span></div>
-                <div><span style="color: #666;">16진수:</span> <span id="hex-result">-</span></div>
+                <div style="margin-bottom:5px;"><span style="color:#555;">2진수:</span> <span id="bin-result">-</span></div>
+                <div style="margin-bottom:5px;"><span style="color:#555;">8진수:</span> <span id="oct-result">-</span></div>
+                <div style="margin-bottom:5px;"><span style="color:#555;">10진수:</span> <span id="dec-result">-</span></div>
+                <div><span style="color:#555;">16진수:</span> <span id="hex-result">-</span></div>
             </div>
         </div>
 
-        <!-- Date Calculator -->
+        <!-- Date -->
         <div class="tool-section" id="tool-date">
-            <button class="back-btn" onclick="showMain()">← 목록으로</button>
+            <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>날짜 계산</h2>
-            <div style="margin-bottom: 20px;">
-                <label style="color: #888; font-size: 0.85rem;">D-Day 계산</label>
+            <div style="margin-bottom:20px;">
+                <div style="color:#555;font-size:0.8rem;margin-bottom:5px;">D-Day</div>
                 <input type="date" id="date-target">
-                <div id="dday-result" style="color: #6c5ce7; font-size: 1.2rem; font-weight: bold; margin-top: 10px;"></div>
+                <div id="dday-result" style="color:#ddd;font-size:1.2rem;font-weight:600;margin-top:8px;"></div>
             </div>
             <div>
-                <label style="color: #888; font-size: 0.85rem;">두 날짜 사이 기간</label>
-                <div class="timestamp-row" style="margin-top: 8px;">
+                <div style="color:#555;font-size:0.8rem;margin-bottom:5px;">두 날짜 사이</div>
+                <div class="row">
                     <input type="date" id="date-from">
                     <input type="date" id="date-to">
                 </div>
-                <button class="btn" style="margin-top: 10px;" onclick="calcDateDiff()">계산</button>
-                <div id="date-diff-result" style="color: #6c5ce7; margin-top: 10px;"></div>
+                <button class="btn" onclick="calcDateDiff()">계산</button>
+                <div id="date-diff-result" style="color:#ddd;margin-top:8px;"></div>
             </div>
         </div>
 
         <!-- About -->
         <div class="tool-section" id="tool-about">
-            <button class="back-btn" onclick="showMain()">← 목록으로</button>
-            <h2>만든 이유</h2>
-            <p style="color: #888; line-height: 1.9;">
-                개발하다 보면 QR코드 만들어야 할 때, JSON 정리해야 할 때, 비밀번호 새로 만들어야 할 때가 자주 있는데요.
-                매번 구글링해서 사이트 찾아가는게 귀찮더라고요. 광고도 많고...<br><br>
-                그래서 자주 쓰는 것들만 모아서 하나 만들었습니다.
-                별거 없는데 누군가한테는 도움이 됐으면 좋겠네요.<br><br>
-                버그 있거나 추가했으면 하는 기능 있으면 편하게 연락주세요.
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>소개</h2>
+            <p style="color:#666;line-height:1.8;">
+                개발하다 보면 자주 쓰는 도구들이 있는데, 매번 찾아다니기 귀찮아서 모아봤습니다.<br><br>
+                모든 처리는 브라우저에서 이루어지고, 서버로 데이터가 전송되지 않습니다.<br><br>
+                버그나 기능 제안은 언제든 환영합니다.
             </p>
         </div>
 
         <!-- Privacy -->
         <div class="tool-section" id="tool-privacy">
-            <button class="back-btn" onclick="showMain()">← 목록으로</button>
+            <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>개인정보처리방침</h2>
-            <div style="color: #777; font-size: 0.9rem; line-height: 1.9;">
-                <p style="margin-bottom: 15px;"><strong style="color: #aaa;">1. 수집하는 개인정보</strong><br>
-                본 사이트는 사용자의 개인정보를 별도로 수집하지 않습니다. 모든 도구는 브라우저에서 처리되며 서버로 데이터가 전송되지 않습니다.</p>
-                <p style="margin-bottom: 15px;"><strong style="color: #aaa;">2. 쿠키 및 광고</strong><br>
-                본 사이트는 Google AdSense 광고를 게재하고 있으며, 이 과정에서 Google이 쿠키를 사용할 수 있습니다.</p>
-                <p style="margin-bottom: 15px;"><strong style="color: #aaa;">3. 제3자 서비스</strong><br>
-                - Google AdSense (광고)<br>- Google Fonts (폰트)<br>- cdnjs (JavaScript 라이브러리)</p>
-                <p><strong style="color: #aaa;">4. 문의</strong><br>
-                개인정보 관련 문의사항이 있으시면 연락 주시기 바랍니다.</p>
+            <div style="color:#666;font-size:0.85rem;line-height:1.8;">
+                <p style="margin-bottom:12px;"><strong style="color:#888;">1. 수집 정보</strong><br>
+                수집하는 개인정보 없음. 모든 도구는 브라우저에서 처리됩니다.</p>
+                <p style="margin-bottom:12px;"><strong style="color:#888;">2. 쿠키</strong><br>
+                Google AdSense 광고를 위한 쿠키가 사용될 수 있습니다.</p>
+                <p><strong style="color:#888;">3. 제3자 서비스</strong><br>
+                Google AdSense, Google Fonts, cdnjs</p>
             </div>
         </div>
 
         <footer>
             <p>직접 만들어서 쓰는 도구 모음</p>
-            <div style="margin-top: 15px;">
-                <a href="#" onclick="showAbout(); return false;">소개</a>
-                <a href="#" onclick="showPrivacy(); return false;">개인정보처리방침</a>
+            <div style="margin-top:10px;">
+                <a href="#" onclick="showTool('about'); return false;">소개</a>
+                <a href="#" onclick="showTool('privacy'); return false;">개인정보</a>
             </div>
         </footer>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
     <script>
         // Navigation
-        function showTool(tool) {
+        function showTool(t) {
             document.getElementById('main-grid').style.display = 'none';
             document.getElementById('main-header').style.display = 'none';
             document.querySelectorAll('.tool-section').forEach(s => s.classList.remove('active'));
-            document.getElementById('tool-' + tool).classList.add('active');
+            document.getElementById('tool-' + t).classList.add('active');
             window.scrollTo(0, 0);
         }
         function showMain() {
@@ -745,177 +729,222 @@
             document.getElementById('main-header').style.display = 'block';
             document.querySelectorAll('.tool-section').forEach(s => s.classList.remove('active'));
         }
-        function showAbout() { showTool('about'); }
-        function showPrivacy() { showTool('privacy'); }
 
-        // QR Code
-        let qrcode = null;
+        // PDF Merge
+        let pdfFilesToMerge = [];
+        document.getElementById('pdf-files').addEventListener('change', function(e) {
+            pdfFilesToMerge = Array.from(e.target.files);
+            renderPdfFileList();
+        });
+        function renderPdfFileList() {
+            const list = document.getElementById('pdf-file-list');
+            list.innerHTML = pdfFilesToMerge.map((f, i) =>
+                `<div class="file-item"><span>${f.name}</span><button onclick="removePdfFile(${i})">×</button></div>`
+            ).join('');
+        }
+        function removePdfFile(i) {
+            pdfFilesToMerge.splice(i, 1);
+            renderPdfFileList();
+        }
+        async function mergePDFs() {
+            if (pdfFilesToMerge.length < 2) return alert('2개 이상의 PDF를 선택하세요');
+            const status = document.getElementById('pdf-merge-status');
+            status.innerHTML = '<div style="color:#666;margin-top:10px;">병합 중...</div>';
+            try {
+                const mergedPdf = await PDFLib.PDFDocument.create();
+                for (const file of pdfFilesToMerge) {
+                    const bytes = await file.arrayBuffer();
+                    const pdf = await PDFLib.PDFDocument.load(bytes);
+                    const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+                    pages.forEach(p => mergedPdf.addPage(p));
+                }
+                const mergedBytes = await mergedPdf.save();
+                const blob = new Blob([mergedBytes], { type: 'application/pdf' });
+                const url = URL.createObjectURL(blob);
+                status.innerHTML = `<a href="${url}" download="merged.pdf" class="btn btn-primary" style="display:inline-block;margin-top:10px;text-decoration:none;">다운로드</a>`;
+            } catch (e) {
+                status.innerHTML = '<div style="color:#a55;margin-top:10px;">오류: ' + e.message + '</div>';
+            }
+        }
+
+        // PDF Convert (Images)
+        let imagesToConvert = [];
+        document.getElementById('convert-files').addEventListener('change', function(e) {
+            imagesToConvert = Array.from(e.target.files);
+            const list = document.getElementById('convert-file-list');
+            list.innerHTML = imagesToConvert.map(f => `<div class="file-item"><span>${f.name}</span></div>`).join('');
+        });
+        async function convertToPDF() {
+            if (imagesToConvert.length === 0) return alert('이미지를 선택하세요');
+            const status = document.getElementById('convert-status');
+            status.innerHTML = '<div style="color:#666;margin-top:10px;">변환 중...</div>';
+            try {
+                const pdfDoc = await PDFLib.PDFDocument.create();
+                for (const file of imagesToConvert) {
+                    const bytes = await file.arrayBuffer();
+                    let img;
+                    if (file.type === 'image/png') {
+                        img = await pdfDoc.embedPng(bytes);
+                    } else {
+                        img = await pdfDoc.embedJpg(bytes);
+                    }
+                    const page = pdfDoc.addPage([img.width, img.height]);
+                    page.drawImage(img, { x: 0, y: 0, width: img.width, height: img.height });
+                }
+                const pdfBytes = await pdfDoc.save();
+                const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+                const url = URL.createObjectURL(blob);
+                status.innerHTML = `<a href="${url}" download="converted.pdf" class="btn btn-primary" style="display:inline-block;margin-top:10px;text-decoration:none;">다운로드</a>`;
+            } catch (e) {
+                status.innerHTML = '<div style="color:#a55;margin-top:10px;">오류: ' + e.message + '</div>';
+            }
+        }
+
+        // QR
+        let qr = null;
         function generateQR() {
             const text = document.getElementById('qr-input').value;
-            if (!text) return alert('내용을 입력하세요');
-            const container = document.getElementById('qrcode');
-            container.innerHTML = '';
-            qrcode = new QRCode(container, { text, width: 180, height: 180, colorDark: '#000', colorLight: '#fff', correctLevel: QRCode.CorrectLevel.H });
+            if (!text) return alert('내용 입력');
+            document.getElementById('qrcode').innerHTML = '';
+            qr = new QRCode(document.getElementById('qrcode'), { text, width: 160, height: 160, colorDark: '#000', colorLight: '#fff' });
             document.getElementById('download-qr').style.display = 'inline-block';
         }
         function downloadQR() {
-            const canvas = document.querySelector('#qrcode canvas');
-            if (canvas) { const link = document.createElement('a'); link.download = 'qrcode.png'; link.href = canvas.toDataURL(); link.click(); }
+            const c = document.querySelector('#qrcode canvas');
+            if (c) { const a = document.createElement('a'); a.download = 'qr.png'; a.href = c.toDataURL(); a.click(); }
         }
 
         // Password
         function generatePassword() {
-            const length = parseInt(document.getElementById('pw-length').value);
+            const len = parseInt(document.getElementById('pw-length').value);
             let chars = '';
             if (document.getElementById('pw-upper').checked) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
             if (document.getElementById('pw-lower').checked) chars += 'abcdefghijklmnopqrstuvwxyz';
             if (document.getElementById('pw-number').checked) chars += '0123456789';
             if (document.getElementById('pw-symbol').checked) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
-            if (!chars) return alert('옵션을 하나 이상 선택하세요');
-            let pw = ''; const arr = new Uint32Array(length); crypto.getRandomValues(arr);
-            for (let i = 0; i < length; i++) pw += chars[arr[i] % chars.length];
+            if (!chars) return alert('옵션 선택');
+            let pw = ''; const arr = new Uint32Array(len); crypto.getRandomValues(arr);
+            for (let i = 0; i < len; i++) pw += chars[arr[i] % chars.length];
             document.getElementById('password-result').textContent = pw;
         }
 
         // UUID
         function generateUUID() {
-            const count = parseInt(document.getElementById('uuid-count').value) || 1;
-            let uuids = [];
-            for (let i = 0; i < count; i++) {
-                uuids.push('xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-                    const r = Math.random() * 16 | 0;
-                    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-                }));
-            }
-            document.getElementById('uuid-result').textContent = uuids.join('\n');
+            const n = parseInt(document.getElementById('uuid-count').value) || 1;
+            let r = [];
+            for (let i = 0; i < n; i++) r.push('xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+                const v = Math.random() * 16 | 0;
+                return (c === 'x' ? v : (v & 0x3 | 0x8)).toString(16);
+            }));
+            document.getElementById('uuid-result').textContent = r.join('\n');
         }
 
-        // Lorem Ipsum
+        // Lorem
         function generateLorem() {
-            const count = parseInt(document.getElementById('lorem-count').value);
-            const p = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.","Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.","Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.","Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit."];
-            let result = []; for (let i = 0; i < count; i++) result.push(p[i % p.length]);
-            document.getElementById('lorem-result').textContent = result.join('\n\n');
+            const n = parseInt(document.getElementById('lorem-count').value);
+            const p = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit.","Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.","Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.","Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia."];
+            let r = []; for (let i = 0; i < n; i++) r.push(p[i % p.length]);
+            document.getElementById('lorem-result').textContent = r.join('\n\n');
         }
 
-        // Text Analyzer
+        // Text
         function analyzeText() {
-            const text = document.getElementById('text-input').value;
-            document.getElementById('char-count').textContent = text.length;
-            document.getElementById('char-no-space').textContent = text.replace(/\s/g, '').length;
-            document.getElementById('word-count').textContent = text.trim() ? text.trim().split(/\s+/).length : 0;
-            document.getElementById('sentence-count').textContent = text.split(/[.!?]+/).filter(s => s.trim()).length;
-            document.getElementById('line-count').textContent = text ? text.split('\n').length : 0;
-            document.getElementById('byte-count').textContent = new Blob([text]).size;
+            const t = document.getElementById('text-input').value;
+            document.getElementById('char-count').textContent = t.length;
+            document.getElementById('char-no-space').textContent = t.replace(/\s/g, '').length;
+            document.getElementById('word-count').textContent = t.trim() ? t.trim().split(/\s+/).length : 0;
+            document.getElementById('line-count').textContent = t ? t.split('\n').length : 0;
+            document.getElementById('byte-count').textContent = new Blob([t]).size;
         }
 
-        // Case Converter
+        // Case
         function convertCase(type) {
-            const text = document.getElementById('case-input').value;
-            let result;
-            switch(type) {
-                case 'upper': result = text.toUpperCase(); break;
-                case 'lower': result = text.toLowerCase(); break;
-                case 'title': result = text.replace(/\w\S*/g, t => t.charAt(0).toUpperCase() + t.substr(1).toLowerCase()); break;
-                case 'sentence': result = text.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, c => c.toUpperCase()); break;
-                case 'toggle': result = text.split('').map(c => c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()).join(''); break;
-            }
-            document.getElementById('case-result').textContent = result;
+            const t = document.getElementById('case-input').value;
+            let r;
+            if (type === 'upper') r = t.toUpperCase();
+            else if (type === 'lower') r = t.toLowerCase();
+            else if (type === 'title') r = t.replace(/\w\S*/g, w => w.charAt(0).toUpperCase() + w.substr(1).toLowerCase());
+            else r = t.split('').map(c => c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()).join('');
+            document.getElementById('case-result').textContent = r;
         }
 
-        // Text Replace
+        // Replace
         function replaceText() {
-            const text = document.getElementById('replace-input').value;
-            const find = document.getElementById('replace-find').value;
-            const replace = document.getElementById('replace-with').value;
-            document.getElementById('replace-result').textContent = text.split(find).join(replace);
+            const t = document.getElementById('replace-input').value;
+            const f = document.getElementById('replace-find').value;
+            const w = document.getElementById('replace-with').value;
+            document.getElementById('replace-result').textContent = t.split(f).join(w);
         }
 
-        // Text Diff
+        // Diff
         function compareText() {
             const t1 = document.getElementById('diff-text1').value;
             const t2 = document.getElementById('diff-text2').value;
-            if (t1 === t2) {
-                document.getElementById('diff-result').innerHTML = '<span style="color: #00b894;">두 텍스트가 동일합니다.</span>';
-            } else {
-                const l1 = t1.split('\n'), l2 = t2.split('\n');
-                let diff = [];
-                const max = Math.max(l1.length, l2.length);
-                for (let i = 0; i < max; i++) {
-                    if (l1[i] !== l2[i]) {
-                        diff.push(`줄 ${i+1}: "${l1[i] || '(없음)'}" → "${l2[i] || '(없음)'}"`);
-                    }
-                }
-                document.getElementById('diff-result').innerHTML = diff.length ? diff.join('<br>') : '차이 없음';
+            if (t1 === t2) { document.getElementById('diff-result').innerHTML = '<span style="color:#6a6;">동일함</span>'; return; }
+            const l1 = t1.split('\n'), l2 = t2.split('\n');
+            let d = [];
+            for (let i = 0; i < Math.max(l1.length, l2.length); i++) {
+                if (l1[i] !== l2[i]) d.push(`줄${i+1}: "${l1[i]||'(없음)'}" → "${l2[i]||'(없음)'}"`);
             }
+            document.getElementById('diff-result').innerHTML = d.join('<br>');
         }
 
         // Base64
         function encodeBase64() {
             try { document.getElementById('base64-result').textContent = btoa(unescape(encodeURIComponent(document.getElementById('base64-input').value))); }
-            catch(e) { document.getElementById('base64-result').textContent = '인코딩 실패'; }
+            catch(e) { document.getElementById('base64-result').textContent = '오류'; }
         }
         function decodeBase64() {
             try { document.getElementById('base64-result').textContent = decodeURIComponent(escape(atob(document.getElementById('base64-input').value))); }
-            catch(e) { document.getElementById('base64-result').textContent = '디코딩 실패'; }
+            catch(e) { document.getElementById('base64-result').textContent = '오류'; }
         }
 
-        // URL Encoding
-        function encodeURL() {
-            document.getElementById('url-result').textContent = encodeURIComponent(document.getElementById('url-input').value);
-        }
+        // URL
+        function encodeURL() { document.getElementById('url-result').textContent = encodeURIComponent(document.getElementById('url-input').value); }
         function decodeURL() {
             try { document.getElementById('url-result').textContent = decodeURIComponent(document.getElementById('url-input').value); }
-            catch(e) { document.getElementById('url-result').textContent = '디코딩 실패'; }
+            catch(e) { document.getElementById('url-result').textContent = '오류'; }
         }
 
         // Hash
         function generateHash() {
-            const text = document.getElementById('hash-input').value;
-            if (!text) { document.getElementById('md5-result').textContent = '-'; document.getElementById('sha1-result').textContent = '-'; document.getElementById('sha256-result').textContent = '-'; return; }
-            document.getElementById('md5-result').textContent = CryptoJS.MD5(text).toString();
-            document.getElementById('sha1-result').textContent = CryptoJS.SHA1(text).toString();
-            document.getElementById('sha256-result').textContent = CryptoJS.SHA256(text).toString();
+            const t = document.getElementById('hash-input').value;
+            if (!t) { document.getElementById('md5-result').textContent = '-'; document.getElementById('sha1-result').textContent = '-'; document.getElementById('sha256-result').textContent = '-'; return; }
+            document.getElementById('md5-result').textContent = CryptoJS.MD5(t).toString();
+            document.getElementById('sha1-result').textContent = CryptoJS.SHA1(t).toString();
+            document.getElementById('sha256-result').textContent = CryptoJS.SHA256(t).toString();
         }
 
-        // HTML Escape
+        // HTML
         function escapeHTML() {
-            const text = document.getElementById('html-input').value;
-            document.getElementById('html-result').textContent = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+            document.getElementById('html-result').textContent = document.getElementById('html-input').value.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
         }
         function unescapeHTML() {
-            const text = document.getElementById('html-input').value;
-            const doc = new DOMParser().parseFromString(text, 'text/html');
-            document.getElementById('html-result').textContent = doc.documentElement.textContent;
+            const d = new DOMParser().parseFromString(document.getElementById('html-input').value, 'text/html');
+            document.getElementById('html-result').textContent = d.documentElement.textContent;
         }
 
         // JSON
         function formatJSON() {
             try { document.getElementById('json-result').textContent = JSON.stringify(JSON.parse(document.getElementById('json-input').value), null, 2); }
-            catch(e) { document.getElementById('json-result').textContent = '올바른 JSON이 아닙니다'; }
+            catch(e) { document.getElementById('json-result').textContent = '유효하지 않은 JSON'; }
         }
         function minifyJSON() {
             try { document.getElementById('json-result').textContent = JSON.stringify(JSON.parse(document.getElementById('json-input').value)); }
-            catch(e) { document.getElementById('json-result').textContent = '올바른 JSON이 아닙니다'; }
+            catch(e) { document.getElementById('json-result').textContent = '유효하지 않은 JSON'; }
         }
 
         // Timestamp
-        function updateCurrentTimestamp() {
-            document.getElementById('current-ts').textContent = Math.floor(Date.now() / 1000);
-        }
+        function updateTs() { document.getElementById('current-ts').textContent = Math.floor(Date.now() / 1000); }
+        setInterval(updateTs, 1000); updateTs();
         function unixToDate() {
             const ts = parseInt(document.getElementById('ts-unix').value);
-            if (isNaN(ts)) return;
-            const d = new Date(ts * 1000);
-            document.getElementById('ts-result').textContent = d.toLocaleString('ko-KR');
+            if (!isNaN(ts)) document.getElementById('ts-result').textContent = new Date(ts * 1000).toLocaleString('ko-KR');
         }
         function dateToUnix() {
             const d = new Date(document.getElementById('ts-date').value);
-            if (isNaN(d)) return;
-            document.getElementById('ts-result').textContent = Math.floor(d.getTime() / 1000);
+            if (!isNaN(d)) document.getElementById('ts-result').textContent = Math.floor(d.getTime() / 1000);
         }
-        setInterval(updateCurrentTimestamp, 1000);
-        updateCurrentTimestamp();
 
         // Color
         function convertColor() {
@@ -923,7 +952,7 @@
             document.getElementById('color-preview').style.background = hex;
             document.getElementById('hex-value').textContent = hex.toUpperCase();
             const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
-            document.getElementById('rgb-value').textContent = `rgb(${r}, ${g}, ${b})`;
+            document.getElementById('rgb-value').textContent = `rgb(${r},${g},${b})`;
             const max = Math.max(r,g,b)/255, min = Math.min(r,g,b)/255, l = (max+min)/2;
             let h = 0, s = 0;
             if (max !== min) {
@@ -932,119 +961,89 @@
                 else if (max === g/255) h = ((b-r)/255/d + 2)/6;
                 else h = ((r-g)/255/d + 4)/6;
             }
-            document.getElementById('hsl-value').textContent = `hsl(${Math.round(h*360)}, ${Math.round(s*100)}%, ${Math.round(l*100)}%)`;
+            document.getElementById('hsl-value').textContent = `hsl(${Math.round(h*360)},${Math.round(s*100)}%,${Math.round(l*100)}%)`;
         }
+        convertColor();
 
         // Regex
         function testRegex() {
-            const pattern = document.getElementById('regex-pattern').value;
-            const flags = document.getElementById('regex-flags').value;
-            const text = document.getElementById('regex-text').value;
-            if (!pattern || !text) { document.getElementById('regex-result').textContent = '패턴과 텍스트를 입력하세요'; return; }
+            const p = document.getElementById('regex-pattern').value;
+            const f = document.getElementById('regex-flags').value;
+            const t = document.getElementById('regex-text').value;
+            if (!p || !t) { document.getElementById('regex-result').textContent = '-'; return; }
             try {
-                const regex = new RegExp(pattern, flags);
-                const matches = text.match(regex);
-                document.getElementById('regex-result').innerHTML = matches ?
-                    `<span style="color:#00b894;">${matches.length}개 매치:</span> ${matches.map(m => `<code style="background:#222;padding:2px 6px;border-radius:4px;">${m}</code>`).join(' ')}` :
-                    '<span style="color:#e74c3c;">매치 없음</span>';
-            } catch(e) {
-                document.getElementById('regex-result').textContent = '잘못된 정규식: ' + e.message;
-            }
+                const re = new RegExp(p, f);
+                const m = t.match(re);
+                document.getElementById('regex-result').innerHTML = m ? `<span style="color:#6a6;">${m.length}개 매치:</span> ${m.map(x => `<code style="background:#1a1a1a;padding:2px 5px;border-radius:3px;">${x}</code>`).join(' ')}` : '<span style="color:#a66;">매치 없음</span>';
+            } catch(e) { document.getElementById('regex-result').textContent = '잘못된 정규식'; }
         }
 
         // Percent
         function calcPercent() {
-            const p1a = parseFloat(document.getElementById('p1-a').value);
-            const p1b = parseFloat(document.getElementById('p1-b').value);
-            if (!isNaN(p1a) && !isNaN(p1b)) document.getElementById('p1-result').textContent = (p1a * p1b / 100).toFixed(2);
-
-            const p2a = parseFloat(document.getElementById('p2-a').value);
-            const p2b = parseFloat(document.getElementById('p2-b').value);
-            if (!isNaN(p2a) && !isNaN(p2b) && p2b !== 0) document.getElementById('p2-result').textContent = (p2a / p2b * 100).toFixed(2);
-
-            const p3a = parseFloat(document.getElementById('p3-a').value);
-            const p3b = parseFloat(document.getElementById('p3-b').value);
-            if (!isNaN(p3a) && !isNaN(p3b) && p3a !== 0) {
-                const change = ((p3b - p3a) / p3a * 100).toFixed(2);
-                document.getElementById('p3-result').textContent = (change > 0 ? '+' : '') + change;
-            }
+            const a1 = parseFloat(document.getElementById('p1-a').value), b1 = parseFloat(document.getElementById('p1-b').value);
+            if (!isNaN(a1) && !isNaN(b1)) document.getElementById('p1-result').textContent = (a1 * b1 / 100).toFixed(2);
+            const a2 = parseFloat(document.getElementById('p2-a').value), b2 = parseFloat(document.getElementById('p2-b').value);
+            if (!isNaN(a2) && !isNaN(b2) && b2 !== 0) document.getElementById('p2-result').textContent = (a2 / b2 * 100).toFixed(2);
         }
 
-        // Unit Converter
+        // Unit
         const units = {
-            length: { mm: 1, cm: 10, m: 1000, km: 1000000, in: 25.4, ft: 304.8, yd: 914.4, mi: 1609344 },
-            weight: { mg: 1, g: 1000, kg: 1000000, oz: 28349.5, lb: 453592 },
+            length: { mm: 1, cm: 10, m: 1000, km: 1e6, in: 25.4, ft: 304.8, mi: 1609344 },
+            weight: { mg: 1, g: 1000, kg: 1e6, oz: 28349.5, lb: 453592 },
             temp: { c: 'c', f: 'f', k: 'k' },
             data: { B: 1, KB: 1024, MB: 1048576, GB: 1073741824, TB: 1099511627776 }
         };
         function updateUnitOptions() {
-            const type = document.getElementById('unit-type').value;
-            const opts = Object.keys(units[type]).map(u => `<option value="${u}">${u}</option>`).join('');
-            document.getElementById('unit-from').innerHTML = opts;
-            document.getElementById('unit-to').innerHTML = opts;
+            const t = document.getElementById('unit-type').value;
+            const o = Object.keys(units[t]).map(u => `<option value="${u}">${u}</option>`).join('');
+            document.getElementById('unit-from').innerHTML = o;
+            document.getElementById('unit-to').innerHTML = o;
             document.getElementById('unit-to').selectedIndex = 1;
         }
         function convertUnit() {
-            const type = document.getElementById('unit-type').value;
-            const val = parseFloat(document.getElementById('unit-value').value);
-            const from = document.getElementById('unit-from').value;
-            const to = document.getElementById('unit-to').value;
-            if (isNaN(val)) { document.getElementById('unit-result').textContent = '?'; return; }
-            let result;
-            if (type === 'temp') {
-                let celsius;
-                if (from === 'c') celsius = val;
-                else if (from === 'f') celsius = (val - 32) * 5/9;
-                else celsius = val - 273.15;
-                if (to === 'c') result = celsius;
-                else if (to === 'f') result = celsius * 9/5 + 32;
-                else result = celsius + 273.15;
-            } else {
-                result = val * units[type][from] / units[type][to];
-            }
-            document.getElementById('unit-result').textContent = result.toFixed(4).replace(/\.?0+$/, '');
+            const t = document.getElementById('unit-type').value;
+            const v = parseFloat(document.getElementById('unit-value').value);
+            const from = document.getElementById('unit-from').value, to = document.getElementById('unit-to').value;
+            if (isNaN(v)) { document.getElementById('unit-result').textContent = '?'; return; }
+            let r;
+            if (t === 'temp') {
+                let c; if (from === 'c') c = v; else if (from === 'f') c = (v-32)*5/9; else c = v-273.15;
+                if (to === 'c') r = c; else if (to === 'f') r = c*9/5+32; else r = c+273.15;
+            } else { r = v * units[t][from] / units[t][to]; }
+            document.getElementById('unit-result').textContent = r.toFixed(4).replace(/\.?0+$/, '');
         }
         updateUnitOptions();
 
         // Number Base
         function convertBase() {
-            const input = document.getElementById('num-input').value.trim();
-            const base = parseInt(document.getElementById('num-base').value);
-            if (!input) { ['bin','oct','dec','hex'].forEach(id => document.getElementById(id+'-result').textContent = '-'); return; }
+            const i = document.getElementById('num-input').value.trim();
+            const b = parseInt(document.getElementById('num-base').value);
+            if (!i) { ['bin','oct','dec','hex'].forEach(x => document.getElementById(x+'-result').textContent = '-'); return; }
             try {
-                const num = parseInt(input, base);
-                if (isNaN(num)) throw new Error();
-                document.getElementById('bin-result').textContent = num.toString(2);
-                document.getElementById('oct-result').textContent = num.toString(8);
-                document.getElementById('dec-result').textContent = num.toString(10);
-                document.getElementById('hex-result').textContent = num.toString(16).toUpperCase();
-            } catch(e) {
-                ['bin','oct','dec','hex'].forEach(id => document.getElementById(id+'-result').textContent = '오류');
-            }
+                const n = parseInt(i, b);
+                if (isNaN(n)) throw 0;
+                document.getElementById('bin-result').textContent = n.toString(2);
+                document.getElementById('oct-result').textContent = n.toString(8);
+                document.getElementById('dec-result').textContent = n.toString(10);
+                document.getElementById('hex-result').textContent = n.toString(16).toUpperCase();
+            } catch(e) { ['bin','oct','dec','hex'].forEach(x => document.getElementById(x+'-result').textContent = '오류'); }
         }
 
-        // Date Calculator
+        // Date
         document.getElementById('date-target').addEventListener('change', function() {
-            const target = new Date(this.value);
-            const today = new Date();
-            today.setHours(0,0,0,0);
-            const diff = Math.ceil((target - today) / (1000 * 60 * 60 * 24));
-            if (diff > 0) document.getElementById('dday-result').textContent = `D-${diff}`;
-            else if (diff < 0) document.getElementById('dday-result').textContent = `D+${Math.abs(diff)}`;
-            else document.getElementById('dday-result').textContent = 'D-Day!';
+            const t = new Date(this.value), today = new Date(); today.setHours(0,0,0,0);
+            const d = Math.ceil((t - today) / 864e5);
+            document.getElementById('dday-result').textContent = d > 0 ? `D-${d}` : d < 0 ? `D+${-d}` : 'D-Day';
         });
         function calcDateDiff() {
-            const from = new Date(document.getElementById('date-from').value);
-            const to = new Date(document.getElementById('date-to').value);
-            const diff = Math.abs(Math.ceil((to - from) / (1000 * 60 * 60 * 24)));
-            document.getElementById('date-diff-result').textContent = `${diff}일 (${Math.floor(diff/7)}주 ${diff%7}일)`;
+            const f = new Date(document.getElementById('date-from').value);
+            const t = new Date(document.getElementById('date-to').value);
+            const d = Math.abs(Math.ceil((t - f) / 864e5));
+            document.getElementById('date-diff-result').textContent = `${d}일 (${Math.floor(d/7)}주 ${d%7}일)`;
         }
 
         // Copy
         function copyText(id) { navigator.clipboard.writeText(document.getElementById(id).textContent).then(() => alert('복사됨')); }
-
-        // Init
-        convertColor();
     </script>
 </body>
 </html>
