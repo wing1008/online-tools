@@ -161,6 +161,11 @@
                 <div class="tool-card" onclick="showTool('duplicate')"><h3>중복 제거</h3><p>중복 줄 삭제</p></div>
                 <div class="tool-card" onclick="showTool('sort')"><h3>줄 정렬</h3><p>가나다순, 역순</p></div>
                 <div class="tool-card" onclick="showTool('diff')"><h3>텍스트 비교</h3><p>차이점 찾기</p></div>
+                <div class="tool-card" onclick="showTool('ocr')"><h3>OCR</h3><p>이미지→텍스트</p></div>
+                <div class="tool-card" onclick="showTool('vertical')"><h3>세로쓰기</h3><p>글자 변환</p></div>
+                <div class="tool-card" onclick="showTool('special')"><h3>특수문자</h3><p>모음/복사</p></div>
+                <div class="tool-card" onclick="showTool('unicode')"><h3>유니코드</h3><p>변환기</p></div>
+                <div class="tool-card" onclick="showTool('lorem-kr')"><h3>한글 Lorem</h3><p>더미 텍스트</p></div>
             </div>
 
             <div class="section-title">이미지</div>
@@ -199,6 +204,14 @@
                 <div class="tool-card" onclick="showTool('ip-info')"><h3>내 IP</h3><p>IP 주소 조회</p></div>
                 <div class="tool-card" onclick="showTool('useragent')"><h3>User-Agent</h3><p>브라우저 정보</p></div>
                 <div class="tool-card" onclick="showTool('slug')"><h3>Slug 생성</h3><p>URL 친화적</p></div>
+                <div class="tool-card" onclick="showTool('sql')"><h3>SQL 포맷터</h3><p>정리/압축</p></div>
+                <div class="tool-card" onclick="showTool('env')"><h3>.env 파서</h3><p>환경변수 파싱</p></div>
+                <div class="tool-card" onclick="showTool('md-html')"><h3>MD→HTML</h3><p>마크다운 변환</p></div>
+                <div class="tool-card" onclick="showTool('html-md')"><h3>HTML→MD</h3><p>마크다운 변환</p></div>
+                <div class="tool-card" onclick="showTool('flexbox')"><h3>Flexbox</h3><p>CSS 생성기</p></div>
+                <div class="tool-card" onclick="showTool('grid')"><h3>Grid</h3><p>CSS 생성기</p></div>
+                <div class="tool-card" onclick="showTool('regex-gen')"><h3>정규식 생성</h3><p>패턴 선택</p></div>
+                <div class="tool-card" onclick="showTool('barcode')"><h3>바코드</h3><p>생성기</p></div>
             </div>
 
             <div class="section-title">계산</div>
@@ -213,6 +226,12 @@
                 <div class="tool-card" onclick="showTool('discount')"><h3>할인율</h3><p>세일 가격</p></div>
                 <div class="tool-card" onclick="showTool('tip')"><h3>팁 계산</h3><p>더치페이</p></div>
                 <div class="tool-card" onclick="showTool('vat')"><h3>부가세</h3><p>세금 계산</p></div>
+                <div class="tool-card" onclick="showTool('currency')"><h3>환율</h3><p>실시간 변환</p></div>
+                <div class="tool-card" onclick="showTool('salary')"><h3>연봉↔월급</h3><p>실수령액</p></div>
+                <div class="tool-card" onclick="showTool('severance')"><h3>퇴직금</h3><p>계산기</p></div>
+                <div class="tool-card" onclick="showTool('savings')"><h3>적금 이자</h3><p>만기금액</p></div>
+                <div class="tool-card" onclick="showTool('stock')"><h3>주식 수익률</h3><p>계산기</p></div>
+                <div class="tool-card" onclick="showTool('calorie')"><h3>칼로리</h3><p>음식 계산</p></div>
             </div>
 
             <div class="section-title">유틸리티</div>
@@ -226,6 +245,12 @@
                 <div class="tool-card" onclick="showTool('palette')"><h3>색상 팔레트</h3><p>컬러 조합</p></div>
                 <div class="tool-card" onclick="showTool('emoji')"><h3>이모지</h3><p>검색/복사</p></div>
                 <div class="tool-card" onclick="showTool('engkor')"><h3>한↔영 변환</h3><p>오타 교정</p></div>
+                <div class="tool-card" onclick="showTool('screen')"><h3>화면 정보</h3><p>해상도/크기</p></div>
+                <div class="tool-card" onclick="showTool('keyboard')"><h3>키보드 테스트</h3><p>키 확인</p></div>
+                <div class="tool-card" onclick="showTool('cps')"><h3>CPS 테스트</h3><p>클릭 속도</p></div>
+                <div class="tool-card" onclick="showTool('reaction')"><h3>반응속도</h3><p>테스트</p></div>
+                <div class="tool-card" onclick="showTool('typing')"><h3>타이핑</h3><p>속도 테스트</p></div>
+                <div class="tool-card" onclick="showTool('randcolor')"><h3>랜덤 색상</h3><p>생성기</p></div>
             </div>
         </div>
 
@@ -1099,6 +1124,379 @@
             </div>
             <div class="result-box"><div id="engkor-result">-</div></div>
             <button class="copy-btn" onclick="copyText('engkor-result')">복사</button>
+        </div>
+
+        <!-- OCR -->
+        <div class="tool-section" id="tool-ocr">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>OCR (이미지→텍스트)</h2>
+            <div class="info-box">이미지에서 텍스트를 추출합니다. 처리 시간이 걸릴 수 있습니다.</div>
+            <input type="file" id="ocr-file" accept="image/*" onchange="loadOcrImage(this)">
+            <img id="ocr-preview" class="img-preview" style="display:none;">
+            <div id="ocr-status" style="margin:10px 0;color:#666;"></div>
+            <button class="btn btn-primary" onclick="runOcr()">텍스트 추출</button>
+            <div class="result-box"><pre id="ocr-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
+            <button class="copy-btn" onclick="copyText('ocr-result')">복사</button>
+        </div>
+
+        <!-- Vertical Text -->
+        <div class="tool-section" id="tool-vertical">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>세로쓰기 변환</h2>
+            <textarea id="vertical-input" placeholder="텍스트 입력" oninput="convertVertical()"></textarea>
+            <div class="result-box"><pre id="vertical-result" style="white-space:pre-wrap;margin:0;writing-mode:vertical-rl;">-</pre></div>
+            <button class="copy-btn" onclick="copyText('vertical-result')">복사</button>
+        </div>
+
+        <!-- Special Characters -->
+        <div class="tool-section" id="tool-special">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>특수문자 모음</h2>
+            <div id="special-chars" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+            <div id="special-copied" style="text-align:center;color:#5a5;margin-top:10px;display:none;">복사됨!</div>
+        </div>
+
+        <!-- Unicode -->
+        <div class="tool-section" id="tool-unicode">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>유니코드 변환기</h2>
+            <textarea id="unicode-input" placeholder="텍스트 또는 유니코드" oninput="convertUnicode()"></textarea>
+            <div class="result-box">
+                <div style="margin-bottom:10px;"><span style="color:#555;">텍스트:</span> <span id="unicode-text">-</span></div>
+                <div><span style="color:#555;">유니코드:</span> <span id="unicode-code">-</span></div>
+            </div>
+            <button class="copy-btn" onclick="copyText('unicode-code')">유니코드 복사</button>
+        </div>
+
+        <!-- Korean Lorem -->
+        <div class="tool-section" id="tool-lorem-kr">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>한글 Lorem Ipsum</h2>
+            <input type="number" id="lorem-kr-count" value="3" min="1" max="20">
+            <button class="btn btn-primary" onclick="generateLoremKr()">생성</button>
+            <div class="result-box"><div id="lorem-kr-result">-</div></div>
+            <button class="copy-btn" onclick="copyText('lorem-kr-result')">복사</button>
+        </div>
+
+        <!-- SQL Formatter -->
+        <div class="tool-section" id="tool-sql">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>SQL 포맷터</h2>
+            <textarea id="sql-input" placeholder="SELECT * FROM users WHERE id = 1"></textarea>
+            <button class="btn" onclick="formatSql()">정리</button>
+            <button class="btn" onclick="minifySql()">압축</button>
+            <div class="result-box"><pre id="sql-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
+            <button class="copy-btn" onclick="copyText('sql-result')">복사</button>
+        </div>
+
+        <!-- ENV Parser -->
+        <div class="tool-section" id="tool-env">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>.env 파서</h2>
+            <textarea id="env-input" placeholder="KEY=value&#10;DATABASE_URL=postgres://..."></textarea>
+            <button class="btn" onclick="parseEnv()">JSON으로</button>
+            <button class="btn" onclick="envToText()">텍스트로</button>
+            <div class="result-box"><pre id="env-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
+            <button class="copy-btn" onclick="copyText('env-result')">복사</button>
+        </div>
+
+        <!-- MD to HTML -->
+        <div class="tool-section" id="tool-md-html">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>Markdown → HTML</h2>
+            <textarea id="mdhtml-input" placeholder="# Title&#10;**bold** *italic*"></textarea>
+            <button class="btn btn-primary" onclick="mdToHtml()">변환</button>
+            <div class="result-box"><pre id="mdhtml-result" style="white-space:pre-wrap;margin:0;font-size:0.75rem;">-</pre></div>
+            <button class="copy-btn" onclick="copyText('mdhtml-result')">복사</button>
+        </div>
+
+        <!-- HTML to MD -->
+        <div class="tool-section" id="tool-html-md">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>HTML → Markdown</h2>
+            <textarea id="htmlmd-input" placeholder="<h1>Title</h1><p><strong>bold</strong></p>"></textarea>
+            <button class="btn btn-primary" onclick="htmlToMd()">변환</button>
+            <div class="result-box"><pre id="htmlmd-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
+            <button class="copy-btn" onclick="copyText('htmlmd-result')">복사</button>
+        </div>
+
+        <!-- Flexbox Generator -->
+        <div class="tool-section" id="tool-flexbox">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>Flexbox 생성기</h2>
+            <div class="row">
+                <select id="flex-direction" onchange="updateFlexbox()">
+                    <option value="row">row</option>
+                    <option value="column">column</option>
+                    <option value="row-reverse">row-reverse</option>
+                    <option value="column-reverse">column-reverse</option>
+                </select>
+                <select id="flex-justify" onchange="updateFlexbox()">
+                    <option value="flex-start">flex-start</option>
+                    <option value="center">center</option>
+                    <option value="flex-end">flex-end</option>
+                    <option value="space-between">space-between</option>
+                    <option value="space-around">space-around</option>
+                    <option value="space-evenly">space-evenly</option>
+                </select>
+            </div>
+            <div class="row">
+                <select id="flex-align" onchange="updateFlexbox()">
+                    <option value="stretch">stretch</option>
+                    <option value="flex-start">flex-start</option>
+                    <option value="center">center</option>
+                    <option value="flex-end">flex-end</option>
+                </select>
+                <select id="flex-wrap" onchange="updateFlexbox()">
+                    <option value="nowrap">nowrap</option>
+                    <option value="wrap">wrap</option>
+                    <option value="wrap-reverse">wrap-reverse</option>
+                </select>
+            </div>
+            <input type="number" id="flex-gap" value="10" placeholder="gap (px)" onchange="updateFlexbox()">
+            <div id="flex-preview" style="display:flex;background:#1a1a1a;padding:20px;border-radius:8px;min-height:100px;margin:15px 0;"><div style="background:#333;padding:10px 20px;border-radius:4px;">1</div><div style="background:#333;padding:10px 20px;border-radius:4px;">2</div><div style="background:#333;padding:10px 20px;border-radius:4px;">3</div></div>
+            <div class="result-box"><code id="flex-result">-</code></div>
+            <button class="copy-btn" onclick="copyText('flex-result')">복사</button>
+        </div>
+
+        <!-- Grid Generator -->
+        <div class="tool-section" id="tool-grid">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>Grid 생성기</h2>
+            <div class="row">
+                <input type="number" id="grid-cols" value="3" min="1" max="12" placeholder="columns" onchange="updateGrid()">
+                <input type="number" id="grid-rows" value="2" min="1" max="12" placeholder="rows" onchange="updateGrid()">
+                <input type="number" id="grid-gap" value="10" placeholder="gap (px)" onchange="updateGrid()">
+            </div>
+            <div id="grid-preview" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;background:#1a1a1a;padding:20px;border-radius:8px;margin:15px 0;"></div>
+            <div class="result-box"><code id="grid-result">-</code></div>
+            <button class="copy-btn" onclick="copyText('grid-result')">복사</button>
+        </div>
+
+        <!-- Regex Generator -->
+        <div class="tool-section" id="tool-regex-gen">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>정규식 생성기</h2>
+            <div class="info-box">자주 쓰는 패턴을 선택하세요</div>
+            <select id="regex-pattern-select" onchange="selectRegexPattern()">
+                <option value="">-- 선택 --</option>
+                <option value="email">이메일</option>
+                <option value="phone">전화번호 (한국)</option>
+                <option value="url">URL</option>
+                <option value="ip">IP 주소</option>
+                <option value="date">날짜 (YYYY-MM-DD)</option>
+                <option value="time">시간 (HH:MM)</option>
+                <option value="korean">한글만</option>
+                <option value="number">숫자만</option>
+                <option value="alphanumeric">영문+숫자</option>
+                <option value="password">비밀번호 (8자+, 대소문자+숫자+특수)</option>
+            </select>
+            <div class="result-box"><code id="regex-gen-result">-</code></div>
+            <div id="regex-gen-desc" style="color:#666;font-size:0.8rem;margin-top:10px;"></div>
+            <button class="copy-btn" onclick="copyText('regex-gen-result')">복사</button>
+        </div>
+
+        <!-- Barcode -->
+        <div class="tool-section" id="tool-barcode">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>바코드 생성기</h2>
+            <input type="text" id="barcode-input" placeholder="텍스트 또는 숫자">
+            <select id="barcode-type">
+                <option value="CODE128">CODE128</option>
+                <option value="EAN13">EAN-13</option>
+                <option value="UPC">UPC</option>
+                <option value="CODE39">CODE39</option>
+            </select>
+            <button class="btn btn-primary" onclick="generateBarcode()">생성</button>
+            <div style="text-align:center;margin:15px 0;"><svg id="barcode-svg"></svg></div>
+            <button class="copy-btn" onclick="downloadBarcode()">다운로드</button>
+        </div>
+
+        <!-- Currency -->
+        <div class="tool-section" id="tool-currency">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>환율 계산기</h2>
+            <div class="info-box">실시간 환율 정보를 사용합니다</div>
+            <div class="row">
+                <input type="number" id="currency-amount" value="1000" placeholder="금액">
+                <select id="currency-from">
+                    <option value="KRW">KRW (원)</option>
+                    <option value="USD">USD ($)</option>
+                    <option value="EUR">EUR (€)</option>
+                    <option value="JPY">JPY (¥)</option>
+                    <option value="CNY">CNY (¥)</option>
+                    <option value="GBP">GBP (£)</option>
+                </select>
+            </div>
+            <div class="row">
+                <select id="currency-to">
+                    <option value="USD">USD ($)</option>
+                    <option value="KRW">KRW (원)</option>
+                    <option value="EUR">EUR (€)</option>
+                    <option value="JPY">JPY (¥)</option>
+                    <option value="CNY">CNY (¥)</option>
+                    <option value="GBP">GBP (£)</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" onclick="convertCurrency()">변환</button>
+            <div class="password-display" id="currency-result">-</div>
+        </div>
+
+        <!-- Salary -->
+        <div class="tool-section" id="tool-salary">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>연봉 ↔ 월급 계산기</h2>
+            <input type="number" id="salary-amount" placeholder="연봉 (원)">
+            <div class="options">
+                <label><input type="checkbox" id="salary-tax" checked> 세금/4대보험 공제</label>
+            </div>
+            <button class="btn btn-primary" onclick="calcSalary()">계산</button>
+            <div class="stats-row" style="margin-top:15px;">
+                <div class="stat-box"><div class="number" id="salary-yearly">-</div><div class="label">연봉</div></div>
+                <div class="stat-box"><div class="number" id="salary-monthly">-</div><div class="label">월급</div></div>
+                <div class="stat-box"><div class="number" id="salary-net">-</div><div class="label">실수령(월)</div></div>
+            </div>
+        </div>
+
+        <!-- Severance -->
+        <div class="tool-section" id="tool-severance">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>퇴직금 계산기</h2>
+            <div class="row">
+                <div><label style="color:#666;font-size:0.8rem;">입사일</label><input type="date" id="sev-start"></div>
+                <div><label style="color:#666;font-size:0.8rem;">퇴사일</label><input type="date" id="sev-end"></div>
+            </div>
+            <div><label style="color:#666;font-size:0.8rem;">월 평균 급여 (원)</label><input type="number" id="sev-salary" placeholder="3000000"></div>
+            <button class="btn btn-primary" onclick="calcSeverance()">계산</button>
+            <div class="stats-row" style="margin-top:15px;">
+                <div class="stat-box"><div class="number" id="sev-years">-</div><div class="label">근속 기간</div></div>
+                <div class="stat-box"><div class="number" id="sev-amount">-</div><div class="label">퇴직금</div></div>
+            </div>
+        </div>
+
+        <!-- Savings -->
+        <div class="tool-section" id="tool-savings">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>적금 이자 계산기</h2>
+            <div class="row">
+                <div><label style="color:#666;font-size:0.8rem;">월 납입액 (원)</label><input type="number" id="sav-amount" placeholder="500000"></div>
+                <div><label style="color:#666;font-size:0.8rem;">연이율 (%)</label><input type="number" id="sav-rate" placeholder="5" step="0.1"></div>
+            </div>
+            <div><label style="color:#666;font-size:0.8rem;">기간 (개월)</label><input type="number" id="sav-months" placeholder="12"></div>
+            <div class="options">
+                <label><input type="radio" name="sav-type" value="simple"> 단리</label>
+                <label><input type="radio" name="sav-type" value="compound" checked> 복리</label>
+            </div>
+            <button class="btn btn-primary" onclick="calcSavings()">계산</button>
+            <div class="stats-row" style="margin-top:15px;">
+                <div class="stat-box"><div class="number" id="sav-principal">-</div><div class="label">원금 합계</div></div>
+                <div class="stat-box"><div class="number" id="sav-interest">-</div><div class="label">이자</div></div>
+                <div class="stat-box"><div class="number" id="sav-total">-</div><div class="label">만기금액</div></div>
+            </div>
+        </div>
+
+        <!-- Stock -->
+        <div class="tool-section" id="tool-stock">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>주식 수익률 계산기</h2>
+            <div class="row">
+                <div><label style="color:#666;font-size:0.8rem;">매수가</label><input type="number" id="stock-buy" placeholder="50000"></div>
+                <div><label style="color:#666;font-size:0.8rem;">매도가</label><input type="number" id="stock-sell" placeholder="60000"></div>
+            </div>
+            <div><label style="color:#666;font-size:0.8rem;">수량</label><input type="number" id="stock-qty" value="1"></div>
+            <button class="btn btn-primary" onclick="calcStock()">계산</button>
+            <div class="stats-row" style="margin-top:15px;">
+                <div class="stat-box"><div class="number" id="stock-profit">-</div><div class="label">수익금</div></div>
+                <div class="stat-box"><div class="number" id="stock-rate">-</div><div class="label">수익률</div></div>
+            </div>
+        </div>
+
+        <!-- Calorie -->
+        <div class="tool-section" id="tool-calorie">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>칼로리 계산기</h2>
+            <div id="calorie-list"></div>
+            <div class="row" style="margin-top:10px;">
+                <input type="text" id="cal-food" placeholder="음식명">
+                <input type="number" id="cal-kcal" placeholder="칼로리(kcal)">
+                <button class="btn" onclick="addCalorie()">추가</button>
+            </div>
+            <div class="info-box" style="margin-top:10px;">자주 쓰는 음식: 밥(300), 라면(500), 치킨(700), 피자(270/조각), 콜라(140)</div>
+            <div class="stats-row" style="margin-top:15px;">
+                <div class="stat-box"><div class="number" id="cal-total">0</div><div class="label">총 칼로리</div></div>
+            </div>
+            <button class="btn btn-danger" onclick="clearCalories()">초기화</button>
+        </div>
+
+        <!-- Screen Info -->
+        <div class="tool-section" id="tool-screen">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>화면 정보</h2>
+            <div class="stats-row" id="screen-info"></div>
+        </div>
+
+        <!-- Keyboard Test -->
+        <div class="tool-section" id="tool-keyboard">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>키보드 테스트</h2>
+            <div class="info-box">아무 키나 눌러보세요</div>
+            <div class="password-display" id="key-display">-</div>
+            <div class="stats-row">
+                <div class="stat-box"><div class="number" id="key-code">-</div><div class="label">Key Code</div></div>
+                <div class="stat-box"><div class="number" id="key-key">-</div><div class="label">Key</div></div>
+                <div class="stat-box"><div class="number" id="key-which">-</div><div class="label">Which</div></div>
+            </div>
+        </div>
+
+        <!-- CPS Test -->
+        <div class="tool-section" id="tool-cps">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>CPS 테스트 (클릭 속도)</h2>
+            <div id="cps-area" style="background:#1a1a1a;border-radius:10px;padding:50px;text-align:center;cursor:pointer;user-select:none;" onclick="cpsClick()">
+                <div style="font-size:2rem;color:#ddd;" id="cps-count">0</div>
+                <div style="color:#666;margin-top:10px;" id="cps-status">클릭하여 시작</div>
+            </div>
+            <div class="stats-row" style="margin-top:15px;">
+                <div class="stat-box"><div class="number" id="cps-result">-</div><div class="label">CPS</div></div>
+                <div class="stat-box"><div class="number" id="cps-time">10</div><div class="label">남은 시간</div></div>
+            </div>
+            <button class="btn" onclick="resetCps()">리셋</button>
+        </div>
+
+        <!-- Reaction Test -->
+        <div class="tool-section" id="tool-reaction">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>반응속도 테스트</h2>
+            <div id="reaction-area" style="background:#c55;border-radius:10px;padding:80px;text-align:center;cursor:pointer;user-select:none;" onclick="reactionClick()">
+                <div style="font-size:1.2rem;color:#fff;" id="reaction-text">클릭하여 시작</div>
+            </div>
+            <div class="stats-row" style="margin-top:15px;">
+                <div class="stat-box"><div class="number" id="reaction-result">-</div><div class="label">반응속도 (ms)</div></div>
+            </div>
+        </div>
+
+        <!-- Typing Test -->
+        <div class="tool-section" id="tool-typing">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>타이핑 속도 테스트</h2>
+            <div id="typing-text" style="background:#1a1a1a;padding:15px;border-radius:8px;font-size:1.1rem;color:#888;line-height:1.8;margin-bottom:15px;"></div>
+            <textarea id="typing-input" placeholder="위 문장을 타이핑하세요" oninput="checkTyping()" style="min-height:80px;"></textarea>
+            <div class="stats-row" style="margin-top:15px;">
+                <div class="stat-box"><div class="number" id="typing-wpm">-</div><div class="label">WPM</div></div>
+                <div class="stat-box"><div class="number" id="typing-accuracy">-</div><div class="label">정확도</div></div>
+                <div class="stat-box"><div class="number" id="typing-time">-</div><div class="label">시간 (초)</div></div>
+            </div>
+            <button class="btn" onclick="resetTyping()">다시 시작</button>
+        </div>
+
+        <!-- Random Color -->
+        <div class="tool-section" id="tool-randcolor">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>랜덤 색상 생성기</h2>
+            <div id="randcolor-preview" style="width:100%;height:150px;border-radius:10px;background:#667eea;margin-bottom:15px;"></div>
+            <div class="password-display" id="randcolor-hex">#667EEA</div>
+            <button class="btn btn-primary" onclick="generateRandomColor()">새 색상</button>
+            <button class="copy-btn" onclick="copyText('randcolor-hex')">복사</button>
         </div>
 
         <!-- About -->
@@ -2044,6 +2442,380 @@
             }
             return result;
         }
+
+        // OCR
+        let ocrImg = null;
+        function loadOcrImage(input) {
+            const file = input.files[0]; if(!file) return;
+            const reader = new FileReader();
+            reader.onload = e => { ocrImg = e.target.result; document.getElementById('ocr-preview').src = e.target.result; document.getElementById('ocr-preview').style.display = 'block'; };
+            reader.readAsDataURL(file);
+        }
+        async function runOcr() {
+            if(!ocrImg) return;
+            const status = document.getElementById('ocr-status');
+            status.textContent = '처리 중... (Tesseract.js 로딩)';
+            try {
+                const Tesseract = await import('https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.esm.min.js');
+                const { data: { text } } = await Tesseract.recognize(ocrImg, 'kor+eng', { logger: m => { if(m.status === 'recognizing text') status.textContent = `처리 중... ${Math.round(m.progress*100)}%`; } });
+                document.getElementById('ocr-result').textContent = text || '텍스트를 찾을 수 없습니다';
+                status.textContent = '완료!';
+            } catch(e) { status.textContent = '오류: ' + e.message; }
+        }
+
+        // Vertical Text
+        function convertVertical() { document.getElementById('vertical-result').textContent = document.getElementById('vertical-input').value || '-'; }
+
+        // Special Characters
+        const specialChars = {arrows:['←','→','↑','↓','↔','↕','⇐','⇒','⇑','⇓'],math:['±','×','÷','≠','≤','≥','≈','∞','∑','√','π','∫'],currency:['₩','$','€','£','¥','₿','₽','₹'],symbols:['©','®','™','§','¶','†','‡','•','※','★','☆','♠','♣','♥','♦'],brackets:['「」','『』','【】','〈〉','《》','〔〕'],lines:['─','│','┌','┐','└','┘','├','┤','┬','┴','┼'],circles:['①','②','③','④','⑤','⑥','⑦','⑧','⑨','⑩'],emoji:['✓','✗','✔','✘','⚠','⚡','☀','☁','☂','☃']};
+        function initSpecialChars() {
+            const container = document.getElementById('special-chars');
+            let html = '';
+            for(const [cat, chars] of Object.entries(specialChars)) {
+                html += `<div style="width:100%;color:#555;font-size:0.75rem;margin:10px 0 5px;">${cat}</div>`;
+                chars.forEach(c => { html += `<span style="padding:8px 12px;background:#1a1a1a;border-radius:5px;cursor:pointer;font-size:1.1rem;" onclick="copySpecial('${c}')">${c}</span>`; });
+            }
+            container.innerHTML = html;
+        }
+        function copySpecial(c) { navigator.clipboard.writeText(c); document.getElementById('special-copied').style.display = 'block'; setTimeout(() => document.getElementById('special-copied').style.display = 'none', 1500); }
+
+        // Unicode
+        function convertUnicode() {
+            const input = document.getElementById('unicode-input').value;
+            if(input.startsWith('U+') || input.startsWith('\\u')) {
+                const codes = input.match(/(?:U\+|\\u)([0-9A-Fa-f]+)/g) || [];
+                const text = codes.map(c => String.fromCodePoint(parseInt(c.replace(/U\+|\\u/,''),16))).join('');
+                document.getElementById('unicode-text').textContent = text || '-';
+                document.getElementById('unicode-code').textContent = input;
+            } else {
+                const codes = [...input].map(c => 'U+' + c.codePointAt(0).toString(16).toUpperCase().padStart(4,'0')).join(' ');
+                document.getElementById('unicode-text').textContent = input || '-';
+                document.getElementById('unicode-code').textContent = codes || '-';
+            }
+        }
+
+        // Korean Lorem
+        const loremKrSentences = ['다람쥐 헌 쳇바퀴에 타고파','키스의 고유조건은 입술끼리 , 닿는다','정 , 참 주무세요?','한글은 세종대왕이 만든 문자입니다','빈 수레가 요란하다','고래 싸움에 새우 등 터진다','낮말은 새가 듣고 밤말은 쥐가 듣는다','호랑이도 제 말하면 온다','개천에서 용 난다','백지장도 맞들면 낫다','소 잃고 외양간 고친다','콩 심은 데 콩 나고 팥 심은 데 팥 난다'];
+        function generateLoremKr() {
+            const count = +document.getElementById('lorem-kr-count').value || 3;
+            let result = [];
+            for(let i = 0; i < count; i++) result.push(loremKrSentences[Math.floor(Math.random()*loremKrSentences.length)]);
+            document.getElementById('lorem-kr-result').textContent = result.join('. ') + '.';
+        }
+
+        // SQL Formatter
+        function formatSql() {
+            let sql = document.getElementById('sql-input').value;
+            const keywords = ['SELECT','FROM','WHERE','AND','OR','JOIN','LEFT','RIGHT','INNER','OUTER','ON','GROUP BY','ORDER BY','HAVING','LIMIT','INSERT','INTO','VALUES','UPDATE','SET','DELETE','CREATE','TABLE','DROP','ALTER','INDEX'];
+            keywords.forEach(k => { sql = sql.replace(new RegExp('\\b'+k+'\\b','gi'), '\n'+k); });
+            document.getElementById('sql-result').textContent = sql.trim();
+        }
+        function minifySql() { document.getElementById('sql-result').textContent = document.getElementById('sql-input').value.replace(/\s+/g,' ').trim(); }
+
+        // ENV Parser
+        function parseEnv() {
+            const input = document.getElementById('env-input').value;
+            const obj = {};
+            input.split('\n').forEach(line => { const [key, ...val] = line.split('='); if(key && key.trim()) obj[key.trim()] = val.join('=').trim(); });
+            document.getElementById('env-result').textContent = JSON.stringify(obj, null, 2);
+        }
+        function envToText() {
+            try {
+                const obj = JSON.parse(document.getElementById('env-input').value);
+                document.getElementById('env-result').textContent = Object.entries(obj).map(([k,v]) => `${k}=${v}`).join('\n');
+            } catch(e) { document.getElementById('env-result').textContent = 'Invalid JSON'; }
+        }
+
+        // MD to HTML
+        function mdToHtml() {
+            let md = document.getElementById('mdhtml-input').value;
+            md = md.replace(/^### (.*$)/gim, '<h3>$1</h3>').replace(/^## (.*$)/gim, '<h2>$1</h2>').replace(/^# (.*$)/gim, '<h1>$1</h1>');
+            md = md.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>');
+            md = md.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
+            md = md.replace(/`(.*?)`/g, '<code>$1</code>');
+            md = md.replace(/\n/g, '<br>');
+            document.getElementById('mdhtml-result').textContent = md;
+        }
+
+        // HTML to MD
+        function htmlToMd() {
+            let html = document.getElementById('htmlmd-input').value;
+            html = html.replace(/<h1>(.*?)<\/h1>/gi, '# $1\n').replace(/<h2>(.*?)<\/h2>/gi, '## $1\n').replace(/<h3>(.*?)<\/h3>/gi, '### $1\n');
+            html = html.replace(/<strong>(.*?)<\/strong>/gi, '**$1**').replace(/<b>(.*?)<\/b>/gi, '**$1**');
+            html = html.replace(/<em>(.*?)<\/em>/gi, '*$1*').replace(/<i>(.*?)<\/i>/gi, '*$1*');
+            html = html.replace(/<a href="(.*?)">(.*?)<\/a>/gi, '[$2]($1)');
+            html = html.replace(/<code>(.*?)<\/code>/gi, '`$1`');
+            html = html.replace(/<br\s*\/?>/gi, '\n').replace(/<p>(.*?)<\/p>/gi, '$1\n\n');
+            html = html.replace(/<[^>]+>/g, '');
+            document.getElementById('htmlmd-result').textContent = html.trim();
+        }
+
+        // Flexbox Generator
+        function updateFlexbox() {
+            const dir = document.getElementById('flex-direction').value;
+            const justify = document.getElementById('flex-justify').value;
+            const align = document.getElementById('flex-align').value;
+            const wrap = document.getElementById('flex-wrap').value;
+            const gap = document.getElementById('flex-gap').value;
+            const preview = document.getElementById('flex-preview');
+            preview.style.flexDirection = dir;
+            preview.style.justifyContent = justify;
+            preview.style.alignItems = align;
+            preview.style.flexWrap = wrap;
+            preview.style.gap = gap + 'px';
+            document.getElementById('flex-result').textContent = `display: flex;\nflex-direction: ${dir};\njustify-content: ${justify};\nalign-items: ${align};\nflex-wrap: ${wrap};\ngap: ${gap}px;`;
+        }
+
+        // Grid Generator
+        function updateGrid() {
+            const cols = +document.getElementById('grid-cols').value || 3;
+            const rows = +document.getElementById('grid-rows').value || 2;
+            const gap = document.getElementById('grid-gap').value;
+            const preview = document.getElementById('grid-preview');
+            preview.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+            preview.style.gap = gap + 'px';
+            preview.innerHTML = Array(cols * rows).fill(0).map((_,i) => `<div style="background:#333;padding:15px;border-radius:4px;text-align:center;">${i+1}</div>`).join('');
+            document.getElementById('grid-result').textContent = `display: grid;\ngrid-template-columns: repeat(${cols}, 1fr);\ngrid-template-rows: repeat(${rows}, 1fr);\ngap: ${gap}px;`;
+        }
+        updateGrid();
+
+        // Regex Generator
+        const regexPatterns = {email:{pattern:'^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$',desc:'이메일 주소 검증'},phone:{pattern:'^01[016789]-?\\d{3,4}-?\\d{4}$',desc:'한국 휴대폰 번호'},url:{pattern:'^https?:\\/\\/[\\w.-]+(?:\\.[\\w.-]+)+[\\w.,@?^=%&:/~+#-]*$',desc:'URL 주소'},ip:{pattern:'^(?:(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$',desc:'IPv4 주소'},date:{pattern:'^\\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])$',desc:'날짜 형식 YYYY-MM-DD'},time:{pattern:'^(?:[01]\\d|2[0-3]):[0-5]\\d$',desc:'시간 형식 HH:MM'},korean:{pattern:'^[가-힣]+$',desc:'한글만 허용'},number:{pattern:'^\\d+$',desc:'숫자만 허용'},alphanumeric:{pattern:'^[a-zA-Z0-9]+$',desc:'영문+숫자만'},password:{pattern:'^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$',desc:'대소문자+숫자+특수문자, 8자 이상'}};
+        function selectRegexPattern() {
+            const sel = document.getElementById('regex-pattern-select').value;
+            if(!sel) { document.getElementById('regex-gen-result').textContent = '-'; document.getElementById('regex-gen-desc').textContent = ''; return; }
+            document.getElementById('regex-gen-result').textContent = regexPatterns[sel].pattern;
+            document.getElementById('regex-gen-desc').textContent = regexPatterns[sel].desc;
+        }
+
+        // Barcode (using JsBarcode)
+        async function generateBarcode() {
+            const text = document.getElementById('barcode-input').value;
+            const type = document.getElementById('barcode-type').value;
+            if(!text) return;
+            if(!window.JsBarcode) {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js';
+                document.head.appendChild(script);
+                await new Promise(r => script.onload = r);
+            }
+            try { JsBarcode('#barcode-svg', text, { format: type, width: 2, height: 100, displayValue: true }); }
+            catch(e) { alert('바코드 생성 오류: ' + e.message); }
+        }
+        function downloadBarcode() {
+            const svg = document.getElementById('barcode-svg');
+            const data = new XMLSerializer().serializeToString(svg);
+            const blob = new Blob([data], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a'); a.href = url; a.download = 'barcode.svg'; a.click();
+        }
+
+        // Currency (using free API)
+        async function convertCurrency() {
+            const amount = +document.getElementById('currency-amount').value;
+            const from = document.getElementById('currency-from').value;
+            const to = document.getElementById('currency-to').value;
+            try {
+                const res = await fetch(`https://api.exchangerate-api.com/v4/latest/${from}`);
+                const data = await res.json();
+                const result = amount * data.rates[to];
+                document.getElementById('currency-result').textContent = `${result.toLocaleString(undefined, {maximumFractionDigits:2})} ${to}`;
+            } catch(e) { document.getElementById('currency-result').textContent = '환율 조회 실패'; }
+        }
+
+        // Salary Calculator
+        function calcSalary() {
+            const yearly = +document.getElementById('salary-amount').value;
+            if(!yearly) return;
+            const monthly = yearly / 12;
+            const withTax = document.getElementById('salary-tax').checked;
+            let net = monthly;
+            if(withTax) {
+                const nationalPension = monthly * 0.045;
+                const healthInsurance = monthly * 0.03545;
+                const longTermCare = healthInsurance * 0.1281;
+                const employmentInsurance = monthly * 0.009;
+                const incomeTax = monthly * 0.033;
+                net = monthly - nationalPension - healthInsurance - longTermCare - employmentInsurance - incomeTax;
+            }
+            document.getElementById('salary-yearly').textContent = Math.round(yearly).toLocaleString() + '원';
+            document.getElementById('salary-monthly').textContent = Math.round(monthly).toLocaleString() + '원';
+            document.getElementById('salary-net').textContent = Math.round(net).toLocaleString() + '원';
+        }
+
+        // Severance
+        function calcSeverance() {
+            const start = new Date(document.getElementById('sev-start').value);
+            const end = new Date(document.getElementById('sev-end').value);
+            const salary = +document.getElementById('sev-salary').value;
+            if(!start || !end || !salary) return;
+            const days = Math.floor((end - start) / 86400000);
+            const years = days / 365;
+            const severance = salary * 30 * years;
+            document.getElementById('sev-years').textContent = years.toFixed(1) + '년';
+            document.getElementById('sev-amount').textContent = Math.round(severance).toLocaleString() + '원';
+        }
+
+        // Savings
+        function calcSavings() {
+            const amount = +document.getElementById('sav-amount').value;
+            const rate = +document.getElementById('sav-rate').value / 100;
+            const months = +document.getElementById('sav-months').value;
+            const type = document.querySelector('input[name="sav-type"]:checked').value;
+            if(!amount || !rate || !months) return;
+            const principal = amount * months;
+            let interest = 0;
+            if(type === 'simple') { for(let i = 1; i <= months; i++) interest += amount * rate / 12 * (months - i + 1); }
+            else { let total = 0; for(let i = 0; i < months; i++) total = (total + amount) * (1 + rate/12); interest = total - principal; }
+            const afterTax = interest * 0.846;
+            document.getElementById('sav-principal').textContent = principal.toLocaleString() + '원';
+            document.getElementById('sav-interest').textContent = Math.round(afterTax).toLocaleString() + '원';
+            document.getElementById('sav-total').textContent = Math.round(principal + afterTax).toLocaleString() + '원';
+        }
+
+        // Stock
+        function calcStock() {
+            const buy = +document.getElementById('stock-buy').value;
+            const sell = +document.getElementById('stock-sell').value;
+            const qty = +document.getElementById('stock-qty').value || 1;
+            if(!buy || !sell) return;
+            const profit = (sell - buy) * qty;
+            const rate = ((sell - buy) / buy * 100);
+            document.getElementById('stock-profit').textContent = profit.toLocaleString() + '원';
+            document.getElementById('stock-rate').textContent = rate.toFixed(2) + '%';
+            document.getElementById('stock-profit').style.color = profit >= 0 ? '#5a5' : '#c55';
+            document.getElementById('stock-rate').style.color = profit >= 0 ? '#5a5' : '#c55';
+        }
+
+        // Calorie
+        let calories = [];
+        function addCalorie() {
+            const food = document.getElementById('cal-food').value;
+            const kcal = +document.getElementById('cal-kcal').value;
+            if(!food || !kcal) return;
+            calories.push({ food, kcal });
+            updateCalorieList();
+            document.getElementById('cal-food').value = '';
+            document.getElementById('cal-kcal').value = '';
+        }
+        function removeCalorie(i) { calories.splice(i, 1); updateCalorieList(); }
+        function updateCalorieList() {
+            document.getElementById('calorie-list').innerHTML = calories.map((c, i) => `<div class="file-item"><span>${c.food}</span><span>${c.kcal}kcal <button onclick="removeCalorie(${i})">×</button></span></div>`).join('');
+            document.getElementById('cal-total').textContent = calories.reduce((s, c) => s + c.kcal, 0);
+        }
+        function clearCalories() { calories = []; updateCalorieList(); }
+
+        // Screen Info
+        function updateScreenInfo() {
+            document.getElementById('screen-info').innerHTML = `
+                <div class="stat-box"><div class="number" style="font-size:1rem;">${screen.width}×${screen.height}</div><div class="label">화면 해상도</div></div>
+                <div class="stat-box"><div class="number" style="font-size:1rem;">${window.innerWidth}×${window.innerHeight}</div><div class="label">브라우저 크기</div></div>
+                <div class="stat-box"><div class="number" style="font-size:1rem;">${window.devicePixelRatio}</div><div class="label">픽셀 비율</div></div>
+                <div class="stat-box"><div class="number" style="font-size:1rem;">${screen.colorDepth}bit</div><div class="label">색상 깊이</div></div>
+            `;
+        }
+
+        // Keyboard Test
+        document.addEventListener('keydown', e => {
+            if(document.getElementById('tool-keyboard').classList.contains('active')) {
+                document.getElementById('key-display').textContent = e.key;
+                document.getElementById('key-code').textContent = e.code;
+                document.getElementById('key-key').textContent = e.key;
+                document.getElementById('key-which').textContent = e.keyCode;
+            }
+        });
+
+        // CPS Test
+        let cpsClicks = 0, cpsStarted = false, cpsInterval = null;
+        function cpsClick() {
+            if(!cpsStarted) {
+                cpsStarted = true;
+                cpsClicks = 0;
+                let time = 10;
+                document.getElementById('cps-status').textContent = '클릭하세요!';
+                cpsInterval = setInterval(() => {
+                    time--;
+                    document.getElementById('cps-time').textContent = time;
+                    if(time <= 0) {
+                        clearInterval(cpsInterval);
+                        cpsStarted = false;
+                        document.getElementById('cps-result').textContent = (cpsClicks / 10).toFixed(1);
+                        document.getElementById('cps-status').textContent = '완료! 다시 클릭하여 시작';
+                    }
+                }, 1000);
+            }
+            if(cpsStarted) { cpsClicks++; document.getElementById('cps-count').textContent = cpsClicks; }
+        }
+        function resetCps() { clearInterval(cpsInterval); cpsStarted = false; cpsClicks = 0; document.getElementById('cps-count').textContent = '0'; document.getElementById('cps-time').textContent = '10'; document.getElementById('cps-status').textContent = '클릭하여 시작'; document.getElementById('cps-result').textContent = '-'; }
+
+        // Reaction Test
+        let reactionState = 'ready', reactionTimeout = null, reactionStart = 0;
+        function reactionClick() {
+            const area = document.getElementById('reaction-area');
+            const text = document.getElementById('reaction-text');
+            if(reactionState === 'ready') {
+                reactionState = 'waiting';
+                area.style.background = '#c55';
+                text.textContent = '초록색이 되면 클릭!';
+                reactionTimeout = setTimeout(() => {
+                    reactionState = 'go';
+                    area.style.background = '#5a5';
+                    text.textContent = '클릭!';
+                    reactionStart = Date.now();
+                }, 2000 + Math.random() * 3000);
+            } else if(reactionState === 'waiting') {
+                clearTimeout(reactionTimeout);
+                reactionState = 'ready';
+                area.style.background = '#c55';
+                text.textContent = '너무 빨라요! 다시 클릭';
+                document.getElementById('reaction-result').textContent = '실패';
+            } else if(reactionState === 'go') {
+                const time = Date.now() - reactionStart;
+                document.getElementById('reaction-result').textContent = time + 'ms';
+                reactionState = 'ready';
+                area.style.background = '#c55';
+                text.textContent = '클릭하여 다시 시작';
+            }
+        }
+
+        // Typing Test
+        const typingTexts = ['The quick brown fox jumps over the lazy dog.','Hello World! Programming is fun.','Practice makes perfect. Keep typing!','JavaScript is a versatile programming language.','Web development requires HTML, CSS, and JavaScript.'];
+        let typingStart = 0, typingTarget = '';
+        function resetTyping() {
+            typingTarget = typingTexts[Math.floor(Math.random() * typingTexts.length)];
+            document.getElementById('typing-text').textContent = typingTarget;
+            document.getElementById('typing-input').value = '';
+            document.getElementById('typing-wpm').textContent = '-';
+            document.getElementById('typing-accuracy').textContent = '-';
+            document.getElementById('typing-time').textContent = '-';
+            typingStart = 0;
+        }
+        function checkTyping() {
+            if(!typingStart) typingStart = Date.now();
+            const input = document.getElementById('typing-input').value;
+            const elapsed = (Date.now() - typingStart) / 1000 / 60;
+            const words = input.trim().split(/\s+/).length;
+            const wpm = Math.round(words / elapsed);
+            let correct = 0;
+            for(let i = 0; i < input.length; i++) if(input[i] === typingTarget[i]) correct++;
+            const accuracy = Math.round(correct / input.length * 100) || 0;
+            document.getElementById('typing-wpm').textContent = wpm || 0;
+            document.getElementById('typing-accuracy').textContent = accuracy + '%';
+            document.getElementById('typing-time').textContent = Math.round((Date.now() - typingStart) / 1000);
+        }
+        resetTyping();
+
+        // Random Color
+        function generateRandomColor() {
+            const hex = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6,'0').toUpperCase();
+            document.getElementById('randcolor-preview').style.background = hex;
+            document.getElementById('randcolor-hex').textContent = hex;
+        }
+
+        // Init functions
+        initSpecialChars();
+        updateScreenInfo();
+        window.addEventListener('resize', updateScreenInfo);
 
         // Background Remove (using Canvas-based approach as fallback)
         let bgRemoveImg = null;
