@@ -2410,17 +2410,25 @@
             </div>
             <div id="pdf-split-info" style="margin-top:10px;color:#666;"></div>
             <div id="pdf-split-options" style="display:none;margin-top:15px;">
-                <div style="margin-bottom:10px;">
+                <div style="margin-bottom:15px;">
                     <label style="display:flex;align-items:center;gap:8px;color:#888;">
-                        <input type="radio" name="split-mode" value="all" checked onchange="updateSplitMode()"> 모든 페이지 개별 분할
+                        <input type="radio" name="split-mode" value="all" checked onchange="updateSplitMode()"> 각 페이지 개별 분할 (1페이지씩)
                     </label>
-                    <label style="display:flex;align-items:center;gap:8px;color:#888;margin-top:5px;">
-                        <input type="radio" name="split-mode" value="range" onchange="updateSplitMode()"> 특정 페이지만 추출
+                    <label style="display:flex;align-items:center;gap:8px;color:#888;margin-top:8px;">
+                        <input type="radio" name="split-mode" value="range" onchange="updateSplitMode()"> 지정 페이지만 추출
+                    </label>
+                    <label style="display:flex;align-items:center;gap:8px;color:#888;margin-top:8px;">
+                        <input type="radio" name="split-mode" value="count" onchange="updateSplitMode()"> N페이지씩 분할
                     </label>
                 </div>
                 <div id="split-range-input" style="display:none;margin-bottom:15px;">
                     <input type="text" id="pdf-split-range" placeholder="페이지 범위 (예: 1-3, 5, 7-9)" style="width:100%;">
                     <div style="font-size:0.75rem;color:#666;margin-top:5px;">쉼표로 구분, 범위는 하이픈 사용</div>
+                </div>
+                <div id="split-count-input" style="display:none;margin-bottom:15px;">
+                    <input type="number" id="pdf-split-count" placeholder="페이지 수" value="5" min="1" style="width:120px;">
+                    <span style="color:#666;font-size:0.85rem;margin-left:8px;">페이지씩 분할</span>
+                    <div style="font-size:0.75rem;color:#666;margin-top:5px;">예: 10페이지 PDF를 5씩 → 2개 파일</div>
                 </div>
                 <button class="btn btn-primary" onclick="splitPdf()">분할하기</button>
             </div>
@@ -8470,6 +8478,7 @@
         function updateSplitMode() {
             const mode = document.querySelector('input[name="split-mode"]:checked').value;
             document.getElementById('split-range-input').style.display = mode === 'range' ? 'block' : 'none';
+            document.getElementById('split-count-input').style.display = mode === 'count' ? 'block' : 'none';
         }
         function parsePageRange(rangeStr, maxPage) {
             const pages = new Set();
@@ -8496,6 +8505,7 @@
             const numPages = srcPdf.getPageCount();
 
             if (mode === 'all') {
+                // 각 페이지 개별 분할
                 status.textContent = '페이지별 분할 중...';
                 for (let i = 0; i < numPages; i++) {
                     status.textContent = `분할 중: ${i + 1}/${numPages}`;
@@ -8508,7 +8518,8 @@
                     result.innerHTML += `<div style="display:inline-block;margin:5px;"><a href="${url}" download="page-${i + 1}.pdf" class="btn" style="font-size:0.8rem;">📄 ${i + 1}페이지</a></div>`;
                 }
                 status.textContent = `완료! ${numPages}개 파일 생성됨`;
-            } else {
+            } else if (mode === 'range') {
+                // 지정 페이지만 추출
                 const rangeStr = document.getElementById('pdf-split-range').value;
                 if (!rangeStr.trim()) { alert('페이지 범위를 입력해주세요.'); return; }
                 const pages = parsePageRange(rangeStr, numPages);
@@ -8524,6 +8535,27 @@
                 const url = URL.createObjectURL(blob);
                 result.innerHTML = `<a href="${url}" download="extracted-pages.pdf" class="btn btn-primary">📄 추출된 PDF 다운로드 (${pages.length}페이지)</a>`;
                 status.textContent = `완료! ${pages.join(', ')} 페이지 추출됨`;
+            } else if (mode === 'count') {
+                // N페이지씩 분할
+                const countVal = parseInt(document.getElementById('pdf-split-count').value);
+                if (!countVal || countVal < 1) { alert('유효한 페이지 수를 입력해주세요.'); return; }
+                status.textContent = '분할 중...';
+                const totalFiles = Math.ceil(numPages / countVal);
+                for (let fileIdx = 0; fileIdx < totalFiles; fileIdx++) {
+                    const startPage = fileIdx * countVal;
+                    const endPage = Math.min(startPage + countVal, numPages);
+                    status.textContent = `파일 ${fileIdx + 1}/${totalFiles} 생성 중...`;
+                    const newPdf = await PDFLib.PDFDocument.create();
+                    for (let i = startPage; i < endPage; i++) {
+                        const [page] = await newPdf.copyPages(srcPdf, [i]);
+                        newPdf.addPage(page);
+                    }
+                    const pdfBytes = await newPdf.save();
+                    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+                    const url = URL.createObjectURL(blob);
+                    result.innerHTML += `<div style="display:inline-block;margin:5px;"><a href="${url}" download="part-${fileIdx + 1}.pdf" class="btn" style="font-size:0.8rem;">📄 파트${fileIdx + 1} (${startPage + 1}-${endPage}쪽)</a></div>`;
+                }
+                status.textContent = `완료! ${totalFiles}개 파일 생성됨 (${countVal}페이지씩)`;
             }
         }
 
