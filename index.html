@@ -38,9 +38,9 @@
         .icon-btn { background: none; border: none; color: #555; padding: 4px; cursor: pointer; font-size: 1rem; }
         .icon-btn:hover { color: #888; }
         .fixed-sidebar { position: fixed; right: 15px; top: 50%; transform: translateY(-50%); z-index: 1000; display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
-        .fixed-sidebar .sidebar-btn { height: 44px; min-width: 44px; border-radius: 22px; background: #1a1a1a; border: 1px solid #333; color: #888; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; text-decoration: none; overflow: hidden; padding: 0 12px; gap: 8px; }
+        .fixed-sidebar .sidebar-btn { height: 44px; width: 44px; min-width: 44px; border-radius: 22px; background: #1a1a1a; border: 1px solid #333; color: #888; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; text-decoration: none; overflow: hidden; padding: 0; gap: 8px; }
         .fixed-sidebar .sidebar-btn .btn-text { display: none; font-size: 0.8rem; white-space: nowrap; }
-        .fixed-sidebar .sidebar-btn:hover { background: #252525; color: #fff; border-color: #555; padding-left: 14px; }
+        .fixed-sidebar .sidebar-btn:hover { background: #252525; color: #fff; border-color: #555; width: auto; padding: 0 14px; }
         .fixed-sidebar .sidebar-btn:hover .btn-text { display: block; }
         body.light .fixed-sidebar .sidebar-btn { background: #fff; border-color: #ddd; color: #666; }
         body.light .fixed-sidebar .sidebar-btn:hover { background: #f5f5f5; color: #333; border-color: #bbb; }
@@ -168,7 +168,7 @@
         .lang-modal h3 { color: #ddd; margin-bottom: 15px; font-size: 1rem; }
         .lang-option { display: block; width: 100%; padding: 10px 15px; background: #1a1a1a; border: 1px solid #222; border-radius: 6px; color: #ccc; cursor: pointer; margin-bottom: 8px; font-size: 0.9rem; text-align: left; }
         .lang-option:hover { background: #222; }
-        @media (max-width: 600px) { nav { flex-direction: column; } .nav-center { max-width: 100%; order: 3; width: 100%; } .timer-display { font-size: 2rem; } .filter-tabs { overflow-x: auto; } .fixed-sidebar { right: 8px; gap: 6px; } .fixed-sidebar .sidebar-btn { min-width: 38px; height: 38px; font-size: 1rem; padding: 0 10px; } }
+        @media (max-width: 600px) { nav { flex-direction: column; } .nav-center { max-width: 100%; order: 3; width: 100%; } .timer-display { font-size: 2rem; } .filter-tabs { overflow-x: auto; } .fixed-sidebar { right: 8px; gap: 6px; } .fixed-sidebar .sidebar-btn { width: 38px; min-width: 38px; height: 38px; font-size: 1rem; padding: 0; } }
 
         /* Filter Tabs - Underline Style */
         .filter-tabs { display: flex; gap: 4px; border-bottom: 1px solid #1a1a1a; margin-bottom: 12px; }
@@ -2718,10 +2718,108 @@
             </div>
         </div>
 
+        <!-- FAQ -->
+        <div class="tool-section" id="tool-faq">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>자주 묻는 질문</h2>
+            <div style="color:#888;line-height:1.8;font-size:0.9rem;">
+                <div style="margin-bottom:20px;">
+                    <h3 style="color:#ccc;font-size:0.95rem;margin-bottom:8px;">Q. 파일이 서버로 전송되나요?</h3>
+                    <p>아니요. 모든 처리는 브라우저에서 이루어지며, 파일은 절대 외부로 전송되지 않습니다.</p>
+                </div>
+                <div style="margin-bottom:20px;">
+                    <h3 style="color:#ccc;font-size:0.95rem;margin-bottom:8px;">Q. 무료인가요?</h3>
+                    <p>네, 모든 도구는 무료로 제한 없이 사용할 수 있습니다.</p>
+                </div>
+                <div style="margin-bottom:20px;">
+                    <h3 style="color:#ccc;font-size:0.95rem;margin-bottom:8px;">Q. 회원가입이 필요한가요?</h3>
+                    <p>아니요. 별도의 가입 없이 바로 사용 가능합니다.</p>
+                </div>
+                <div style="margin-bottom:20px;">
+                    <h3 style="color:#ccc;font-size:0.95rem;margin-bottom:8px;">Q. 모바일에서도 사용할 수 있나요?</h3>
+                    <p>네, 반응형으로 제작되어 모바일에서도 사용 가능합니다.</p>
+                </div>
+                <div style="margin-bottom:20px;">
+                    <h3 style="color:#ccc;font-size:0.95rem;margin-bottom:8px;">Q. 즐겨찾기는 어디에 저장되나요?</h3>
+                    <p>브라우저의 로컬 스토리지에 저장됩니다. 브라우저 데이터를 삭제하면 즐겨찾기도 초기화됩니다.</p>
+                </div>
+                <div style="margin-bottom:20px;">
+                    <h3 style="color:#ccc;font-size:0.95rem;margin-bottom:8px;">Q. 오류가 발생하면 어떻게 하나요?</h3>
+                    <p><a href="#" onclick="showTool('contact'); return false;" style="color:#5b8def;">문의 페이지</a>에서 버그를 신고해 주세요.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Guide -->
+        <div class="tool-section" id="tool-guide">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>사용 가이드</h2>
+            <div style="color:#888;line-height:1.8;font-size:0.9rem;">
+                <div style="margin-bottom:25px;">
+                    <h3 style="color:#4ade80;font-size:0.95rem;margin-bottom:10px;">📁 파일 업로드</h3>
+                    <p>대부분의 도구에서 파일을 드래그 앤 드롭하거나 클릭하여 선택할 수 있습니다.</p>
+                </div>
+                <div style="margin-bottom:25px;">
+                    <h3 style="color:#5b8def;font-size:0.95rem;margin-bottom:10px;">⭐ 즐겨찾기</h3>
+                    <p>도구 카드의 ☆ 버튼을 클릭하면 즐겨찾기에 추가됩니다. 상단의 '즐겨찾기' 탭에서 확인할 수 있습니다.</p>
+                </div>
+                <div style="margin-bottom:25px;">
+                    <h3 style="color:#a78bfa;font-size:0.95rem;margin-bottom:10px;">🔍 검색</h3>
+                    <p>상단 검색창(Ctrl+K)에서 도구를 검색할 수 있습니다. 한글, 영문 모두 검색 가능합니다.</p>
+                </div>
+                <div style="margin-bottom:25px;">
+                    <h3 style="color:#f59e0b;font-size:0.95rem;margin-bottom:10px;">🌓 테마 변경</h3>
+                    <p>오른쪽 사이드바의 ◐ 버튼을 클릭하면 다크/라이트 모드를 전환할 수 있습니다.</p>
+                </div>
+                <div style="margin-bottom:25px;">
+                    <h3 style="color:#ec4899;font-size:0.95rem;margin-bottom:10px;">📋 복사</h3>
+                    <p>대부분의 결과에는 '복사' 버튼이 있어 클릭 한 번으로 클립보드에 복사됩니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Changelog -->
+        <div class="tool-section" id="tool-changelog">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>업데이트 로그</h2>
+            <div style="color:#888;line-height:1.8;font-size:0.9rem;">
+                <div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #222;">
+                    <div style="color:#4ade80;font-size:0.85rem;margin-bottom:5px;">2025.01</div>
+                    <ul style="margin-left:20px;">
+                        <li>이모지 검색 카테고리 대폭 확장</li>
+                        <li>문의 페이지 추가 (GitHub Issues 연동)</li>
+                        <li>개인정보처리방침 페이지 추가</li>
+                        <li>FAQ, 가이드, 업데이트 로그 페이지 추가</li>
+                    </ul>
+                </div>
+                <div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #222;">
+                    <div style="color:#4ade80;font-size:0.85rem;margin-bottom:5px;">2024.12</div>
+                    <ul style="margin-left:20px;">
+                        <li>이미지 편집 비율 유지 기능 수정</li>
+                        <li>중복 도구 섹션 제거</li>
+                        <li>XSS 보안 취약점 수정</li>
+                        <li>MIT 라이선스 추가</li>
+                    </ul>
+                </div>
+                <div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #222;">
+                    <div style="color:#4ade80;font-size:0.85rem;margin-bottom:5px;">2024.11</div>
+                    <ul style="margin-left:20px;">
+                        <li>사이드바 hover 확장 효과 추가</li>
+                        <li>상세 보기 모드 추가</li>
+                        <li>ZIP 압축/해제 도구 추가</li>
+                        <li>사이트 이름 변경: ToolBox → WingsTool</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         <footer>
             <p>직접 만들어서 쓰는 도구 모음</p>
             <div style="margin-top:10px;">
                 <a href="#" onclick="showTool('about'); return false;">소개</a>
+                <a href="#" onclick="showTool('faq'); return false;">FAQ</a>
+                <a href="#" onclick="showTool('guide'); return false;">가이드</a>
+                <a href="#" onclick="showTool('changelog'); return false;">업데이트</a>
                 <a href="#" onclick="showTool('contact'); return false;">문의</a>
                 <a href="#" onclick="showTool('privacy'); return false;">개인정보처리방침</a>
                 <a href="https://buymeacoffee.com/wings1008" target="_blank">후원</a>
