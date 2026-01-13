@@ -147,6 +147,8 @@
                 <div class="tool-card" onclick="showTool('lorem')"><h3>더미 텍스트</h3><p>Lorem, 한글</p></div>
                 <div class="tool-card" onclick="showTool('markdown')"><h3>Markdown</h3><p>미리보기</p></div>
                 <div class="tool-card" onclick="showTool('ocr')"><h3>OCR</h3><p>이미지→텍스트</p></div>
+                <div class="tool-card" onclick="showTool('romanize')"><h3>로마자 변환</h3><p>한글→영문</p></div>
+                <div class="tool-card" onclick="showTool('jamo')"><h3>자모 분리</h3><p>조합/분리</p></div>
             </div>
 
             <div class="section-title">이미지</div>
@@ -160,6 +162,7 @@
                 <div class="tool-card" onclick="showTool('favicon')"><h3>파비콘</h3><p>ICO 생성</p></div>
                 <div class="tool-card" onclick="showTool('placeholder')"><h3>플레이스홀더</h3><p>더미 이미지</p></div>
                 <div class="tool-card" onclick="showTool('qr')"><h3>QR/바코드</h3><p>생성</p></div>
+                <div class="tool-card" onclick="showTool('ascii-art')"><h3>ASCII 아트</h3><p>이미지→문자</p></div>
             </div>
 
             <div class="section-title">개발</div>
@@ -176,6 +179,9 @@
                 <div class="tool-card" onclick="showTool('color')"><h3>색상 변환</h3><p>HEX, RGB, HSL</p></div>
                 <div class="tool-card" onclick="showTool('cron')"><h3>Cron</h3><p>표현식</p></div>
                 <div class="tool-card" onclick="showTool('dev-info')"><h3>개발 정보</h3><p>HTTP, IP, UA</p></div>
+                <div class="tool-card" onclick="showTool('uuid')"><h3>UUID</h3><p>생성/검증</p></div>
+                <div class="tool-card" onclick="showTool('sql')"><h3>SQL 포매터</h3><p>정렬/정리</p></div>
+                <div class="tool-card" onclick="showTool('og-preview')"><h3>OG 미리보기</h3><p>메타 태그</p></div>
             </div>
 
             <div class="section-title">계산</div>
@@ -184,6 +190,11 @@
                 <div class="tool-card" onclick="showTool('unit')"><h3>단위 변환</h3><p>길이, 무게, 온도</p></div>
                 <div class="tool-card" onclick="showTool('number-convert')"><h3>숫자 변환</h3><p>진법, 로마, 한글</p></div>
                 <div class="tool-card" onclick="showTool('date')"><h3>날짜 계산</h3><p>D-Day, 기간</p></div>
+                <div class="tool-card" onclick="showTool('age')"><h3>나이 계산</h3><p>만나이, 한국나이</p></div>
+                <div class="tool-card" onclick="showTool('loan')"><h3>대출 계산</h3><p>이자, 상환액</p></div>
+                <div class="tool-card" onclick="showTool('salary')"><h3>연봉 실수령</h3><p>세금 계산</p></div>
+                <div class="tool-card" onclick="showTool('vat')"><h3>부가세</h3><p>VAT 계산</p></div>
+                <div class="tool-card" onclick="showTool('zodiac')"><h3>띠/별자리</h3><p>생년월일</p></div>
                 <div class="tool-card" onclick="showTool('statistics')"><h3>통계</h3><p>평균, 표준편차</p></div>
                 <div class="tool-card" onclick="showTool('programmer-calc')"><h3>프로그래머</h3><p>비트 연산</p></div>
             </div>
@@ -193,6 +204,8 @@
                 <div class="tool-card" onclick="showTool('timer')"><h3>타이머</h3><p>뽀모도로, 스톱워치</p></div>
                 <div class="tool-card" onclick="showTool('worldclock')"><h3>세계 시간</h3><p>타임존</p></div>
                 <div class="tool-card" onclick="showTool('password')"><h3>비밀번호</h3><p>생성/강도/유출확인</p></div>
+                <div class="tool-card" onclick="showTool('lunar')"><h3>음력 변환</h3><p>음력 ↔ 양력</p></div>
+                <div class="tool-card" onclick="showTool('nickname')"><h3>닉네임 생성</h3><p>랜덤 이름</p></div>
                 <div class="tool-card" onclick="showTool('notepad')"><h3>메모장</h3><p>로컬 저장</p></div>
                 <div class="tool-card" onclick="showTool('todo')"><h3>할 일</h3><p>목록 관리</p></div>
                 <div class="tool-card" onclick="showTool('emoji')"><h3>이모지</h3><p>검색/복사</p></div>
@@ -2264,6 +2277,216 @@
             <input type="password" id="pwned-input" placeholder="확인할 비밀번호">
             <button class="btn btn-primary" onclick="checkPwned()">확인</button>
             <div class="result-box"><div id="pwned-result">-</div></div>
+        </div>
+
+        <!-- Age Calculator -->
+        <div class="tool-section" id="tool-age">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>나이 계산기</h2>
+            <div class="row">
+                <input type="date" id="age-birth" onchange="calcAge()">
+                <input type="date" id="age-base" onchange="calcAge()">
+            </div>
+            <p style="color:#555;font-size:0.8rem;margin-bottom:10px;">기준일 비워두면 오늘 기준</p>
+            <div class="result-box">
+                <div><span style="color:#555;">만 나이:</span> <span id="age-int">-</span></div>
+                <div><span style="color:#555;">한국 나이:</span> <span id="age-kr">-</span></div>
+                <div><span style="color:#555;">개월 수:</span> <span id="age-months">-</span></div>
+                <div><span style="color:#555;">일 수:</span> <span id="age-days">-</span></div>
+            </div>
+        </div>
+
+        <!-- Loan Calculator -->
+        <div class="tool-section" id="tool-loan">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>대출 계산기</h2>
+            <input type="number" id="loan-amount" placeholder="대출금액 (원)">
+            <input type="number" id="loan-rate" placeholder="연이율 (%)">
+            <input type="number" id="loan-months" placeholder="기간 (개월)">
+            <select id="loan-type">
+                <option value="equal">원리금균등상환</option>
+                <option value="principal">원금균등상환</option>
+                <option value="bullet">만기일시상환</option>
+            </select>
+            <button class="btn btn-primary" onclick="calcLoan()">계산</button>
+            <div class="result-box">
+                <div><span style="color:#555;">월 상환액:</span> <span id="loan-monthly">-</span></div>
+                <div><span style="color:#555;">총 상환액:</span> <span id="loan-total">-</span></div>
+                <div><span style="color:#555;">총 이자:</span> <span id="loan-interest">-</span></div>
+            </div>
+            <div id="loan-schedule" style="margin-top:15px;max-height:300px;overflow-y:auto;"></div>
+        </div>
+
+        <!-- Salary Calculator -->
+        <div class="tool-section" id="tool-salary">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>연봉 실수령액 계산기</h2>
+            <input type="number" id="salary-annual" placeholder="연봉 (원)" oninput="calcSalary()">
+            <div class="options">
+                <label><input type="checkbox" id="salary-non-tax" value="200000" checked> 비과세 20만원</label>
+                <label><input type="number" id="salary-dependents" value="1" min="1" style="width:60px;"> 부양가족</label>
+            </div>
+            <div class="result-box">
+                <div><span style="color:#555;">월급 (세전):</span> <span id="salary-gross">-</span></div>
+                <div><span style="color:#555;">국민연금:</span> <span id="salary-np">-</span></div>
+                <div><span style="color:#555;">건강보험:</span> <span id="salary-hi">-</span></div>
+                <div><span style="color:#555;">장기요양:</span> <span id="salary-ltc">-</span></div>
+                <div><span style="color:#555;">고용보험:</span> <span id="salary-ei">-</span></div>
+                <div><span style="color:#555;">소득세:</span> <span id="salary-tax">-</span></div>
+                <div><span style="color:#555;">지방소득세:</span> <span id="salary-local">-</span></div>
+                <div style="border-top:1px solid #222;padding-top:10px;margin-top:10px;"><span style="color:#888;font-weight:600;">실수령액:</span> <span id="salary-net" style="color:#6a9fb5;font-weight:600;">-</span></div>
+            </div>
+        </div>
+
+        <!-- VAT Calculator -->
+        <div class="tool-section" id="tool-vat">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>부가세 계산기</h2>
+            <input type="number" id="vat-amount" placeholder="금액" oninput="calcVat()">
+            <div class="options">
+                <label><input type="radio" name="vat-type" value="include" checked onchange="calcVat()"> 부가세 포함 금액</label>
+                <label><input type="radio" name="vat-type" value="exclude" onchange="calcVat()"> 부가세 별도 금액</label>
+            </div>
+            <div class="result-box">
+                <div><span style="color:#555;">공급가액:</span> <span id="vat-supply">-</span></div>
+                <div><span style="color:#555;">부가세 (10%):</span> <span id="vat-tax">-</span></div>
+                <div><span style="color:#555;">합계:</span> <span id="vat-total">-</span></div>
+            </div>
+        </div>
+
+        <!-- Zodiac Calculator -->
+        <div class="tool-section" id="tool-zodiac">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>띠 / 별자리 계산기</h2>
+            <input type="date" id="zodiac-date" onchange="calcZodiac()">
+            <div class="result-box">
+                <div><span style="color:#555;">띠:</span> <span id="zodiac-animal">-</span></div>
+                <div><span style="color:#555;">별자리:</span> <span id="zodiac-star">-</span></div>
+                <div><span style="color:#555;">탄생석:</span> <span id="zodiac-stone">-</span></div>
+            </div>
+        </div>
+
+        <!-- Lunar Calendar -->
+        <div class="tool-section" id="tool-lunar">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>음력 ↔ 양력 변환</h2>
+            <div class="info-box">간이 변환입니다. 정확한 변환은 천문 데이터가 필요합니다.</div>
+            <div class="row">
+                <input type="number" id="lunar-year" placeholder="년" min="1900" max="2100">
+                <input type="number" id="lunar-month" placeholder="월" min="1" max="12">
+                <input type="number" id="lunar-day" placeholder="일" min="1" max="30">
+            </div>
+            <div class="options">
+                <label><input type="checkbox" id="lunar-leap"> 윤달</label>
+            </div>
+            <button class="btn" onclick="convertLunar('toSolar')">음력→양력</button>
+            <button class="btn" onclick="convertLunar('toLunar')">양력→음력</button>
+            <div class="result-box"><div id="lunar-result">-</div></div>
+        </div>
+
+        <!-- Nickname Generator -->
+        <div class="tool-section" id="tool-nickname">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>닉네임 생성기</h2>
+            <select id="nickname-style">
+                <option value="korean">한국어 (형용사+명사)</option>
+                <option value="english">영어 (Adjective+Noun)</option>
+                <option value="game">게임용 (영문+숫자)</option>
+                <option value="cute">귀여운 스타일</option>
+            </select>
+            <button class="btn btn-primary" onclick="generateNickname()">생성</button>
+            <button class="btn" onclick="generateNicknames(10)">10개 생성</button>
+            <div class="result-box"><div id="nickname-result">-</div></div>
+        </div>
+
+        <!-- Romanize -->
+        <div class="tool-section" id="tool-romanize">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>한글 로마자 변환</h2>
+            <input type="text" id="romanize-input" placeholder="한글 이름 입력 (예: 김철수)" oninput="romanizeKorean()">
+            <div class="result-box">
+                <div><span style="color:#555;">문화부 표기:</span> <span id="romanize-govt">-</span></div>
+                <div><span style="color:#555;">여권용:</span> <span id="romanize-passport">-</span></div>
+            </div>
+            <div class="info-box">문화부 표기법 기준입니다. 여권용은 성을 대문자로 표시합니다.</div>
+        </div>
+
+        <!-- Jamo -->
+        <div class="tool-section" id="tool-jamo">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>한글 자모 분리/조합</h2>
+            <textarea id="jamo-input" placeholder="한글 입력"></textarea>
+            <button class="btn" onclick="jamoSplit()">분리 (가→ㄱㅏ)</button>
+            <button class="btn" onclick="jamoCombine()">조합 (ㄱㅏ→가)</button>
+            <div class="result-box"><div id="jamo-result">-</div><button class="copy-btn" onclick="copy(document.getElementById('jamo-result').textContent)">복사</button></div>
+        </div>
+
+        <!-- ASCII Art -->
+        <div class="tool-section" id="tool-ascii-art">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>이미지 → ASCII 아트</h2>
+            <input type="file" id="ascii-file" accept="image/*" onchange="loadAsciiImage(this)">
+            <div class="slider-row">
+                <span>폭:</span>
+                <input type="range" id="ascii-width" min="40" max="200" value="100" onchange="generateAscii()">
+                <span id="ascii-width-val">100</span>
+            </div>
+            <select id="ascii-charset" onchange="generateAscii()">
+                <option value="standard">표준 (@#%*+=-:. )</option>
+                <option value="blocks">블록 (█▓▒░ )</option>
+                <option value="simple">간단 (#. )</option>
+            </select>
+            <canvas id="ascii-canvas" style="display:none;"></canvas>
+            <pre id="ascii-result" style="font-size:6px;line-height:6px;background:#000;color:#0f0;padding:10px;overflow:auto;max-height:400px;"></pre>
+            <button class="btn" onclick="copy(document.getElementById('ascii-result').textContent)">복사</button>
+        </div>
+
+        <!-- UUID Generator -->
+        <div class="tool-section" id="tool-uuid">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>UUID 생성기</h2>
+            <button class="btn btn-primary" onclick="generateUUID()">UUID v4 생성</button>
+            <button class="btn" onclick="generateUUIDs(10)">10개 생성</button>
+            <div class="result-box"><div id="uuid-result">-</div></div>
+            <input type="text" id="uuid-validate" placeholder="UUID 검증" oninput="validateUUID()">
+            <div id="uuid-valid" style="margin-top:5px;font-size:0.85rem;"></div>
+        </div>
+
+        <!-- SQL Formatter -->
+        <div class="tool-section" id="tool-sql">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>SQL 포매터</h2>
+            <textarea id="sql-input" placeholder="SQL 쿼리 입력" style="min-height:150px;font-family:monospace;"></textarea>
+            <button class="btn btn-primary" onclick="formatSQL()">정리</button>
+            <button class="btn" onclick="minifySQL()">압축</button>
+            <textarea id="sql-result" readonly style="min-height:150px;font-family:monospace;margin-top:10px;"></textarea>
+            <button class="copy-btn" onclick="copy(document.getElementById('sql-result').value)">복사</button>
+        </div>
+
+        <!-- OG Preview -->
+        <div class="tool-section" id="tool-og-preview">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>Open Graph 미리보기</h2>
+            <input type="text" id="og-title" placeholder="og:title" oninput="updateOGPreview()">
+            <textarea id="og-desc" placeholder="og:description" style="min-height:60px;" oninput="updateOGPreview()"></textarea>
+            <input type="text" id="og-image" placeholder="og:image URL" oninput="updateOGPreview()">
+            <input type="text" id="og-url" placeholder="og:url" oninput="updateOGPreview()">
+            <div style="margin:20px 0;">
+                <p style="color:#555;font-size:0.8rem;margin-bottom:10px;">미리보기:</p>
+                <div id="og-preview-box" style="border:1px solid #333;border-radius:8px;overflow:hidden;max-width:500px;background:#111;">
+                    <div id="og-preview-img" style="height:260px;background:#222;display:flex;align-items:center;justify-content:center;color:#444;">이미지 없음</div>
+                    <div style="padding:12px;">
+                        <div id="og-preview-url" style="color:#555;font-size:0.75rem;text-transform:uppercase;">example.com</div>
+                        <div id="og-preview-title" style="color:#ddd;font-size:0.95rem;font-weight:500;margin:5px 0;">제목</div>
+                        <div id="og-preview-desc" style="color:#666;font-size:0.85rem;">설명</div>
+                    </div>
+                </div>
+            </div>
+            <div class="result-box">
+                <p style="color:#555;margin-bottom:10px;">메타 태그:</p>
+                <pre id="og-meta" style="font-size:0.8rem;white-space:pre-wrap;"></pre>
+                <button class="copy-btn" onclick="copy(document.getElementById('og-meta').textContent)">복사</button>
+            </div>
         </div>
 
         <!-- About -->
@@ -5513,6 +5736,448 @@
         function dtMicStop() { if (dtStream) { dtStream.getTracks().forEach(t => t.stop()); dtStream = null; } if (dtMicContext) { dtMicContext.close(); dtMicContext = null; } dtMicAnalyser = null; document.getElementById('dt-mic-level').textContent = '-'; document.getElementById('dt-mic-visual').innerHTML = ''; }
         async function dtSpeedTest() { const btn = document.getElementById('dt-speed-btn'); const status = document.getElementById('dt-speed-status'); btn.disabled = true; status.textContent = '테스트 중...'; try { const start = performance.now(); const res = await fetch('https://www.cloudflare.com/cdn-cgi/trace?' + Date.now()); const data = await res.text(); const dur = (performance.now() - start) / 1000; const mbps = ((new Blob([data]).size * 8) / dur / 1000000).toFixed(2); document.getElementById('dt-speed-result').textContent = mbps; status.textContent = '완료 (추정치)'; } catch(e) { status.textContent = '테스트 실패'; } btn.disabled = false; }
         function dtShowScreen() { const info = { '화면 해상도': `${screen.width} x ${screen.height}`, '브라우저 창': `${window.innerWidth} x ${window.innerHeight}`, '색상 깊이': screen.colorDepth + ' bit', 'DPR': window.devicePixelRatio, '터치 지원': 'ontouchstart' in window ? '예' : '아니오' }; let html = ''; for (const [k, v] of Object.entries(info)) html += `<div class="stat-box"><div class="number" style="font-size:0.9rem;">${v}</div><div class="label">${k}</div></div>`; document.getElementById('dt-screen-info').innerHTML = html; }
+
+        // Age Calculator
+        function calcAge() {
+            const birthInput = document.getElementById('age-birth').value;
+            if (!birthInput) return;
+            const birth = new Date(birthInput);
+            const baseInput = document.getElementById('age-base').value;
+            const base = baseInput ? new Date(baseInput) : new Date();
+
+            // 만 나이
+            let intAge = base.getFullYear() - birth.getFullYear();
+            const monthDiff = base.getMonth() - birth.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && base.getDate() < birth.getDate())) intAge--;
+
+            // 한국 나이
+            const krAge = base.getFullYear() - birth.getFullYear() + 1;
+
+            // 개월수
+            let months = (base.getFullYear() - birth.getFullYear()) * 12 + (base.getMonth() - birth.getMonth());
+            if (base.getDate() < birth.getDate()) months--;
+
+            // 일수
+            const days = Math.floor((base - birth) / (1000 * 60 * 60 * 24));
+
+            document.getElementById('age-int').textContent = intAge + '세';
+            document.getElementById('age-kr').textContent = krAge + '세';
+            document.getElementById('age-months').textContent = months.toLocaleString() + '개월';
+            document.getElementById('age-days').textContent = days.toLocaleString() + '일';
+        }
+
+        // Loan Calculator
+        function calcLoan() {
+            const amount = parseFloat(document.getElementById('loan-amount').value) || 0;
+            const rate = parseFloat(document.getElementById('loan-rate').value) / 100 / 12;
+            const months = parseInt(document.getElementById('loan-months').value) || 0;
+            const type = document.getElementById('loan-type').value;
+            if (!amount || !rate || !months) return;
+
+            let monthly = 0, total = 0, interest = 0;
+            let schedule = '<table style="width:100%;font-size:0.75rem;color:#888;"><tr><th>회차</th><th>상환원금</th><th>이자</th><th>월납입금</th><th>잔액</th></tr>';
+
+            if (type === 'equal') { // 원리금균등
+                monthly = amount * rate * Math.pow(1 + rate, months) / (Math.pow(1 + rate, months) - 1);
+                let balance = amount;
+                for (let i = 1; i <= months; i++) {
+                    const intPay = balance * rate;
+                    const prinPay = monthly - intPay;
+                    balance -= prinPay;
+                    interest += intPay;
+                    if (i <= 12 || i > months - 3) schedule += `<tr><td>${i}</td><td>${Math.round(prinPay).toLocaleString()}</td><td>${Math.round(intPay).toLocaleString()}</td><td>${Math.round(monthly).toLocaleString()}</td><td>${Math.max(0, Math.round(balance)).toLocaleString()}</td></tr>`;
+                    else if (i === 13) schedule += '<tr><td colspan="5" style="text-align:center;">...</td></tr>';
+                }
+                total = monthly * months;
+            } else if (type === 'principal') { // 원금균등
+                const prinPay = amount / months;
+                let balance = amount;
+                for (let i = 1; i <= months; i++) {
+                    const intPay = balance * rate;
+                    const pay = prinPay + intPay;
+                    balance -= prinPay;
+                    interest += intPay;
+                    if (i === 1) monthly = pay;
+                    if (i <= 12 || i > months - 3) schedule += `<tr><td>${i}</td><td>${Math.round(prinPay).toLocaleString()}</td><td>${Math.round(intPay).toLocaleString()}</td><td>${Math.round(pay).toLocaleString()}</td><td>${Math.max(0, Math.round(balance)).toLocaleString()}</td></tr>`;
+                    else if (i === 13) schedule += '<tr><td colspan="5" style="text-align:center;">...</td></tr>';
+                }
+                total = amount + interest;
+            } else { // 만기일시
+                interest = amount * rate * months;
+                monthly = amount * rate;
+                total = amount + interest;
+                schedule += `<tr><td>1~${months-1}</td><td>0</td><td>${Math.round(monthly).toLocaleString()}</td><td>${Math.round(monthly).toLocaleString()}</td><td>${amount.toLocaleString()}</td></tr>`;
+                schedule += `<tr><td>${months}</td><td>${amount.toLocaleString()}</td><td>${Math.round(monthly).toLocaleString()}</td><td>${(amount + monthly).toLocaleString()}</td><td>0</td></tr>`;
+            }
+            schedule += '</table>';
+
+            document.getElementById('loan-monthly').textContent = Math.round(monthly).toLocaleString() + '원' + (type === 'principal' ? ' (첫달)' : '');
+            document.getElementById('loan-total').textContent = Math.round(total).toLocaleString() + '원';
+            document.getElementById('loan-interest').textContent = Math.round(interest).toLocaleString() + '원';
+            document.getElementById('loan-schedule').innerHTML = schedule;
+        }
+
+        // Salary Calculator
+        function calcSalary() {
+            const annual = parseFloat(document.getElementById('salary-annual').value) || 0;
+            if (!annual) return;
+            const nonTax = document.getElementById('salary-non-tax').checked ? 200000 : 0;
+            const dependents = parseInt(document.getElementById('salary-dependents').value) || 1;
+
+            const monthly = annual / 12;
+            const taxable = monthly - nonTax;
+
+            // 4대보험 (2024년 기준 근사치)
+            const np = Math.min(taxable * 0.045, 248850); // 국민연금
+            const hi = taxable * 0.03545; // 건강보험
+            const ltc = hi * 0.1295; // 장기요양
+            const ei = taxable * 0.009; // 고용보험
+
+            // 소득세 (간이세액표 근사)
+            let tax = 0;
+            const base = taxable - np - hi - ltc - ei;
+            if (base > 10000000) tax = base * 0.35 - 1490000;
+            else if (base > 4600000) tax = base * 0.24 - 522000;
+            else if (base > 1500000) tax = base * 0.15 - 108000;
+            else if (base > 500000) tax = base * 0.06;
+            tax = Math.max(0, tax) * (dependents === 1 ? 1 : 1 - (dependents - 1) * 0.1);
+            const local = tax * 0.1;
+
+            const net = monthly - np - hi - ltc - ei - tax - local;
+
+            document.getElementById('salary-gross').textContent = Math.round(monthly).toLocaleString() + '원';
+            document.getElementById('salary-np').textContent = '-' + Math.round(np).toLocaleString() + '원';
+            document.getElementById('salary-hi').textContent = '-' + Math.round(hi).toLocaleString() + '원';
+            document.getElementById('salary-ltc').textContent = '-' + Math.round(ltc).toLocaleString() + '원';
+            document.getElementById('salary-ei').textContent = '-' + Math.round(ei).toLocaleString() + '원';
+            document.getElementById('salary-tax').textContent = '-' + Math.round(tax).toLocaleString() + '원';
+            document.getElementById('salary-local').textContent = '-' + Math.round(local).toLocaleString() + '원';
+            document.getElementById('salary-net').textContent = Math.round(net).toLocaleString() + '원';
+        }
+
+        // VAT Calculator
+        function calcVat() {
+            const amount = parseFloat(document.getElementById('vat-amount').value) || 0;
+            const type = document.querySelector('input[name="vat-type"]:checked').value;
+
+            let supply, vat, total;
+            if (type === 'include') {
+                total = amount;
+                supply = Math.round(amount / 1.1);
+                vat = total - supply;
+            } else {
+                supply = amount;
+                vat = Math.round(amount * 0.1);
+                total = supply + vat;
+            }
+
+            document.getElementById('vat-supply').textContent = supply.toLocaleString() + '원';
+            document.getElementById('vat-tax').textContent = vat.toLocaleString() + '원';
+            document.getElementById('vat-total').textContent = total.toLocaleString() + '원';
+        }
+
+        // Zodiac Calculator
+        function calcZodiac() {
+            const input = document.getElementById('zodiac-date').value;
+            if (!input) return;
+            const date = new Date(input);
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+
+            // 띠
+            const animals = ['원숭이', '닭', '개', '돼지', '쥐', '소', '호랑이', '토끼', '용', '뱀', '말', '양'];
+            const animal = animals[year % 12];
+
+            // 별자리
+            const signs = [
+                [20, '물병자리'], [19, '물고기자리'], [21, '양자리'], [20, '황소자리'],
+                [21, '쌍둥이자리'], [22, '게자리'], [23, '사자자리'], [23, '처녀자리'],
+                [23, '천칭자리'], [23, '전갈자리'], [22, '사수자리'], [22, '염소자리']
+            ];
+            const star = day < signs[month - 1][0] ? signs[(month + 10) % 12][1] : signs[month - 1][1];
+
+            // 탄생석
+            const stones = ['가넷', '자수정', '아쿠아마린', '다이아몬드', '에메랄드', '진주', '루비', '페리도트', '사파이어', '오팔', '토파즈', '터키석'];
+
+            document.getElementById('zodiac-animal').textContent = animal + '띠 🐾';
+            document.getElementById('zodiac-star').textContent = star + ' ⭐';
+            document.getElementById('zodiac-stone').textContent = stones[month - 1] + ' 💎';
+        }
+
+        // Lunar Calendar (simplified)
+        function convertLunar(dir) {
+            const year = parseInt(document.getElementById('lunar-year').value);
+            const month = parseInt(document.getElementById('lunar-month').value);
+            const day = parseInt(document.getElementById('lunar-day').value);
+            if (!year || !month || !day) { alert('날짜를 입력하세요'); return; }
+
+            // 간이 변환 (정확도 낮음 - 실제로는 천문 데이터 필요)
+            // 음력과 양력의 차이는 보통 1~2달 정도
+            const result = document.getElementById('lunar-result');
+            if (dir === 'toSolar') {
+                // 음력 → 양력 (근사)
+                const offset = Math.floor((month - 1) * 0.5) + 20;
+                const solar = new Date(year, month - 1, day + offset);
+                result.textContent = `양력: ${solar.getFullYear()}년 ${solar.getMonth() + 1}월 ${solar.getDate()}일 (근사값)`;
+            } else {
+                // 양력 → 음력 (근사)
+                const offset = Math.floor((month - 1) * 0.5) + 20;
+                let lunarDay = day - offset;
+                let lunarMonth = month;
+                if (lunarDay <= 0) { lunarDay += 30; lunarMonth--; }
+                if (lunarMonth <= 0) { lunarMonth = 12; }
+                result.textContent = `음력: ${year}년 ${lunarMonth}월 ${lunarDay}일 (근사값)`;
+            }
+        }
+
+        // Nickname Generator
+        const nickKorAdj = ['행복한', '즐거운', '용감한', '슬기로운', '귀여운', '멋진', '빛나는', '달콤한', '상큼한', '따뜻한', '시원한', '날렵한', '영리한', '씩씩한', '푸른', '붉은', '하얀', '검은', '노란', '분홍'];
+        const nickKorNoun = ['고양이', '강아지', '토끼', '여우', '곰', '사자', '호랑이', '코끼리', '팬더', '펭귄', '독수리', '참새', '올빼미', '돌고래', '상어', '해파리', '나비', '벌', '구름', '바람', '별', '달', '해', '숲', '바다'];
+        const nickEngAdj = ['Happy', 'Lucky', 'Brave', 'Swift', 'Clever', 'Cool', 'Bright', 'Wild', 'Silent', 'Golden', 'Silver', 'Crystal', 'Dark', 'Light', 'Storm', 'Fire', 'Ice', 'Thunder'];
+        const nickEngNoun = ['Wolf', 'Fox', 'Bear', 'Tiger', 'Lion', 'Eagle', 'Hawk', 'Dragon', 'Phoenix', 'Shadow', 'Knight', 'Hunter', 'Warrior', 'Wizard', 'Ninja', 'Samurai', 'Panda', 'Raven'];
+        const nickCute = ['뭉치', '콩이', '밤이', '솜이', '달이', '별이', '구름이', '하늘이', '바다', '모찌', '젤리', '푸딩', '쿠키', '초코', '딸기', '복숭아', '레몬', '민트', '라떼', '모카'];
+
+        function generateNickname() {
+            const style = document.getElementById('nickname-style').value;
+            let nick = '';
+            const rand = arr => arr[Math.floor(Math.random() * arr.length)];
+            const randNum = () => Math.floor(Math.random() * 1000);
+
+            switch(style) {
+                case 'korean': nick = rand(nickKorAdj) + rand(nickKorNoun); break;
+                case 'english': nick = rand(nickEngAdj) + rand(nickEngNoun); break;
+                case 'game': nick = rand(nickEngAdj) + rand(nickEngNoun) + randNum(); break;
+                case 'cute': nick = rand(nickCute) + (Math.random() > 0.5 ? randNum() : ''); break;
+            }
+            document.getElementById('nickname-result').innerHTML = `<span style="font-size:1.2rem;color:#ddd;">${nick}</span><button class="copy-btn" style="margin-left:10px;" onclick="copy('${nick}')">복사</button>`;
+        }
+
+        function generateNicknames(n) {
+            const style = document.getElementById('nickname-style').value;
+            const rand = arr => arr[Math.floor(Math.random() * arr.length)];
+            const randNum = () => Math.floor(Math.random() * 1000);
+            let nicks = [];
+            for (let i = 0; i < n; i++) {
+                let nick = '';
+                switch(style) {
+                    case 'korean': nick = rand(nickKorAdj) + rand(nickKorNoun); break;
+                    case 'english': nick = rand(nickEngAdj) + rand(nickEngNoun); break;
+                    case 'game': nick = rand(nickEngAdj) + rand(nickEngNoun) + randNum(); break;
+                    case 'cute': nick = rand(nickCute) + (Math.random() > 0.5 ? randNum() : ''); break;
+                }
+                nicks.push(nick);
+            }
+            document.getElementById('nickname-result').innerHTML = nicks.map(n => `<div style="margin:5px 0;"><span style="color:#ddd;">${n}</span> <button class="copy-btn" onclick="copy('${n}')">복사</button></div>`).join('');
+        }
+
+        // Romanize Korean
+        const romInit = {'ㄱ':'g','ㄲ':'kk','ㄴ':'n','ㄷ':'d','ㄸ':'tt','ㄹ':'r','ㅁ':'m','ㅂ':'b','ㅃ':'pp','ㅅ':'s','ㅆ':'ss','ㅇ':'','ㅈ':'j','ㅉ':'jj','ㅊ':'ch','ㅋ':'k','ㅌ':'t','ㅍ':'p','ㅎ':'h'};
+        const romVow = {'ㅏ':'a','ㅐ':'ae','ㅑ':'ya','ㅒ':'yae','ㅓ':'eo','ㅔ':'e','ㅕ':'yeo','ㅖ':'ye','ㅗ':'o','ㅘ':'wa','ㅙ':'wae','ㅚ':'oe','ㅛ':'yo','ㅜ':'u','ㅝ':'wo','ㅞ':'we','ㅟ':'wi','ㅠ':'yu','ㅡ':'eu','ㅢ':'ui','ㅣ':'i'};
+        const romFin = {'':'','ㄱ':'k','ㄲ':'k','ㄳ':'k','ㄴ':'n','ㄵ':'n','ㄶ':'n','ㄷ':'t','ㄹ':'l','ㄺ':'k','ㄻ':'m','ㄼ':'l','ㄽ':'l','ㄾ':'l','ㄿ':'p','ㅀ':'l','ㅁ':'m','ㅂ':'p','ㅄ':'p','ㅅ':'t','ㅆ':'t','ㅇ':'ng','ㅈ':'t','ㅊ':'t','ㅋ':'k','ㅌ':'t','ㅍ':'p','ㅎ':'t'};
+        const cho = 'ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ';
+        const jung = 'ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ';
+        const jong = ['','ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅂ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+
+        function romanizeKorean() {
+            const input = document.getElementById('romanize-input').value;
+            let result = '';
+            for (const char of input) {
+                const code = char.charCodeAt(0);
+                if (code >= 0xAC00 && code <= 0xD7A3) {
+                    const idx = code - 0xAC00;
+                    const c = Math.floor(idx / 588);
+                    const v = Math.floor((idx % 588) / 28);
+                    const f = idx % 28;
+                    result += (romInit[cho[c]] || '') + (romVow[jung[v]] || '') + (romFin[jong[f]] || '');
+                } else {
+                    result += char;
+                }
+            }
+            document.getElementById('romanize-govt').textContent = result || '-';
+            // 여권용: 첫 글자(성) 대문자
+            const words = result.split(' ');
+            if (words.length > 0) words[0] = words[0].toUpperCase();
+            document.getElementById('romanize-passport').textContent = words.map((w, i) => i === 0 ? w : w.charAt(0).toUpperCase() + w.slice(1)).join(' ') || '-';
+        }
+
+        // Jamo Split/Combine
+        function jamoSplit() {
+            const input = document.getElementById('jamo-input').value;
+            let result = '';
+            for (const char of input) {
+                const code = char.charCodeAt(0);
+                if (code >= 0xAC00 && code <= 0xD7A3) {
+                    const idx = code - 0xAC00;
+                    const c = Math.floor(idx / 588);
+                    const v = Math.floor((idx % 588) / 28);
+                    const f = idx % 28;
+                    result += cho[c] + jung[v] + jong[f];
+                } else {
+                    result += char;
+                }
+            }
+            document.getElementById('jamo-result').textContent = result;
+        }
+
+        function jamoCombine() {
+            const input = document.getElementById('jamo-input').value;
+            let result = '';
+            let i = 0;
+            while (i < input.length) {
+                const c = cho.indexOf(input[i]);
+                if (c >= 0 && i + 1 < input.length) {
+                    const v = jung.indexOf(input[i + 1]);
+                    if (v >= 0) {
+                        let f = 0;
+                        if (i + 2 < input.length) {
+                            const fIdx = jong.indexOf(input[i + 2]);
+                            if (fIdx > 0 && (i + 3 >= input.length || jung.indexOf(input[i + 3]) < 0)) {
+                                f = fIdx;
+                                i++;
+                            }
+                        }
+                        result += String.fromCharCode(0xAC00 + c * 588 + v * 28 + f);
+                        i += 2;
+                        continue;
+                    }
+                }
+                result += input[i];
+                i++;
+            }
+            document.getElementById('jamo-result').textContent = result;
+        }
+
+        // ASCII Art
+        let asciiImg = null;
+        function loadAsciiImage(input) {
+            if (!input.files[0]) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                asciiImg = new Image();
+                asciiImg.onload = () => generateAscii();
+                asciiImg.src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        function generateAscii() {
+            if (!asciiImg) return;
+            const width = parseInt(document.getElementById('ascii-width').value);
+            document.getElementById('ascii-width-val').textContent = width;
+            const charset = document.getElementById('ascii-charset').value;
+
+            const chars = { standard: '@#%*+=-:. ', blocks: '█▓▒░ ', simple: '#. ' }[charset];
+
+            const canvas = document.getElementById('ascii-canvas');
+            const ratio = asciiImg.height / asciiImg.width;
+            canvas.width = width;
+            canvas.height = Math.floor(width * ratio * 0.5);
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(asciiImg, 0, 0, canvas.width, canvas.height);
+
+            const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+            let ascii = '';
+            for (let y = 0; y < canvas.height; y++) {
+                for (let x = 0; x < canvas.width; x++) {
+                    const i = (y * canvas.width + x) * 4;
+                    const brightness = (imgData[i] + imgData[i + 1] + imgData[i + 2]) / 3;
+                    const charIdx = Math.floor((brightness / 255) * (chars.length - 1));
+                    ascii += chars[chars.length - 1 - charIdx];
+                }
+                ascii += '\n';
+            }
+            document.getElementById('ascii-result').textContent = ascii;
+        }
+
+        // UUID Generator
+        function generateUUID() {
+            const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+                const r = Math.random() * 16 | 0;
+                return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+            });
+            document.getElementById('uuid-result').innerHTML = `<span style="font-family:monospace;color:#ddd;">${uuid}</span><button class="copy-btn" style="margin-left:10px;" onclick="copy('${uuid}')">복사</button>`;
+        }
+
+        function generateUUIDs(n) {
+            let uuids = [];
+            for (let i = 0; i < n; i++) {
+                uuids.push('xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+                    const r = Math.random() * 16 | 0;
+                    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+                }));
+            }
+            document.getElementById('uuid-result').innerHTML = uuids.map(u => `<div style="margin:3px 0;font-family:monospace;"><span style="color:#ddd;">${u}</span> <button class="copy-btn" onclick="copy('${u}')">복사</button></div>`).join('');
+        }
+
+        function validateUUID() {
+            const input = document.getElementById('uuid-validate').value.trim();
+            const el = document.getElementById('uuid-valid');
+            if (!input) { el.textContent = ''; return; }
+            const regex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+            if (regex.test(input)) {
+                const version = input.charAt(14);
+                el.innerHTML = `<span style="color:#5a5;">✓ 유효한 UUID v${version}</span>`;
+            } else {
+                el.innerHTML = `<span style="color:#c55;">✗ 유효하지 않음</span>`;
+            }
+        }
+
+        // SQL Formatter
+        function formatSQL() {
+            let sql = document.getElementById('sql-input').value;
+            const keywords = ['SELECT', 'FROM', 'WHERE', 'AND', 'OR', 'ORDER BY', 'GROUP BY', 'HAVING', 'JOIN', 'LEFT JOIN', 'RIGHT JOIN', 'INNER JOIN', 'OUTER JOIN', 'ON', 'INSERT INTO', 'VALUES', 'UPDATE', 'SET', 'DELETE FROM', 'CREATE TABLE', 'ALTER TABLE', 'DROP TABLE', 'LIMIT', 'OFFSET', 'UNION', 'AS', 'DISTINCT', 'COUNT', 'SUM', 'AVG', 'MIN', 'MAX', 'CASE', 'WHEN', 'THEN', 'ELSE', 'END', 'IN', 'NOT', 'NULL', 'IS', 'LIKE', 'BETWEEN'];
+
+            // 키워드 앞에 줄바꿈 추가
+            const newlineKeywords = ['SELECT', 'FROM', 'WHERE', 'AND', 'OR', 'ORDER BY', 'GROUP BY', 'HAVING', 'JOIN', 'LEFT JOIN', 'RIGHT JOIN', 'INNER JOIN', 'LIMIT', 'UNION'];
+
+            sql = sql.replace(/\s+/g, ' ').trim();
+            for (const kw of newlineKeywords) {
+                const regex = new RegExp('\\b' + kw + '\\b', 'gi');
+                sql = sql.replace(regex, '\n' + kw);
+            }
+
+            // 키워드 대문자로
+            for (const kw of keywords) {
+                const regex = new RegExp('\\b' + kw + '\\b', 'gi');
+                sql = sql.replace(regex, kw);
+            }
+
+            document.getElementById('sql-result').value = sql.trim();
+        }
+
+        function minifySQL() {
+            let sql = document.getElementById('sql-input').value;
+            sql = sql.replace(/\s+/g, ' ').replace(/\s*,\s*/g, ',').replace(/\s*=\s*/g, '=').trim();
+            document.getElementById('sql-result').value = sql;
+        }
+
+        // OG Preview
+        function updateOGPreview() {
+            const title = document.getElementById('og-title').value || '제목';
+            const desc = document.getElementById('og-desc').value || '설명';
+            const image = document.getElementById('og-image').value;
+            const url = document.getElementById('og-url').value || 'example.com';
+
+            document.getElementById('og-preview-title').textContent = title;
+            document.getElementById('og-preview-desc').textContent = desc;
+            document.getElementById('og-preview-url').textContent = new URL(url.startsWith('http') ? url : 'https://' + url, 'https://example.com').hostname;
+
+            const imgEl = document.getElementById('og-preview-img');
+            if (image) {
+                imgEl.innerHTML = `<img src="${image}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='이미지 로드 실패'">`;
+            } else {
+                imgEl.innerHTML = '이미지 없음';
+            }
+
+            // 메타 태그 생성
+            const meta = `<meta property="og:title" content="${title}">
+<meta property="og:description" content="${desc}">
+<meta property="og:image" content="${image}">
+<meta property="og:url" content="${url}">
+<meta property="og:type" content="website">`;
+            document.getElementById('og-meta').textContent = meta;
+        }
 
         // Copy
         function copyText(id){navigator.clipboard.writeText(document.getElementById(id).textContent).then(()=>alert('복사됨'));}
