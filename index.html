@@ -3908,13 +3908,24 @@
             zodiac:['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓','⛎','🔯','☯️','☮️','☪️','✝️','☦️','✡️','🕉️','☸️','🛐','⚛️','🆔','♀️','♂️','⚧️','✴️','🔱','📛','🔰','⭕','✅','☑️','✔️','❌','❎','➕','➖','➗','✖️','♾️','❓','❔','❕','❗','〰️','💱','💲','⚕️','♻️','⚜️','🔅','🔆','🌀','〽️','㊗️','㊙️','🈴','🈵','🈹','🈲','🉐','🈶','🈚','🈸','🈺','🈷️','🉑','🆘']
         };
         const emojiCategoryNames = {smile:'😊 표정',sad:'😢 슬픔/화남',heart:'❤️ 하트',hand:'👋 손/몸',fire:'✨ 효과',animal:'🐶 동물',food:'🍎 음식',work:'💼 사무',weather:'☀️ 날씨',travel:'✈️ 여행',flag:'🇰🇷 국기',arrow:'➡️ 화살표',number:'①  숫자',letter:'Ⓐ 문자',symbol:'※ 기호',music:'🎵 음악',sport:'⚽ 스포츠',clock:'🕐 시계',zodiac:'♈ 별자리'};
+        function toggleEmojiCategory(el) {
+            const content = el.nextElementSibling;
+            const arrow = el.querySelector('.emoji-arrow');
+            if(content.style.display === 'none') {
+                content.style.display = 'flex';
+                arrow.textContent = '▼';
+            } else {
+                content.style.display = 'none';
+                arrow.textContent = '▶';
+            }
+        }
         function searchEmoji() {
             const q = document.getElementById('emoji-search').value.toLowerCase();
             const container = document.getElementById('emoji-result');
             if(!q) {
                 let html = '';
                 for(const [key, emojis] of Object.entries(emojiData)) {
-                    html += `<div style="margin-bottom:15px;"><div style="font-size:0.85rem;color:#888;margin-bottom:8px;border-bottom:1px solid #333;padding-bottom:4px;">${emojiCategoryNames[key] || key}</div><div style="display:flex;flex-wrap:wrap;gap:3px;font-size:1.4rem;">${emojis.map(e => `<span style="cursor:pointer;padding:4px;border-radius:4px;transition:background 0.15s;" onmouseover="this.style.background='#333'" onmouseout="this.style.background=''" onclick="copyEmoji('${e}')">${e}</span>`).join('')}</div></div>`;
+                    html += `<div style="margin-bottom:12px;"><div onclick="toggleEmojiCategory(this)" style="font-size:0.85rem;color:#888;margin-bottom:8px;border-bottom:1px solid #333;padding-bottom:4px;cursor:pointer;user-select:none;"><span class="emoji-arrow" style="display:inline-block;width:14px;font-size:0.7rem;">▼</span> ${emojiCategoryNames[key] || key}</div><div style="display:flex;flex-wrap:wrap;gap:3px;font-size:1.4rem;">${emojis.map(e => `<span style="cursor:pointer;padding:4px;border-radius:4px;transition:background 0.15s;" onmouseover="this.style.background='#333'" onmouseout="this.style.background=''" onclick="copyEmoji('${e}')">${e}</span>`).join('')}</div></div>`;
                 }
                 container.innerHTML = html;
                 return;
