@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="100%" style="stop-color:#111827"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="80" y="200" width="120" height="120" rx="20" fill="#2563eb"/>
+  <text x="140" y="280" font-size="70" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">W</text>
+  <text x="230" y="285" font-size="72" fill="#fff" font-family="Arial, sans-serif" font-weight="bold">wings-tool</text>
+  <text x="80" y="370" font-size="32" fill="#9ca3af" font-family="Arial, sans-serif">QR코드 · PDF 병합 · 글자수 세기 · 텍스트 변환</text>
+  <text x="80" y="420" font-size="28" fill="#6b7280" font-family="Arial, sans-serif">누구나 무료로 사용할 수 있는 온라인 도구 모음</text>
+  <text x="80" y="550" font-size="24" fill="#2563eb" font-family="Arial, sans-serif">online-tools-nu.vercel.app</text>
+</svg>

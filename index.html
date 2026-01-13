@@ -3,14 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>wings-tool - 개발자 도구 모음</title>
-    <meta name="description" content="개발하면서 자주 쓰는 도구들 모아봤습니다. QR코드, 글자수 세기, PDF 변환 등 무료로 사용하세요.">
+    <title>wings-tool - 온라인 도구 모음</title>
+    <meta name="description" content="자주 쓰는 온라인 도구들을 모아봤습니다. QR코드, 글자수 세기, PDF 변환 등 무료로 사용하세요.">
     <meta name="google-site-verification" content="8-710rPHIPud95_b_MtQGbK-7oJrH9jP3CTtTruxRPM" />
     <meta name="naver-site-verification" content="4bee6e815402d1c8f958bf701bbce6a652d32cb9" />
-    <meta property="og:title" content="wings-tool - 개발자 도구 모음">
+    <meta property="og:title" content="wings-tool - 온라인 도구 모음">
     <meta property="og:description" content="QR코드, PDF 병합, 글자수 세기 등 무료 온라인 도구">
     <meta property="og:type" content="website">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%23222'/><text x='50' y='65' font-size='45' text-anchor='middle' fill='%23888' font-family='Arial' font-weight='bold'>W</text></svg>">
+    <meta property="og:url" content="https://online-tools-nu.vercel.app/">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:site_name" content="wings-tool">
+    <meta property="og:image" content="https://online-tools-nu.vercel.app/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="wings-tool - 온라인 도구 모음">
+    <meta name="twitter:description" content="QR코드, PDF 병합, 글자수 세기 등 무료 온라인 도구">
+    <meta name="twitter:image" content="https://online-tools-nu.vercel.app/og-image.png">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%232563eb'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='%23fff' font-family='Arial' font-weight='bold'>W</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%232563eb'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='%23fff' font-family='Arial' font-weight='bold'>W</text></svg>">
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8968767404465379" crossorigin="anonymous"></script>
     <style>
@@ -46,6 +57,8 @@
         .fixed-sidebar .sidebar-btn:hover .btn-text { display: block; }
         body.light .fixed-sidebar .sidebar-btn { background: #fff; border-color: #ddd; color: #666; }
         body.light .fixed-sidebar .sidebar-btn:hover { background: #f5f5f5; color: #333; border-color: #bbb; }
+        .fixed-sidebar .sidebar-btn:active { background: #333; color: #fff; border-color: #555; transform: scale(0.93); }
+        body.light .fixed-sidebar .sidebar-btn:active { background: #ddd; color: #222; border-color: #aaa; transform: scale(0.93); }
         header { padding: 8px 0 16px; }
         header p { color: #444; font-size: 0.8rem; }
         .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 8px; flex-wrap: wrap; }
@@ -106,6 +119,7 @@
         input[type="range"] { padding: 0; }
         .btn { background: #1a1a1a; border: 1px solid #2a2a2a; color: #aaa; padding: 10px 18px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: all 0.15s; margin-right: 6px; margin-bottom: 6px; }
         .btn:hover { background: #222; border-color: #333; color: #ccc; }
+        .btn:active { background: #333; border-color: #444; color: #fff; transform: scale(0.97); }
         .btn-primary { background: #2a2a2a; border-color: #333; color: #ddd; }
         .btn-danger { background: #3a2020; border-color: #442828; color: #c88; }
         .result-box { background: #0a0a0a; border-radius: 6px; padding: 15px; margin-top: 15px; border: 1px solid #1a1a1a; word-break: break-all; font-size: 0.85rem; }
@@ -117,6 +131,7 @@
         .stat-box .label { color: #555; font-size: 0.7rem; margin-top: 2px; }
         .copy-btn { background: #1a1a1a; border: none; color: #666; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.75rem; margin-top: 8px; }
         .copy-btn:hover { color: #999; }
+        .copy-btn:active { background: #333; color: #fff; transform: scale(0.95); }
         .row { display: flex; gap: 10px; flex-wrap: wrap; }
         .row > * { flex: 1; min-width: 150px; }
         .file-list { margin: 10px 0; }
@@ -204,6 +219,8 @@
         body.light input, body.light textarea, body.light select { border-color: #ddd; background: #fff; color: #333; }
         body.light .btn { background: #f0f0f0; border-color: #ddd; color: #444; }
         body.light .btn:hover { background: #e5e5e5; }
+        body.light .btn:active { background: #d0d0d0; border-color: #bbb; color: #222; transform: scale(0.97); }
+        body.light .copy-btn:active { background: #ddd; color: #222; transform: scale(0.95); }
         body.light .result-box { background: #f9f9f9; border-color: #e5e5e5; }
         body.light .filter-tabs { border-color: #e5e5e5; }
         body.light .filter-tab { color: #888; }
@@ -232,6 +249,7 @@
         <div class="fixed-sidebar">
             <button class="sidebar-btn" onclick="toggleTheme()" title="테마"><span class="btn-text">테마</span>◐</button>
             <button class="sidebar-btn" onclick="toggleLangModal()" title="언어"><span class="btn-text">언어</span>🌐</button>
+            <button class="sidebar-btn" onclick="shareSite()" title="공유"><span class="btn-text">공유</span>📤</button>
             <a href="https://buymeacoffee.com/wings1008" target="_blank" class="sidebar-btn" title="후원"><span class="btn-text">후원</span>☕</a>
         </div>
 
@@ -2502,9 +2520,9 @@
             <h2>음력 ↔ 양력 변환</h2>
             <div class="info-box">간이 변환입니다. 정확한 변환은 천문 데이터가 필요합니다.</div>
             <div class="row">
-                <input type="number" id="lunar-year" placeholder="년" min="1900" max="2100">
-                <input type="number" id="lunar-month" placeholder="월" min="1" max="12">
-                <input type="number" id="lunar-day" placeholder="일" min="1" max="30">
+                <input type="number" id="lunar-year" placeholder="연도 (예: 2024)" min="1900" max="2100">
+                <input type="number" id="lunar-month" placeholder="월 (1~12)" min="1" max="12">
+                <input type="number" id="lunar-day" placeholder="일 (1~31)" min="1" max="30">
             </div>
             <div class="options">
                 <label><input type="checkbox" id="lunar-leap"> 윤달</label>
@@ -2656,7 +2674,7 @@
         <div class="tool-section" id="tool-about">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>소개</h2>
-            <p style="color:#666;line-height:1.8;">개발하다 보면 자주 쓰는 도구들이 있는데, 매번 찾아다니기 귀찮아서 모아봤습니다. 모든 처리는 브라우저에서 이루어지고, 서버로 데이터가 전송되지 않습니다.</p>
+            <p style="color:#666;line-height:1.8;">자주 쓰는 도구들이 있는데, 매번 찾아다니기 귀찮아서 모아봤습니다. 모든 처리는 브라우저에서 이루어지고, 서버로 데이터가 전송되지 않습니다.</p>
             <div style="margin-top:20px;padding-top:20px;border-top:1px solid #1a1a1a;">
                 <p style="color:#555;font-size:0.85rem;">도움이 되셨다면 후원해주세요</p>
                 <a href="https://buymeacoffee.com/wings1008" target="_blank" class="btn btn-primary" style="margin-top:10px;display:inline-block;text-decoration:none;">☕ Buy me a coffee</a>
@@ -2849,6 +2867,20 @@
 
         // Theme
         let isDark = localStorage.getItem('theme') !== 'light';
+        function shareSite() {
+            const shareData = {
+                title: 'wings-tool',
+                text: '자주 쓰는 온라인 도구 모음',
+                url: 'https://online-tools-nu.vercel.app/'
+            };
+            if (navigator.share) {
+                navigator.share(shareData);
+            } else {
+                navigator.clipboard.writeText(shareData.url).then(() => {
+                    alert('링크가 복사되었습니다!');
+                });
+            }
+        }
         function toggleTheme() {
             isDark = !isDark;
             document.body.classList.toggle('light', !isDark);
@@ -3353,7 +3385,7 @@
         // Lorem
         function generateLorem() {
             const n = +document.getElementById('lorem-count').value;
-            const p = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit.","Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.","Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.","Excepteur sint occaecat cupidatat non proident."];
+            const p = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit.","Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.","Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.","Excepteur sint occaecat cupidatat non proident.","Nulla facilisi morbi tempus iaculis urna id volutpat lacus.","Viverra accumsan in nisl nisi scelerisque eu ultrices vitae.","Amet consectetur adipiscing elit pellentesque habitant morbi tristique.","Egestas purus viverra accumsan in nisl nisi scelerisque.","Nunc sed blandit libero volutpat sed cras ornare arcu.","Feugiat in fermentum posuere urna nec tincidunt praesent.","Massa tincidunt nunc pulvinar sapien et ligula ullamcorper.","Pellentesque habitant morbi tristique senectus et netus et malesuada.","Amet nisl suscipit adipiscing bibendum est ultricies integer.","Vitae congue mauris rhoncus aenean vel elit scelerisque.","Turpis egestas pretium aenean pharetra magna ac placerat.","Arcu cursus vitae congue mauris rhoncus aenean vel.","Facilisis magna etiam tempor orci eu lobortis elementum.","Consectetur adipiscing elit duis tristique sollicitudin nibh sit.","Mattis molestie a iaculis at erat pellentesque adipiscing.","Magnis dis parturient montes nascetur ridiculus mus mauris.","Neque vitae tempus quam pellentesque nec nam aliquam.","Ultrices sagittis orci a scelerisque purus semper eget duis.","Bibendum enim facilisis gravida neque convallis a cras.","Vitae proin sagittis nisl rhoncus mattis rhoncus urna neque."];
             document.getElementById('lorem-result').textContent = Array(n).fill(0).map((_,i)=>p[i%p.length]).join('\n\n');
         }
 
@@ -4196,7 +4228,7 @@
         }
 
         // Korean Lorem
-        const loremKrSentences = ['다람쥐 헌 쳇바퀴에 타고파','키스의 고유조건은 입술끼리 , 닿는다','정 , 참 주무세요?','한글은 세종대왕이 만든 문자입니다','빈 수레가 요란하다','고래 싸움에 새우 등 터진다','낮말은 새가 듣고 밤말은 쥐가 듣는다','호랑이도 제 말하면 온다','개천에서 용 난다','백지장도 맞들면 낫다','소 잃고 외양간 고친다','콩 심은 데 콩 나고 팥 심은 데 팥 난다'];
+        const loremKrSentences = ['다람쥐 헌 쳇바퀴에 타고파','키스의 고유조건은 입술끼리 닿는 것','한글은 세종대왕이 만든 문자입니다','빈 수레가 요란하다','고래 싸움에 새우 등 터진다','낮말은 새가 듣고 밤말은 쥐가 듣는다','호랑이도 제 말하면 온다','개천에서 용 난다','백지장도 맞들면 낫다','소 잃고 외양간 고친다','콩 심은 데 콩 나고 팥 심은 데 팥 난다','가는 말이 고와야 오는 말이 곱다','구슬이 서 말이라도 꿰어야 보배','뜻이 있는 곳에 길이 있다','시작이 반이다','천 리 길도 한 걸음부터','아는 것이 힘이다','배움에는 왕도가 없다','실패는 성공의 어머니','하늘은 스스로 돕는 자를 돕는다','세월은 사람을 기다려 주지 않는다','웃는 얼굴에 침 뱉으랴','가랑비에 옷 젖는 줄 모른다','등잔 밑이 어둡다','될성부른 나무는 떡잎부터 알아본다','발 없는 말이 천 리 간다','세 살 버릇 여든까지 간다','작은 고추가 맵다','쥐구멍에도 볕 들 날 있다','티끌 모아 태산','하늘이 무너져도 솟아날 구멍이 있다','어물전 망신은 꼴뚜기가 시킨다','원숭이도 나무에서 떨어진다','우물 안 개구리','입에 쓴 약이 몸에 좋다','지렁이도 밟으면 꿈틀한다','칼로 물 베기','콩으로 메주를 쑨다 해도 안 믿는다','하룻강아지 범 무서운 줄 모른다','핑계 없는 무덤 없다'];
         function generateLoremKr() {
             const count = +document.getElementById('lorem-kr-count').value || 3;
             let result = [];
@@ -7215,11 +7247,11 @@
         }
 
         // Nickname Generator
-        const nickKorAdj = ['행복한', '즐거운', '용감한', '슬기로운', '귀여운', '멋진', '빛나는', '달콤한', '상큼한', '따뜻한', '시원한', '날렵한', '영리한', '씩씩한', '푸른', '붉은', '하얀', '검은', '노란', '분홍'];
-        const nickKorNoun = ['고양이', '강아지', '토끼', '여우', '곰', '사자', '호랑이', '코끼리', '팬더', '펭귄', '독수리', '참새', '올빼미', '돌고래', '상어', '해파리', '나비', '벌', '구름', '바람', '별', '달', '해', '숲', '바다'];
-        const nickEngAdj = ['Happy', 'Lucky', 'Brave', 'Swift', 'Clever', 'Cool', 'Bright', 'Wild', 'Silent', 'Golden', 'Silver', 'Crystal', 'Dark', 'Light', 'Storm', 'Fire', 'Ice', 'Thunder'];
-        const nickEngNoun = ['Wolf', 'Fox', 'Bear', 'Tiger', 'Lion', 'Eagle', 'Hawk', 'Dragon', 'Phoenix', 'Shadow', 'Knight', 'Hunter', 'Warrior', 'Wizard', 'Ninja', 'Samurai', 'Panda', 'Raven'];
-        const nickCute = ['뭉치', '콩이', '밤이', '솜이', '달이', '별이', '구름이', '하늘이', '바다', '모찌', '젤리', '푸딩', '쿠키', '초코', '딸기', '복숭아', '레몬', '민트', '라떼', '모카'];
+        const nickKorAdj = ['행복한','즐거운','용감한','슬기로운','귀여운','멋진','빛나는','달콤한','상큼한','따뜻한','시원한','날렵한','영리한','씩씩한','푸른','붉은','하얀','검은','노란','분홍','신비로운','화려한','조용한','활발한','차분한','열정적인','순수한','강인한','부드러운','청량한','우아한','당당한','호기심많은','자유로운','낭만적인','명랑한','든든한','포근한','산뜻한','깔끔한','소중한','특별한','반짝이는','기운찬','느긋한','재빠른','정직한','성실한','지혜로운','유쾌한'];
+        const nickKorNoun = ['고양이','강아지','토끼','여우','곰','사자','호랑이','코끼리','팬더','펭귄','독수리','참새','올빼미','돌고래','상어','해파리','나비','벌','구름','바람','별','달','해','숲','바다','하늘','산','강','호수','눈꽃','민들레','장미','벚꽃','해바라기','은하수','무지개','오로라','햇살','달빛','새벽','황혼','소나기','안개','이슬','눈송이','파도','조약돌','모래','산호','진주','다이아','루비','사파이어','에메랄드','수정','오팔','자수정','호박','비취'];
+        const nickEngAdj = ['Happy','Lucky','Brave','Swift','Clever','Cool','Bright','Wild','Silent','Golden','Silver','Crystal','Dark','Light','Storm','Fire','Ice','Thunder','Mystic','Royal','Noble','Fierce','Gentle','Wise','Bold','Calm','Radiant','Shadow','Cosmic','Electric','Frozen','Blazing','Ancient','Eternal','Sacred','Divine','Phantom','Stellar','Lunar','Solar','Crimson','Azure','Emerald','Violet','Scarlet','Ivory','Obsidian','Velvet','Neon','Cyber','Pixel','Quantum','Hyper','Ultra','Mega','Turbo','Primal','Alpha','Omega','Apex'];
+        const nickEngNoun = ['Wolf','Fox','Bear','Tiger','Lion','Eagle','Hawk','Dragon','Phoenix','Shadow','Knight','Hunter','Warrior','Wizard','Ninja','Samurai','Panda','Raven','Falcon','Serpent','Viper','Panther','Jaguar','Leopard','Lynx','Owl','Crow','Swan','Dolphin','Shark','Whale','Kraken','Griffin','Unicorn','Pegasus','Hydra','Titan','Giant','Golem','Specter','Wraith','Spirit','Phantom','Guardian','Sentinel','Champion','Legend','Hero','Blade','Storm','Frost','Flame','Thunder','Comet','Nova','Star','Moon','Sun','Sky','Ocean','Mountain','Forest','River','Wind','Cloud'];
+        const nickCute = ['뭉치','콩이','밤이','솜이','달이','별이','구름이','하늘이','바다','모찌','젤리','푸딩','쿠키','초코','딸기','복숭아','레몬','민트','라떼','모카','카푸치노','마카롱','크림','버블','캔디','슈가','허니','메이플','바닐라','카라멜','피치','체리','베리','키위','망고','멜론','포도','사과','배','감','귤','오렌지','자몽','코코넛','아몬드','피스타치오','헤이즐넛','캐슈넛','호두','밤','도토리','솜사탕','팝콘','와플','토스트','브레드','케이크','타르트','파이','도넛','머핀','스콘','크루아상','에클레어','티라미수','판나코타','슈크림','몽블랑','브라우니','치즈케이크'];
 
         function generateNickname() {
             const style = document.getElementById('nickname-style').value;
