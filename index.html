@@ -1293,6 +1293,7 @@
         <div class="tool-section" id="tool-pomodoro">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>뽀모도로 타이머</h2>
+            <div class="info-box">이탈리아어로 "토마토" - 토마토 모양 타이머에서 유래한 시간 관리법<br>• 25분 집중 작업 → 5분 짧은 휴식 → 4회 반복 후 15분 긴 휴식</div>
             <div class="timer-display" id="pomo-display">25:00</div>
             <div class="timer-controls">
                 <button class="btn btn-primary" id="pomo-start" onclick="startPomodoro()">시작</button>
@@ -1302,6 +1303,10 @@
                 <button class="btn" onclick="setPomoTime(25)">25분</button>
                 <button class="btn" onclick="setPomoTime(5)">5분</button>
                 <button class="btn" onclick="setPomoTime(15)">15분</button>
+            </div>
+            <div class="row" style="margin-top:15px;">
+                <input type="number" id="pomo-custom" placeholder="직접 입력 (분)" min="1" max="180">
+                <button class="btn" onclick="setPomoTime(document.getElementById('pomo-custom').value)">설정</button>
             </div>
         </div>
 
@@ -6959,7 +6964,8 @@
 
         // Timer Combined
         const timerTemplates = {
-            pomodoro: `<div class="timer-display" id="tmr-display">25:00</div>
+            pomodoro: `<div class="info-box">이탈리아어로 "토마토" - 토마토 모양 타이머에서 유래한 시간 관리법<br>• 25분 집중 작업 → 5분 짧은 휴식 → 4회 반복 후 15분 긴 휴식</div>
+                <div class="timer-display" id="tmr-display">25:00</div>
                 <div class="timer-controls">
                     <button class="btn btn-primary" onclick="tmrPomoStart()">시작</button>
                     <button class="btn" onclick="tmrPomoPause()">일시정지</button>
@@ -6969,6 +6975,10 @@
                     <label><input type="radio" name="tmr-pomo" value="25" checked onchange="tmrPomoSet(25)"> 25분</label>
                     <label><input type="radio" name="tmr-pomo" value="5" onchange="tmrPomoSet(5)"> 5분</label>
                     <label><input type="radio" name="tmr-pomo" value="15" onchange="tmrPomoSet(15)"> 15분</label>
+                </div>
+                <div class="row" style="margin-top:15px;">
+                    <input type="number" id="tmr-pomo-custom" placeholder="직접 입력 (분)" min="1" max="180">
+                    <button class="btn" onclick="tmrPomoSet(document.getElementById('tmr-pomo-custom').value)">설정</button>
                 </div>`,
             stopwatch: `<div class="timer-display" id="tmr-display">00:00:00</div>
                 <div class="timer-controls">
