@@ -3254,7 +3254,8 @@
             try {
                 const zip = new JSZip();
                 for (const f of zipFiles) {
-                    zip.file(f.name, f);
+                    const data = await f.arrayBuffer();
+                    zip.file(f.name, data);
                 }
                 const blob = await zip.generateAsync({type: 'blob'});
                 const filename = document.getElementById('zip-filename').value || 'archive.zip';
