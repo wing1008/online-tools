@@ -33,7 +33,18 @@
         .sort-select { padding: 5px 8px; border-radius: 4px; border: 1px solid #222; background: #111; color: #888; font-size: 0.75rem; cursor: pointer; }
         .section-title { color: #555; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; margin: 20px 0 8px; font-weight: 500; padding-left: 2px; }
         .tools-grid { display: flex; flex-wrap: wrap; gap: 6px; }
-        .tool-card { background: #111; border-radius: 4px; padding: 6px 12px; cursor: pointer; border: 1px solid #1a1a1a; transition: all 0.12s; display: inline-flex; align-items: center; gap: 6px; }
+        .tool-card { background: #111; border-radius: 4px; padding: 6px 12px; cursor: pointer; border: 1px solid #1a1a1a; transition: all 0.12s; display: inline-flex; align-items: center; gap: 6px; border-left: 3px solid #444; }
+        /* Category Colors */
+        .tool-card[data-cat="text"] { border-left-color: #5b8def; }
+        .tool-card[data-cat="image"] { border-left-color: #4ade80; }
+        .tool-card[data-cat="dev"] { border-left-color: #a78bfa; }
+        .tool-card[data-cat="calc"] { border-left-color: #f59e0b; }
+        .tool-card[data-cat="util"] { border-left-color: #ec4899; }
+        .tool-card[data-cat="test"] { border-left-color: #14b8a6; }
+        .tool-card[data-cat="pdf"] { border-left-color: #ef4444; }
+        /* Letter Group Divider */
+        .letter-divider { width: 100%; padding: 8px 0 4px 2px; font-size: 0.7rem; font-weight: 600; color: #666; letter-spacing: 1px; border-left: 3px solid #444; margin-top: 12px; }
+        .letter-divider:first-child { margin-top: 0; }
         .tool-card:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,0.3); border-color: #333; }
         .tool-card h3 { font-size: 0.8rem; color: #bbb; font-weight: 400; }
         .tool-card p { display: none; }
@@ -153,6 +164,7 @@
         body.light .lang-modal-content { background: #fff; border-color: #ddd; }
         body.light .lang-modal h3 { color: #222; }
         body.light .lang-option { background: #f5f5f5; border-color: #ddd; color: #333; }
+        body.light .letter-divider { color: #888; }
     </style>
 </head>
 <body>
@@ -2734,6 +2746,33 @@
             }
         }
 
+        // Letter colors for alphabetical grouping
+        const letterColors = {
+            'ㄱ': '#5b8def', 'ㄴ': '#4ade80', 'ㄷ': '#a78bfa', 'ㄹ': '#f59e0b', 'ㅁ': '#ec4899',
+            'ㅂ': '#14b8a6', 'ㅅ': '#ef4444', 'ㅇ': '#8b5cf6', 'ㅈ': '#06b6d4', 'ㅊ': '#f97316',
+            'ㅋ': '#84cc16', 'ㅌ': '#6366f1', 'ㅍ': '#d946ef', 'ㅎ': '#0ea5e9',
+            'A': '#5b8def', 'B': '#4ade80', 'C': '#a78bfa', 'D': '#f59e0b', 'E': '#ec4899',
+            'F': '#14b8a6', 'G': '#ef4444', 'H': '#8b5cf6', 'I': '#06b6d4', 'J': '#f97316',
+            'K': '#84cc16', 'L': '#6366f1', 'M': '#d946ef', 'N': '#0ea5e9', 'O': '#f472b6',
+            'P': '#22d3d1', 'Q': '#a3e635', 'R': '#818cf8', 'S': '#fb923c', 'T': '#4ade80',
+            'U': '#c084fc', 'V': '#38bdf8', 'W': '#facc15', 'X': '#f87171', 'Y': '#34d399', 'Z': '#a78bfa'
+        };
+
+        function getFirstLetter(name, isKorean) {
+            if (!name) return '#';
+            const first = name.charAt(0).toUpperCase();
+            if (isKorean) {
+                const code = first.charCodeAt(0);
+                if (code >= 0xAC00 && code <= 0xD7A3) {
+                    const cho = Math.floor((code - 0xAC00) / 588);
+                    const choList = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+                    return choList[cho];
+                }
+            }
+            if (/[A-Z]/.test(first)) return first;
+            return '#';
+        }
+
         // Sort Tools
         function sortTools() {
             currentSort = document.getElementById('sort-select').value;
@@ -2760,6 +2799,8 @@
                 cards = cards.filter(c => c.dataset.cat === currentCategory);
             }
 
+            const isKorean = currentSort === 'name';
+
             // Sort
             if (currentSort === 'name') {
                 cards.sort((a, b) => (a.dataset.name || '').localeCompare(b.dataset.name || '', 'ko'));
@@ -2771,10 +2812,26 @@
                 });
             }
 
-            // Clone and append to all-tools-grid
+            // Group by first letter and render
             allToolsGrid.innerHTML = '';
+            let currentLetter = null;
+
             cards.forEach(card => {
+                const name = isKorean ? (card.dataset.name || '') : (card.querySelector('h3')?.textContent || '');
+                const letter = getFirstLetter(name, isKorean);
+
+                // Add letter divider if new group
+                if (letter !== currentLetter) {
+                    currentLetter = letter;
+                    const divider = document.createElement('div');
+                    divider.className = 'letter-divider';
+                    divider.textContent = letter;
+                    divider.style.borderLeftColor = letterColors[letter] || '#666';
+                    allToolsGrid.appendChild(divider);
+                }
+
                 const clone = card.cloneNode(true);
+                clone.style.borderLeftColor = letterColors[letter] || '#666';
                 clone.onclick = () => openTool(card.dataset.tool);
                 const favBtn = clone.querySelector('.fav-btn');
                 if (favBtn) {
