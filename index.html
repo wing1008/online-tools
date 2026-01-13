@@ -9,30 +9,35 @@
     <meta property="og:description" content="QR코드, PDF 병합, 글자수 세기 등 무료 온라인 도구">
     <meta property="og:type" content="website">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%23222'/><text x='50' y='65' font-size='45' text-anchor='middle' fill='%23888' font-family='Arial' font-weight='bold'>T</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8968767404465379" crossorigin="anonymous"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', -apple-system, sans-serif; background: #0a0a0a; min-height: 100vh; color: #999; line-height: 1.5; }
-        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #1a1a1a; margin-bottom: 40px; }
-        .logo { font-size: 1.1rem; font-weight: 600; color: #fff; letter-spacing: -0.5px; }
-        .nav-right { display: flex; align-items: center; gap: 15px; }
-        nav a { color: #555; text-decoration: none; font-size: 0.85rem; }
+        body { font-family: 'Pretendard', -apple-system, sans-serif; background: #0a0a0a; min-height: 100vh; color: #888; line-height: 1.4; font-size: 14px; }
+        .container { max-width: 960px; margin: 0 auto; padding: 16px; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #1a1a1a; margin-bottom: 16px; gap: 12px; flex-wrap: wrap; }
+        .logo { font-size: 1rem; font-weight: 700; color: #fff; letter-spacing: -0.5px; cursor: pointer; }
+        .nav-center { flex: 1; max-width: 280px; }
+        .nav-search { width: 100%; padding: 7px 12px 7px 32px; border-radius: 4px; border: 1px solid #222; background: #111; color: #ccc; font-size: 0.8rem; }
+        .nav-search:focus { outline: none; border-color: #333; }
+        .nav-search-wrap { position: relative; }
+        .nav-search-wrap::before { content: '⌕'; position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #444; font-size: 0.9rem; }
+        .nav-right { display: flex; align-items: center; gap: 10px; }
+        nav a { color: #555; text-decoration: none; font-size: 0.8rem; }
         nav a:hover { color: #888; }
-        .lang-btn { background: none; border: 1px solid #333; color: #666; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; gap: 5px; }
-        .lang-btn:hover { border-color: #444; color: #888; }
-        .donate-btn { background: #1a1a1a; border: 1px solid #333; color: #888; padding: 6px 12px; border-radius: 5px; cursor: pointer; font-size: 0.8rem; text-decoration: none; }
-        .donate-btn:hover { background: #222; color: #aaa; }
-        header { text-align: center; padding: 30px 0 40px; }
-        header h1 { font-size: 1.5rem; color: #ddd; font-weight: 600; margin-bottom: 8px; }
-        header p { color: #555; font-size: 0.9rem; }
-        .section-title { color: #444; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; margin: 35px 0 12px; font-weight: 500; }
-        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
-        .tool-card { background: #111; border-radius: 8px; padding: 16px 18px; cursor: pointer; border: 1px solid #1a1a1a; transition: all 0.15s; }
-        .tool-card:hover { background: #161616; border-color: #252525; }
-        .tool-card h3 { font-size: 0.9rem; color: #ccc; font-weight: 500; margin-bottom: 3px; }
-        .tool-card p { color: #555; font-size: 0.75rem; }
+        .icon-btn { background: none; border: none; color: #555; padding: 4px; cursor: pointer; font-size: 1rem; }
+        .icon-btn:hover { color: #888; }
+        header { padding: 8px 0 16px; }
+        header p { color: #444; font-size: 0.8rem; }
+        .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 8px; flex-wrap: wrap; }
+        .sort-select { padding: 5px 8px; border-radius: 4px; border: 1px solid #222; background: #111; color: #888; font-size: 0.75rem; cursor: pointer; }
+        .section-title { color: #555; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; margin: 20px 0 8px; font-weight: 500; padding-left: 2px; }
+        .tools-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+        .tool-card { background: #111; border-radius: 4px; padding: 6px 12px; cursor: pointer; border: 1px solid #1a1a1a; transition: all 0.12s; display: inline-flex; align-items: center; gap: 6px; }
+        .tool-card:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,0.3); border-color: #333; }
+        .tool-card h3 { font-size: 0.8rem; color: #bbb; font-weight: 400; }
+        .tool-card p { display: none; }
+        .tool-card .icon { font-size: 0.9rem; }
         .tool-section { display: none; background: #111; border-radius: 10px; padding: 25px; margin: 20px 0; border: 1px solid #1a1a1a; }
         .tool-section.active { display: block; }
         .tool-section h2 { font-size: 1.1rem; color: #ddd; font-weight: 500; margin-bottom: 20px; }
@@ -102,139 +107,115 @@
         .lang-modal h3 { color: #ddd; margin-bottom: 15px; font-size: 1rem; }
         .lang-option { display: block; width: 100%; padding: 10px 15px; background: #1a1a1a; border: 1px solid #222; border-radius: 6px; color: #ccc; cursor: pointer; margin-bottom: 8px; font-size: 0.9rem; text-align: left; }
         .lang-option:hover { background: #222; }
-        @media (max-width: 600px) { .tools-grid { grid-template-columns: 1fr 1fr; } nav { flex-direction: column; gap: 12px; } .timer-display { font-size: 2rem; } .category-tabs { flex-wrap: wrap; } .category-tab { padding: 6px 10px; font-size: 0.7rem; } }
+        @media (max-width: 600px) { nav { flex-direction: column; } .nav-center { max-width: 100%; order: 3; width: 100%; } .timer-display { font-size: 2rem; } .filter-tabs { overflow-x: auto; } }
 
-        /* Search */
-        .search-box { position: relative; margin-bottom: 20px; }
-        .search-box input { padding-left: 40px; background: #111; border: 1px solid #222; }
-        .search-box::before { content: '🔍'; position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 0.9rem; }
-        .search-box input:focus { border-color: #444; }
-
-        /* Category Tabs */
-        .category-tabs { display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 5px; }
-        .category-tab { padding: 8px 14px; background: #111; border: 1px solid #1a1a1a; border-radius: 20px; color: #666; font-size: 0.8rem; cursor: pointer; white-space: nowrap; transition: all 0.15s; }
-        .category-tab:hover { border-color: #333; color: #888; }
-        .category-tab.active { background: #222; border-color: #444; color: #ddd; }
+        /* Filter Tabs - Underline Style */
+        .filter-tabs { display: flex; gap: 4px; border-bottom: 1px solid #1a1a1a; margin-bottom: 12px; }
+        .filter-tab { padding: 8px 12px; background: none; border: none; border-bottom: 2px solid transparent; color: #555; font-size: 0.75rem; cursor: pointer; white-space: nowrap; transition: all 0.12s; }
+        .filter-tab:hover { color: #888; }
+        .filter-tab.active { color: #ddd; border-bottom-color: #ddd; }
 
         /* Recent & Favorites */
-        .special-section { margin-bottom: 25px; }
-        .special-section .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .special-section .section-title { margin: 0; }
+        .special-section { margin-bottom: 16px; }
+        .special-section .section-title { margin: 0 0 8px 0; }
 
-        /* Tool Card with Icon */
+        /* Favorite Button - Hidden by default */
         .tool-card { position: relative; }
-        .tool-card .icon { font-size: 1.3rem; margin-bottom: 5px; }
-        .tool-card .fav-btn { position: absolute; top: 8px; right: 8px; background: none; border: none; font-size: 1rem; cursor: pointer; opacity: 0.3; transition: opacity 0.15s; }
-        .tool-card:hover .fav-btn { opacity: 0.6; }
-        .tool-card .fav-btn:hover, .tool-card .fav-btn.active { opacity: 1; }
-
-        /* Category Colors */
-        .tool-card[data-cat="text"] { border-left: 3px solid #6a9fb5; }
-        .tool-card[data-cat="image"] { border-left: 3px solid #a06ab5; }
-        .tool-card[data-cat="dev"] { border-left: 3px solid #6ab575; }
-        .tool-card[data-cat="calc"] { border-left: 3px solid #b5a36a; }
-        .tool-card[data-cat="util"] { border-left: 3px solid #b56a6a; }
-        .tool-card[data-cat="test"] { border-left: 3px solid #6ab5b5; }
-        .tool-card[data-cat="pdf"] { border-left: 3px solid #b58a6a; }
-
-        /* Theme Toggle */
-        .theme-btn { background: none; border: 1px solid #333; color: #666; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.9rem; }
-        .theme-btn:hover { border-color: #444; color: #888; }
+        .tool-card .fav-btn { display: none; position: absolute; top: 2px; right: 4px; background: none; border: none; font-size: 0.8rem; cursor: pointer; color: #555; }
+        .tool-card:hover .fav-btn { display: block; }
+        .tool-card .fav-btn:hover, .tool-card .fav-btn.active { color: #f5c518; }
 
         /* Light Mode */
-        body.light { background: #f5f5f5; color: #666; }
-        body.light .container { }
-        body.light nav { border-color: #ddd; }
-        body.light .logo { color: #333; }
-        body.light nav a { color: #888; }
-        body.light nav a:hover { color: #555; }
-        body.light .lang-btn, body.light .theme-btn { border-color: #ccc; color: #666; }
-        body.light .donate-btn { background: #eee; border-color: #ddd; color: #555; }
-        body.light header h1 { color: #333; }
-        body.light header p { color: #888; }
-        body.light .section-title { color: #999; }
-        body.light .tool-card { background: #fff; border-color: #e0e0e0; }
-        body.light .tool-card:hover { background: #fafafa; border-color: #ccc; }
+        body.light { background: #fafafa; color: #666; }
+        body.light nav { border-color: #e5e5e5; }
+        body.light .logo { color: #222; }
+        body.light nav a, body.light .icon-btn { color: #888; }
+        body.light .nav-search { background: #fff; border-color: #ddd; color: #333; }
+        body.light .section-title { color: #888; }
+        body.light .tool-card { background: #fff; border-color: #e5e5e5; }
+        body.light .tool-card:hover { box-shadow: 0 3px 8px rgba(0,0,0,0.08); border-color: #ccc; }
         body.light .tool-card h3 { color: #333; }
-        body.light .tool-card p { color: #888; }
-        body.light .tool-section { background: #fff; border-color: #e0e0e0; }
-        body.light .tool-section h2 { color: #333; }
-        body.light .back-btn { border-color: #ddd; color: #888; }
-        body.light input, body.light textarea, body.light select { border-color: #ddd; background: #f9f9f9; color: #333; }
-        body.light .btn { background: #eee; border-color: #ddd; color: #555; }
-        body.light .btn:hover { background: #e0e0e0; }
-        body.light .result-box { background: #f9f9f9; border-color: #e0e0e0; }
-        body.light .category-tab { background: #fff; border-color: #ddd; color: #888; }
-        body.light .category-tab.active { background: #333; border-color: #333; color: #fff; }
-        body.light .search-box input { background: #fff; border-color: #ddd; }
-        body.light footer { border-color: #eee; }
-        body.light footer p { color: #bbb; }
-        body.light .info-box { background: #f0f0f0; border-color: #ccc; }
-        body.light .stat-box { background: #f9f9f9; border-color: #e0e0e0; }
+        body.light .tool-section { background: #fff; border-color: #e5e5e5; }
+        body.light .tool-section h2 { color: #222; }
+        body.light .back-btn { border-color: #ddd; color: #666; }
+        body.light input, body.light textarea, body.light select { border-color: #ddd; background: #fff; color: #333; }
+        body.light .btn { background: #f0f0f0; border-color: #ddd; color: #444; }
+        body.light .btn:hover { background: #e5e5e5; }
+        body.light .result-box { background: #f9f9f9; border-color: #e5e5e5; }
+        body.light .filter-tabs { border-color: #e5e5e5; }
+        body.light .filter-tab { color: #888; }
+        body.light .filter-tab.active { color: #222; border-bottom-color: #222; }
+        body.light .sort-select { background: #fff; border-color: #ddd; color: #555; }
+        body.light footer { border-color: #e5e5e5; }
+        body.light footer p, body.light footer a { color: #aaa; }
+        body.light .info-box { background: #f5f5f5; border-color: #ddd; }
+        body.light .stat-box { background: #f9f9f9; border-color: #e5e5e5; }
         body.light .lang-modal-content { background: #fff; border-color: #ddd; }
-        body.light .lang-modal h3 { color: #333; }
+        body.light .lang-modal h3 { color: #222; }
         body.light .lang-option { background: #f5f5f5; border-color: #ddd; color: #333; }
     </style>
 </head>
 <body>
     <div class="container">
         <nav>
-            <div class="logo" onclick="showMain()" style="cursor:pointer;">ToolBox</div>
+            <div class="logo" onclick="showMain()">ToolBox</div>
+            <div class="nav-center">
+                <div class="nav-search-wrap">
+                    <input type="text" class="nav-search" id="search-input" placeholder="검색 (Ctrl+K)" oninput="searchTools()">
+                </div>
+            </div>
             <div class="nav-right">
-                <a href="#" onclick="showMain(); return false;" data-i18n="nav.tools">도구</a>
-                <a href="#" onclick="showTool('about'); return false;" data-i18n="nav.about">소개</a>
-                <button class="theme-btn" onclick="toggleTheme()" title="테마 변경">🌓</button>
-                <button class="lang-btn" onclick="toggleLangModal()">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                    <span id="current-lang">KO</span>
-                </button>
-                <a href="https://buymeacoffee.com/wings1008" target="_blank" class="donate-btn" data-i18n="nav.donate">후원하기</a>
+                <button class="icon-btn" onclick="toggleTheme()" title="테마">◐</button>
+                <button class="icon-btn" onclick="toggleLangModal()" title="언어">🌐</button>
+                <a href="https://buymeacoffee.com/wings1008" target="_blank" class="icon-btn" title="후원">☕</a>
             </div>
         </nav>
 
         <div class="lang-modal" id="lang-modal" onclick="if(event.target===this)toggleLangModal()">
             <div class="lang-modal-content">
-                <h3>Language / 언어</h3>
-                <button class="lang-option" onclick="setLang('ko')">🇰🇷 한국어</button>
-                <button class="lang-option" onclick="setLang('en')">🇺🇸 English</button>
+                <h3>Language</h3>
+                <button class="lang-option" onclick="setLang('ko')">한국어</button>
+                <button class="lang-option" onclick="setLang('en')">English</button>
             </div>
         </div>
 
         <header id="main-header">
-            <h1 data-i18n="header.title">개발할 때 필요한 도구들</h1>
-            <p data-i18n="header.subtitle">그냥 편하게 쓰세요</p>
-            <div class="search-box" style="max-width:400px;margin:20px auto 0;">
-                <input type="text" id="search-input" placeholder="도구 검색... (Ctrl+K)" oninput="searchTools()">
-            </div>
-            <div class="category-tabs" id="category-tabs">
-                <button class="category-tab active" data-cat="all" onclick="filterCategory('all')">전체</button>
-                <button class="category-tab" data-cat="text" onclick="filterCategory('text')">📝 텍스트</button>
-                <button class="category-tab" data-cat="image" onclick="filterCategory('image')">🖼️ 이미지</button>
-                <button class="category-tab" data-cat="dev" onclick="filterCategory('dev')">💻 개발</button>
-                <button class="category-tab" data-cat="calc" onclick="filterCategory('calc')">🔢 계산</button>
-                <button class="category-tab" data-cat="util" onclick="filterCategory('util')">🔧 유틸</button>
-                <button class="category-tab" data-cat="test" onclick="filterCategory('test')">🧪 테스트</button>
-                <button class="category-tab" data-cat="pdf" onclick="filterCategory('pdf')">📄 PDF</button>
+            <div class="toolbar">
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-cat="all" onclick="filterCategory('all')">전체</button>
+                    <button class="filter-tab" data-cat="text" onclick="filterCategory('text')">텍스트</button>
+                    <button class="filter-tab" data-cat="image" onclick="filterCategory('image')">이미지</button>
+                    <button class="filter-tab" data-cat="dev" onclick="filterCategory('dev')">개발</button>
+                    <button class="filter-tab" data-cat="calc" onclick="filterCategory('calc')">계산</button>
+                    <button class="filter-tab" data-cat="util" onclick="filterCategory('util')">유틸</button>
+                    <button class="filter-tab" data-cat="test" onclick="filterCategory('test')">테스트</button>
+                    <button class="filter-tab" data-cat="pdf" onclick="filterCategory('pdf')">PDF</button>
+                </div>
+                <select class="sort-select" id="sort-select" onchange="sortTools()">
+                    <option value="category">카테고리순</option>
+                    <option value="name">가나다순</option>
+                    <option value="name-en">ABC순</option>
+                </select>
             </div>
         </header>
 
         <div id="main-grid">
             <!-- Favorites Section -->
             <div class="special-section" id="favorites-section" style="display:none;">
-                <div class="section-header">
-                    <div class="section-title">⭐ 즐겨찾기</div>
-                </div>
+                <div class="section-title">즐겨찾기</div>
                 <div class="tools-grid" id="favorites-grid"></div>
             </div>
 
             <!-- Recent Section -->
             <div class="special-section" id="recent-section" style="display:none;">
-                <div class="section-header">
-                    <div class="section-title">🕐 최근 사용</div>
-                </div>
+                <div class="section-title">최근 사용</div>
                 <div class="tools-grid" id="recent-grid"></div>
             </div>
-            <div class="section-title" data-section="text">📝 텍스트</div>
+
+            <!-- All Tools (for sorting) -->
+            <div id="all-tools-grid" class="tools-grid" style="display:none;"></div>
+
+            <div class="section-title" data-section="text">텍스트</div>
             <div class="tools-grid" data-section="text">
                 <div class="tool-card" data-cat="text" data-tool="text" data-name="글자수 세기" onclick="openTool('text')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('text')">☆</button><div class="icon">📊</div><h3>글자수 세기</h3><p>공백, 바이트</p></div>
                 <div class="tool-card" data-cat="text" data-tool="text-convert" data-name="텍스트 변환" onclick="openTool('text-convert')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('text-convert')">☆</button><div class="icon">🔄</div><h3>텍스트 변환</h3><p>대소문자, 뒤집기, 모스 등</p></div>
@@ -251,7 +232,7 @@
                 <div class="tool-card" data-cat="text" data-tool="jamo" data-name="자모 분리" onclick="openTool('jamo')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('jamo')">☆</button><div class="icon">🇰🇷</div><h3>자모 분리</h3><p>조합/분리</p></div>
             </div>
 
-            <div class="section-title" data-section="image">🖼️ 이미지</div>
+            <div class="section-title" data-section="image">이미지</div>
             <div class="tools-grid" data-section="image">
                 <div class="tool-card" data-cat="image" data-tool="img-edit" data-name="이미지 편집" onclick="openTool('img-edit')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('img-edit')">☆</button><div class="icon">✂️</div><h3>이미지 편집</h3><p>크기, 자르기, 회전</p></div>
                 <div class="tool-card" data-cat="image" data-tool="img-filter" data-name="이미지 필터" onclick="openTool('img-filter')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('img-filter')">☆</button><div class="icon">🎨</div><h3>이미지 필터</h3><p>흑백, 세피아, 픽셀화</p></div>
@@ -265,7 +246,7 @@
                 <div class="tool-card" data-cat="image" data-tool="ascii-art" data-name="ASCII 아트" onclick="openTool('ascii-art')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('ascii-art')">☆</button><div class="icon">🔣</div><h3>ASCII 아트</h3><p>이미지→문자</p></div>
             </div>
 
-            <div class="section-title" data-section="dev">💻 개발</div>
+            <div class="section-title" data-section="dev">개발</div>
             <div class="tools-grid" data-section="dev">
                 <div class="tool-card" data-cat="dev" data-tool="encoder" data-name="인코더" onclick="openTool('encoder')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('encoder')">☆</button><div class="icon">🔢</div><h3>인코더</h3><p>Base64, URL, Hash</p></div>
                 <div class="tool-card" data-cat="dev" data-tool="data-convert" data-name="데이터 변환" onclick="openTool('data-convert')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('data-convert')">☆</button><div class="icon">🔀</div><h3>데이터 변환</h3><p>JSON, XML, YAML, CSV</p></div>
@@ -284,7 +265,7 @@
                 <div class="tool-card" data-cat="dev" data-tool="og-preview" data-name="OG 미리보기" onclick="openTool('og-preview')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('og-preview')">☆</button><div class="icon">🔗</div><h3>OG 미리보기</h3><p>메타 태그</p></div>
             </div>
 
-            <div class="section-title" data-section="calc">🔢 계산</div>
+            <div class="section-title" data-section="calc">계산</div>
             <div class="tools-grid" data-section="calc">
                 <div class="tool-card" data-cat="calc" data-tool="calculator" data-name="종합 계산기" onclick="openTool('calculator')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('calculator')">☆</button><div class="icon">🧮</div><h3>종합 계산기</h3><p>금융, BMI, 연봉 등</p></div>
                 <div class="tool-card" data-cat="calc" data-tool="unit" data-name="단위 변환" onclick="openTool('unit')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('unit')">☆</button><div class="icon">📐</div><h3>단위 변환</h3><p>길이, 무게, 온도</p></div>
@@ -299,7 +280,7 @@
                 <div class="tool-card" data-cat="calc" data-tool="programmer-calc" data-name="프로그래머 계산기" onclick="openTool('programmer-calc')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('programmer-calc')">☆</button><div class="icon">💻</div><h3>프로그래머</h3><p>비트 연산</p></div>
             </div>
 
-            <div class="section-title" data-section="util">🔧 유틸리티</div>
+            <div class="section-title" data-section="util">유틸리티</div>
             <div class="tools-grid" data-section="util">
                 <div class="tool-card" data-cat="util" data-tool="timer" data-name="타이머" onclick="openTool('timer')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('timer')">☆</button><div class="icon">⏲️</div><h3>타이머</h3><p>뽀모도로, 스톱워치</p></div>
                 <div class="tool-card" data-cat="util" data-tool="worldclock" data-name="세계 시간" onclick="openTool('worldclock')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('worldclock')">☆</button><div class="icon">🌍</div><h3>세계 시간</h3><p>타임존</p></div>
@@ -312,7 +293,7 @@
                 <div class="tool-card" data-cat="util" data-tool="engkor" data-name="한영 변환" onclick="openTool('engkor')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('engkor')">☆</button><div class="icon">🔠</div><h3>한↔영</h3><p>오타 교정</p></div>
             </div>
 
-            <div class="section-title" data-section="test">🧪 테스트</div>
+            <div class="section-title" data-section="test">테스트</div>
             <div class="tools-grid" data-section="test">
                 <div class="tool-card" data-cat="test" data-tool="input-test" data-name="입력 테스트" onclick="openTool('input-test')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('input-test')">☆</button><div class="icon">⌨️</div><h3>입력 테스트</h3><p>키보드, 클릭, 타이핑</p></div>
                 <div class="tool-card" data-cat="test" data-tool="device-test" data-name="장치 테스트" onclick="openTool('device-test')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('device-test')">☆</button><div class="icon">📷</div><h3>장치 테스트</h3><p>카메라, 마이크, 속도</p></div>
@@ -321,7 +302,7 @@
                 <div class="tool-card" data-cat="test" data-tool="qr-scan" data-name="QR 스캔" onclick="openTool('qr-scan')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('qr-scan')">☆</button><div class="icon">📸</div><h3>QR 스캔</h3><p>카메라 인식</p></div>
             </div>
 
-            <div class="section-title" data-section="pdf">📄 PDF</div>
+            <div class="section-title" data-section="pdf">PDF</div>
             <div class="tools-grid" data-section="pdf">
                 <div class="tool-card" data-cat="pdf" data-tool="pdf-merge" data-name="PDF 병합" onclick="openTool('pdf-merge')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('pdf-merge')">☆</button><div class="icon">📑</div><h3>PDF 병합</h3><p>여러 PDF를 하나로</p></div>
                 <div class="tool-card" data-cat="pdf" data-tool="pdf-convert" data-name="PDF 변환" onclick="openTool('pdf-convert')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('pdf-convert')">☆</button><div class="icon">🔄</div><h3>PDF 변환</h3><p>이미지 → PDF</p></div>
@@ -2728,21 +2709,80 @@
 
         // Category Filter
         let currentCategory = 'all';
+        let currentSort = 'category';
         function filterCategory(cat) {
             currentCategory = cat;
-            document.querySelectorAll('.category-tab').forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
+            document.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
 
             const sections = document.querySelectorAll('#main-grid .section-title[data-section]');
             const grids = document.querySelectorAll('#main-grid .tools-grid[data-section]');
+            const allToolsGrid = document.getElementById('all-tools-grid');
 
-            if (cat === 'all') {
+            if (currentSort !== 'category') {
+                sections.forEach(s => s.style.display = 'none');
+                grids.forEach(g => g.style.display = 'none');
+                allToolsGrid.style.display = '';
+                sortTools();
+            } else if (cat === 'all') {
+                allToolsGrid.style.display = 'none';
                 sections.forEach(s => s.style.display = '');
                 grids.forEach(g => g.style.display = '');
             } else {
-                const catMap = { text: 'text', image: 'image', dev: 'dev', calc: 'calc', util: 'util', test: 'test', pdf: 'pdf' };
-                sections.forEach(s => s.style.display = s.dataset.section === catMap[cat] ? '' : 'none');
-                grids.forEach(g => g.style.display = g.dataset.section === catMap[cat] ? '' : 'none');
+                allToolsGrid.style.display = 'none';
+                sections.forEach(s => s.style.display = s.dataset.section === cat ? '' : 'none');
+                grids.forEach(g => g.style.display = g.dataset.section === cat ? '' : 'none');
             }
+        }
+
+        // Sort Tools
+        function sortTools() {
+            currentSort = document.getElementById('sort-select').value;
+            const sections = document.querySelectorAll('#main-grid .section-title[data-section]');
+            const grids = document.querySelectorAll('#main-grid .tools-grid[data-section]');
+            const allToolsGrid = document.getElementById('all-tools-grid');
+
+            if (currentSort === 'category') {
+                allToolsGrid.style.display = 'none';
+                filterCategory(currentCategory);
+                return;
+            }
+
+            // Hide category sections, show all-tools-grid
+            sections.forEach(s => s.style.display = 'none');
+            grids.forEach(g => g.style.display = 'none');
+            allToolsGrid.style.display = '';
+
+            // Collect all tool cards
+            let cards = Array.from(document.querySelectorAll('#main-grid .tools-grid[data-section] .tool-card'));
+
+            // Filter by category if not 'all'
+            if (currentCategory !== 'all') {
+                cards = cards.filter(c => c.dataset.cat === currentCategory);
+            }
+
+            // Sort
+            if (currentSort === 'name') {
+                cards.sort((a, b) => (a.dataset.name || '').localeCompare(b.dataset.name || '', 'ko'));
+            } else if (currentSort === 'name-en') {
+                cards.sort((a, b) => {
+                    const aName = a.querySelector('h3')?.textContent || '';
+                    const bName = b.querySelector('h3')?.textContent || '';
+                    return aName.localeCompare(bName, 'en');
+                });
+            }
+
+            // Clone and append to all-tools-grid
+            allToolsGrid.innerHTML = '';
+            cards.forEach(card => {
+                const clone = card.cloneNode(true);
+                clone.onclick = () => openTool(card.dataset.tool);
+                const favBtn = clone.querySelector('.fav-btn');
+                if (favBtn) {
+                    favBtn.onclick = (e) => { e.stopPropagation(); toggleFav(card.dataset.tool); };
+                }
+                allToolsGrid.appendChild(clone);
+            });
+            updateFavButtons();
         }
 
         // Keyboard shortcut
