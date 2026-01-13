@@ -27,9 +27,11 @@
         nav a:hover { color: #888; }
         .icon-btn { background: none; border: none; color: #555; padding: 4px; cursor: pointer; font-size: 1rem; }
         .icon-btn:hover { color: #888; }
-        .fixed-sidebar { position: fixed; right: 15px; top: 50%; transform: translateY(-50%); z-index: 1000; display: flex; flex-direction: column; gap: 10px; }
-        .fixed-sidebar .sidebar-btn { width: 44px; height: 44px; border-radius: 50%; background: #1a1a1a; border: 1px solid #333; color: #888; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; text-decoration: none; }
-        .fixed-sidebar .sidebar-btn:hover { background: #252525; color: #fff; border-color: #555; }
+        .fixed-sidebar { position: fixed; right: 15px; top: 50%; transform: translateY(-50%); z-index: 1000; display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+        .fixed-sidebar .sidebar-btn { height: 44px; min-width: 44px; border-radius: 22px; background: #1a1a1a; border: 1px solid #333; color: #888; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; text-decoration: none; overflow: hidden; padding: 0 12px; gap: 8px; }
+        .fixed-sidebar .sidebar-btn .btn-text { display: none; font-size: 0.8rem; white-space: nowrap; }
+        .fixed-sidebar .sidebar-btn:hover { background: #252525; color: #fff; border-color: #555; padding-left: 14px; }
+        .fixed-sidebar .sidebar-btn:hover .btn-text { display: block; }
         body.light .fixed-sidebar .sidebar-btn { background: #fff; border-color: #ddd; color: #666; }
         body.light .fixed-sidebar .sidebar-btn:hover { background: #f5f5f5; color: #333; border-color: #bbb; }
         header { padding: 8px 0 16px; }
@@ -149,7 +151,7 @@
         .lang-modal h3 { color: #ddd; margin-bottom: 15px; font-size: 1rem; }
         .lang-option { display: block; width: 100%; padding: 10px 15px; background: #1a1a1a; border: 1px solid #222; border-radius: 6px; color: #ccc; cursor: pointer; margin-bottom: 8px; font-size: 0.9rem; text-align: left; }
         .lang-option:hover { background: #222; }
-        @media (max-width: 600px) { nav { flex-direction: column; } .nav-center { max-width: 100%; order: 3; width: 100%; } .timer-display { font-size: 2rem; } .filter-tabs { overflow-x: auto; } .fixed-sidebar { right: 8px; gap: 6px; } .fixed-sidebar .sidebar-btn { width: 38px; height: 38px; font-size: 1rem; } }
+        @media (max-width: 600px) { nav { flex-direction: column; } .nav-center { max-width: 100%; order: 3; width: 100%; } .timer-display { font-size: 2rem; } .filter-tabs { overflow-x: auto; } .fixed-sidebar { right: 8px; gap: 6px; } .fixed-sidebar .sidebar-btn { min-width: 38px; height: 38px; font-size: 1rem; padding: 0 10px; } }
 
         /* Filter Tabs - Underline Style */
         .filter-tabs { display: flex; gap: 4px; border-bottom: 1px solid #1a1a1a; margin-bottom: 12px; }
@@ -210,9 +212,9 @@
 
         <!-- Fixed Sidebar -->
         <div class="fixed-sidebar">
-            <button class="sidebar-btn" onclick="toggleTheme()" title="테마">◐</button>
-            <button class="sidebar-btn" onclick="toggleLangModal()" title="언어">🌐</button>
-            <a href="https://buymeacoffee.com/wings1008" target="_blank" class="sidebar-btn" title="후원">☕</a>
+            <button class="sidebar-btn" onclick="toggleTheme()" title="테마"><span class="btn-text">테마</span>◐</button>
+            <button class="sidebar-btn" onclick="toggleLangModal()" title="언어"><span class="btn-text">언어</span>🌐</button>
+            <a href="https://buymeacoffee.com/wings1008" target="_blank" class="sidebar-btn" title="후원"><span class="btn-text">후원</span>☕</a>
         </div>
 
         <div class="lang-modal" id="lang-modal" onclick="if(event.target===this)toggleLangModal()">
