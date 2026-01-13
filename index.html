@@ -6493,6 +6493,7 @@
             compress: `<div class="slider-row"><span>품질:</span><input type="range" id="ie-quality" min="10" max="100" value="80" oninput="document.getElementById('ie-q-v').textContent=this.value+'%'"><span id="ie-q-v">80%</span></div>
                 <button class="btn btn-primary" onclick="ieCompress()">압축</button>`
         };
+        let ieOriginalRatio = 1;
         function showImgEditType() {
             const type = document.getElementById('imgedit-type').value;
             document.getElementById('imgedit-content').innerHTML = imgEditTemplates[type] || '';
@@ -6500,6 +6501,22 @@
             if (imgEditImg && type === 'resize') {
                 document.getElementById('ie-width').value = imgEditImg.width;
                 document.getElementById('ie-height').value = imgEditImg.height;
+                ieOriginalRatio = imgEditImg.width / imgEditImg.height;
+                // 비율 유지 이벤트 리스너
+                document.getElementById('ie-width').addEventListener('input', function() {
+                    if (document.getElementById('ie-ratio').checked) {
+                        document.getElementById('ie-height').value = Math.round(this.value / ieOriginalRatio);
+                    }
+                });
+                document.getElementById('ie-height').addEventListener('input', function() {
+                    if (document.getElementById('ie-ratio').checked) {
+                        document.getElementById('ie-width').value = Math.round(this.value * ieOriginalRatio);
+                    }
+                });
+            }
+            if (imgEditImg && type === 'crop') {
+                document.getElementById('ie-cw').value = imgEditImg.width;
+                document.getElementById('ie-ch').value = imgEditImg.height;
             }
         }
         function ieSetupCanvas(w, h) {
