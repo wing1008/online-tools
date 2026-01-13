@@ -171,6 +171,8 @@
                 <div class="tool-card" onclick="showTool('img-base64')"><h3>이미지 Base64</h3><p>인코딩</p></div>
                 <div class="tool-card" onclick="showTool('img-crop')"><h3>이미지 자르기</h3><p>크롭</p></div>
                 <div class="tool-card" onclick="showTool('favicon')"><h3>파비콘 생성</h3><p>ICO, PNG</p></div>
+                <div class="tool-card" onclick="showTool('bg-remove')"><h3>누끼</h3><p>배경 제거</p></div>
+                <div class="tool-card" onclick="showTool('placeholder')"><h3>플레이스홀더</h3><p>더미 이미지</p></div>
             </div>
 
             <div class="section-title">인코딩</div>
@@ -192,6 +194,11 @@
                 <div class="tool-card" onclick="showTool('regex')"><h3>정규식</h3><p>테스트</p></div>
                 <div class="tool-card" onclick="showTool('cron')"><h3>Cron</h3><p>표현식 생성</p></div>
                 <div class="tool-card" onclick="showTool('meta')"><h3>메타 태그</h3><p>SEO 생성기</p></div>
+                <div class="tool-card" onclick="showTool('css-unit')"><h3>CSS 단위</h3><p>px, rem, em</p></div>
+                <div class="tool-card" onclick="showTool('http-status')"><h3>HTTP 상태코드</h3><p>코드 조회</p></div>
+                <div class="tool-card" onclick="showTool('ip-info')"><h3>내 IP</h3><p>IP 주소 조회</p></div>
+                <div class="tool-card" onclick="showTool('useragent')"><h3>User-Agent</h3><p>브라우저 정보</p></div>
+                <div class="tool-card" onclick="showTool('slug')"><h3>Slug 생성</h3><p>URL 친화적</p></div>
             </div>
 
             <div class="section-title">계산</div>
@@ -201,6 +208,11 @@
                 <div class="tool-card" onclick="showTool('number')"><h3>진법</h3><p>2, 8, 10, 16</p></div>
                 <div class="tool-card" onclick="showTool('date')"><h3>날짜</h3><p>D-Day, 기간</p></div>
                 <div class="tool-card" onclick="showTool('age')"><h3>나이 계산</h3><p>만나이, 음력/양력</p></div>
+                <div class="tool-card" onclick="showTool('bmi')"><h3>BMI</h3><p>체질량지수</p></div>
+                <div class="tool-card" onclick="showTool('loan')"><h3>대출 이자</h3><p>원리금 계산</p></div>
+                <div class="tool-card" onclick="showTool('discount')"><h3>할인율</h3><p>세일 가격</p></div>
+                <div class="tool-card" onclick="showTool('tip')"><h3>팁 계산</h3><p>더치페이</p></div>
+                <div class="tool-card" onclick="showTool('vat')"><h3>부가세</h3><p>세금 계산</p></div>
             </div>
 
             <div class="section-title">유틸리티</div>
@@ -208,6 +220,12 @@
                 <div class="tool-card" onclick="showTool('pomodoro')"><h3>뽀모도로</h3><p>집중 타이머</p></div>
                 <div class="tool-card" onclick="showTool('stopwatch')"><h3>스톱워치</h3><p>시간 측정</p></div>
                 <div class="tool-card" onclick="showTool('pwcheck')"><h3>비밀번호 강도</h3><p>안전성 검사</p></div>
+                <div class="tool-card" onclick="showTool('countdown')"><h3>카운트다운</h3><p>타이머</p></div>
+                <div class="tool-card" onclick="showTool('worldclock')"><h3>세계 시간</h3><p>타임존 변환</p></div>
+                <div class="tool-card" onclick="showTool('notepad')"><h3>메모장</h3><p>로컬 저장</p></div>
+                <div class="tool-card" onclick="showTool('palette')"><h3>색상 팔레트</h3><p>컬러 조합</p></div>
+                <div class="tool-card" onclick="showTool('emoji')"><h3>이모지</h3><p>검색/복사</p></div>
+                <div class="tool-card" onclick="showTool('engkor')"><h3>한↔영 변환</h3><p>오타 교정</p></div>
             </div>
         </div>
 
@@ -515,6 +533,40 @@
             <div id="favicon-downloads"></div>
         </div>
 
+        <!-- Background Remove -->
+        <div class="tool-section" id="tool-bg-remove">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>누끼 (배경 제거)</h2>
+            <div class="info-box">AI를 사용해 이미지 배경을 자동으로 제거합니다. 처리 시간이 걸릴 수 있습니다.</div>
+            <input type="file" id="bgremove-file" accept="image/*" onchange="loadBgRemoveImage(this)">
+            <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:15px;">
+                <div style="flex:1;min-width:200px;"><div style="color:#555;font-size:0.8rem;margin-bottom:5px;">원본</div><img id="bgremove-preview" class="img-preview" style="display:none;max-width:100%;"></div>
+                <div style="flex:1;min-width:200px;"><div style="color:#555;font-size:0.8rem;margin-bottom:5px;">결과</div><img id="bgremove-result" class="img-preview" style="display:none;max-width:100%;background:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22><rect width=%2210%22 height=%2210%22 fill=%22%23333%22/><rect x=%2210%22 y=%2210%22 width=%2210%22 height=%2210%22 fill=%22%23333%22/><rect x=%2210%22 width=%2210%22 height=%2210%22 fill=%22%23222%22/><rect y=%2210%22 width=%2210%22 height=%2210%22 fill=%22%23222%22/></svg>');"></div>
+            </div>
+            <div id="bgremove-status" style="text-align:center;margin:15px 0;color:#666;"></div>
+            <button class="btn btn-primary" onclick="removeBackground()" id="bgremove-btn">배경 제거</button>
+            <a id="bgremove-download" class="btn" style="display:none;text-decoration:none;">다운로드</a>
+        </div>
+
+        <!-- Placeholder Image -->
+        <div class="tool-section" id="tool-placeholder">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>플레이스홀더 이미지</h2>
+            <div class="row">
+                <input type="number" id="ph-width" value="400" placeholder="Width">
+                <input type="number" id="ph-height" value="300" placeholder="Height">
+            </div>
+            <div class="row">
+                <input type="color" id="ph-bg" value="#333333">
+                <input type="color" id="ph-text" value="#666666">
+            </div>
+            <input type="text" id="ph-label" placeholder="텍스트 (비우면 크기 표시)">
+            <button class="btn btn-primary" onclick="generatePlaceholder()">생성</button>
+            <canvas id="ph-canvas" style="display:none;"></canvas>
+            <img id="ph-preview" class="img-preview" style="display:none;margin-top:15px;">
+            <a id="ph-download" class="btn" style="display:none;text-decoration:none;margin-top:10px;">다운로드</a>
+        </div>
+
         <!-- Encoding -->
         <div class="tool-section" id="tool-base64">
             <button class="back-btn" onclick="showMain()">← 목록</button>
@@ -669,6 +721,84 @@
             <button class="copy-btn" onclick="copyText('meta-result')">복사</button>
         </div>
 
+        <!-- CSS Unit -->
+        <div class="tool-section" id="tool-css-unit">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>CSS 단위 변환</h2>
+            <div class="info-box">기본 폰트 크기: 16px (브라우저 기본값)</div>
+            <div class="row">
+                <input type="number" id="css-value" value="16" placeholder="값" oninput="convertCssUnit()">
+                <select id="css-from" onchange="convertCssUnit()">
+                    <option value="px">px</option>
+                    <option value="rem">rem</option>
+                    <option value="em">em</option>
+                    <option value="pt">pt</option>
+                    <option value="vw">vw</option>
+                    <option value="vh">vh</option>
+                </select>
+            </div>
+            <input type="number" id="css-base" value="16" placeholder="기준 폰트 크기 (px)" oninput="convertCssUnit()">
+            <div class="result-box" id="css-unit-result">-</div>
+        </div>
+
+        <!-- HTTP Status -->
+        <div class="tool-section" id="tool-http-status">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>HTTP 상태 코드</h2>
+            <input type="number" id="http-code" placeholder="상태 코드 입력 (예: 404)" oninput="lookupHttpStatus()">
+            <div class="result-box" id="http-status-result">-</div>
+            <div style="margin-top:20px;">
+                <div style="color:#555;font-size:0.8rem;margin-bottom:10px;">자주 쓰는 코드</div>
+                <div style="display:flex;flex-wrap:wrap;gap:5px;">
+                    <button class="btn" onclick="document.getElementById('http-code').value='200';lookupHttpStatus()">200</button>
+                    <button class="btn" onclick="document.getElementById('http-code').value='201';lookupHttpStatus()">201</button>
+                    <button class="btn" onclick="document.getElementById('http-code').value='301';lookupHttpStatus()">301</button>
+                    <button class="btn" onclick="document.getElementById('http-code').value='400';lookupHttpStatus()">400</button>
+                    <button class="btn" onclick="document.getElementById('http-code').value='401';lookupHttpStatus()">401</button>
+                    <button class="btn" onclick="document.getElementById('http-code').value='403';lookupHttpStatus()">403</button>
+                    <button class="btn" onclick="document.getElementById('http-code').value='404';lookupHttpStatus()">404</button>
+                    <button class="btn" onclick="document.getElementById('http-code').value='500';lookupHttpStatus()">500</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- IP Info -->
+        <div class="tool-section" id="tool-ip-info">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>내 IP 주소</h2>
+            <button class="btn btn-primary" onclick="getMyIP()">IP 조회</button>
+            <div class="stats-row" id="ip-result" style="margin-top:15px;">
+                <div class="stat-box"><div class="number" id="ip-address" style="font-size:1rem;">-</div><div class="label">IP 주소</div></div>
+            </div>
+            <div class="result-box" id="ip-details" style="display:none;margin-top:15px;"></div>
+        </div>
+
+        <!-- User Agent -->
+        <div class="tool-section" id="tool-useragent">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>User-Agent 정보</h2>
+            <div class="result-box" style="word-break:break-all;"><div id="ua-string">-</div></div>
+            <div class="stats-row" style="margin-top:15px;">
+                <div class="stat-box"><div class="number" id="ua-browser" style="font-size:0.9rem;">-</div><div class="label">브라우저</div></div>
+                <div class="stat-box"><div class="number" id="ua-os" style="font-size:0.9rem;">-</div><div class="label">OS</div></div>
+                <div class="stat-box"><div class="number" id="ua-device" style="font-size:0.9rem;">-</div><div class="label">기기</div></div>
+            </div>
+            <button class="copy-btn" onclick="copyText('ua-string')" style="margin-top:10px;">복사</button>
+        </div>
+
+        <!-- Slug -->
+        <div class="tool-section" id="tool-slug">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>Slug 생성기</h2>
+            <textarea id="slug-input" placeholder="제목이나 텍스트 입력" oninput="generateSlug()"></textarea>
+            <div class="options">
+                <label><input type="checkbox" id="slug-lower" checked onchange="generateSlug()"> 소문자</label>
+                <label><input type="checkbox" id="slug-korean" onchange="generateSlug()"> 한글 유지</label>
+            </div>
+            <div class="result-box"><div id="slug-result">-</div></div>
+            <button class="copy-btn" onclick="copyText('slug-result')">복사</button>
+        </div>
+
         <!-- Calculate -->
         <div class="tool-section" id="tool-percent">
             <button class="back-btn" onclick="showMain()">← 목록</button>
@@ -773,6 +903,95 @@
             </div>
         </div>
 
+        <!-- BMI -->
+        <div class="tool-section" id="tool-bmi">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>BMI 계산기</h2>
+            <div class="row">
+                <div><label style="color:#666;font-size:0.8rem;">키 (cm)</label><input type="number" id="bmi-height" placeholder="170"></div>
+                <div><label style="color:#666;font-size:0.8rem;">몸무게 (kg)</label><input type="number" id="bmi-weight" placeholder="65"></div>
+            </div>
+            <button class="btn btn-primary" onclick="calcBMI()">계산</button>
+            <div class="stats-row" style="margin-top:15px;">
+                <div class="stat-box"><div class="number" id="bmi-value">-</div><div class="label">BMI</div></div>
+                <div class="stat-box"><div class="number" id="bmi-status" style="font-size:1rem;">-</div><div class="label">상태</div></div>
+            </div>
+            <div class="info-box" style="margin-top:15px;">저체중: ~18.5 | 정상: 18.5~23 | 과체중: 23~25 | 비만: 25~</div>
+        </div>
+
+        <!-- Loan -->
+        <div class="tool-section" id="tool-loan">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>대출 이자 계산기</h2>
+            <div class="row">
+                <div><label style="color:#666;font-size:0.8rem;">대출금 (원)</label><input type="number" id="loan-amount" placeholder="10000000"></div>
+                <div><label style="color:#666;font-size:0.8rem;">연이율 (%)</label><input type="number" id="loan-rate" placeholder="5" step="0.1"></div>
+            </div>
+            <div class="row">
+                <div><label style="color:#666;font-size:0.8rem;">기간 (개월)</label><input type="number" id="loan-months" placeholder="12"></div>
+                <select id="loan-type">
+                    <option value="equal">원리금균등</option>
+                    <option value="principal">원금균등</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" onclick="calcLoan()">계산</button>
+            <div class="stats-row" style="margin-top:15px;">
+                <div class="stat-box"><div class="number" id="loan-monthly" style="font-size:1rem;">-</div><div class="label">월 상환금</div></div>
+                <div class="stat-box"><div class="number" id="loan-total" style="font-size:1rem;">-</div><div class="label">총 상환금</div></div>
+                <div class="stat-box"><div class="number" id="loan-interest" style="font-size:1rem;">-</div><div class="label">총 이자</div></div>
+            </div>
+        </div>
+
+        <!-- Discount -->
+        <div class="tool-section" id="tool-discount">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>할인율 계산기</h2>
+            <div class="row">
+                <div><label style="color:#666;font-size:0.8rem;">원가</label><input type="number" id="disc-original" placeholder="100000"></div>
+                <div><label style="color:#666;font-size:0.8rem;">할인율 (%)</label><input type="number" id="disc-rate" placeholder="30"></div>
+            </div>
+            <button class="btn btn-primary" onclick="calcDiscount()">계산</button>
+            <div class="stats-row" style="margin-top:15px;">
+                <div class="stat-box"><div class="number" id="disc-price">-</div><div class="label">할인가</div></div>
+                <div class="stat-box"><div class="number" id="disc-save">-</div><div class="label">절약</div></div>
+            </div>
+        </div>
+
+        <!-- Tip -->
+        <div class="tool-section" id="tool-tip">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>팁/더치페이 계산</h2>
+            <div class="row">
+                <div><label style="color:#666;font-size:0.8rem;">금액</label><input type="number" id="tip-amount" placeholder="50000"></div>
+                <div><label style="color:#666;font-size:0.8rem;">팁 (%)</label><input type="number" id="tip-rate" value="10"></div>
+            </div>
+            <div><label style="color:#666;font-size:0.8rem;">인원</label><input type="number" id="tip-people" value="1" min="1"></div>
+            <button class="btn btn-primary" onclick="calcTip()">계산</button>
+            <div class="stats-row" style="margin-top:15px;">
+                <div class="stat-box"><div class="number" id="tip-total">-</div><div class="label">총액 (팁 포함)</div></div>
+                <div class="stat-box"><div class="number" id="tip-each">-</div><div class="label">1인당</div></div>
+                <div class="stat-box"><div class="number" id="tip-tipamt">-</div><div class="label">팁</div></div>
+            </div>
+        </div>
+
+        <!-- VAT -->
+        <div class="tool-section" id="tool-vat">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>부가세 계산기</h2>
+            <input type="number" id="vat-amount" placeholder="금액">
+            <div class="options">
+                <label><input type="radio" name="vat-type" value="exclude" checked> 부가세 별도 (공급가)</label>
+                <label><input type="radio" name="vat-type" value="include"> 부가세 포함 (총액)</label>
+            </div>
+            <input type="number" id="vat-rate" value="10" placeholder="세율 (%)">
+            <button class="btn btn-primary" onclick="calcVAT()">계산</button>
+            <div class="stats-row" style="margin-top:15px;">
+                <div class="stat-box"><div class="number" id="vat-supply">-</div><div class="label">공급가액</div></div>
+                <div class="stat-box"><div class="number" id="vat-tax">-</div><div class="label">부가세</div></div>
+                <div class="stat-box"><div class="number" id="vat-total">-</div><div class="label">총액</div></div>
+            </div>
+        </div>
+
         <!-- Utility -->
         <div class="tool-section" id="tool-pomodoro">
             <button class="back-btn" onclick="showMain()">← 목록</button>
@@ -808,6 +1027,78 @@
             <div class="strength-bar"><div class="strength-fill" id="pw-strength-fill"></div></div>
             <div id="pw-strength-text" style="text-align:center;margin-top:10px;font-size:0.9rem;"></div>
             <div class="result-box" id="pw-strength-tips" style="font-size:0.8rem;"></div>
+        </div>
+
+        <!-- Countdown -->
+        <div class="tool-section" id="tool-countdown">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>카운트다운 타이머</h2>
+            <div class="row">
+                <input type="number" id="cd-hours" value="0" min="0" placeholder="시">
+                <input type="number" id="cd-minutes" value="5" min="0" max="59" placeholder="분">
+                <input type="number" id="cd-seconds" value="0" min="0" max="59" placeholder="초">
+            </div>
+            <div class="timer-display" id="cd-display">00:05:00</div>
+            <div class="timer-controls">
+                <button class="btn btn-primary" id="cd-start" onclick="toggleCountdown()">시작</button>
+                <button class="btn" onclick="resetCountdown()">리셋</button>
+            </div>
+        </div>
+
+        <!-- World Clock -->
+        <div class="tool-section" id="tool-worldclock">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>세계 시간</h2>
+            <div id="world-clocks" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;"></div>
+        </div>
+
+        <!-- Notepad -->
+        <div class="tool-section" id="tool-notepad">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>메모장</h2>
+            <div class="info-box">브라우저 로컬 저장소에 자동 저장됩니다.</div>
+            <textarea id="notepad-input" style="min-height:300px;" oninput="saveNotepad()"></textarea>
+            <div style="display:flex;justify-content:space-between;margin-top:10px;">
+                <span style="color:#555;font-size:0.8rem;" id="notepad-status">저장됨</span>
+                <button class="btn btn-danger" onclick="clearNotepad()">삭제</button>
+            </div>
+        </div>
+
+        <!-- Palette -->
+        <div class="tool-section" id="tool-palette">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>색상 팔레트 생성</h2>
+            <input type="color" id="palette-base" value="#667eea" onchange="generatePalette()">
+            <div class="options">
+                <label><input type="radio" name="palette-type" value="analogous" checked onchange="generatePalette()"> 유사색</label>
+                <label><input type="radio" name="palette-type" value="complementary" onchange="generatePalette()"> 보색</label>
+                <label><input type="radio" name="palette-type" value="triadic" onchange="generatePalette()"> 삼원색</label>
+                <label><input type="radio" name="palette-type" value="shades" onchange="generatePalette()"> 명암</label>
+            </div>
+            <div id="palette-result" style="display:flex;gap:5px;margin-top:15px;flex-wrap:wrap;"></div>
+        </div>
+
+        <!-- Emoji -->
+        <div class="tool-section" id="tool-emoji">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>이모지 검색</h2>
+            <input type="text" id="emoji-search" placeholder="검색 (예: smile, heart, fire)" oninput="searchEmoji()">
+            <div id="emoji-result" style="display:flex;flex-wrap:wrap;gap:5px;margin-top:15px;font-size:1.5rem;"></div>
+            <div id="emoji-copied" style="text-align:center;color:#5a5;margin-top:10px;display:none;">복사됨!</div>
+        </div>
+
+        <!-- Eng-Kor -->
+        <div class="tool-section" id="tool-engkor">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>한↔영 변환 (오타 교정)</h2>
+            <div class="info-box">영문 자판으로 한글을 치거나, 한글 자판으로 영문을 쳤을 때 변환합니다.</div>
+            <textarea id="engkor-input" placeholder="ㅗ디ㅣㅐ or gksrmfdl"></textarea>
+            <div>
+                <button class="btn" onclick="convertEngToKor()">영→한</button>
+                <button class="btn" onclick="convertKorToEng()">한→영</button>
+            </div>
+            <div class="result-box"><div id="engkor-result">-</div></div>
+            <button class="copy-btn" onclick="copyText('engkor-result')">복사</button>
         </div>
 
         <!-- About -->
@@ -1422,6 +1713,374 @@
             else if(score < 80) { fill.style.background = '#5a5'; document.getElementById('pw-strength-text').innerHTML = '<span style="color:#5a5;">강함</span>'; }
             else { fill.style.background = '#5c5'; document.getElementById('pw-strength-text').innerHTML = '<span style="color:#5c5;">매우 강함</span>'; }
             document.getElementById('pw-strength-tips').innerHTML = tips.length ? '개선 팁: ' + tips.join(', ') : '좋은 비밀번호입니다!';
+        }
+
+        // Placeholder Image
+        function generatePlaceholder() {
+            const w = +document.getElementById('ph-width').value || 400;
+            const h = +document.getElementById('ph-height').value || 300;
+            const bg = document.getElementById('ph-bg').value;
+            const textColor = document.getElementById('ph-text').value;
+            const label = document.getElementById('ph-label').value || `${w}×${h}`;
+            const canvas = document.getElementById('ph-canvas');
+            canvas.width = w; canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = bg;
+            ctx.fillRect(0, 0, w, h);
+            ctx.fillStyle = textColor;
+            ctx.font = `${Math.min(w, h) / 8}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(label, w/2, h/2);
+            const dataUrl = canvas.toDataURL('image/png');
+            document.getElementById('ph-preview').src = dataUrl;
+            document.getElementById('ph-preview').style.display = 'block';
+            const link = document.getElementById('ph-download');
+            link.href = dataUrl; link.download = `placeholder-${w}x${h}.png`; link.style.display = 'inline-block';
+        }
+
+        // CSS Unit
+        function convertCssUnit() {
+            const val = +document.getElementById('css-value').value;
+            const from = document.getElementById('css-from').value;
+            const base = +document.getElementById('css-base').value || 16;
+            if(isNaN(val)) { document.getElementById('css-unit-result').innerHTML = '-'; return; }
+            let px;
+            if(from === 'px') px = val;
+            else if(from === 'rem' || from === 'em') px = val * base;
+            else if(from === 'pt') px = val * 1.333;
+            else if(from === 'vw') px = val * window.innerWidth / 100;
+            else if(from === 'vh') px = val * window.innerHeight / 100;
+            const results = {
+                px: px.toFixed(2),
+                rem: (px / base).toFixed(4),
+                em: (px / base).toFixed(4),
+                pt: (px / 1.333).toFixed(2),
+                vw: (px / window.innerWidth * 100).toFixed(4),
+                vh: (px / window.innerHeight * 100).toFixed(4)
+            };
+            document.getElementById('css-unit-result').innerHTML = Object.entries(results).map(([k,v]) => `<div style="margin:5px 0;"><span style="color:#6a9fb5;">${k}:</span> ${v}</div>`).join('');
+        }
+
+        // HTTP Status
+        const httpCodes = {100:'Continue',101:'Switching Protocols',200:'OK',201:'Created',202:'Accepted',204:'No Content',301:'Moved Permanently',302:'Found',304:'Not Modified',307:'Temporary Redirect',308:'Permanent Redirect',400:'Bad Request',401:'Unauthorized',403:'Forbidden',404:'Not Found',405:'Method Not Allowed',408:'Request Timeout',409:'Conflict',410:'Gone',413:'Payload Too Large',414:'URI Too Long',415:'Unsupported Media Type',422:'Unprocessable Entity',429:'Too Many Requests',500:'Internal Server Error',501:'Not Implemented',502:'Bad Gateway',503:'Service Unavailable',504:'Gateway Timeout'};
+        function lookupHttpStatus() {
+            const code = document.getElementById('http-code').value;
+            const status = httpCodes[code];
+            if(status) {
+                document.getElementById('http-status-result').innerHTML = `<div style="font-size:1.2rem;color:#ddd;margin-bottom:10px;"><strong>${code}</strong> ${status}</div><div style="color:#666;">${getHttpDesc(code)}</div>`;
+            } else {
+                document.getElementById('http-status-result').textContent = code ? '알 수 없는 코드' : '-';
+            }
+        }
+        function getHttpDesc(code) {
+            const descs = {200:'요청 성공',201:'리소스 생성됨',301:'영구 이동 (SEO 권장)',302:'임시 이동',400:'잘못된 요청',401:'인증 필요',403:'접근 금지',404:'리소스 없음',500:'서버 오류',502:'게이트웨이 오류',503:'서비스 불가',504:'게이트웨이 타임아웃'};
+            return descs[code] || '';
+        }
+
+        // IP Info
+        async function getMyIP() {
+            try {
+                const res = await fetch('https://api.ipify.org?format=json');
+                const data = await res.json();
+                document.getElementById('ip-address').textContent = data.ip;
+            } catch(e) {
+                document.getElementById('ip-address').textContent = '조회 실패';
+            }
+        }
+
+        // User Agent
+        function parseUserAgent() {
+            const ua = navigator.userAgent;
+            document.getElementById('ua-string').textContent = ua;
+            let browser = 'Unknown', os = 'Unknown', device = 'Desktop';
+            if(ua.includes('Firefox')) browser = 'Firefox';
+            else if(ua.includes('Edg')) browser = 'Edge';
+            else if(ua.includes('Chrome')) browser = 'Chrome';
+            else if(ua.includes('Safari')) browser = 'Safari';
+            if(ua.includes('Windows')) os = 'Windows';
+            else if(ua.includes('Mac')) os = 'macOS';
+            else if(ua.includes('Linux')) os = 'Linux';
+            else if(ua.includes('Android')) os = 'Android';
+            else if(ua.includes('iOS') || ua.includes('iPhone')) os = 'iOS';
+            if(ua.includes('Mobile')) device = 'Mobile';
+            else if(ua.includes('Tablet')) device = 'Tablet';
+            document.getElementById('ua-browser').textContent = browser;
+            document.getElementById('ua-os').textContent = os;
+            document.getElementById('ua-device').textContent = device;
+        }
+        parseUserAgent();
+
+        // Slug
+        function generateSlug() {
+            let text = document.getElementById('slug-input').value;
+            const lower = document.getElementById('slug-lower').checked;
+            const keepKorean = document.getElementById('slug-korean').checked;
+            if(lower) text = text.toLowerCase();
+            if(!keepKorean) text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[가-힣]/g, '');
+            text = text.replace(/[^\w\s가-힣-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+            document.getElementById('slug-result').textContent = text || '-';
+        }
+
+        // BMI
+        function calcBMI() {
+            const h = +document.getElementById('bmi-height').value / 100;
+            const w = +document.getElementById('bmi-weight').value;
+            if(!h || !w) return;
+            const bmi = w / (h * h);
+            document.getElementById('bmi-value').textContent = bmi.toFixed(1);
+            let status = '';
+            if(bmi < 18.5) status = '저체중';
+            else if(bmi < 23) status = '정상';
+            else if(bmi < 25) status = '과체중';
+            else if(bmi < 30) status = '비만';
+            else status = '고도비만';
+            document.getElementById('bmi-status').textContent = status;
+        }
+
+        // Loan
+        function calcLoan() {
+            const p = +document.getElementById('loan-amount').value;
+            const r = +document.getElementById('loan-rate').value / 100 / 12;
+            const n = +document.getElementById('loan-months').value;
+            const type = document.getElementById('loan-type').value;
+            if(!p || !r || !n) return;
+            let monthly, total;
+            if(type === 'equal') {
+                monthly = p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+                total = monthly * n;
+            } else {
+                const principal = p / n;
+                monthly = principal + p * r;
+                total = p + (p * r * (n + 1) / 2);
+            }
+            document.getElementById('loan-monthly').textContent = Math.round(monthly).toLocaleString() + '원';
+            document.getElementById('loan-total').textContent = Math.round(total).toLocaleString() + '원';
+            document.getElementById('loan-interest').textContent = Math.round(total - p).toLocaleString() + '원';
+        }
+
+        // Discount
+        function calcDiscount() {
+            const original = +document.getElementById('disc-original').value;
+            const rate = +document.getElementById('disc-rate').value;
+            if(!original) return;
+            const discount = original * rate / 100;
+            const price = original - discount;
+            document.getElementById('disc-price').textContent = Math.round(price).toLocaleString() + '원';
+            document.getElementById('disc-save').textContent = Math.round(discount).toLocaleString() + '원';
+        }
+
+        // Tip
+        function calcTip() {
+            const amount = +document.getElementById('tip-amount').value;
+            const rate = +document.getElementById('tip-rate').value;
+            const people = +document.getElementById('tip-people').value || 1;
+            if(!amount) return;
+            const tip = amount * rate / 100;
+            const total = amount + tip;
+            const each = total / people;
+            document.getElementById('tip-total').textContent = Math.round(total).toLocaleString() + '원';
+            document.getElementById('tip-each').textContent = Math.round(each).toLocaleString() + '원';
+            document.getElementById('tip-tipamt').textContent = Math.round(tip).toLocaleString() + '원';
+        }
+
+        // VAT
+        function calcVAT() {
+            const amount = +document.getElementById('vat-amount').value;
+            const rate = +document.getElementById('vat-rate').value;
+            const type = document.querySelector('input[name="vat-type"]:checked').value;
+            if(!amount) return;
+            let supply, tax, total;
+            if(type === 'exclude') {
+                supply = amount;
+                tax = amount * rate / 100;
+                total = supply + tax;
+            } else {
+                total = amount;
+                supply = amount / (1 + rate / 100);
+                tax = total - supply;
+            }
+            document.getElementById('vat-supply').textContent = Math.round(supply).toLocaleString() + '원';
+            document.getElementById('vat-tax').textContent = Math.round(tax).toLocaleString() + '원';
+            document.getElementById('vat-total').textContent = Math.round(total).toLocaleString() + '원';
+        }
+
+        // Countdown
+        let cdTime = 300, cdInterval = null, cdRunning = false;
+        function updateCdDisplay() { const h = Math.floor(cdTime/3600), m = Math.floor((cdTime%3600)/60), s = cdTime%60; document.getElementById('cd-display').textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; }
+        function toggleCountdown() {
+            if(cdRunning) { clearInterval(cdInterval); cdRunning = false; document.getElementById('cd-start').textContent = '시작'; return; }
+            cdTime = (+document.getElementById('cd-hours').value||0)*3600 + (+document.getElementById('cd-minutes').value||0)*60 + (+document.getElementById('cd-seconds').value||0);
+            if(cdTime <= 0) return;
+            cdRunning = true; document.getElementById('cd-start').textContent = '정지';
+            cdInterval = setInterval(() => { if(cdTime > 0) { cdTime--; updateCdDisplay(); } else { clearInterval(cdInterval); cdRunning = false; alert('시간 종료!'); document.getElementById('cd-start').textContent = '시작'; } }, 1000);
+        }
+        function resetCountdown() { clearInterval(cdInterval); cdRunning = false; cdTime = (+document.getElementById('cd-hours').value||0)*3600 + (+document.getElementById('cd-minutes').value||0)*60 + (+document.getElementById('cd-seconds').value||0); updateCdDisplay(); document.getElementById('cd-start').textContent = '시작'; }
+
+        // World Clock
+        const worldTimezones = [{city:'서울',tz:'Asia/Seoul'},{city:'도쿄',tz:'Asia/Tokyo'},{city:'베이징',tz:'Asia/Shanghai'},{city:'싱가포르',tz:'Asia/Singapore'},{city:'두바이',tz:'Asia/Dubai'},{city:'런던',tz:'Europe/London'},{city:'파리',tz:'Europe/Paris'},{city:'뉴욕',tz:'America/New_York'},{city:'LA',tz:'America/Los_Angeles'},{city:'시드니',tz:'Australia/Sydney'}];
+        function updateWorldClocks() {
+            const html = worldTimezones.map(({city, tz}) => {
+                const time = new Date().toLocaleTimeString('ko-KR', {timeZone: tz, hour: '2-digit', minute: '2-digit'});
+                const date = new Date().toLocaleDateString('ko-KR', {timeZone: tz, month: 'short', day: 'numeric'});
+                return `<div class="stat-box"><div class="number" style="font-size:1.1rem;">${time}</div><div class="label">${city}<br><span style="font-size:0.65rem;">${date}</span></div></div>`;
+            }).join('');
+            document.getElementById('world-clocks').innerHTML = html;
+        }
+        setInterval(updateWorldClocks, 1000);
+        updateWorldClocks();
+
+        // Notepad
+        function loadNotepad() { document.getElementById('notepad-input').value = localStorage.getItem('notepad') || ''; }
+        function saveNotepad() { localStorage.setItem('notepad', document.getElementById('notepad-input').value); document.getElementById('notepad-status').textContent = '저장됨 ' + new Date().toLocaleTimeString(); }
+        function clearNotepad() { if(confirm('정말 삭제하시겠습니까?')) { localStorage.removeItem('notepad'); document.getElementById('notepad-input').value = ''; } }
+        loadNotepad();
+
+        // Palette
+        function hexToHsl(hex) {
+            let r = parseInt(hex.slice(1,3),16)/255, g = parseInt(hex.slice(3,5),16)/255, b = parseInt(hex.slice(5,7),16)/255;
+            const max = Math.max(r,g,b), min = Math.min(r,g,b), l = (max+min)/2;
+            let h = 0, s = 0;
+            if(max !== min) {
+                const d = max - min;
+                s = l > 0.5 ? d/(2-max-min) : d/(max+min);
+                if(max === r) h = ((g-b)/d + (g<b?6:0))/6;
+                else if(max === g) h = ((b-r)/d + 2)/6;
+                else h = ((r-g)/d + 4)/6;
+            }
+            return [h*360, s*100, l*100];
+        }
+        function hslToHex(h, s, l) {
+            h /= 360; s /= 100; l /= 100;
+            let r, g, b;
+            if(s === 0) { r = g = b = l; }
+            else {
+                const hue2rgb = (p, q, t) => { if(t<0)t+=1; if(t>1)t-=1; if(t<1/6)return p+(q-p)*6*t; if(t<1/2)return q; if(t<2/3)return p+(q-p)*(2/3-t)*6; return p; };
+                const q = l < 0.5 ? l*(1+s) : l+s-l*s, p = 2*l-q;
+                r = hue2rgb(p,q,h+1/3); g = hue2rgb(p,q,h); b = hue2rgb(p,q,h-1/3);
+            }
+            return '#' + [r,g,b].map(x => Math.round(x*255).toString(16).padStart(2,'0')).join('');
+        }
+        function generatePalette() {
+            const base = document.getElementById('palette-base').value;
+            const type = document.querySelector('input[name="palette-type"]:checked').value;
+            const [h, s, l] = hexToHsl(base);
+            let colors = [];
+            if(type === 'analogous') colors = [hslToHex((h-30+360)%360,s,l), base, hslToHex((h+30)%360,s,l), hslToHex((h-15+360)%360,s,l), hslToHex((h+15)%360,s,l)];
+            else if(type === 'complementary') colors = [base, hslToHex((h+180)%360,s,l), hslToHex((h+180)%360,s,Math.min(l+20,100)), hslToHex(h,s,Math.min(l+20,100)), hslToHex(h,s,Math.max(l-20,0))];
+            else if(type === 'triadic') colors = [base, hslToHex((h+120)%360,s,l), hslToHex((h+240)%360,s,l), hslToHex((h+60)%360,s,l), hslToHex((h+180)%360,s,l)];
+            else colors = [hslToHex(h,s,Math.max(l-40,0)), hslToHex(h,s,Math.max(l-20,0)), base, hslToHex(h,s,Math.min(l+20,100)), hslToHex(h,s,Math.min(l+40,100))];
+            document.getElementById('palette-result').innerHTML = colors.map(c => `<div style="width:60px;height:60px;background:${c};border-radius:8px;cursor:pointer;display:flex;align-items:flex-end;justify-content:center;" onclick="navigator.clipboard.writeText('${c}');alert('복사됨: ${c}')"><span style="font-size:0.65rem;color:#fff;text-shadow:0 0 3px #000;padding:3px;">${c}</span></div>`).join('');
+        }
+        generatePalette();
+
+        // Emoji
+        const emojiData = {smile:['😀','😃','😄','😁','😆','😅','🤣','😂','🙂','😊','😇','🥰','😍','🤩'],heart:['❤️','🧡','💛','💚','💙','💜','🖤','🤍','🤎','💕','💞','💓','💗','💖','💝','💘'],hand:['👍','👎','👏','🙌','🤝','🙏','✌️','🤞','🤟','🤘','👌','🤏','👈','👉','👆','👇'],fire:['🔥','💥','✨','⭐','🌟','💫','⚡','☀️','🌈','🌙'],animal:['🐶','🐱','🐭','🐹','🐰','🦊','🐻','🐼','🐨','🐯','🦁','🐮','🐷','🐸'],food:['🍎','🍐','🍊','🍋','🍌','🍉','🍇','🍓','🫐','🍒','🍑','🥭','🍍','🥥','🥝','🍅'],work:['💼','📁','📂','📅','📆','📊','📈','📉','💻','🖥️','⌨️','🖱️','🖨️'],weather:['☀️','🌤️','⛅','🌥️','☁️','🌦️','🌧️','⛈️','🌩️','🌨️','❄️','💨','🌪️'],travel:['✈️','🚗','🚕','🚌','🚎','🏎️','🚓','🚑','🚒','🚐','🛻','🚚','🚛','🚜'],flag:['🇰🇷','🇺🇸','🇯🇵','🇨🇳','🇬🇧','🇫🇷','🇩🇪','🇮🇹','🇪🇸','🇦🇺','🇨🇦','🇧🇷']};
+        function searchEmoji() {
+            const q = document.getElementById('emoji-search').value.toLowerCase();
+            if(!q) { document.getElementById('emoji-result').innerHTML = Object.values(emojiData).flat().slice(0,50).map(e => `<span style="cursor:pointer;padding:5px;" onclick="copyEmoji('${e}')">${e}</span>`).join(''); return; }
+            const results = [];
+            for(const [key, emojis] of Object.entries(emojiData)) {
+                if(key.includes(q)) results.push(...emojis);
+            }
+            document.getElementById('emoji-result').innerHTML = results.length ? results.map(e => `<span style="cursor:pointer;padding:5px;" onclick="copyEmoji('${e}')">${e}</span>`).join('') : '결과 없음';
+        }
+        function copyEmoji(e) { navigator.clipboard.writeText(e); document.getElementById('emoji-copied').style.display = 'block'; setTimeout(() => document.getElementById('emoji-copied').style.display = 'none', 1500); }
+        searchEmoji();
+
+        // Eng-Kor conversion
+        const engToKor = {'a':'ㅁ','b':'ㅠ','c':'ㅊ','d':'ㅇ','e':'ㄷ','f':'ㄹ','g':'ㅎ','h':'ㅗ','i':'ㅑ','j':'ㅓ','k':'ㅏ','l':'ㅣ','m':'ㅡ','n':'ㅜ','o':'ㅐ','p':'ㅔ','q':'ㅂ','r':'ㄱ','s':'ㄴ','t':'ㅅ','u':'ㅕ','v':'ㅍ','w':'ㅈ','x':'ㅌ','y':'ㅛ','z':'ㅋ','Q':'ㅃ','W':'ㅉ','E':'ㄸ','R':'ㄲ','T':'ㅆ','O':'ㅒ','P':'ㅖ'};
+        const korToEng = {};
+        for(const [e, k] of Object.entries(engToKor)) korToEng[k] = e.toLowerCase();
+        function convertEngToKor() {
+            const input = document.getElementById('engkor-input').value;
+            let result = '';
+            for(const c of input) result += engToKor[c] || c;
+            document.getElementById('engkor-result').textContent = composeHangul(result);
+        }
+        function convertKorToEng() {
+            const input = decomposeHangul(document.getElementById('engkor-input').value);
+            let result = '';
+            for(const c of input) result += korToEng[c] || c;
+            document.getElementById('engkor-result').textContent = result;
+        }
+        function composeHangul(str) {
+            const cho = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+            const jung = ['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'];
+            const jong = ['','ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅂ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+            let result = '', i = 0;
+            while(i < str.length) {
+                const c = str[i];
+                if(cho.includes(c) && i+1 < str.length && jung.includes(str[i+1])) {
+                    const choIdx = cho.indexOf(c);
+                    const jungIdx = jung.indexOf(str[i+1]);
+                    let jongIdx = 0;
+                    if(i+2 < str.length && jong.includes(str[i+2])) {
+                        if(i+3 < str.length && jung.includes(str[i+3])) {
+                            result += String.fromCharCode(0xAC00 + choIdx*588 + jungIdx*28);
+                            i += 2;
+                            continue;
+                        }
+                        jongIdx = jong.indexOf(str[i+2]);
+                        i++;
+                    }
+                    result += String.fromCharCode(0xAC00 + choIdx*588 + jungIdx*28 + jongIdx);
+                    i += 2;
+                } else { result += c; i++; }
+            }
+            return result;
+        }
+        function decomposeHangul(str) {
+            const cho = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+            const jung = ['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'];
+            const jong = ['','ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅂ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+            let result = '';
+            for(const c of str) {
+                const code = c.charCodeAt(0);
+                if(code >= 0xAC00 && code <= 0xD7A3) {
+                    const idx = code - 0xAC00;
+                    result += cho[Math.floor(idx/588)] + jung[Math.floor((idx%588)/28)] + jong[idx%28];
+                } else { result += c; }
+            }
+            return result;
+        }
+
+        // Background Remove (using Canvas-based approach as fallback)
+        let bgRemoveImg = null;
+        function loadBgRemoveImage(input) {
+            const file = input.files[0]; if(!file) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                bgRemoveImg = new Image();
+                bgRemoveImg.src = e.target.result;
+                document.getElementById('bgremove-preview').src = e.target.result;
+                document.getElementById('bgremove-preview').style.display = 'block';
+                document.getElementById('bgremove-result').style.display = 'none';
+                document.getElementById('bgremove-download').style.display = 'none';
+                document.getElementById('bgremove-status').textContent = '';
+            };
+            reader.readAsDataURL(file);
+        }
+        async function removeBackground() {
+            if(!bgRemoveImg) return;
+            const status = document.getElementById('bgremove-status');
+            const btn = document.getElementById('bgremove-btn');
+            btn.disabled = true;
+            status.innerHTML = '처리 중... (AI 모델 로딩 중)<br><small style="color:#555;">처음 실행시 모델 다운로드로 시간이 걸릴 수 있습니다.</small>';
+            try {
+                const { removeBackground } = await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/+esm');
+                const blob = await fetch(bgRemoveImg.src).then(r => r.blob());
+                const result = await removeBackground(blob, { progress: (key, current, total) => { status.textContent = `처리 중... ${key} ${Math.round(current/total*100)}%`; } });
+                const url = URL.createObjectURL(result);
+                document.getElementById('bgremove-result').src = url;
+                document.getElementById('bgremove-result').style.display = 'block';
+                const link = document.getElementById('bgremove-download');
+                link.href = url; link.download = 'removed-bg.png'; link.style.display = 'inline-block';
+                status.textContent = '완료!';
+            } catch(e) {
+                status.innerHTML = `오류: ${e.message}<br><small>브라우저가 WebGPU/WASM을 지원하지 않을 수 있습니다.</small>`;
+            }
+            btn.disabled = false;
         }
 
         // Copy
