@@ -102,7 +102,78 @@
         .lang-modal h3 { color: #ddd; margin-bottom: 15px; font-size: 1rem; }
         .lang-option { display: block; width: 100%; padding: 10px 15px; background: #1a1a1a; border: 1px solid #222; border-radius: 6px; color: #ccc; cursor: pointer; margin-bottom: 8px; font-size: 0.9rem; text-align: left; }
         .lang-option:hover { background: #222; }
-        @media (max-width: 600px) { .tools-grid { grid-template-columns: 1fr 1fr; } nav { flex-direction: column; gap: 12px; } .timer-display { font-size: 2rem; } }
+        @media (max-width: 600px) { .tools-grid { grid-template-columns: 1fr 1fr; } nav { flex-direction: column; gap: 12px; } .timer-display { font-size: 2rem; } .category-tabs { flex-wrap: wrap; } .category-tab { padding: 6px 10px; font-size: 0.7rem; } }
+
+        /* Search */
+        .search-box { position: relative; margin-bottom: 20px; }
+        .search-box input { padding-left: 40px; background: #111; border: 1px solid #222; }
+        .search-box::before { content: '🔍'; position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 0.9rem; }
+        .search-box input:focus { border-color: #444; }
+
+        /* Category Tabs */
+        .category-tabs { display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 5px; }
+        .category-tab { padding: 8px 14px; background: #111; border: 1px solid #1a1a1a; border-radius: 20px; color: #666; font-size: 0.8rem; cursor: pointer; white-space: nowrap; transition: all 0.15s; }
+        .category-tab:hover { border-color: #333; color: #888; }
+        .category-tab.active { background: #222; border-color: #444; color: #ddd; }
+
+        /* Recent & Favorites */
+        .special-section { margin-bottom: 25px; }
+        .special-section .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .special-section .section-title { margin: 0; }
+
+        /* Tool Card with Icon */
+        .tool-card { position: relative; }
+        .tool-card .icon { font-size: 1.3rem; margin-bottom: 5px; }
+        .tool-card .fav-btn { position: absolute; top: 8px; right: 8px; background: none; border: none; font-size: 1rem; cursor: pointer; opacity: 0.3; transition: opacity 0.15s; }
+        .tool-card:hover .fav-btn { opacity: 0.6; }
+        .tool-card .fav-btn:hover, .tool-card .fav-btn.active { opacity: 1; }
+
+        /* Category Colors */
+        .tool-card[data-cat="text"] { border-left: 3px solid #6a9fb5; }
+        .tool-card[data-cat="image"] { border-left: 3px solid #a06ab5; }
+        .tool-card[data-cat="dev"] { border-left: 3px solid #6ab575; }
+        .tool-card[data-cat="calc"] { border-left: 3px solid #b5a36a; }
+        .tool-card[data-cat="util"] { border-left: 3px solid #b56a6a; }
+        .tool-card[data-cat="test"] { border-left: 3px solid #6ab5b5; }
+        .tool-card[data-cat="pdf"] { border-left: 3px solid #b58a6a; }
+
+        /* Theme Toggle */
+        .theme-btn { background: none; border: 1px solid #333; color: #666; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.9rem; }
+        .theme-btn:hover { border-color: #444; color: #888; }
+
+        /* Light Mode */
+        body.light { background: #f5f5f5; color: #666; }
+        body.light .container { }
+        body.light nav { border-color: #ddd; }
+        body.light .logo { color: #333; }
+        body.light nav a { color: #888; }
+        body.light nav a:hover { color: #555; }
+        body.light .lang-btn, body.light .theme-btn { border-color: #ccc; color: #666; }
+        body.light .donate-btn { background: #eee; border-color: #ddd; color: #555; }
+        body.light header h1 { color: #333; }
+        body.light header p { color: #888; }
+        body.light .section-title { color: #999; }
+        body.light .tool-card { background: #fff; border-color: #e0e0e0; }
+        body.light .tool-card:hover { background: #fafafa; border-color: #ccc; }
+        body.light .tool-card h3 { color: #333; }
+        body.light .tool-card p { color: #888; }
+        body.light .tool-section { background: #fff; border-color: #e0e0e0; }
+        body.light .tool-section h2 { color: #333; }
+        body.light .back-btn { border-color: #ddd; color: #888; }
+        body.light input, body.light textarea, body.light select { border-color: #ddd; background: #f9f9f9; color: #333; }
+        body.light .btn { background: #eee; border-color: #ddd; color: #555; }
+        body.light .btn:hover { background: #e0e0e0; }
+        body.light .result-box { background: #f9f9f9; border-color: #e0e0e0; }
+        body.light .category-tab { background: #fff; border-color: #ddd; color: #888; }
+        body.light .category-tab.active { background: #333; border-color: #333; color: #fff; }
+        body.light .search-box input { background: #fff; border-color: #ddd; }
+        body.light footer { border-color: #eee; }
+        body.light footer p { color: #bbb; }
+        body.light .info-box { background: #f0f0f0; border-color: #ccc; }
+        body.light .stat-box { background: #f9f9f9; border-color: #e0e0e0; }
+        body.light .lang-modal-content { background: #fff; border-color: #ddd; }
+        body.light .lang-modal h3 { color: #333; }
+        body.light .lang-option { background: #f5f5f5; border-color: #ddd; color: #333; }
     </style>
 </head>
 <body>
@@ -112,6 +183,7 @@
             <div class="nav-right">
                 <a href="#" onclick="showMain(); return false;" data-i18n="nav.tools">도구</a>
                 <a href="#" onclick="showTool('about'); return false;" data-i18n="nav.about">소개</a>
+                <button class="theme-btn" onclick="toggleTheme()" title="테마 변경">🌓</button>
                 <button class="lang-btn" onclick="toggleLangModal()">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                     <span id="current-lang">KO</span>
@@ -131,100 +203,128 @@
         <header id="main-header">
             <h1 data-i18n="header.title">개발할 때 필요한 도구들</h1>
             <p data-i18n="header.subtitle">그냥 편하게 쓰세요</p>
+            <div class="search-box" style="max-width:400px;margin:20px auto 0;">
+                <input type="text" id="search-input" placeholder="도구 검색... (Ctrl+K)" oninput="searchTools()">
+            </div>
+            <div class="category-tabs" id="category-tabs">
+                <button class="category-tab active" data-cat="all" onclick="filterCategory('all')">전체</button>
+                <button class="category-tab" data-cat="text" onclick="filterCategory('text')">📝 텍스트</button>
+                <button class="category-tab" data-cat="image" onclick="filterCategory('image')">🖼️ 이미지</button>
+                <button class="category-tab" data-cat="dev" onclick="filterCategory('dev')">💻 개발</button>
+                <button class="category-tab" data-cat="calc" onclick="filterCategory('calc')">🔢 계산</button>
+                <button class="category-tab" data-cat="util" onclick="filterCategory('util')">🔧 유틸</button>
+                <button class="category-tab" data-cat="test" onclick="filterCategory('test')">🧪 테스트</button>
+                <button class="category-tab" data-cat="pdf" onclick="filterCategory('pdf')">📄 PDF</button>
+            </div>
         </header>
 
         <div id="main-grid">
-            <div class="section-title">텍스트</div>
-            <div class="tools-grid">
-                <div class="tool-card" onclick="showTool('text')"><h3>글자수 세기</h3><p>공백, 바이트</p></div>
-                <div class="tool-card" onclick="showTool('text-convert')"><h3>텍스트 변환</h3><p>대소문자, 뒤집기, 모스 등</p></div>
-                <div class="tool-card" onclick="showTool('replace')"><h3>찾아 바꾸기</h3><p>치환</p></div>
-                <div class="tool-card" onclick="showTool('diff')"><h3>텍스트 비교</h3><p>차이점 찾기</p></div>
-                <div class="tool-card" onclick="showTool('duplicate')"><h3>중복/정렬</h3><p>줄 처리</p></div>
-                <div class="tool-card" onclick="showTool('encrypt')"><h3>암호화</h3><p>AES</p></div>
-                <div class="tool-card" onclick="showTool('word-freq')"><h3>단어 분석</h3><p>빈도, 난이도</p></div>
-                <div class="tool-card" onclick="showTool('special')"><h3>특수문자</h3><p>유니코드</p></div>
-                <div class="tool-card" onclick="showTool('lorem')"><h3>더미 텍스트</h3><p>Lorem, 한글</p></div>
-                <div class="tool-card" onclick="showTool('markdown')"><h3>Markdown</h3><p>미리보기</p></div>
-                <div class="tool-card" onclick="showTool('ocr')"><h3>OCR</h3><p>이미지→텍스트</p></div>
-                <div class="tool-card" onclick="showTool('romanize')"><h3>로마자 변환</h3><p>한글→영문</p></div>
-                <div class="tool-card" onclick="showTool('jamo')"><h3>자모 분리</h3><p>조합/분리</p></div>
+            <!-- Favorites Section -->
+            <div class="special-section" id="favorites-section" style="display:none;">
+                <div class="section-header">
+                    <div class="section-title">⭐ 즐겨찾기</div>
+                </div>
+                <div class="tools-grid" id="favorites-grid"></div>
             </div>
 
-            <div class="section-title">이미지</div>
-            <div class="tools-grid">
-                <div class="tool-card" onclick="showTool('img-edit')"><h3>이미지 편집</h3><p>크기, 자르기, 회전</p></div>
-                <div class="tool-card" onclick="showTool('img-filter')"><h3>이미지 필터</h3><p>흑백, 세피아, 픽셀화</p></div>
-                <div class="tool-card" onclick="showTool('img-convert')"><h3>포맷 변환</h3><p>JPG, PNG, WebP</p></div>
-                <div class="tool-card" onclick="showTool('bg-remove')"><h3>누끼</h3><p>배경 제거</p></div>
-                <div class="tool-card" onclick="showTool('img-watermark')"><h3>워터마크</h3><p>텍스트 삽입</p></div>
-                <div class="tool-card" onclick="showTool('color-extract')"><h3>색상 추출</h3><p>팔레트 생성</p></div>
-                <div class="tool-card" onclick="showTool('favicon')"><h3>파비콘</h3><p>ICO 생성</p></div>
-                <div class="tool-card" onclick="showTool('placeholder')"><h3>플레이스홀더</h3><p>더미 이미지</p></div>
-                <div class="tool-card" onclick="showTool('qr')"><h3>QR/바코드</h3><p>생성</p></div>
-                <div class="tool-card" onclick="showTool('ascii-art')"><h3>ASCII 아트</h3><p>이미지→문자</p></div>
+            <!-- Recent Section -->
+            <div class="special-section" id="recent-section" style="display:none;">
+                <div class="section-header">
+                    <div class="section-title">🕐 최근 사용</div>
+                </div>
+                <div class="tools-grid" id="recent-grid"></div>
+            </div>
+            <div class="section-title" data-section="text">📝 텍스트</div>
+            <div class="tools-grid" data-section="text">
+                <div class="tool-card" data-cat="text" data-tool="text" data-name="글자수 세기" onclick="openTool('text')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('text')">☆</button><div class="icon">📊</div><h3>글자수 세기</h3><p>공백, 바이트</p></div>
+                <div class="tool-card" data-cat="text" data-tool="text-convert" data-name="텍스트 변환" onclick="openTool('text-convert')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('text-convert')">☆</button><div class="icon">🔄</div><h3>텍스트 변환</h3><p>대소문자, 뒤집기, 모스 등</p></div>
+                <div class="tool-card" data-cat="text" data-tool="replace" data-name="찾아 바꾸기" onclick="openTool('replace')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('replace')">☆</button><div class="icon">🔍</div><h3>찾아 바꾸기</h3><p>치환</p></div>
+                <div class="tool-card" data-cat="text" data-tool="diff" data-name="텍스트 비교" onclick="openTool('diff')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('diff')">☆</button><div class="icon">📋</div><h3>텍스트 비교</h3><p>차이점 찾기</p></div>
+                <div class="tool-card" data-cat="text" data-tool="duplicate" data-name="중복 정렬" onclick="openTool('duplicate')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('duplicate')">☆</button><div class="icon">📑</div><h3>중복/정렬</h3><p>줄 처리</p></div>
+                <div class="tool-card" data-cat="text" data-tool="encrypt" data-name="암호화" onclick="openTool('encrypt')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('encrypt')">☆</button><div class="icon">🔐</div><h3>암호화</h3><p>AES</p></div>
+                <div class="tool-card" data-cat="text" data-tool="word-freq" data-name="단어 분석" onclick="openTool('word-freq')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('word-freq')">☆</button><div class="icon">📈</div><h3>단어 분석</h3><p>빈도, 난이도</p></div>
+                <div class="tool-card" data-cat="text" data-tool="special" data-name="특수문자" onclick="openTool('special')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('special')">☆</button><div class="icon">✨</div><h3>특수문자</h3><p>유니코드</p></div>
+                <div class="tool-card" data-cat="text" data-tool="lorem" data-name="더미 텍스트" onclick="openTool('lorem')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('lorem')">☆</button><div class="icon">📝</div><h3>더미 텍스트</h3><p>Lorem, 한글</p></div>
+                <div class="tool-card" data-cat="text" data-tool="markdown" data-name="Markdown" onclick="openTool('markdown')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('markdown')">☆</button><div class="icon">📄</div><h3>Markdown</h3><p>미리보기</p></div>
+                <div class="tool-card" data-cat="text" data-tool="ocr" data-name="OCR" onclick="openTool('ocr')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('ocr')">☆</button><div class="icon">👁️</div><h3>OCR</h3><p>이미지→텍스트</p></div>
+                <div class="tool-card" data-cat="text" data-tool="romanize" data-name="로마자 변환" onclick="openTool('romanize')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('romanize')">☆</button><div class="icon">🔤</div><h3>로마자 변환</h3><p>한글→영문</p></div>
+                <div class="tool-card" data-cat="text" data-tool="jamo" data-name="자모 분리" onclick="openTool('jamo')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('jamo')">☆</button><div class="icon">🇰🇷</div><h3>자모 분리</h3><p>조합/분리</p></div>
             </div>
 
-            <div class="section-title">개발</div>
-            <div class="tools-grid">
-                <div class="tool-card" onclick="showTool('encoder')"><h3>인코더</h3><p>Base64, URL, Hash</p></div>
-                <div class="tool-card" onclick="showTool('data-convert')"><h3>데이터 변환</h3><p>JSON, XML, YAML, CSV</p></div>
-                <div class="tool-card" onclick="showTool('json')"><h3>JSON 도구</h3><p>정리, Path, TS변환</p></div>
-                <div class="tool-card" onclick="showTool('css-gen')"><h3>CSS 생성기</h3><p>그라데이션, 쉐도우 등</p></div>
-                <div class="tool-card" onclick="showTool('seo-tools')"><h3>SEO 도구</h3><p>메타, robots, sitemap</p></div>
-                <div class="tool-card" onclick="showTool('regex')"><h3>정규식</h3><p>테스트/생성</p></div>
-                <div class="tool-card" onclick="showTool('minify')"><h3>코드 압축</h3><p>JS, CSS, HTML</p></div>
-                <div class="tool-card" onclick="showTool('code-diff')"><h3>코드 비교</h3><p>Diff</p></div>
-                <div class="tool-card" onclick="showTool('timestamp')"><h3>타임스탬프</h3><p>Unix ↔ Date</p></div>
-                <div class="tool-card" onclick="showTool('color')"><h3>색상 변환</h3><p>HEX, RGB, HSL</p></div>
-                <div class="tool-card" onclick="showTool('cron')"><h3>Cron</h3><p>표현식</p></div>
-                <div class="tool-card" onclick="showTool('dev-info')"><h3>개발 정보</h3><p>HTTP, IP, UA</p></div>
-                <div class="tool-card" onclick="showTool('uuid')"><h3>UUID</h3><p>생성/검증</p></div>
-                <div class="tool-card" onclick="showTool('sql')"><h3>SQL 포매터</h3><p>정렬/정리</p></div>
-                <div class="tool-card" onclick="showTool('og-preview')"><h3>OG 미리보기</h3><p>메타 태그</p></div>
+            <div class="section-title" data-section="image">🖼️ 이미지</div>
+            <div class="tools-grid" data-section="image">
+                <div class="tool-card" data-cat="image" data-tool="img-edit" data-name="이미지 편집" onclick="openTool('img-edit')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('img-edit')">☆</button><div class="icon">✂️</div><h3>이미지 편집</h3><p>크기, 자르기, 회전</p></div>
+                <div class="tool-card" data-cat="image" data-tool="img-filter" data-name="이미지 필터" onclick="openTool('img-filter')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('img-filter')">☆</button><div class="icon">🎨</div><h3>이미지 필터</h3><p>흑백, 세피아, 픽셀화</p></div>
+                <div class="tool-card" data-cat="image" data-tool="img-convert" data-name="포맷 변환" onclick="openTool('img-convert')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('img-convert')">☆</button><div class="icon">🔄</div><h3>포맷 변환</h3><p>JPG, PNG, WebP</p></div>
+                <div class="tool-card" data-cat="image" data-tool="bg-remove" data-name="누끼" onclick="openTool('bg-remove')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('bg-remove')">☆</button><div class="icon">🪄</div><h3>누끼</h3><p>배경 제거</p></div>
+                <div class="tool-card" data-cat="image" data-tool="img-watermark" data-name="워터마크" onclick="openTool('img-watermark')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('img-watermark')">☆</button><div class="icon">💧</div><h3>워터마크</h3><p>텍스트 삽입</p></div>
+                <div class="tool-card" data-cat="image" data-tool="color-extract" data-name="색상 추출" onclick="openTool('color-extract')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('color-extract')">☆</button><div class="icon">🎯</div><h3>색상 추출</h3><p>팔레트 생성</p></div>
+                <div class="tool-card" data-cat="image" data-tool="favicon" data-name="파비콘" onclick="openTool('favicon')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('favicon')">☆</button><div class="icon">⭐</div><h3>파비콘</h3><p>ICO 생성</p></div>
+                <div class="tool-card" data-cat="image" data-tool="placeholder" data-name="플레이스홀더" onclick="openTool('placeholder')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('placeholder')">☆</button><div class="icon">🖼️</div><h3>플레이스홀더</h3><p>더미 이미지</p></div>
+                <div class="tool-card" data-cat="image" data-tool="qr" data-name="QR 바코드" onclick="openTool('qr')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('qr')">☆</button><div class="icon">📱</div><h3>QR/바코드</h3><p>생성</p></div>
+                <div class="tool-card" data-cat="image" data-tool="ascii-art" data-name="ASCII 아트" onclick="openTool('ascii-art')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('ascii-art')">☆</button><div class="icon">🔣</div><h3>ASCII 아트</h3><p>이미지→문자</p></div>
             </div>
 
-            <div class="section-title">계산</div>
-            <div class="tools-grid">
-                <div class="tool-card" onclick="showTool('calculator')"><h3>종합 계산기</h3><p>금융, BMI, 연봉 등</p></div>
-                <div class="tool-card" onclick="showTool('unit')"><h3>단위 변환</h3><p>길이, 무게, 온도</p></div>
-                <div class="tool-card" onclick="showTool('number-convert')"><h3>숫자 변환</h3><p>진법, 로마, 한글</p></div>
-                <div class="tool-card" onclick="showTool('date')"><h3>날짜 계산</h3><p>D-Day, 기간</p></div>
-                <div class="tool-card" onclick="showTool('age')"><h3>나이 계산</h3><p>만나이, 한국나이</p></div>
-                <div class="tool-card" onclick="showTool('loan')"><h3>대출 계산</h3><p>이자, 상환액</p></div>
-                <div class="tool-card" onclick="showTool('salary')"><h3>연봉 실수령</h3><p>세금 계산</p></div>
-                <div class="tool-card" onclick="showTool('vat')"><h3>부가세</h3><p>VAT 계산</p></div>
-                <div class="tool-card" onclick="showTool('zodiac')"><h3>띠/별자리</h3><p>생년월일</p></div>
-                <div class="tool-card" onclick="showTool('statistics')"><h3>통계</h3><p>평균, 표준편차</p></div>
-                <div class="tool-card" onclick="showTool('programmer-calc')"><h3>프로그래머</h3><p>비트 연산</p></div>
+            <div class="section-title" data-section="dev">💻 개발</div>
+            <div class="tools-grid" data-section="dev">
+                <div class="tool-card" data-cat="dev" data-tool="encoder" data-name="인코더" onclick="openTool('encoder')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('encoder')">☆</button><div class="icon">🔢</div><h3>인코더</h3><p>Base64, URL, Hash</p></div>
+                <div class="tool-card" data-cat="dev" data-tool="data-convert" data-name="데이터 변환" onclick="openTool('data-convert')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('data-convert')">☆</button><div class="icon">🔀</div><h3>데이터 변환</h3><p>JSON, XML, YAML, CSV</p></div>
+                <div class="tool-card" data-cat="dev" data-tool="json" data-name="JSON 도구" onclick="openTool('json')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('json')">☆</button><div class="icon">📦</div><h3>JSON 도구</h3><p>정리, Path, TS변환</p></div>
+                <div class="tool-card" data-cat="dev" data-tool="css-gen" data-name="CSS 생성기" onclick="openTool('css-gen')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('css-gen')">☆</button><div class="icon">🎨</div><h3>CSS 생성기</h3><p>그라데이션, 쉐도우 등</p></div>
+                <div class="tool-card" data-cat="dev" data-tool="seo-tools" data-name="SEO 도구" onclick="openTool('seo-tools')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('seo-tools')">☆</button><div class="icon">🔎</div><h3>SEO 도구</h3><p>메타, robots, sitemap</p></div>
+                <div class="tool-card" data-cat="dev" data-tool="regex" data-name="정규식" onclick="openTool('regex')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('regex')">☆</button><div class="icon">🧩</div><h3>정규식</h3><p>테스트/생성</p></div>
+                <div class="tool-card" data-cat="dev" data-tool="minify" data-name="코드 압축" onclick="openTool('minify')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('minify')">☆</button><div class="icon">📦</div><h3>코드 압축</h3><p>JS, CSS, HTML</p></div>
+                <div class="tool-card" data-cat="dev" data-tool="code-diff" data-name="코드 비교" onclick="openTool('code-diff')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('code-diff')">☆</button><div class="icon">⚖️</div><h3>코드 비교</h3><p>Diff</p></div>
+                <div class="tool-card" data-cat="dev" data-tool="timestamp" data-name="타임스탬프" onclick="openTool('timestamp')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('timestamp')">☆</button><div class="icon">⏰</div><h3>타임스탬프</h3><p>Unix ↔ Date</p></div>
+                <div class="tool-card" data-cat="dev" data-tool="color" data-name="색상 변환" onclick="openTool('color')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('color')">☆</button><div class="icon">🌈</div><h3>색상 변환</h3><p>HEX, RGB, HSL</p></div>
+                <div class="tool-card" data-cat="dev" data-tool="cron" data-name="Cron" onclick="openTool('cron')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('cron')">☆</button><div class="icon">⏱️</div><h3>Cron</h3><p>표현식</p></div>
+                <div class="tool-card" data-cat="dev" data-tool="dev-info" data-name="개발 정보" onclick="openTool('dev-info')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('dev-info')">☆</button><div class="icon">ℹ️</div><h3>개발 정보</h3><p>HTTP, IP, UA</p></div>
+                <div class="tool-card" data-cat="dev" data-tool="uuid" data-name="UUID" onclick="openTool('uuid')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('uuid')">☆</button><div class="icon">🔑</div><h3>UUID</h3><p>생성/검증</p></div>
+                <div class="tool-card" data-cat="dev" data-tool="sql" data-name="SQL 포매터" onclick="openTool('sql')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('sql')">☆</button><div class="icon">🗃️</div><h3>SQL 포매터</h3><p>정렬/정리</p></div>
+                <div class="tool-card" data-cat="dev" data-tool="og-preview" data-name="OG 미리보기" onclick="openTool('og-preview')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('og-preview')">☆</button><div class="icon">🔗</div><h3>OG 미리보기</h3><p>메타 태그</p></div>
             </div>
 
-            <div class="section-title">유틸리티</div>
-            <div class="tools-grid">
-                <div class="tool-card" onclick="showTool('timer')"><h3>타이머</h3><p>뽀모도로, 스톱워치</p></div>
-                <div class="tool-card" onclick="showTool('worldclock')"><h3>세계 시간</h3><p>타임존</p></div>
-                <div class="tool-card" onclick="showTool('password')"><h3>비밀번호</h3><p>생성/강도/유출확인</p></div>
-                <div class="tool-card" onclick="showTool('lunar')"><h3>음력 변환</h3><p>음력 ↔ 양력</p></div>
-                <div class="tool-card" onclick="showTool('nickname')"><h3>닉네임 생성</h3><p>랜덤 이름</p></div>
-                <div class="tool-card" onclick="showTool('notepad')"><h3>메모장</h3><p>로컬 저장</p></div>
-                <div class="tool-card" onclick="showTool('todo')"><h3>할 일</h3><p>목록 관리</p></div>
-                <div class="tool-card" onclick="showTool('emoji')"><h3>이모지</h3><p>검색/복사</p></div>
-                <div class="tool-card" onclick="showTool('engkor')"><h3>한↔영</h3><p>오타 교정</p></div>
+            <div class="section-title" data-section="calc">🔢 계산</div>
+            <div class="tools-grid" data-section="calc">
+                <div class="tool-card" data-cat="calc" data-tool="calculator" data-name="종합 계산기" onclick="openTool('calculator')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('calculator')">☆</button><div class="icon">🧮</div><h3>종합 계산기</h3><p>금융, BMI, 연봉 등</p></div>
+                <div class="tool-card" data-cat="calc" data-tool="unit" data-name="단위 변환" onclick="openTool('unit')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('unit')">☆</button><div class="icon">📐</div><h3>단위 변환</h3><p>길이, 무게, 온도</p></div>
+                <div class="tool-card" data-cat="calc" data-tool="number-convert" data-name="숫자 변환" onclick="openTool('number-convert')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('number-convert')">☆</button><div class="icon">🔢</div><h3>숫자 변환</h3><p>진법, 로마, 한글</p></div>
+                <div class="tool-card" data-cat="calc" data-tool="date" data-name="날짜 계산" onclick="openTool('date')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('date')">☆</button><div class="icon">📅</div><h3>날짜 계산</h3><p>D-Day, 기간</p></div>
+                <div class="tool-card" data-cat="calc" data-tool="age" data-name="나이 계산" onclick="openTool('age')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('age')">☆</button><div class="icon">🎂</div><h3>나이 계산</h3><p>만나이, 한국나이</p></div>
+                <div class="tool-card" data-cat="calc" data-tool="loan" data-name="대출 계산" onclick="openTool('loan')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('loan')">☆</button><div class="icon">🏦</div><h3>대출 계산</h3><p>이자, 상환액</p></div>
+                <div class="tool-card" data-cat="calc" data-tool="salary" data-name="연봉 실수령" onclick="openTool('salary')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('salary')">☆</button><div class="icon">💰</div><h3>연봉 실수령</h3><p>세금 계산</p></div>
+                <div class="tool-card" data-cat="calc" data-tool="vat" data-name="부가세" onclick="openTool('vat')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('vat')">☆</button><div class="icon">🧾</div><h3>부가세</h3><p>VAT 계산</p></div>
+                <div class="tool-card" data-cat="calc" data-tool="zodiac" data-name="띠 별자리" onclick="openTool('zodiac')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('zodiac')">☆</button><div class="icon">⭐</div><h3>띠/별자리</h3><p>생년월일</p></div>
+                <div class="tool-card" data-cat="calc" data-tool="statistics" data-name="통계" onclick="openTool('statistics')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('statistics')">☆</button><div class="icon">📊</div><h3>통계</h3><p>평균, 표준편차</p></div>
+                <div class="tool-card" data-cat="calc" data-tool="programmer-calc" data-name="프로그래머 계산기" onclick="openTool('programmer-calc')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('programmer-calc')">☆</button><div class="icon">💻</div><h3>프로그래머</h3><p>비트 연산</p></div>
             </div>
 
-            <div class="section-title">테스트</div>
-            <div class="tools-grid">
-                <div class="tool-card" onclick="showTool('input-test')"><h3>입력 테스트</h3><p>키보드, 클릭, 타이핑</p></div>
-                <div class="tool-card" onclick="showTool('device-test')"><h3>장치 테스트</h3><p>카메라, 마이크, 속도</p></div>
-                <div class="tool-card" onclick="showTool('browser-info')"><h3>브라우저 정보</h3><p>화면, 쿠키, 저장소</p></div>
-                <div class="tool-card" onclick="showTool('tts')"><h3>TTS</h3><p>텍스트→음성</p></div>
-                <div class="tool-card" onclick="showTool('qr-scan')"><h3>QR 스캔</h3><p>카메라 인식</p></div>
+            <div class="section-title" data-section="util">🔧 유틸리티</div>
+            <div class="tools-grid" data-section="util">
+                <div class="tool-card" data-cat="util" data-tool="timer" data-name="타이머" onclick="openTool('timer')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('timer')">☆</button><div class="icon">⏲️</div><h3>타이머</h3><p>뽀모도로, 스톱워치</p></div>
+                <div class="tool-card" data-cat="util" data-tool="worldclock" data-name="세계 시간" onclick="openTool('worldclock')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('worldclock')">☆</button><div class="icon">🌍</div><h3>세계 시간</h3><p>타임존</p></div>
+                <div class="tool-card" data-cat="util" data-tool="password" data-name="비밀번호" onclick="openTool('password')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('password')">☆</button><div class="icon">🔒</div><h3>비밀번호</h3><p>생성/강도/유출확인</p></div>
+                <div class="tool-card" data-cat="util" data-tool="lunar" data-name="음력 변환" onclick="openTool('lunar')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('lunar')">☆</button><div class="icon">🌙</div><h3>음력 변환</h3><p>음력 ↔ 양력</p></div>
+                <div class="tool-card" data-cat="util" data-tool="nickname" data-name="닉네임 생성" onclick="openTool('nickname')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('nickname')">☆</button><div class="icon">🎭</div><h3>닉네임 생성</h3><p>랜덤 이름</p></div>
+                <div class="tool-card" data-cat="util" data-tool="notepad" data-name="메모장" onclick="openTool('notepad')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('notepad')">☆</button><div class="icon">📒</div><h3>메모장</h3><p>로컬 저장</p></div>
+                <div class="tool-card" data-cat="util" data-tool="todo" data-name="할 일" onclick="openTool('todo')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('todo')">☆</button><div class="icon">✅</div><h3>할 일</h3><p>목록 관리</p></div>
+                <div class="tool-card" data-cat="util" data-tool="emoji" data-name="이모지" onclick="openTool('emoji')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('emoji')">☆</button><div class="icon">😀</div><h3>이모지</h3><p>검색/복사</p></div>
+                <div class="tool-card" data-cat="util" data-tool="engkor" data-name="한영 변환" onclick="openTool('engkor')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('engkor')">☆</button><div class="icon">🔠</div><h3>한↔영</h3><p>오타 교정</p></div>
             </div>
 
-            <div class="section-title">PDF</div>
-            <div class="tools-grid">
-                <div class="tool-card" onclick="showTool('pdf-merge')"><h3>PDF 병합</h3><p>여러 PDF를 하나로</p></div>
-                <div class="tool-card" onclick="showTool('pdf-convert')"><h3>PDF 변환</h3><p>이미지 → PDF</p></div>
+            <div class="section-title" data-section="test">🧪 테스트</div>
+            <div class="tools-grid" data-section="test">
+                <div class="tool-card" data-cat="test" data-tool="input-test" data-name="입력 테스트" onclick="openTool('input-test')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('input-test')">☆</button><div class="icon">⌨️</div><h3>입력 테스트</h3><p>키보드, 클릭, 타이핑</p></div>
+                <div class="tool-card" data-cat="test" data-tool="device-test" data-name="장치 테스트" onclick="openTool('device-test')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('device-test')">☆</button><div class="icon">📷</div><h3>장치 테스트</h3><p>카메라, 마이크, 속도</p></div>
+                <div class="tool-card" data-cat="test" data-tool="browser-info" data-name="브라우저 정보" onclick="openTool('browser-info')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('browser-info')">☆</button><div class="icon">🌐</div><h3>브라우저 정보</h3><p>화면, 쿠키, 저장소</p></div>
+                <div class="tool-card" data-cat="test" data-tool="tts" data-name="TTS" onclick="openTool('tts')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('tts')">☆</button><div class="icon">🔊</div><h3>TTS</h3><p>텍스트→음성</p></div>
+                <div class="tool-card" data-cat="test" data-tool="qr-scan" data-name="QR 스캔" onclick="openTool('qr-scan')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('qr-scan')">☆</button><div class="icon">📸</div><h3>QR 스캔</h3><p>카메라 인식</p></div>
+            </div>
+
+            <div class="section-title" data-section="pdf">📄 PDF</div>
+            <div class="tools-grid" data-section="pdf">
+                <div class="tool-card" data-cat="pdf" data-tool="pdf-merge" data-name="PDF 병합" onclick="openTool('pdf-merge')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('pdf-merge')">☆</button><div class="icon">📑</div><h3>PDF 병합</h3><p>여러 PDF를 하나로</p></div>
+                <div class="tool-card" data-cat="pdf" data-tool="pdf-convert" data-name="PDF 변환" onclick="openTool('pdf-convert')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('pdf-convert')">☆</button><div class="icon">🔄</div><h3>PDF 변환</h3><p>이미지 → PDF</p></div>
             </div>
         </div>
 
@@ -2519,6 +2619,146 @@
         function setLang(lang) { currentLang = lang; localStorage.setItem('lang', lang); document.getElementById('current-lang').textContent = lang.toUpperCase(); toggleLangModal(); }
         function toggleLangModal() { document.getElementById('lang-modal').classList.toggle('active'); }
 
+        // Theme
+        let isDark = localStorage.getItem('theme') !== 'light';
+        function toggleTheme() {
+            isDark = !isDark;
+            document.body.classList.toggle('light', !isDark);
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+        if (!isDark) document.body.classList.add('light');
+
+        // Favorites & Recent
+        let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+        let recentTools = JSON.parse(localStorage.getItem('recentTools') || '[]');
+
+        function toggleFav(toolId) {
+            const idx = favorites.indexOf(toolId);
+            if (idx >= 0) favorites.splice(idx, 1);
+            else favorites.push(toolId);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            updateFavButtons();
+            renderFavorites();
+        }
+
+        function updateFavButtons() {
+            document.querySelectorAll('.tool-card').forEach(card => {
+                const toolId = card.dataset.tool;
+                const btn = card.querySelector('.fav-btn');
+                if (btn) {
+                    btn.textContent = favorites.includes(toolId) ? '★' : '☆';
+                    btn.classList.toggle('active', favorites.includes(toolId));
+                }
+            });
+        }
+
+        function addRecent(toolId) {
+            recentTools = recentTools.filter(t => t !== toolId);
+            recentTools.unshift(toolId);
+            if (recentTools.length > 5) recentTools = recentTools.slice(0, 5);
+            localStorage.setItem('recentTools', JSON.stringify(recentTools));
+            renderRecent();
+        }
+
+        function renderFavorites() {
+            const section = document.getElementById('favorites-section');
+            const grid = document.getElementById('favorites-grid');
+            if (favorites.length === 0) { section.style.display = 'none'; return; }
+            section.style.display = 'block';
+            grid.innerHTML = favorites.map(toolId => {
+                const card = document.querySelector(`.tool-card[data-tool="${toolId}"]`);
+                if (!card) return '';
+                return card.outerHTML;
+            }).join('');
+            grid.querySelectorAll('.tool-card').forEach(card => {
+                card.onclick = () => openTool(card.dataset.tool);
+                const btn = card.querySelector('.fav-btn');
+                if (btn) btn.onclick = e => { e.stopPropagation(); toggleFav(card.dataset.tool); };
+            });
+        }
+
+        function renderRecent() {
+            const section = document.getElementById('recent-section');
+            const grid = document.getElementById('recent-grid');
+            if (recentTools.length === 0) { section.style.display = 'none'; return; }
+            section.style.display = 'block';
+            grid.innerHTML = recentTools.map(toolId => {
+                const card = document.querySelector(`.tool-card[data-tool="${toolId}"]`);
+                if (!card) return '';
+                return card.outerHTML;
+            }).join('');
+            grid.querySelectorAll('.tool-card').forEach(card => {
+                card.onclick = () => openTool(card.dataset.tool);
+                const btn = card.querySelector('.fav-btn');
+                if (btn) btn.onclick = e => { e.stopPropagation(); toggleFav(card.dataset.tool); };
+            });
+        }
+
+        // Search
+        function searchTools() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('#main-grid .tool-card[data-tool]');
+            const sections = document.querySelectorAll('#main-grid .section-title[data-section]');
+            const grids = document.querySelectorAll('#main-grid .tools-grid[data-section]');
+
+            if (!query) {
+                cards.forEach(c => c.style.display = '');
+                sections.forEach(s => s.style.display = '');
+                grids.forEach(g => g.style.display = '');
+                return;
+            }
+
+            cards.forEach(card => {
+                const name = card.dataset.name?.toLowerCase() || '';
+                const text = card.textContent.toLowerCase();
+                const match = name.includes(query) || text.includes(query);
+                card.style.display = match ? '' : 'none';
+            });
+
+            // Hide empty sections
+            grids.forEach(grid => {
+                const visibleCards = grid.querySelectorAll('.tool-card[style=""], .tool-card:not([style])');
+                const hasVisible = Array.from(grid.querySelectorAll('.tool-card')).some(c => c.style.display !== 'none');
+                grid.style.display = hasVisible ? '' : 'none';
+                const section = grid.dataset.section;
+                const title = document.querySelector(`.section-title[data-section="${section}"]`);
+                if (title) title.style.display = hasVisible ? '' : 'none';
+            });
+        }
+
+        // Category Filter
+        let currentCategory = 'all';
+        function filterCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.category-tab').forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
+
+            const sections = document.querySelectorAll('#main-grid .section-title[data-section]');
+            const grids = document.querySelectorAll('#main-grid .tools-grid[data-section]');
+
+            if (cat === 'all') {
+                sections.forEach(s => s.style.display = '');
+                grids.forEach(g => g.style.display = '');
+            } else {
+                const catMap = { text: 'text', image: 'image', dev: 'dev', calc: 'calc', util: 'util', test: 'test', pdf: 'pdf' };
+                sections.forEach(s => s.style.display = s.dataset.section === catMap[cat] ? '' : 'none');
+                grids.forEach(g => g.style.display = g.dataset.section === catMap[cat] ? '' : 'none');
+            }
+        }
+
+        // Keyboard shortcut
+        document.addEventListener('keydown', e => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                document.getElementById('search-input').focus();
+            }
+        });
+
+        // Open tool with tracking
+        function openTool(toolId) {
+            addRecent(toolId);
+            showTool(toolId);
+        }
+
         // Navigation
         function showTool(t) {
             document.getElementById('main-grid').style.display = 'none';
@@ -2531,7 +2771,15 @@
             document.getElementById('main-grid').style.display = 'block';
             document.getElementById('main-header').style.display = 'block';
             document.querySelectorAll('.tool-section').forEach(s => s.classList.remove('active'));
+            updateFavButtons();
+            renderFavorites();
+            renderRecent();
         }
+
+        // Init
+        updateFavButtons();
+        renderFavorites();
+        renderRecent();
 
         // PDF Merge
         let pdfFiles = [];
