@@ -1872,6 +1872,13 @@
             <img id="wm-preview" class="img-preview" style="display:none;">
             <input type="text" id="wm-text" placeholder="워터마크 텍스트">
             <div class="row">
+                <select id="wm-pattern">
+                    <option value="single">단일</option>
+                    <option value="tile">타일 (반복)</option>
+                    <option value="diagonal">대각선 반복</option>
+                    <option value="center-big">중앙 크게</option>
+                    <option value="border">테두리</option>
+                </select>
                 <select id="wm-position">
                     <option value="br">우하단</option>
                     <option value="bl">좌하단</option>
@@ -1879,7 +1886,32 @@
                     <option value="tl">좌상단</option>
                     <option value="center">중앙</option>
                 </select>
+            </div>
+            <div class="row">
+                <select id="wm-font">
+                    <option value="Arial">Arial</option>
+                    <option value="Georgia">Georgia (세리프)</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Courier New">Courier New (고정폭)</option>
+                    <option value="Verdana">Verdana</option>
+                    <option value="Impact">Impact (굵은)</option>
+                    <option value="Comic Sans MS">Comic Sans MS</option>
+                    <option value="Trebuchet MS">Trebuchet MS</option>
+                    <option value="Palatino Linotype">Palatino</option>
+                    <option value="Lucida Console">Lucida Console</option>
+                    <option value="Pretendard">Pretendard (한글)</option>
+                </select>
+                <select id="wm-style">
+                    <option value="normal">기본</option>
+                    <option value="bold">굵게</option>
+                    <option value="italic">기울임</option>
+                    <option value="bold italic">굵은 기울임</option>
+                </select>
+            </div>
+            <div class="row">
+                <input type="color" id="wm-color" value="#ffffff" title="글자 색상">
                 <input type="number" id="wm-opacity" value="50" min="10" max="100" placeholder="투명도 %">
+                <input type="number" id="wm-size" value="0" min="0" max="200" placeholder="크기 (0=자동)">
             </div>
             <button class="btn btn-primary" onclick="addWatermark()">워터마크 추가</button>
             <canvas id="wm-canvas" style="display:none;"></canvas>
@@ -4777,27 +4809,66 @@
         function addWatermark() {
             if(!wmImg) return;
             const text = document.getElementById('wm-text').value || 'Watermark';
+            const pattern = document.getElementById('wm-pattern').value;
             const pos = document.getElementById('wm-position').value;
             const opacity = document.getElementById('wm-opacity').value / 100;
+            const font = document.getElementById('wm-font').value;
+            const style = document.getElementById('wm-style').value;
+            const color = document.getElementById('wm-color').value;
+            const customSize = parseInt(document.getElementById('wm-size').value) || 0;
             const canvas = document.getElementById('wm-canvas');
             const ctx = canvas.getContext('2d');
             canvas.width = wmImg.width;
             canvas.height = wmImg.height;
             ctx.drawImage(wmImg, 0, 0);
             ctx.globalAlpha = opacity;
-            ctx.fillStyle = '#ffffff';
-            ctx.font = `${Math.max(20, wmImg.width / 20)}px Arial`;
+            ctx.fillStyle = color;
+            const fontSize = customSize || Math.max(20, wmImg.width / 20);
+            ctx.font = `${style} ${fontSize}px ${font}`;
             ctx.textBaseline = 'middle';
-            const metrics = ctx.measureText(text);
-            let x, y;
-            if(pos === 'br') { x = canvas.width - metrics.width - 20; y = canvas.height - 30; }
-            else if(pos === 'bl') { x = 20; y = canvas.height - 30; }
-            else if(pos === 'tr') { x = canvas.width - metrics.width - 20; y = 30; }
-            else if(pos === 'tl') { x = 20; y = 30; }
-            else { x = (canvas.width - metrics.width) / 2; y = canvas.height / 2; }
             ctx.shadowColor = 'rgba(0,0,0,0.5)';
             ctx.shadowBlur = 4;
-            ctx.fillText(text, x, y);
+            const metrics = ctx.measureText(text);
+
+            if (pattern === 'single') {
+                let x, y;
+                if(pos === 'br') { x = canvas.width - metrics.width - 20; y = canvas.height - 30; }
+                else if(pos === 'bl') { x = 20; y = canvas.height - 30; }
+                else if(pos === 'tr') { x = canvas.width - metrics.width - 20; y = 30; }
+                else if(pos === 'tl') { x = 20; y = 30; }
+                else { x = (canvas.width - metrics.width) / 2; y = canvas.height / 2; }
+                ctx.fillText(text, x, y);
+            } else if (pattern === 'tile') {
+                const gap = fontSize * 3;
+                for (let y = fontSize; y < canvas.height; y += gap) {
+                    for (let x = 0; x < canvas.width; x += metrics.width + gap) {
+                        ctx.fillText(text, x, y);
+                    }
+                }
+            } else if (pattern === 'diagonal') {
+                ctx.save();
+                ctx.translate(canvas.width / 2, canvas.height / 2);
+                ctx.rotate(-Math.PI / 6);
+                const gap = fontSize * 2.5;
+                for (let y = -canvas.height; y < canvas.height * 2; y += gap) {
+                    for (let x = -canvas.width; x < canvas.width * 2; x += metrics.width + gap) {
+                        ctx.fillText(text, x, y);
+                    }
+                }
+                ctx.restore();
+            } else if (pattern === 'center-big') {
+                const bigSize = Math.min(canvas.width, canvas.height) / 3;
+                ctx.font = `${style} ${bigSize}px ${font}`;
+                const bigMetrics = ctx.measureText(text);
+                ctx.fillText(text, (canvas.width - bigMetrics.width) / 2, canvas.height / 2);
+            } else if (pattern === 'border') {
+                const pad = 20;
+                ctx.fillText(text, pad, fontSize);
+                ctx.fillText(text, canvas.width - metrics.width - pad, fontSize);
+                ctx.fillText(text, pad, canvas.height - fontSize);
+                ctx.fillText(text, canvas.width - metrics.width - pad, canvas.height - fontSize);
+            }
+
             const dataUrl = canvas.toDataURL('image/png');
             document.getElementById('wm-preview').src = dataUrl;
             const link = document.getElementById('wm-download');
