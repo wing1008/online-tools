@@ -31,21 +31,36 @@
         header p { color: #444; font-size: 0.8rem; }
         .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 8px; flex-wrap: wrap; }
         .sort-select { padding: 5px 8px; border-radius: 4px; border: 1px solid #222; background: #111; color: #888; font-size: 0.75rem; cursor: pointer; }
-        .section-title { color: #555; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; margin: 20px 0 8px; font-weight: 500; padding-left: 2px; }
+        .section-title { color: #555; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; margin: 20px 0 8px; font-weight: 500; padding-left: 0; padding-bottom: 4px; border-bottom: 2px solid #444; display: inline-block; }
+        /* Section Title Colors */
+        .section-title[data-section="text"] { border-bottom-color: #5b8def; }
+        .section-title[data-section="image"] { border-bottom-color: #4ade80; }
+        .section-title[data-section="dev"] { border-bottom-color: #a78bfa; }
+        .section-title[data-section="calc"] { border-bottom-color: #f59e0b; }
+        .section-title[data-section="util"] { border-bottom-color: #ec4899; }
+        .section-title[data-section="test"] { border-bottom-color: #14b8a6; }
+        .section-title[data-section="pdf"] { border-bottom-color: #ef4444; }
         .tools-grid { display: flex; flex-wrap: wrap; gap: 6px; }
-        .tool-card { background: #111; border-radius: 4px; padding: 6px 12px; cursor: pointer; border: 1px solid #1a1a1a; transition: all 0.12s; display: inline-flex; align-items: center; gap: 6px; border-left: 3px solid #444; }
-        /* Category Colors */
-        .tool-card[data-cat="text"] { border-left-color: #5b8def; }
-        .tool-card[data-cat="image"] { border-left-color: #4ade80; }
-        .tool-card[data-cat="dev"] { border-left-color: #a78bfa; }
-        .tool-card[data-cat="calc"] { border-left-color: #f59e0b; }
-        .tool-card[data-cat="util"] { border-left-color: #ec4899; }
-        .tool-card[data-cat="test"] { border-left-color: #14b8a6; }
-        .tool-card[data-cat="pdf"] { border-left-color: #ef4444; }
+        .tool-card { background: #111; border-radius: 4px; padding: 6px 12px; cursor: pointer; border: 1px solid #333; transition: all 0.12s; display: inline-flex; align-items: center; gap: 6px; }
+        /* Card Category Border Colors */
+        .tool-card[data-cat="text"] { border-color: #5b8def55; }
+        .tool-card[data-cat="image"] { border-color: #4ade8055; }
+        .tool-card[data-cat="dev"] { border-color: #a78bfa55; }
+        .tool-card[data-cat="calc"] { border-color: #f59e0b55; }
+        .tool-card[data-cat="util"] { border-color: #ec489955; }
+        .tool-card[data-cat="test"] { border-color: #14b8a655; }
+        .tool-card[data-cat="pdf"] { border-color: #ef444455; }
         /* Letter Group Divider */
-        .letter-divider { width: 100%; padding: 8px 0 4px 2px; font-size: 0.7rem; font-weight: 600; color: #666; letter-spacing: 1px; border-left: 3px solid #444; margin-top: 12px; }
+        .letter-divider { padding: 8px 0 4px 0; font-size: 0.7rem; font-weight: 600; color: #666; letter-spacing: 1px; margin-top: 16px; border-bottom: 2px solid #444; display: inline-block; width: auto; }
         .letter-divider:first-child { margin-top: 0; }
-        .tool-card:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,0.3); border-color: #333; }
+        .tool-card:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,0.3); }
+        .tool-card[data-cat="text"]:hover { border-color: #5b8def88; }
+        .tool-card[data-cat="image"]:hover { border-color: #4ade8088; }
+        .tool-card[data-cat="dev"]:hover { border-color: #a78bfa88; }
+        .tool-card[data-cat="calc"]:hover { border-color: #f59e0b88; }
+        .tool-card[data-cat="util"]:hover { border-color: #ec489988; }
+        .tool-card[data-cat="test"]:hover { border-color: #14b8a688; }
+        .tool-card[data-cat="pdf"]:hover { border-color: #ef444488; }
         .tool-card h3 { font-size: 0.8rem; color: #bbb; font-weight: 400; }
         .tool-card p { display: none; }
         .tool-card .icon { font-size: 0.9rem; }
@@ -2826,12 +2841,13 @@
                     const divider = document.createElement('div');
                     divider.className = 'letter-divider';
                     divider.textContent = letter;
-                    divider.style.borderLeftColor = letterColors[letter] || '#666';
+                    divider.style.borderBottomColor = letterColors[letter] || '#666';
                     allToolsGrid.appendChild(divider);
                 }
 
                 const clone = card.cloneNode(true);
-                clone.style.borderLeftColor = letterColors[letter] || '#666';
+                const color = letterColors[letter] || '#666';
+                clone.style.borderColor = color + '55';
                 clone.onclick = () => openTool(card.dataset.tool);
                 const favBtn = clone.querySelector('.fav-btn');
                 if (favBtn) {
