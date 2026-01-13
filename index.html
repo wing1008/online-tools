@@ -3156,6 +3156,7 @@
             document.querySelectorAll('.tool-section').forEach(s => s.classList.remove('active'));
             document.getElementById('tool-' + t).classList.add('active');
             window.scrollTo(0, 0);
+            if (t === 'browser-info') loadBrowserInfo();
         }
         function showMain() {
             document.getElementById('main-grid').style.display = 'block';
