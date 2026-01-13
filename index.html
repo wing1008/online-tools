@@ -120,6 +120,14 @@
         .diff-result > div { padding: 10px; border-radius: 6px; font-size: 0.8rem; white-space: pre-wrap; font-family: monospace; }
         .diff-old { background: #2a1515; }
         .diff-new { background: #152a15; }
+        /* Drop Zone */
+        .drop-zone { border: 2px dashed #333; border-radius: 8px; padding: 30px; text-align: center; color: #555; cursor: pointer; transition: all 0.2s; margin-bottom: 10px; }
+        .drop-zone:hover, .drop-zone.drag-over { border-color: #666; background: #151515; color: #888; }
+        .drop-zone input[type="file"] { display: none; }
+        .drop-zone-icon { font-size: 2rem; margin-bottom: 8px; }
+        .drop-zone-text { font-size: 0.85rem; }
+        body.light .drop-zone { border-color: #ccc; color: #888; }
+        body.light .drop-zone:hover, body.light .drop-zone.drag-over { border-color: #999; background: #f5f5f5; }
         footer { text-align: center; padding: 40px 0 30px; border-top: 1px solid #111; margin-top: 50px; }
         footer p { color: #333; font-size: 0.8rem; }
         footer a { color: #444; text-decoration: none; margin: 0 8px; font-size: 0.8rem; }
@@ -313,6 +321,7 @@
                 <div class="tool-card" data-cat="util" data-tool="todo" data-name="할 일" onclick="openTool('todo')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('todo')">☆</button><div class="icon">✅</div><h3>할 일</h3><p>목록 관리</p></div>
                 <div class="tool-card" data-cat="util" data-tool="emoji" data-name="이모지" onclick="openTool('emoji')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('emoji')">☆</button><div class="icon">😀</div><h3>이모지</h3><p>검색/복사</p></div>
                 <div class="tool-card" data-cat="util" data-tool="engkor" data-name="한영 변환" onclick="openTool('engkor')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('engkor')">☆</button><div class="icon">🔠</div><h3>한↔영</h3><p>오타 교정</p></div>
+                <div class="tool-card" data-cat="util" data-tool="zip" data-name="ZIP 압축" onclick="openTool('zip')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('zip')">☆</button><div class="icon">📦</div><h3>ZIP 압축</h3><p>압축/해제</p></div>
             </div>
 
             <div class="section-title" data-section="test">테스트</div>
@@ -2592,6 +2601,35 @@
             </div>
         </div>
 
+        <!-- ZIP -->
+        <div class="tool-section" id="tool-zip">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>ZIP 압축/해제</h2>
+            <select id="zip-mode" onchange="toggleZipMode()">
+                <option value="compress">압축하기 (파일 → ZIP)</option>
+                <option value="extract">해제하기 (ZIP → 파일)</option>
+            </select>
+            <div id="zip-compress-area">
+                <div class="drop-zone" id="zip-drop-compress" onclick="document.getElementById('zip-files').click()">
+                    <div class="drop-zone-icon">📁</div>
+                    <div class="drop-zone-text">파일을 여기에 드래그하거나 클릭하여 선택</div>
+                    <input type="file" id="zip-files" multiple>
+                </div>
+                <div class="file-list" id="zip-file-list"></div>
+                <input type="text" id="zip-filename" placeholder="ZIP 파일명 (기본: archive.zip)">
+                <button class="btn btn-primary" onclick="compressZip()">ZIP 압축</button>
+                <div id="zip-compress-result"></div>
+            </div>
+            <div id="zip-extract-area" style="display:none;">
+                <div class="drop-zone" id="zip-drop-extract" onclick="document.getElementById('zip-extract-file').click()">
+                    <div class="drop-zone-icon">📦</div>
+                    <div class="drop-zone-text">ZIP 파일을 여기에 드래그하거나 클릭하여 선택</div>
+                    <input type="file" id="zip-extract-file" accept=".zip">
+                </div>
+                <div id="zip-extract-result"></div>
+            </div>
+        </div>
+
         <!-- About -->
         <div class="tool-section" id="tool-about">
             <button class="back-btn" onclick="showMain()">← 목록</button>
@@ -2616,6 +2654,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script>
         // Language
         let currentLang = localStorage.getItem('lang') || 'ko';
@@ -2911,6 +2950,81 @@
         updateFavButtons();
         renderFavorites();
         renderRecent();
+
+        // ZIP Compress/Extract
+        let zipFiles = [];
+        function toggleZipMode() {
+            const mode = document.getElementById('zip-mode').value;
+            document.getElementById('zip-compress-area').style.display = mode === 'compress' ? '' : 'none';
+            document.getElementById('zip-extract-area').style.display = mode === 'extract' ? '' : 'none';
+        }
+        function updateZipFileList() {
+            document.getElementById('zip-file-list').innerHTML = zipFiles.map((f,i) =>
+                `<div class="file-item"><span>${f.name}</span><button onclick="zipFiles.splice(${i},1);updateZipFileList()">×</button></div>`
+            ).join('');
+        }
+        document.getElementById('zip-files').addEventListener('change', e => {
+            zipFiles = [...zipFiles, ...Array.from(e.target.files)];
+            updateZipFileList();
+        });
+        document.getElementById('zip-extract-file').addEventListener('change', e => {
+            if (e.target.files[0]) extractZip(e.target.files[0]);
+        });
+        // Drop zone for compress
+        const dropCompress = document.getElementById('zip-drop-compress');
+        dropCompress.addEventListener('dragover', e => { e.preventDefault(); dropCompress.classList.add('drag-over'); });
+        dropCompress.addEventListener('dragleave', () => dropCompress.classList.remove('drag-over'));
+        dropCompress.addEventListener('drop', e => {
+            e.preventDefault(); dropCompress.classList.remove('drag-over');
+            zipFiles = [...zipFiles, ...Array.from(e.dataTransfer.files)];
+            updateZipFileList();
+        });
+        // Drop zone for extract
+        const dropExtract = document.getElementById('zip-drop-extract');
+        dropExtract.addEventListener('dragover', e => { e.preventDefault(); dropExtract.classList.add('drag-over'); });
+        dropExtract.addEventListener('dragleave', () => dropExtract.classList.remove('drag-over'));
+        dropExtract.addEventListener('drop', e => {
+            e.preventDefault(); dropExtract.classList.remove('drag-over');
+            const file = e.dataTransfer.files[0];
+            if (file && file.name.endsWith('.zip')) extractZip(file);
+            else alert('ZIP 파일만 가능합니다');
+        });
+        async function compressZip() {
+            if (!zipFiles.length) return alert('파일을 선택하세요');
+            const result = document.getElementById('zip-compress-result');
+            result.innerHTML = '<div style="color:#666;margin-top:10px;">압축 중...</div>';
+            try {
+                const zip = new JSZip();
+                for (const f of zipFiles) {
+                    zip.file(f.name, f);
+                }
+                const blob = await zip.generateAsync({type: 'blob'});
+                const filename = document.getElementById('zip-filename').value || 'archive.zip';
+                const url = URL.createObjectURL(blob);
+                result.innerHTML = `<a href="${url}" download="${filename}" class="btn btn-primary" style="display:inline-block;margin-top:10px;text-decoration:none;">다운로드 (${(blob.size/1024).toFixed(1)}KB)</a>`;
+                zipFiles = [];
+                updateZipFileList();
+            } catch(e) { result.innerHTML = `<div style="color:#a55;margin-top:10px;">오류: ${e.message}</div>`; }
+        }
+        async function extractZip(file) {
+            const result = document.getElementById('zip-extract-result');
+            result.innerHTML = '<div style="color:#666;margin-top:10px;">해제 중...</div>';
+            try {
+                const zip = await JSZip.loadAsync(file);
+                let html = '<div class="file-list" style="margin-top:10px;">';
+                const files = [];
+                zip.forEach((path, entry) => {
+                    if (!entry.dir) files.push({path, entry});
+                });
+                for (const {path, entry} of files) {
+                    const blob = await entry.async('blob');
+                    const url = URL.createObjectURL(blob);
+                    html += `<div class="file-item"><span>${path}</span><a href="${url}" download="${path.split('/').pop()}" class="btn" style="padding:4px 8px;font-size:0.75rem;">다운로드</a></div>`;
+                }
+                html += '</div>';
+                result.innerHTML = `<p style="color:#888;margin-top:10px;">${files.length}개 파일</p>${html}`;
+            } catch(e) { result.innerHTML = `<div style="color:#a55;margin-top:10px;">오류: ${e.message}</div>`; }
+        }
 
         // PDF Merge
         let pdfFiles = [];
