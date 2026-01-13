@@ -31,7 +31,7 @@
         header p { color: #444; font-size: 0.8rem; }
         .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 8px; flex-wrap: wrap; }
         .sort-select { padding: 5px 8px; border-radius: 4px; border: 1px solid #222; background: #111; color: #888; font-size: 0.75rem; cursor: pointer; }
-        .section-title { color: #555; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; margin: 20px 0 8px; font-weight: 500; padding-left: 0; padding-bottom: 4px; border-bottom: 2px solid #444; display: inline-block; }
+        .section-title { color: #555; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; margin: 20px 0 8px; font-weight: 500; padding-left: 0; padding-bottom: 6px; border-bottom: 2px solid #444; display: block; width: 40%; min-width: 200px; max-width: 400px; }
         /* Section Title Colors */
         .section-title[data-section="text"] { border-bottom-color: #5b8def; }
         .section-title[data-section="image"] { border-bottom-color: #4ade80; }
@@ -40,8 +40,8 @@
         .section-title[data-section="util"] { border-bottom-color: #ec4899; }
         .section-title[data-section="test"] { border-bottom-color: #14b8a6; }
         .section-title[data-section="pdf"] { border-bottom-color: #ef4444; }
-        .tools-grid { display: flex; flex-wrap: wrap; gap: 6px; }
-        .tool-card { background: #111; border-radius: 4px; padding: 6px 12px; cursor: pointer; border: 1px solid #333; transition: all 0.12s; display: inline-flex; align-items: center; gap: 6px; }
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 6px; }
+        .tool-card { background: #111; border-radius: 4px; padding: 8px 10px; cursor: pointer; border: 1px solid #333; transition: all 0.12s; display: flex; align-items: center; justify-content: center; gap: 6px; text-align: center; }
         /* Card Category Border Colors */
         .tool-card[data-cat="text"] { border-color: #5b8def55; }
         .tool-card[data-cat="image"] { border-color: #4ade8055; }
@@ -51,7 +51,7 @@
         .tool-card[data-cat="test"] { border-color: #14b8a655; }
         .tool-card[data-cat="pdf"] { border-color: #ef444455; }
         /* Letter Group Divider */
-        .letter-divider { padding: 8px 0 4px 0; font-size: 0.7rem; font-weight: 600; color: #666; letter-spacing: 1px; margin-top: 16px; border-bottom: 2px solid #444; display: inline-block; width: auto; }
+        .letter-divider { grid-column: 1 / -1; padding: 8px 0 6px 0; font-size: 0.7rem; font-weight: 600; color: #666; letter-spacing: 1px; margin-top: 12px; border-bottom: 2px solid #444; width: 40%; min-width: 200px; max-width: 400px; }
         .letter-divider:first-child { margin-top: 0; }
         .tool-card:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,0.3); }
         .tool-card[data-cat="text"]:hover { border-color: #5b8def88; }
