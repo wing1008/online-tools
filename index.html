@@ -331,6 +331,8 @@
                 <div class="tool-card" data-cat="image" data-tool="placeholder" data-name="플레이스홀더" onclick="openTool('placeholder')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('placeholder')">☆</button><div class="icon">🖼️</div><h3>플레이스홀더</h3><p>원하는 크기의 더미 이미지 생성</p></div>
                 <div class="tool-card" data-cat="image" data-tool="qr" data-name="QR 바코드" onclick="openTool('qr')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('qr')">☆</button><div class="icon">📱</div><h3>QR/바코드</h3><p>URL, 텍스트로 QR코드 생성</p></div>
                 <div class="tool-card" data-cat="image" data-tool="ascii-art" data-name="ASCII 아트" onclick="openTool('ascii-art')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('ascii-art')">☆</button><div class="icon">🔣</div><h3>ASCII 아트</h3><p>이미지를 문자 아트로 변환</p></div>
+                <div class="tool-card" data-cat="image" data-tool="gif-maker" data-name="GIF 만들기" onclick="openTool('gif-maker')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('gif-maker')">☆</button><div class="icon">🎞️</div><h3>GIF 만들기</h3><p>이미지들로 GIF 애니메이션 생성</p></div>
+                <div class="tool-card" data-cat="image" data-tool="exif" data-name="EXIF 정보" onclick="openTool('exif')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('exif')">☆</button><div class="icon">📷</div><h3>EXIF 정보</h3><p>이미지 메타데이터 확인/제거</p></div>
             </div>
 
             <div class="section-title" data-section="dev">개발</div>
@@ -350,6 +352,7 @@
                 <div class="tool-card" data-cat="dev" data-tool="uuid" data-name="UUID" onclick="openTool('uuid')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('uuid')">☆</button><div class="icon">🔑</div><h3>UUID</h3><p>UUID v4 생성 및 유효성 검증</p></div>
                 <div class="tool-card" data-cat="dev" data-tool="sql" data-name="SQL 포매터" onclick="openTool('sql')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('sql')">☆</button><div class="icon">🗃️</div><h3>SQL 포매터</h3><p>SQL 쿼리 정리 및 포맷팅</p></div>
                 <div class="tool-card" data-cat="dev" data-tool="og-preview" data-name="OG 미리보기" onclick="openTool('og-preview')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('og-preview')">☆</button><div class="icon">🔗</div><h3>OG 미리보기</h3><p>Open Graph 메타태그 미리보기</p></div>
+                <div class="tool-card" data-cat="dev" data-tool="code-img" data-name="코드 이미지" onclick="openTool('code-img')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('code-img')">☆</button><div class="icon">📸</div><h3>코드→이미지</h3><p>코드를 예쁜 이미지로 변환</p></div>
             </div>
 
             <div class="section-title" data-section="calc">계산</div>
@@ -379,6 +382,11 @@
                 <div class="tool-card" data-cat="util" data-tool="emoji" data-name="이모지" onclick="openTool('emoji')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('emoji')">☆</button><div class="icon">😀</div><h3>이모지</h3><p>이모지 검색 및 클립보드 복사</p></div>
                 <div class="tool-card" data-cat="util" data-tool="engkor" data-name="한영 변환" onclick="openTool('engkor')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('engkor')">☆</button><div class="icon">🔠</div><h3>한↔영</h3><p>한영 키보드 오타 자동 교정</p></div>
                 <div class="tool-card" data-cat="util" data-tool="zip" data-name="ZIP 압축" onclick="openTool('zip')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('zip')">☆</button><div class="icon">📦</div><h3>ZIP 압축</h3><p>파일 ZIP 압축 및 해제</p></div>
+                <div class="tool-card" data-cat="util" data-tool="signature" data-name="서명 만들기" onclick="openTool('signature')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('signature')">☆</button><div class="icon">✍️</div><h3>서명 만들기</h3><p>마우스/터치로 전자 서명 생성</p></div>
+                <div class="tool-card" data-cat="util" data-tool="business-card" data-name="명함 생성" onclick="openTool('business-card')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('business-card')">☆</button><div class="icon">💼</div><h3>명함 생성</h3><p>간단한 명함 디자인 및 저장</p></div>
+                <div class="tool-card" data-cat="util" data-tool="fake-data" data-name="가짜 데이터" onclick="openTool('fake-data')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('fake-data')">☆</button><div class="icon">🎲</div><h3>가짜 데이터</h3><p>테스트용 더미 데이터 생성</p></div>
+                <div class="tool-card" data-cat="util" data-tool="chart-gen" data-name="차트 생성" onclick="openTool('chart-gen')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('chart-gen')">☆</button><div class="icon">📊</div><h3>차트 생성</h3><p>데이터로 차트 이미지 생성</p></div>
+                <div class="tool-card" data-cat="util" data-tool="resume" data-name="이력서 생성" onclick="openTool('resume')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('resume')">☆</button><div class="icon">📄</div><h3>이력서 생성</h3><p>간단한 이력서 작성 및 PDF 출력</p></div>
             </div>
 
             <div class="section-title" data-section="test">테스트</div>
@@ -388,12 +396,14 @@
                 <div class="tool-card" data-cat="test" data-tool="browser-info" data-name="브라우저 정보" onclick="openTool('browser-info')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('browser-info')">☆</button><div class="icon">🌐</div><h3>브라우저 정보</h3><p>화면 해상도, 쿠키, 로컬 저장소 정보</p></div>
                 <div class="tool-card" data-cat="test" data-tool="tts" data-name="TTS" onclick="openTool('tts')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('tts')">☆</button><div class="icon">🔊</div><h3>TTS</h3><p>텍스트를 음성으로 읽어주기</p></div>
                 <div class="tool-card" data-cat="test" data-tool="qr-scan" data-name="QR 스캔" onclick="openTool('qr-scan')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('qr-scan')">☆</button><div class="icon">📸</div><h3>QR 스캔</h3><p>카메라로 QR코드 스캔 및 인식</p></div>
+                <div class="tool-card" data-cat="test" data-tool="stt" data-name="음성인식" onclick="openTool('stt')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('stt')">☆</button><div class="icon">🎤</div><h3>음성→텍스트</h3><p>마이크로 음성을 텍스트로 변환</p></div>
             </div>
 
             <div class="section-title" data-section="pdf">PDF</div>
             <div class="tools-grid" data-section="pdf">
                 <div class="tool-card" data-cat="pdf" data-tool="pdf-merge" data-name="PDF 병합" onclick="openTool('pdf-merge')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('pdf-merge')">☆</button><div class="icon">📑</div><h3>PDF 병합</h3><p>여러 PDF 파일을 하나로 합치기</p></div>
                 <div class="tool-card" data-cat="pdf" data-tool="pdf-convert" data-name="PDF 변환" onclick="openTool('pdf-convert')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('pdf-convert')">☆</button><div class="icon">🔄</div><h3>PDF 변환</h3><p>이미지 파일을 PDF로 변환</p></div>
+                <div class="tool-card" data-cat="pdf" data-tool="pdf-to-img" data-name="PDF→이미지" onclick="openTool('pdf-to-img')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('pdf-to-img')">☆</button><div class="icon">🖼️</div><h3>PDF→이미지</h3><p>PDF 페이지를 이미지로 추출</p></div>
             </div>
         </div>
 
@@ -2126,6 +2136,209 @@
             </div>
             <div class="result-box"><div id="qr-scan-result">-</div></div>
             <button class="copy-btn" onclick="copyText('qr-scan-result')">복사</button>
+        </div>
+
+        <!-- STT (Speech to Text) -->
+        <div class="tool-section" id="tool-stt">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>음성 → 텍스트</h2>
+            <div class="info-box">마이크 권한이 필요합니다. 브라우저 내장 음성인식을 사용합니다.</div>
+            <select id="stt-lang">
+                <option value="ko-KR">한국어</option>
+                <option value="en-US">English (US)</option>
+                <option value="ja-JP">日本語</option>
+                <option value="zh-CN">中文</option>
+            </select>
+            <div style="margin:15px 0;">
+                <button class="btn btn-primary" id="stt-btn" onclick="toggleSTT()">🎤 녹음 시작</button>
+            </div>
+            <textarea id="stt-result" placeholder="인식된 텍스트가 여기에 표시됩니다" rows="6" readonly></textarea>
+            <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('stt-result').value)">복사</button>
+        </div>
+
+        <!-- Signature -->
+        <div class="tool-section" id="tool-signature">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>전자 서명</h2>
+            <div class="info-box">마우스 또는 터치로 서명하세요</div>
+            <canvas id="sig-canvas" style="width:100%;height:200px;border:1px solid #333;border-radius:8px;background:#fff;touch-action:none;"></canvas>
+            <div class="row" style="margin-top:15px;">
+                <input type="color" id="sig-color" value="#000000" title="펜 색상">
+                <input type="range" id="sig-width" min="1" max="10" value="3" title="펜 굵기">
+                <button class="btn" onclick="clearSignature()">지우기</button>
+                <button class="btn btn-primary" onclick="downloadSignature()">다운로드</button>
+            </div>
+        </div>
+
+        <!-- Business Card -->
+        <div class="tool-section" id="tool-business-card">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>명함 생성기</h2>
+            <div class="row">
+                <input type="text" id="bc-name" placeholder="이름">
+                <input type="text" id="bc-title" placeholder="직함">
+            </div>
+            <div class="row">
+                <input type="text" id="bc-company" placeholder="회사명">
+                <input type="text" id="bc-email" placeholder="이메일">
+            </div>
+            <div class="row">
+                <input type="text" id="bc-phone" placeholder="전화번호">
+                <input type="text" id="bc-website" placeholder="웹사이트">
+            </div>
+            <div class="row">
+                <select id="bc-style">
+                    <option value="simple">심플</option>
+                    <option value="modern">모던</option>
+                    <option value="classic">클래식</option>
+                </select>
+                <input type="color" id="bc-color" value="#2563eb" title="포인트 색상">
+            </div>
+            <button class="btn btn-primary" onclick="generateBusinessCard()">생성</button>
+            <canvas id="bc-canvas" style="display:none;"></canvas>
+            <div id="bc-preview" style="margin-top:15px;"></div>
+        </div>
+
+        <!-- Fake Data -->
+        <div class="tool-section" id="tool-fake-data">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>가짜 데이터 생성</h2>
+            <div class="row">
+                <select id="fake-type">
+                    <option value="name">이름</option>
+                    <option value="email">이메일</option>
+                    <option value="phone">전화번호</option>
+                    <option value="address">주소</option>
+                    <option value="company">회사명</option>
+                    <option value="date">날짜</option>
+                    <option value="uuid">UUID</option>
+                    <option value="ip">IP 주소</option>
+                    <option value="card">카드번호</option>
+                    <option value="user">사용자 전체</option>
+                </select>
+                <input type="number" id="fake-count" value="10" min="1" max="100" placeholder="개수">
+            </div>
+            <button class="btn btn-primary" onclick="generateFakeData()">생성</button>
+            <div class="result-box"><pre id="fake-result" style="white-space:pre-wrap;">-</pre></div>
+            <button class="copy-btn" onclick="copyText('fake-result')">복사</button>
+        </div>
+
+        <!-- Chart Generator -->
+        <div class="tool-section" id="tool-chart-gen">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>차트 생성기</h2>
+            <div class="row">
+                <select id="chart-type">
+                    <option value="bar">막대 차트</option>
+                    <option value="line">선 차트</option>
+                    <option value="pie">원형 차트</option>
+                    <option value="doughnut">도넛 차트</option>
+                </select>
+            </div>
+            <textarea id="chart-labels" placeholder="라벨 (쉼표 구분): 1월, 2월, 3월" rows="2"></textarea>
+            <textarea id="chart-data" placeholder="데이터 (쉼표 구분): 10, 20, 30" rows="2"></textarea>
+            <input type="text" id="chart-title" placeholder="차트 제목">
+            <button class="btn btn-primary" onclick="generateChart()">생성</button>
+            <canvas id="chart-canvas" style="max-width:100%;margin-top:15px;"></canvas>
+            <a id="chart-download" class="btn" style="display:none;text-decoration:none;margin-top:10px;">다운로드</a>
+        </div>
+
+        <!-- GIF Maker -->
+        <div class="tool-section" id="tool-gif-maker">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>GIF 만들기</h2>
+            <div class="drop-zone" onclick="document.getElementById('gif-files').click()">
+                <div class="drop-zone-icon">🎞️</div>
+                <div class="drop-zone-text">이미지들을 선택하세요 (순서대로 GIF 생성)</div>
+                <input type="file" id="gif-files" accept="image/*" multiple onchange="loadGifImages(this)">
+            </div>
+            <div id="gif-preview" style="display:flex;flex-wrap:wrap;gap:5px;margin:10px 0;"></div>
+            <div class="row">
+                <input type="number" id="gif-delay" value="500" min="100" max="3000" placeholder="프레임 간격 (ms)">
+                <input type="number" id="gif-width" value="400" min="50" max="800" placeholder="너비">
+            </div>
+            <button class="btn btn-primary" onclick="createGif()">GIF 생성</button>
+            <div id="gif-status" style="margin-top:10px;color:#666;"></div>
+            <div id="gif-result" style="margin-top:15px;"></div>
+        </div>
+
+        <!-- EXIF -->
+        <div class="tool-section" id="tool-exif">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>EXIF 정보</h2>
+            <div class="drop-zone" onclick="document.getElementById('exif-file').click()">
+                <div class="drop-zone-icon">📷</div>
+                <div class="drop-zone-text">이미지를 선택하세요</div>
+                <input type="file" id="exif-file" accept="image/*" onchange="loadExifImage(this)">
+            </div>
+            <img id="exif-preview" class="img-preview" style="display:none;">
+            <div id="exif-result" style="margin-top:15px;"></div>
+        </div>
+
+        <!-- PDF to Image -->
+        <div class="tool-section" id="tool-pdf-to-img">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>PDF → 이미지</h2>
+            <div class="drop-zone" onclick="document.getElementById('pdf-img-file').click()">
+                <div class="drop-zone-icon">📄</div>
+                <div class="drop-zone-text">PDF 파일을 선택하세요</div>
+                <input type="file" id="pdf-img-file" accept=".pdf" onchange="loadPdfForImage(this)">
+            </div>
+            <div id="pdf-img-status" style="margin-top:10px;color:#666;"></div>
+            <div id="pdf-img-result" style="margin-top:15px;display:flex;flex-wrap:wrap;gap:10px;"></div>
+        </div>
+
+        <!-- Code to Image -->
+        <div class="tool-section" id="tool-code-img">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>코드 → 이미지</h2>
+            <textarea id="code-img-input" placeholder="코드를 입력하세요" rows="10" style="font-family:monospace;"></textarea>
+            <div class="row">
+                <select id="code-img-theme">
+                    <option value="dark">다크</option>
+                    <option value="light">라이트</option>
+                    <option value="monokai">모노카이</option>
+                    <option value="github">깃허브</option>
+                </select>
+                <select id="code-img-lang">
+                    <option value="javascript">JavaScript</option>
+                    <option value="python">Python</option>
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="java">Java</option>
+                    <option value="text">Plain Text</option>
+                </select>
+                <input type="number" id="code-img-fontsize" value="14" min="10" max="24" placeholder="폰트 크기">
+            </div>
+            <button class="btn btn-primary" onclick="generateCodeImage()">이미지 생성</button>
+            <div id="code-img-result" style="margin-top:15px;"></div>
+        </div>
+
+        <!-- Resume Generator -->
+        <div class="tool-section" id="tool-resume">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>이력서 생성</h2>
+            <div class="info-box" style="margin-bottom:15px;">간단한 이력서를 작성하고 PDF로 저장할 수 있습니다.</div>
+            <div style="display:grid;gap:10px;">
+                <input type="text" id="resume-name" placeholder="이름">
+                <input type="email" id="resume-email" placeholder="이메일">
+                <input type="tel" id="resume-phone" placeholder="연락처 (예: 010-1234-5678)">
+                <input type="text" id="resume-address" placeholder="주소 (선택)">
+                <textarea id="resume-intro" placeholder="간단한 자기소개 (2-3문장)" rows="3"></textarea>
+                <input type="text" id="resume-education" placeholder="학력 (예: OO대학교 컴퓨터공학과 졸업)">
+                <textarea id="resume-experience" placeholder="경력 사항 (줄바꿈으로 구분)" rows="4"></textarea>
+                <textarea id="resume-skills" placeholder="보유 기술 (쉼표로 구분, 예: JavaScript, Python, React)" rows="2"></textarea>
+            </div>
+            <div class="row" style="margin-top:15px;">
+                <select id="resume-template">
+                    <option value="simple">심플</option>
+                    <option value="modern">모던</option>
+                    <option value="classic">클래식</option>
+                </select>
+                <button class="btn btn-primary" onclick="generateResume()">미리보기</button>
+                <button class="btn" onclick="downloadResumePDF()">PDF 저장</button>
+            </div>
+            <div id="resume-preview" style="margin-top:15px;background:#fff;padding:20px;border-radius:8px;display:none;"></div>
         </div>
 
         <!-- Morse Code -->
@@ -7371,6 +7584,375 @@
                 nicks.push(nick);
             }
             document.getElementById('nickname-result').innerHTML = nicks.map(n => `<div style="margin:5px 0;"><span style="color:#ddd;">${n}</span> <button class="copy-btn" onclick="copy('${n}')">복사</button></div>`).join('');
+        }
+
+        // STT (Speech to Text)
+        let sttRecognition = null;
+        let sttRunning = false;
+        function toggleSTT() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert('이 브라우저는 음성인식을 지원하지 않습니다. Chrome을 사용해주세요.');
+                return;
+            }
+            if (sttRunning) {
+                sttRecognition.stop();
+                return;
+            }
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            sttRecognition = new SpeechRecognition();
+            sttRecognition.lang = document.getElementById('stt-lang').value;
+            sttRecognition.continuous = true;
+            sttRecognition.interimResults = true;
+            sttRecognition.onstart = () => { sttRunning = true; document.getElementById('stt-btn').textContent = '🔴 녹음 중...'; };
+            sttRecognition.onend = () => { sttRunning = false; document.getElementById('stt-btn').textContent = '🎤 녹음 시작'; };
+            sttRecognition.onresult = (e) => {
+                let transcript = '';
+                for (let i = 0; i < e.results.length; i++) transcript += e.results[i][0].transcript;
+                document.getElementById('stt-result').value = transcript;
+            };
+            sttRecognition.onerror = (e) => { alert('음성인식 오류: ' + e.error); sttRunning = false; };
+            sttRecognition.start();
+        }
+
+        // Signature
+        let sigCanvas, sigCtx, sigDrawing = false;
+        function initSignature() {
+            sigCanvas = document.getElementById('sig-canvas');
+            if (!sigCanvas) return;
+            sigCtx = sigCanvas.getContext('2d');
+            const rect = sigCanvas.getBoundingClientRect();
+            sigCanvas.width = rect.width * 2;
+            sigCanvas.height = rect.height * 2;
+            sigCtx.scale(2, 2);
+            sigCtx.fillStyle = '#fff';
+            sigCtx.fillRect(0, 0, sigCanvas.width, sigCanvas.height);
+            sigCtx.lineCap = 'round';
+            sigCtx.lineJoin = 'round';
+            const getPos = (e) => {
+                const rect = sigCanvas.getBoundingClientRect();
+                const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+                const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+                return { x, y };
+            };
+            sigCanvas.addEventListener('mousedown', (e) => { sigDrawing = true; sigCtx.beginPath(); const p = getPos(e); sigCtx.moveTo(p.x, p.y); });
+            sigCanvas.addEventListener('mousemove', (e) => { if (!sigDrawing) return; sigCtx.strokeStyle = document.getElementById('sig-color').value; sigCtx.lineWidth = document.getElementById('sig-width').value; const p = getPos(e); sigCtx.lineTo(p.x, p.y); sigCtx.stroke(); });
+            sigCanvas.addEventListener('mouseup', () => sigDrawing = false);
+            sigCanvas.addEventListener('mouseleave', () => sigDrawing = false);
+            sigCanvas.addEventListener('touchstart', (e) => { e.preventDefault(); sigDrawing = true; sigCtx.beginPath(); const p = getPos(e); sigCtx.moveTo(p.x, p.y); });
+            sigCanvas.addEventListener('touchmove', (e) => { e.preventDefault(); if (!sigDrawing) return; sigCtx.strokeStyle = document.getElementById('sig-color').value; sigCtx.lineWidth = document.getElementById('sig-width').value; const p = getPos(e); sigCtx.lineTo(p.x, p.y); sigCtx.stroke(); });
+            sigCanvas.addEventListener('touchend', () => sigDrawing = false);
+        }
+        function clearSignature() { if (sigCtx) { sigCtx.fillStyle = '#fff'; sigCtx.fillRect(0, 0, sigCanvas.width, sigCanvas.height); } }
+        function downloadSignature() { if (!sigCanvas) return; const a = document.createElement('a'); a.download = 'signature.png'; a.href = sigCanvas.toDataURL(); a.click(); }
+        setTimeout(initSignature, 100);
+
+        // Business Card
+        function generateBusinessCard() {
+            const name = document.getElementById('bc-name').value || '홍길동';
+            const title = document.getElementById('bc-title').value || '개발자';
+            const company = document.getElementById('bc-company').value || '회사명';
+            const email = document.getElementById('bc-email').value || 'email@example.com';
+            const phone = document.getElementById('bc-phone').value || '010-1234-5678';
+            const website = document.getElementById('bc-website').value || '';
+            const style = document.getElementById('bc-style').value;
+            const color = document.getElementById('bc-color').value;
+            const canvas = document.getElementById('bc-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 700; canvas.height = 400;
+            ctx.fillStyle = style === 'classic' ? '#f5f5dc' : '#fff';
+            ctx.fillRect(0, 0, 700, 400);
+            if (style === 'modern') { ctx.fillStyle = color; ctx.fillRect(0, 0, 10, 400); }
+            if (style === 'simple') { ctx.fillStyle = color; ctx.fillRect(0, 380, 700, 20); }
+            ctx.fillStyle = '#333'; ctx.font = 'bold 32px Pretendard, sans-serif'; ctx.fillText(name, 40, 80);
+            ctx.fillStyle = color; ctx.font = '20px Pretendard, sans-serif'; ctx.fillText(title, 40, 115);
+            ctx.fillStyle = '#666'; ctx.font = '18px Pretendard, sans-serif';
+            ctx.fillText(company, 40, 180); ctx.fillText(email, 40, 220); ctx.fillText(phone, 40, 260);
+            if (website) ctx.fillText(website, 40, 300);
+            const url = canvas.toDataURL();
+            document.getElementById('bc-preview').innerHTML = `<img src="${url}" style="max-width:100%;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.2);"><br><a href="${url}" download="business-card.png" class="btn" style="margin-top:10px;display:inline-block;text-decoration:none;">다운로드</a>`;
+        }
+
+        // Fake Data
+        const fakeFirstNames = ['김','이','박','최','정','강','조','윤','장','임','한','오','서','신','권','황','안','송','류','전'];
+        const fakeLastNames = ['민준','서연','도윤','서윤','시우','지우','주원','하윤','지호','수아','준서','지민','예준','채원','건우','지윤','우진','은서','현우','수빈'];
+        const fakeCompanies = ['삼성전자','LG전자','현대자동차','SK하이닉스','네이버','카카오','쿠팡','배달의민족','토스','당근마켓'];
+        const fakeDomains = ['naver.com','gmail.com','daum.net','kakao.com','outlook.com'];
+        const fakeCities = ['서울','부산','인천','대구','대전','광주','울산','수원','고양','성남'];
+        function generateFakeData() {
+            const type = document.getElementById('fake-type').value;
+            const count = parseInt(document.getElementById('fake-count').value) || 10;
+            const rand = arr => arr[Math.floor(Math.random() * arr.length)];
+            const randNum = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+            let results = [];
+            for (let i = 0; i < count; i++) {
+                let data;
+                switch(type) {
+                    case 'name': data = rand(fakeFirstNames) + rand(fakeLastNames); break;
+                    case 'email': data = `user${randNum(1,9999)}@${rand(fakeDomains)}`; break;
+                    case 'phone': data = `010-${randNum(1000,9999)}-${randNum(1000,9999)}`; break;
+                    case 'address': data = `${rand(fakeCities)} ${['강남구','서초구','마포구','영등포구','송파구'][randNum(0,4)]} ${randNum(1,500)}번지`; break;
+                    case 'company': data = rand(fakeCompanies); break;
+                    case 'date': data = `${randNum(1990,2024)}-${String(randNum(1,12)).padStart(2,'0')}-${String(randNum(1,28)).padStart(2,'0')}`; break;
+                    case 'uuid': data = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.random()*16|0;return(c=='x'?r:(r&0x3|0x8)).toString(16);}); break;
+                    case 'ip': data = `${randNum(1,255)}.${randNum(0,255)}.${randNum(0,255)}.${randNum(1,255)}`; break;
+                    case 'card': data = `${randNum(4000,4999)}-${randNum(1000,9999)}-${randNum(1000,9999)}-${randNum(1000,9999)}`; break;
+                    case 'user': data = JSON.stringify({name:rand(fakeFirstNames)+rand(fakeLastNames),email:`user${randNum(1,9999)}@${rand(fakeDomains)}`,phone:`010-${randNum(1000,9999)}-${randNum(1000,9999)}`}); break;
+                }
+                results.push(data);
+            }
+            document.getElementById('fake-result').textContent = results.join('\n');
+        }
+
+        // Chart Generator
+        let chartInstance = null;
+        async function generateChart() {
+            if (!window.Chart) {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js';
+                document.head.appendChild(script);
+                await new Promise(r => script.onload = r);
+            }
+            const type = document.getElementById('chart-type').value;
+            const labels = document.getElementById('chart-labels').value.split(',').map(s => s.trim());
+            const data = document.getElementById('chart-data').value.split(',').map(s => parseFloat(s.trim()));
+            const title = document.getElementById('chart-title').value;
+            const canvas = document.getElementById('chart-canvas');
+            if (chartInstance) chartInstance.destroy();
+            const colors = ['#2563eb','#dc2626','#16a34a','#ca8a04','#9333ea','#0891b2','#be185d','#ea580c'];
+            chartInstance = new Chart(canvas, {
+                type: type,
+                data: { labels, datasets: [{ label: title, data, backgroundColor: colors, borderColor: type === 'line' ? '#2563eb' : colors, borderWidth: 2, fill: false }] },
+                options: { responsive: true, plugins: { legend: { display: type !== 'bar' && type !== 'line' }, title: { display: !!title, text: title } } }
+            });
+            const link = document.getElementById('chart-download');
+            link.href = canvas.toDataURL(); link.download = 'chart.png'; link.style.display = 'inline-block';
+        }
+
+        // GIF Maker
+        let gifImages = [];
+        function loadGifImages(input) {
+            gifImages = Array.from(input.files);
+            const preview = document.getElementById('gif-preview');
+            preview.innerHTML = '';
+            gifImages.forEach((f, i) => {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(f);
+                img.style.cssText = 'width:60px;height:60px;object-fit:cover;border-radius:4px;';
+                preview.appendChild(img);
+            });
+        }
+        async function createGif() {
+            if (gifImages.length < 2) return alert('2개 이상의 이미지를 선택하세요');
+            const status = document.getElementById('gif-status');
+            status.textContent = 'GIF.js 로딩 중...';
+            if (!window.GIF) {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.min.js';
+                document.head.appendChild(script);
+                await new Promise(r => script.onload = r);
+            }
+            status.textContent = '이미지 처리 중...';
+            const delay = parseInt(document.getElementById('gif-delay').value) || 500;
+            const width = parseInt(document.getElementById('gif-width').value) || 400;
+            const gif = new GIF({ workers: 2, quality: 10, width: width, workerScript: 'https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js' });
+            for (const file of gifImages) {
+                const img = new Image();
+                img.src = URL.createObjectURL(file);
+                await new Promise(r => img.onload = r);
+                const canvas = document.createElement('canvas');
+                const ratio = img.height / img.width;
+                canvas.width = width; canvas.height = width * ratio;
+                canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+                gif.addFrame(canvas, { delay });
+            }
+            gif.on('progress', p => status.textContent = `생성 중... ${Math.round(p * 100)}%`);
+            gif.on('finished', blob => {
+                status.textContent = '완료!';
+                const url = URL.createObjectURL(blob);
+                document.getElementById('gif-result').innerHTML = `<img src="${url}" style="max-width:100%;border-radius:8px;"><br><a href="${url}" download="animation.gif" class="btn" style="margin-top:10px;display:inline-block;text-decoration:none;">다운로드</a>`;
+            });
+            gif.render();
+        }
+
+        // EXIF
+        function loadExifImage(input) {
+            const file = input.files[0]; if (!file) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                document.getElementById('exif-preview').src = e.target.result;
+                document.getElementById('exif-preview').style.display = 'block';
+                parseExif(e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+        function parseExif(dataUrl) {
+            const result = document.getElementById('exif-result');
+            const binary = atob(dataUrl.split(',')[1]);
+            const exifData = {};
+            if (binary.substring(0, 2) === '\xFF\xD8') {
+                let offset = 2;
+                while (offset < binary.length) {
+                    if (binary.charCodeAt(offset) !== 0xFF) break;
+                    const marker = binary.charCodeAt(offset + 1);
+                    if (marker === 0xE1) {
+                        const length = binary.charCodeAt(offset + 2) * 256 + binary.charCodeAt(offset + 3);
+                        exifData['EXIF 데이터'] = '발견됨 (' + length + ' bytes)';
+                        break;
+                    }
+                    if (marker === 0xD9 || marker === 0xDA) break;
+                    const len = binary.charCodeAt(offset + 2) * 256 + binary.charCodeAt(offset + 3);
+                    offset += 2 + len;
+                }
+            }
+            const img = new Image();
+            img.onload = () => {
+                exifData['너비'] = img.width + 'px';
+                exifData['높이'] = img.height + 'px';
+                exifData['파일 크기'] = Math.round(binary.length / 1024) + ' KB';
+                let html = '';
+                for (const [k, v] of Object.entries(exifData)) {
+                    html += `<div class="file-item"><span style="color:#6a9fb5;">${k}</span><span style="color:#999;">${v}</span></div>`;
+                }
+                result.innerHTML = html || '<div style="color:#666;">EXIF 정보를 찾을 수 없습니다.</div>';
+            };
+            img.src = dataUrl;
+        }
+
+        // PDF to Image
+        async function loadPdfForImage(input) {
+            const file = input.files[0]; if (!file) return;
+            const status = document.getElementById('pdf-img-status');
+            const result = document.getElementById('pdf-img-result');
+            status.textContent = 'PDF.js 로딩 중...';
+            if (!window.pdfjsLib) {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js';
+                document.head.appendChild(script);
+                await new Promise(r => script.onload = r);
+                pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+            }
+            status.textContent = 'PDF 로딩 중...';
+            const data = await file.arrayBuffer();
+            const pdf = await pdfjsLib.getDocument(data).promise;
+            result.innerHTML = '';
+            for (let i = 1; i <= pdf.numPages; i++) {
+                status.textContent = `페이지 ${i}/${pdf.numPages} 처리 중...`;
+                const page = await pdf.getPage(i);
+                const scale = 2;
+                const viewport = page.getViewport({ scale });
+                const canvas = document.createElement('canvas');
+                canvas.width = viewport.width; canvas.height = viewport.height;
+                await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+                const url = canvas.toDataURL();
+                const div = document.createElement('div');
+                div.innerHTML = `<img src="${url}" style="max-width:200px;border-radius:4px;"><br><a href="${url}" download="page-${i}.png" class="btn" style="font-size:0.7rem;padding:4px 8px;">다운로드</a>`;
+                result.appendChild(div);
+            }
+            status.textContent = `완료! ${pdf.numPages}페이지`;
+        }
+
+        // Code to Image
+        function generateCodeImage() {
+            const code = document.getElementById('code-img-input').value || 'console.log("Hello World");';
+            const theme = document.getElementById('code-img-theme').value;
+            const fontSize = document.getElementById('code-img-fontsize').value || 14;
+            const themes = {
+                dark: { bg: '#1e1e1e', text: '#d4d4d4', keyword: '#569cd6', string: '#ce9178', comment: '#6a9955' },
+                light: { bg: '#ffffff', text: '#333333', keyword: '#0000ff', string: '#a31515', comment: '#008000' },
+                monokai: { bg: '#272822', text: '#f8f8f2', keyword: '#f92672', string: '#e6db74', comment: '#75715e' },
+                github: { bg: '#f6f8fa', text: '#24292e', keyword: '#d73a49', string: '#032f62', comment: '#6a737d' }
+            };
+            const t = themes[theme];
+            const lines = code.split('\n');
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.font = `${fontSize}px Consolas, monospace`;
+            const padding = 40;
+            const lineHeight = fontSize * 1.5;
+            const maxWidth = Math.max(...lines.map(l => ctx.measureText(l).width)) + padding * 2 + 50;
+            canvas.width = maxWidth; canvas.height = lines.length * lineHeight + padding * 2;
+            ctx.fillStyle = t.bg; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = t.bg === '#ffffff' || t.bg === '#f6f8fa' ? '#ddd' : '#444';
+            for (let i = 0; i < lines.length; i++) ctx.fillText(i + 1, 15, padding + i * lineHeight);
+            ctx.font = `${fontSize}px Consolas, monospace`;
+            ctx.fillStyle = t.text;
+            for (let i = 0; i < lines.length; i++) ctx.fillText(lines[i], padding + 20, padding + i * lineHeight);
+            const url = canvas.toDataURL();
+            document.getElementById('code-img-result').innerHTML = `<img src="${url}" style="max-width:100%;border-radius:8px;"><br><a href="${url}" download="code.png" class="btn" style="margin-top:10px;display:inline-block;text-decoration:none;">다운로드</a>`;
+        }
+
+        // Resume Generator
+        let resumeHtml = '';
+        function generateResume() {
+            const name = document.getElementById('resume-name').value || '홍길동';
+            const email = document.getElementById('resume-email').value || 'example@email.com';
+            const phone = document.getElementById('resume-phone').value || '010-1234-5678';
+            const address = document.getElementById('resume-address').value;
+            const intro = document.getElementById('resume-intro').value || '자기소개를 입력해주세요.';
+            const education = document.getElementById('resume-education').value || '학력 정보';
+            const experience = document.getElementById('resume-experience').value || '경력 사항';
+            const skills = document.getElementById('resume-skills').value || 'JavaScript, Python';
+            const template = document.getElementById('resume-template').value;
+            const templates = {
+                simple: { headerBg: '#333', headerColor: '#fff', sectionColor: '#333' },
+                modern: { headerBg: '#2563eb', headerColor: '#fff', sectionColor: '#2563eb' },
+                classic: { headerBg: '#1a1a1a', headerColor: '#d4af37', sectionColor: '#1a1a1a' }
+            };
+            const t = templates[template];
+            const skillsHtml = skills.split(',').map(s => `<span style="display:inline-block;background:#f0f0f0;padding:4px 10px;border-radius:12px;margin:3px;font-size:12px;">${s.trim()}</span>`).join('');
+            const expHtml = experience.split('\n').filter(e => e.trim()).map(e => `<li style="margin-bottom:5px;">${e.trim()}</li>`).join('');
+            resumeHtml = `
+                <div style="font-family:'Pretendard',sans-serif;max-width:600px;margin:0 auto;color:#333;">
+                    <div style="background:${t.headerBg};color:${t.headerColor};padding:30px;text-align:center;">
+                        <h1 style="margin:0;font-size:28px;">${name}</h1>
+                        <p style="margin:10px 0 0;font-size:14px;opacity:0.9;">${email} | ${phone}${address ? ' | ' + address : ''}</p>
+                    </div>
+                    <div style="padding:25px;">
+                        <div style="margin-bottom:20px;">
+                            <h3 style="color:${t.sectionColor};border-bottom:2px solid ${t.sectionColor};padding-bottom:5px;margin-bottom:10px;">자기소개</h3>
+                            <p style="line-height:1.6;margin:0;">${intro}</p>
+                        </div>
+                        <div style="margin-bottom:20px;">
+                            <h3 style="color:${t.sectionColor};border-bottom:2px solid ${t.sectionColor};padding-bottom:5px;margin-bottom:10px;">학력</h3>
+                            <p style="margin:0;">${education}</p>
+                        </div>
+                        <div style="margin-bottom:20px;">
+                            <h3 style="color:${t.sectionColor};border-bottom:2px solid ${t.sectionColor};padding-bottom:5px;margin-bottom:10px;">경력</h3>
+                            <ul style="margin:0;padding-left:20px;">${expHtml || '<li>경력 사항 없음</li>'}</ul>
+                        </div>
+                        <div>
+                            <h3 style="color:${t.sectionColor};border-bottom:2px solid ${t.sectionColor};padding-bottom:5px;margin-bottom:10px;">보유 기술</h3>
+                            <div>${skillsHtml}</div>
+                        </div>
+                    </div>
+                </div>`;
+            const preview = document.getElementById('resume-preview');
+            preview.innerHTML = resumeHtml;
+            preview.style.display = 'block';
+        }
+        async function downloadResumePDF() {
+            if (!resumeHtml) { alert('먼저 미리보기를 눌러주세요.'); return; }
+            if (!window.html2canvas) {
+                const s1 = document.createElement('script');
+                s1.src = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
+                document.head.appendChild(s1);
+                await new Promise(r => s1.onload = r);
+            }
+            if (!window.jspdf) {
+                const s2 = document.createElement('script');
+                s2.src = 'https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js';
+                document.head.appendChild(s2);
+                await new Promise(r => s2.onload = r);
+            }
+            const preview = document.getElementById('resume-preview');
+            const canvas = await html2canvas(preview, { scale: 2, backgroundColor: '#fff' });
+            const imgData = canvas.toDataURL('image/png');
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+            pdf.save('resume.pdf');
         }
 
         // Romanize Korean
