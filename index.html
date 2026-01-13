@@ -586,16 +586,6 @@
             <div style="text-align:center;"><button class="copy-btn" onclick="copyText('password-result')">복사</button></div>
         </div>
 
-        <!-- UUID -->
-        <div class="tool-section" id="tool-uuid">
-            <button class="back-btn" onclick="showMain()">← 목록</button>
-            <h2>UUID</h2>
-            <input type="number" id="uuid-count" value="5" min="1" max="100">
-            <button class="btn btn-primary" onclick="generateUUID()">생성</button>
-            <div class="result-box"><pre id="uuid-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
-            <button class="copy-btn" onclick="copyText('uuid-result')">복사</button>
-        </div>
-
         <!-- Lorem -->
         <div class="tool-section" id="tool-lorem">
             <button class="back-btn" onclick="showMain()">← 목록</button>
@@ -1221,25 +1211,6 @@
             </div>
         </div>
 
-        <div class="tool-section" id="tool-age">
-            <button class="back-btn" onclick="showMain()">← 목록</button>
-            <h2>나이 계산</h2>
-            <div class="options">
-                <label><input type="radio" name="age-type" value="solar" checked> 양력</label>
-                <label><input type="radio" name="age-type" value="lunar"> 음력</label>
-            </div>
-            <input type="date" id="age-birth" placeholder="생년월일">
-            <button class="btn btn-primary" onclick="calcAge()">계산</button>
-            <div class="stats-row" id="age-result" style="margin-top:15px;">
-                <div class="stat-box"><div class="number" id="age-korean">-</div><div class="label">한국 나이</div></div>
-                <div class="stat-box"><div class="number" id="age-full">-</div><div class="label">만 나이</div></div>
-                <div class="stat-box"><div class="number" id="age-days">-</div><div class="label">살아온 날</div></div>
-            </div>
-            <div class="result-box" id="age-lunar-info" style="display:none;margin-top:15px;">
-                <div>양력 변환: <span id="age-solar-date">-</span></div>
-            </div>
-        </div>
-
         <!-- BMI -->
         <div class="tool-section" id="tool-bmi">
             <button class="back-btn" onclick="showMain()">← 목록</button>
@@ -1254,29 +1225,6 @@
                 <div class="stat-box"><div class="number" id="bmi-status" style="font-size:1rem;">-</div><div class="label">상태</div></div>
             </div>
             <div class="info-box" style="margin-top:15px;">저체중: ~18.5 | 정상: 18.5~23 | 과체중: 23~25 | 비만: 25~</div>
-        </div>
-
-        <!-- Loan -->
-        <div class="tool-section" id="tool-loan">
-            <button class="back-btn" onclick="showMain()">← 목록</button>
-            <h2>대출 이자 계산기</h2>
-            <div class="row">
-                <div><label style="color:#666;font-size:0.8rem;">대출금 (원)</label><input type="number" id="loan-amount" placeholder="10000000"></div>
-                <div><label style="color:#666;font-size:0.8rem;">연이율 (%)</label><input type="number" id="loan-rate" placeholder="5" step="0.1"></div>
-            </div>
-            <div class="row">
-                <div><label style="color:#666;font-size:0.8rem;">기간 (개월)</label><input type="number" id="loan-months" placeholder="12"></div>
-                <select id="loan-type">
-                    <option value="equal">원리금균등</option>
-                    <option value="principal">원금균등</option>
-                </select>
-            </div>
-            <button class="btn btn-primary" onclick="calcLoan()">계산</button>
-            <div class="stats-row" style="margin-top:15px;">
-                <div class="stat-box"><div class="number" id="loan-monthly" style="font-size:1rem;">-</div><div class="label">월 상환금</div></div>
-                <div class="stat-box"><div class="number" id="loan-total" style="font-size:1rem;">-</div><div class="label">총 상환금</div></div>
-                <div class="stat-box"><div class="number" id="loan-interest" style="font-size:1rem;">-</div><div class="label">총 이자</div></div>
-            </div>
         </div>
 
         <!-- Discount -->
@@ -1308,24 +1256,6 @@
                 <div class="stat-box"><div class="number" id="tip-total">-</div><div class="label">총액 (팁 포함)</div></div>
                 <div class="stat-box"><div class="number" id="tip-each">-</div><div class="label">1인당</div></div>
                 <div class="stat-box"><div class="number" id="tip-tipamt">-</div><div class="label">팁</div></div>
-            </div>
-        </div>
-
-        <!-- VAT -->
-        <div class="tool-section" id="tool-vat">
-            <button class="back-btn" onclick="showMain()">← 목록</button>
-            <h2>부가세 계산기</h2>
-            <input type="number" id="vat-amount" placeholder="금액">
-            <div class="options">
-                <label><input type="radio" name="vat-type" value="exclude" checked> 부가세 별도 (공급가)</label>
-                <label><input type="radio" name="vat-type" value="include"> 부가세 포함 (총액)</label>
-            </div>
-            <input type="number" id="vat-rate" value="10" placeholder="세율 (%)">
-            <button class="btn btn-primary" onclick="calcVAT()">계산</button>
-            <div class="stats-row" style="margin-top:15px;">
-                <div class="stat-box"><div class="number" id="vat-supply">-</div><div class="label">공급가액</div></div>
-                <div class="stat-box"><div class="number" id="vat-tax">-</div><div class="label">부가세</div></div>
-                <div class="stat-box"><div class="number" id="vat-total">-</div><div class="label">총액</div></div>
             </div>
         </div>
 
@@ -1494,17 +1424,6 @@
             <button class="copy-btn" onclick="copyText('lorem-kr-result')">복사</button>
         </div>
 
-        <!-- SQL Formatter -->
-        <div class="tool-section" id="tool-sql">
-            <button class="back-btn" onclick="showMain()">← 목록</button>
-            <h2>SQL 포맷터</h2>
-            <textarea id="sql-input" placeholder="SELECT * FROM users WHERE id = 1"></textarea>
-            <button class="btn" onclick="formatSql()">정리</button>
-            <button class="btn" onclick="minifySql()">압축</button>
-            <div class="result-box"><pre id="sql-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
-            <button class="copy-btn" onclick="copyText('sql-result')">복사</button>
-        </div>
-
         <!-- ENV Parser -->
         <div class="tool-section" id="tool-env">
             <button class="back-btn" onclick="showMain()">← 목록</button>
@@ -1656,22 +1575,6 @@
             </div>
             <button class="btn btn-primary" onclick="convertCurrency()">변환</button>
             <div class="password-display" id="currency-result">-</div>
-        </div>
-
-        <!-- Salary -->
-        <div class="tool-section" id="tool-salary">
-            <button class="back-btn" onclick="showMain()">← 목록</button>
-            <h2>연봉 ↔ 월급 계산기</h2>
-            <input type="number" id="salary-amount" placeholder="연봉 (원)">
-            <div class="options">
-                <label><input type="checkbox" id="salary-tax" checked> 세금/4대보험 공제</label>
-            </div>
-            <button class="btn btn-primary" onclick="calcSalary()">계산</button>
-            <div class="stats-row" style="margin-top:15px;">
-                <div class="stat-box"><div class="number" id="salary-yearly">-</div><div class="label">연봉</div></div>
-                <div class="stat-box"><div class="number" id="salary-monthly">-</div><div class="label">월급</div></div>
-                <div class="stat-box"><div class="number" id="salary-net">-</div><div class="label">실수령(월)</div></div>
-            </div>
         </div>
 
         <!-- Severance -->
@@ -3278,14 +3181,6 @@
             document.getElementById('password-result').textContent = pw;
         }
 
-        // UUID
-        function generateUUID() {
-            const n = +document.getElementById('uuid-count').value || 1;
-            let r = [];
-            for(let i=0;i<n;i++) r.push('xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const v=Math.random()*16|0;return(c==='x'?v:(v&0x3|0x8)).toString(16);}));
-            document.getElementById('uuid-result').textContent = r.join('\n');
-        }
-
         // Lorem
         function generateLorem() {
             const n = +document.getElementById('lorem-count').value;
@@ -3707,33 +3602,6 @@
         function getLeapMonth(y) { return lunarData[y-1900] & 0xf; }
         function getLunarMonthDays(y, m) { return (lunarData[y-1900] & (0x10000 >> m)) ? 30 : 29; }
 
-        function calcAge() {
-            const birthStr = document.getElementById('age-birth').value;
-            if(!birthStr) return;
-            const isLunar = document.querySelector('input[name="age-type"]:checked').value === 'lunar';
-            let birth;
-            if(isLunar) {
-                const [y, m, d] = birthStr.split('-').map(Number);
-                birth = lunarToSolar(y, m, d);
-                if(birth) {
-                    document.getElementById('age-lunar-info').style.display = 'block';
-                    document.getElementById('age-solar-date').textContent = birth.toLocaleDateString('ko-KR');
-                }
-            } else {
-                birth = new Date(birthStr);
-                document.getElementById('age-lunar-info').style.display = 'none';
-            }
-            if(!birth) return;
-            const today = new Date();
-            const koreanAge = today.getFullYear() - birth.getFullYear() + 1;
-            let fullAge = today.getFullYear() - birth.getFullYear();
-            if(today.getMonth() < birth.getMonth() || (today.getMonth() === birth.getMonth() && today.getDate() < birth.getDate())) fullAge--;
-            const days = Math.floor((today - birth) / 86400000);
-            document.getElementById('age-korean').textContent = koreanAge;
-            document.getElementById('age-full').textContent = fullAge;
-            document.getElementById('age-days').textContent = days.toLocaleString();
-        }
-
         // Pomodoro
         let pomoTime = 25*60, pomoInterval = null, pomoRunning = false;
         function updatePomoDisplay() { const m = Math.floor(pomoTime/60), s = pomoTime%60; document.getElementById('pomo-display').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; }
@@ -3898,27 +3766,6 @@
             document.getElementById('bmi-status').textContent = status;
         }
 
-        // Loan
-        function calcLoan() {
-            const p = +document.getElementById('loan-amount').value;
-            const r = +document.getElementById('loan-rate').value / 100 / 12;
-            const n = +document.getElementById('loan-months').value;
-            const type = document.getElementById('loan-type').value;
-            if(!p || !r || !n) return;
-            let monthly, total;
-            if(type === 'equal') {
-                monthly = p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
-                total = monthly * n;
-            } else {
-                const principal = p / n;
-                monthly = principal + p * r;
-                total = p + (p * r * (n + 1) / 2);
-            }
-            document.getElementById('loan-monthly').textContent = Math.round(monthly).toLocaleString() + '원';
-            document.getElementById('loan-total').textContent = Math.round(total).toLocaleString() + '원';
-            document.getElementById('loan-interest').textContent = Math.round(total - p).toLocaleString() + '원';
-        }
-
         // Discount
         function calcDiscount() {
             const original = +document.getElementById('disc-original').value;
@@ -3942,27 +3789,6 @@
             document.getElementById('tip-total').textContent = Math.round(total).toLocaleString() + '원';
             document.getElementById('tip-each').textContent = Math.round(each).toLocaleString() + '원';
             document.getElementById('tip-tipamt').textContent = Math.round(tip).toLocaleString() + '원';
-        }
-
-        // VAT
-        function calcVAT() {
-            const amount = +document.getElementById('vat-amount').value;
-            const rate = +document.getElementById('vat-rate').value;
-            const type = document.querySelector('input[name="vat-type"]:checked').value;
-            if(!amount) return;
-            let supply, tax, total;
-            if(type === 'exclude') {
-                supply = amount;
-                tax = amount * rate / 100;
-                total = supply + tax;
-            } else {
-                total = amount;
-                supply = amount / (1 + rate / 100);
-                tax = total - supply;
-            }
-            document.getElementById('vat-supply').textContent = Math.round(supply).toLocaleString() + '원';
-            document.getElementById('vat-tax').textContent = Math.round(tax).toLocaleString() + '원';
-            document.getElementById('vat-total').textContent = Math.round(total).toLocaleString() + '원';
         }
 
         // Countdown
@@ -4165,15 +3991,6 @@
             document.getElementById('lorem-kr-result').textContent = result.join('. ') + '.';
         }
 
-        // SQL Formatter
-        function formatSql() {
-            let sql = document.getElementById('sql-input').value;
-            const keywords = ['SELECT','FROM','WHERE','AND','OR','JOIN','LEFT','RIGHT','INNER','OUTER','ON','GROUP BY','ORDER BY','HAVING','LIMIT','INSERT','INTO','VALUES','UPDATE','SET','DELETE','CREATE','TABLE','DROP','ALTER','INDEX'];
-            keywords.forEach(k => { sql = sql.replace(new RegExp('\\b'+k+'\\b','gi'), '\n'+k); });
-            document.getElementById('sql-result').textContent = sql.trim();
-        }
-        function minifySql() { document.getElementById('sql-result').textContent = document.getElementById('sql-input').value.replace(/\s+/g,' ').trim(); }
-
         // ENV Parser
         function parseEnv() {
             const input = document.getElementById('env-input').value;
@@ -4283,26 +4100,6 @@
                 const result = amount * data.rates[to];
                 document.getElementById('currency-result').textContent = `${result.toLocaleString(undefined, {maximumFractionDigits:2})} ${to}`;
             } catch(e) { document.getElementById('currency-result').textContent = '환율 조회 실패'; }
-        }
-
-        // Salary Calculator
-        function calcSalary() {
-            const yearly = +document.getElementById('salary-amount').value;
-            if(!yearly) return;
-            const monthly = yearly / 12;
-            const withTax = document.getElementById('salary-tax').checked;
-            let net = monthly;
-            if(withTax) {
-                const nationalPension = monthly * 0.045;
-                const healthInsurance = monthly * 0.03545;
-                const longTermCare = healthInsurance * 0.1281;
-                const employmentInsurance = monthly * 0.009;
-                const incomeTax = monthly * 0.033;
-                net = monthly - nationalPension - healthInsurance - longTermCare - employmentInsurance - incomeTax;
-            }
-            document.getElementById('salary-yearly').textContent = Math.round(yearly).toLocaleString() + '원';
-            document.getElementById('salary-monthly').textContent = Math.round(monthly).toLocaleString() + '원';
-            document.getElementById('salary-net').textContent = Math.round(net).toLocaleString() + '원';
         }
 
         // Severance
