@@ -27,6 +27,11 @@
         nav a:hover { color: #888; }
         .icon-btn { background: none; border: none; color: #555; padding: 4px; cursor: pointer; font-size: 1rem; }
         .icon-btn:hover { color: #888; }
+        .fixed-sidebar { position: fixed; right: 15px; top: 50%; transform: translateY(-50%); z-index: 1000; display: flex; flex-direction: column; gap: 10px; }
+        .fixed-sidebar .sidebar-btn { width: 44px; height: 44px; border-radius: 50%; background: #1a1a1a; border: 1px solid #333; color: #888; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; text-decoration: none; }
+        .fixed-sidebar .sidebar-btn:hover { background: #252525; color: #fff; border-color: #555; }
+        body.light .fixed-sidebar .sidebar-btn { background: #fff; border-color: #ddd; color: #666; }
+        body.light .fixed-sidebar .sidebar-btn:hover { background: #f5f5f5; color: #333; border-color: #bbb; }
         header { padding: 8px 0 16px; }
         header p { color: #444; font-size: 0.8rem; }
         .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 8px; flex-wrap: wrap; }
@@ -61,6 +66,13 @@
         .tool-card h3 { font-size: 0.8rem; color: #bbb; font-weight: 400; }
         .tool-card p { display: none; }
         .tool-card .icon { font-size: 0.9rem; }
+        .tools-grid.detail-view { grid-template-columns: 1fr; gap: 8px; }
+        .tools-grid.detail-view .tool-card { flex-direction: row; justify-content: flex-start; padding: 12px 16px; gap: 12px; }
+        .tools-grid.detail-view .tool-card .icon { font-size: 1.4rem; min-width: 32px; }
+        .tools-grid.detail-view .tool-card h3 { font-size: 0.9rem; font-weight: 500; }
+        .tools-grid.detail-view .tool-card p { display: block; color: #666; font-size: 0.8rem; margin-top: 2px; }
+        .tools-grid.detail-view .tool-card .card-text { text-align: left; }
+        body.light .tools-grid.detail-view .tool-card p { color: #888; }
         .tool-section { display: none; background: #111; border-radius: 10px; padding: 25px; margin: 20px 0; border: 1px solid #1a1a1a; }
         .tool-section.active { display: block; }
         .tool-section h2 { font-size: 1.1rem; color: #ddd; font-weight: 500; margin-bottom: 20px; }
@@ -138,7 +150,7 @@
         .lang-modal h3 { color: #ddd; margin-bottom: 15px; font-size: 1rem; }
         .lang-option { display: block; width: 100%; padding: 10px 15px; background: #1a1a1a; border: 1px solid #222; border-radius: 6px; color: #ccc; cursor: pointer; margin-bottom: 8px; font-size: 0.9rem; text-align: left; }
         .lang-option:hover { background: #222; }
-        @media (max-width: 600px) { nav { flex-direction: column; } .nav-center { max-width: 100%; order: 3; width: 100%; } .timer-display { font-size: 2rem; } .filter-tabs { overflow-x: auto; } }
+        @media (max-width: 600px) { nav { flex-direction: column; } .nav-center { max-width: 100%; order: 3; width: 100%; } .timer-display { font-size: 2rem; } .filter-tabs { overflow-x: auto; } .fixed-sidebar { right: 8px; gap: 6px; } .fixed-sidebar .sidebar-btn { width: 38px; height: 38px; font-size: 1rem; } }
 
         /* Filter Tabs - Underline Style */
         .filter-tabs { display: flex; gap: 4px; border-bottom: 1px solid #1a1a1a; margin-bottom: 12px; }
@@ -195,12 +207,14 @@
                     <input type="text" class="nav-search" id="search-input" placeholder="검색 (Ctrl+K)" oninput="searchTools()">
                 </div>
             </div>
-            <div class="nav-right">
-                <button class="icon-btn" onclick="toggleTheme()" title="테마">◐</button>
-                <button class="icon-btn" onclick="toggleLangModal()" title="언어">🌐</button>
-                <a href="https://buymeacoffee.com/wings1008" target="_blank" class="icon-btn" title="후원">☕</a>
-            </div>
         </nav>
+
+        <!-- Fixed Sidebar -->
+        <div class="fixed-sidebar">
+            <button class="sidebar-btn" onclick="toggleTheme()" title="테마">◐</button>
+            <button class="sidebar-btn" onclick="toggleLangModal()" title="언어">🌐</button>
+            <a href="https://buymeacoffee.com/wings1008" target="_blank" class="sidebar-btn" title="후원">☕</a>
+        </div>
 
         <div class="lang-modal" id="lang-modal" onclick="if(event.target===this)toggleLangModal()">
             <div class="lang-modal-content">
@@ -225,6 +239,7 @@
                 <select class="sort-select" id="sort-select" onchange="sortTools()">
                     <option value="category">카테고리순</option>
                     <option value="name">이름순</option>
+                    <option value="detail">상세보기</option>
                 </select>
             </div>
         </header>
@@ -365,7 +380,11 @@
         <div class="tool-section" id="tool-img-edit">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>이미지 편집</h2>
-            <input type="file" id="imgedit-file" accept="image/*" onchange="loadImgEdit(this)">
+            <div class="drop-zone" id="drop-imgedit-file" onclick="document.getElementById('imgedit-file').click()">
+                <div class="drop-zone-icon">🖼️</div>
+                <div class="drop-zone-text">이미지를 여기에 드래그하거나 클릭하여 선택</div>
+                <input type="file" id="imgedit-file" accept="image/*" onchange="loadImgEdit(this)">
+            </div>
             <img id="imgedit-preview" class="img-preview" style="display:none;">
             <select id="imgedit-type" onchange="showImgEditType()">
                 <option value="resize">크기 조절</option>
@@ -504,7 +523,11 @@
         <div class="tool-section" id="tool-pdf-merge">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>PDF 병합</h2>
-            <input type="file" id="pdf-files" accept=".pdf" multiple>
+            <div class="drop-zone" id="drop-pdf-files" onclick="document.getElementById('pdf-files').click()">
+                <div class="drop-zone-icon">📄</div>
+                <div class="drop-zone-text">PDF 파일을 여기에 드래그하거나 클릭하여 선택</div>
+                <input type="file" id="pdf-files" accept=".pdf" multiple>
+            </div>
             <div class="file-list" id="pdf-file-list"></div>
             <button class="btn btn-primary" onclick="mergePDFs()">병합하기</button>
             <div id="pdf-merge-status"></div>
@@ -515,7 +538,11 @@
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>PDF 변환</h2>
             <div class="info-box"><strong>지원:</strong> JPG, PNG<br><strong>HWP, Word, Excel, PPT:</strong> 서비스 준비중</div>
-            <input type="file" id="convert-files" accept="image/*" multiple>
+            <div class="drop-zone" id="drop-convert-files" onclick="document.getElementById('convert-files').click()">
+                <div class="drop-zone-icon">🖼️</div>
+                <div class="drop-zone-text">이미지를 여기에 드래그하거나 클릭하여 선택</div>
+                <input type="file" id="convert-files" accept="image/*" multiple>
+            </div>
             <div class="file-list" id="convert-file-list"></div>
             <button class="btn btn-primary" onclick="convertToPDF()">변환</button>
             <div id="convert-status"></div>
@@ -730,7 +757,11 @@
         <div class="tool-section" id="tool-img-resize">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>이미지 리사이즈</h2>
-            <input type="file" id="resize-file" accept="image/*" onchange="loadResizeImage(this)">
+            <div class="drop-zone" id="drop-resize-file" onclick="document.getElementById('resize-file').click()">
+                <div class="drop-zone-icon">🖼️</div>
+                <div class="drop-zone-text">이미지를 여기에 드래그하거나 클릭하여 선택</div>
+                <input type="file" id="resize-file" accept="image/*" onchange="loadResizeImage(this)">
+            </div>
             <canvas id="resize-canvas" style="display:none;"></canvas>
             <img id="resize-preview" class="img-preview" style="display:none;">
             <div class="row" style="margin-top:10px;">
@@ -747,7 +778,11 @@
         <div class="tool-section" id="tool-img-compress">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>이미지 압축</h2>
-            <input type="file" id="compress-file" accept="image/*" onchange="loadCompressImage(this)">
+            <div class="drop-zone" id="drop-compress-file" onclick="document.getElementById('compress-file').click()">
+                <div class="drop-zone-icon">🗜️</div>
+                <div class="drop-zone-text">이미지를 여기에 드래그하거나 클릭하여 선택</div>
+                <input type="file" id="compress-file" accept="image/*" onchange="loadCompressImage(this)">
+            </div>
             <img id="compress-preview" class="img-preview" style="display:none;">
             <div class="slider-row"><span>품질:</span><input type="range" id="compress-quality" min="10" max="100" value="80" oninput="updateQualityLabel()"><span id="quality-label">80%</span></div>
             <div id="compress-info" style="color:#666;font-size:0.85rem;margin:10px 0;"></div>
@@ -758,7 +793,11 @@
         <div class="tool-section" id="tool-img-convert">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>이미지 변환</h2>
-            <input type="file" id="imgconv-file" accept="image/*" onchange="loadConvertImage(this)">
+            <div class="drop-zone" id="drop-imgconv-file" onclick="document.getElementById('imgconv-file').click()">
+                <div class="drop-zone-icon">🔄</div>
+                <div class="drop-zone-text">이미지를 여기에 드래그하거나 클릭하여 선택</div>
+                <input type="file" id="imgconv-file" accept="image/*" onchange="loadConvertImage(this)">
+            </div>
             <img id="imgconv-preview" class="img-preview" style="display:none;">
             <select id="imgconv-format">
                 <option value="image/jpeg">JPG</option>
@@ -772,7 +811,11 @@
         <div class="tool-section" id="tool-img-base64">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>이미지 → Base64</h2>
-            <input type="file" id="imgb64-file" accept="image/*" onchange="imageToBase64(this)">
+            <div class="drop-zone" id="drop-imgb64-file" onclick="document.getElementById('imgb64-file').click()">
+                <div class="drop-zone-icon">📝</div>
+                <div class="drop-zone-text">이미지를 여기에 드래그하거나 클릭하여 선택</div>
+                <input type="file" id="imgb64-file" accept="image/*" onchange="imageToBase64(this)">
+            </div>
             <img id="imgb64-preview" class="img-preview" style="display:none;">
             <div class="result-box" style="max-height:200px;overflow:auto;"><div id="imgb64-result" style="word-break:break-all;">-</div></div>
             <button class="copy-btn" onclick="copyText('imgb64-result')">복사</button>
@@ -781,7 +824,11 @@
         <div class="tool-section" id="tool-img-crop">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>이미지 자르기</h2>
-            <input type="file" id="crop-file" accept="image/*" onchange="loadCropImage(this)">
+            <div class="drop-zone" id="drop-crop-file" onclick="document.getElementById('crop-file').click()">
+                <div class="drop-zone-icon">✂️</div>
+                <div class="drop-zone-text">이미지를 여기에 드래그하거나 클릭하여 선택</div>
+                <input type="file" id="crop-file" accept="image/*" onchange="loadCropImage(this)">
+            </div>
             <img id="crop-preview" class="img-preview" style="display:none;">
             <div class="row" style="margin-top:10px;">
                 <input type="number" id="crop-x" placeholder="X" value="0">
@@ -796,7 +843,11 @@
         <div class="tool-section" id="tool-favicon">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>파비콘 생성</h2>
-            <input type="file" id="favicon-file" accept="image/*" onchange="loadFaviconImage(this)">
+            <div class="drop-zone" id="drop-favicon-file" onclick="document.getElementById('favicon-file').click()">
+                <div class="drop-zone-icon">⭐</div>
+                <div class="drop-zone-text">이미지를 여기에 드래그하거나 클릭하여 선택</div>
+                <input type="file" id="favicon-file" accept="image/*" onchange="loadFaviconImage(this)">
+            </div>
             <img id="favicon-preview" class="img-preview" style="display:none;">
             <div class="info-box">이미지를 16x16, 32x32, 48x48 크기로 변환합니다.</div>
             <button class="btn btn-primary" onclick="generateFavicons()">생성</button>
@@ -808,7 +859,11 @@
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>누끼 (배경 제거)</h2>
             <div class="info-box">AI를 사용해 이미지 배경을 자동으로 제거합니다. 처리 시간이 걸릴 수 있습니다.</div>
-            <input type="file" id="bgremove-file" accept="image/*" onchange="loadBgRemoveImage(this)">
+            <div class="drop-zone" id="drop-bgremove-file" onclick="document.getElementById('bgremove-file').click()">
+                <div class="drop-zone-icon">🎨</div>
+                <div class="drop-zone-text">이미지를 여기에 드래그하거나 클릭하여 선택</div>
+                <input type="file" id="bgremove-file" accept="image/*" onchange="loadBgRemoveImage(this)">
+            </div>
             <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:15px;">
                 <div style="flex:1;min-width:200px;"><div style="color:#555;font-size:0.8rem;margin-bottom:5px;">원본</div><img id="bgremove-preview" class="img-preview" style="display:none;max-width:100%;"></div>
                 <div style="flex:1;min-width:200px;"><div style="color:#555;font-size:0.8rem;margin-bottom:5px;">결과</div><img id="bgremove-result" class="img-preview" style="display:none;max-width:100%;background:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22><rect width=%2210%22 height=%2210%22 fill=%22%23333%22/><rect x=%2210%22 y=%2210%22 width=%2210%22 height=%2210%22 fill=%22%23333%22/><rect x=%2210%22 width=%2210%22 height=%2210%22 fill=%22%23222%22/><rect y=%2210%22 width=%2210%22 height=%2210%22 fill=%22%23222%22/></svg>');"></div>
@@ -1376,7 +1431,11 @@
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>OCR (이미지→텍스트)</h2>
             <div class="info-box">이미지에서 텍스트를 추출합니다. 처리 시간이 걸릴 수 있습니다.</div>
-            <input type="file" id="ocr-file" accept="image/*" onchange="loadOcrImage(this)">
+            <div class="drop-zone" id="drop-ocr-file" onclick="document.getElementById('ocr-file').click()">
+                <div class="drop-zone-icon">📖</div>
+                <div class="drop-zone-text">이미지를 여기에 드래그하거나 클릭하여 선택</div>
+                <input type="file" id="ocr-file" accept="image/*" onchange="loadOcrImage(this)">
+            </div>
             <img id="ocr-preview" class="img-preview" style="display:none;">
             <div id="ocr-status" style="margin:10px 0;color:#666;"></div>
             <button class="btn btn-primary" onclick="runOcr()">텍스트 추출</button>
@@ -1818,7 +1877,11 @@
         <div class="tool-section" id="tool-img-rotate">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>이미지 회전/뒤집기</h2>
-            <input type="file" id="rotate-file" accept="image/*" onchange="loadRotateImage(this)">
+            <div class="drop-zone" id="drop-rotate-file" onclick="document.getElementById('rotate-file').click()">
+                <div class="drop-zone-icon">🔄</div>
+                <div class="drop-zone-text">이미지를 여기에 드래그하거나 클릭하여 선택</div>
+                <input type="file" id="rotate-file" accept="image/*" onchange="loadRotateImage(this)">
+            </div>
             <img id="rotate-preview" class="img-preview" style="display:none;">
             <div style="margin:15px 0;">
                 <button class="btn" onclick="rotateImage(90)">↻ 90°</button>
@@ -1834,7 +1897,11 @@
         <div class="tool-section" id="tool-img-filter">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>이미지 필터</h2>
-            <input type="file" id="filter-file" accept="image/*" onchange="loadFilterImage(this)">
+            <div class="drop-zone" id="drop-filter-file" onclick="document.getElementById('filter-file').click()">
+                <div class="drop-zone-icon">🎨</div>
+                <div class="drop-zone-text">이미지를 여기에 드래그하거나 클릭하여 선택</div>
+                <input type="file" id="filter-file" accept="image/*" onchange="loadFilterImage(this)">
+            </div>
             <img id="filter-preview" class="img-preview" style="display:none;">
             <div style="margin:15px 0;">
                 <button class="btn" onclick="applyFilter('grayscale')">흑백</button>
@@ -1852,7 +1919,11 @@
         <div class="tool-section" id="tool-img-watermark">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>이미지 워터마크</h2>
-            <input type="file" id="wm-file" accept="image/*" onchange="loadWatermarkImage(this)">
+            <div class="drop-zone" id="drop-wm-file" onclick="document.getElementById('wm-file').click()">
+                <div class="drop-zone-icon">💧</div>
+                <div class="drop-zone-text">이미지를 여기에 드래그하거나 클릭하여 선택</div>
+                <input type="file" id="wm-file" accept="image/*" onchange="loadWatermarkImage(this)">
+            </div>
             <img id="wm-preview" class="img-preview" style="display:none;">
             <input type="text" id="wm-text" placeholder="워터마크 텍스트">
             <div class="row">
@@ -1874,7 +1945,11 @@
         <div class="tool-section" id="tool-color-extract">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>이미지 색상 추출</h2>
-            <input type="file" id="ce-file" accept="image/*" onchange="loadColorExtractImage(this)">
+            <div class="drop-zone" id="drop-ce-file" onclick="document.getElementById('ce-file').click()">
+                <div class="drop-zone-icon">🎨</div>
+                <div class="drop-zone-text">이미지를 여기에 드래그하거나 클릭하여 선택</div>
+                <input type="file" id="ce-file" accept="image/*" onchange="loadColorExtractImage(this)">
+            </div>
             <img id="ce-preview" class="img-preview" style="display:none;cursor:crosshair;">
             <canvas id="ce-canvas" style="display:none;"></canvas>
             <div class="info-box">이미지를 클릭하면 해당 위치의 색상이 추출됩니다</div>
@@ -2126,7 +2201,11 @@
         <div class="tool-section" id="tool-exif">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>EXIF 메타데이터 뷰어</h2>
-            <input type="file" id="exif-file" accept="image/*" onchange="loadExifImage(this)">
+            <div class="drop-zone" id="drop-exif-file" onclick="document.getElementById('exif-file').click()">
+                <div class="drop-zone-icon">📷</div>
+                <div class="drop-zone-text">이미지를 여기에 드래그하거나 클릭하여 선택</div>
+                <input type="file" id="exif-file" accept="image/*" onchange="loadExifImage(this)">
+            </div>
             <img id="exif-preview" class="img-preview" style="display:none;">
             <div id="exif-result" style="margin-top:15px;"></div>
         </div>
@@ -2135,7 +2214,11 @@
         <div class="tool-section" id="tool-auto-palette">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>자동 팔레트 추출</h2>
-            <input type="file" id="autopal-file" accept="image/*" onchange="extractAutoPalette(this)">
+            <div class="drop-zone" id="drop-autopal-file" onclick="document.getElementById('autopal-file').click()">
+                <div class="drop-zone-icon">🎨</div>
+                <div class="drop-zone-text">이미지를 여기에 드래그하거나 클릭하여 선택</div>
+                <input type="file" id="autopal-file" accept="image/*" onchange="extractAutoPalette(this)">
+            </div>
             <img id="autopal-preview" class="img-preview" style="display:none;">
             <div id="autopal-colors" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:15px;"></div>
         </div>
@@ -2144,7 +2227,11 @@
         <div class="tool-section" id="tool-pixelate">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>이미지 픽셀화</h2>
-            <input type="file" id="pixel-file" accept="image/*" onchange="loadPixelImage(this)">
+            <div class="drop-zone" id="drop-pixel-file" onclick="document.getElementById('pixel-file').click()">
+                <div class="drop-zone-icon">▦</div>
+                <div class="drop-zone-text">이미지를 여기에 드래그하거나 클릭하여 선택</div>
+                <input type="file" id="pixel-file" accept="image/*" onchange="loadPixelImage(this)">
+            </div>
             <img id="pixel-preview" class="img-preview" style="display:none;">
             <div class="slider-row"><span>크기:</span><input type="range" id="pixel-size" min="2" max="50" value="10"><span id="pixel-size-val">10px</span></div>
             <button class="btn btn-primary" onclick="applyPixelate()">적용</button>
@@ -2156,7 +2243,11 @@
         <div class="tool-section" id="tool-img-pdf">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>이미지 → PDF</h2>
-            <input type="file" id="imgpdf-files" accept="image/*" multiple>
+            <div class="drop-zone" id="drop-imgpdf-files" onclick="document.getElementById('imgpdf-files').click()">
+                <div class="drop-zone-icon">📄</div>
+                <div class="drop-zone-text">이미지를 여기에 드래그하거나 클릭하여 선택</div>
+                <input type="file" id="imgpdf-files" accept="image/*" multiple>
+            </div>
             <div class="file-list" id="imgpdf-file-list"></div>
             <button class="btn btn-primary" onclick="imagesToPdf()">PDF 생성</button>
             <div id="imgpdf-status"></div>
@@ -2537,7 +2628,11 @@
         <div class="tool-section" id="tool-ascii-art">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>이미지 → ASCII 아트</h2>
-            <input type="file" id="ascii-file" accept="image/*" onchange="loadAsciiImage(this)">
+            <div class="drop-zone" id="drop-ascii-file" onclick="document.getElementById('ascii-file').click()">
+                <div class="drop-zone-icon">🔤</div>
+                <div class="drop-zone-text">이미지를 여기에 드래그하거나 클릭하여 선택</div>
+                <input type="file" id="ascii-file" accept="image/*" onchange="loadAsciiImage(this)">
+            </div>
             <div class="slider-row">
                 <span>폭:</span>
                 <input type="range" id="ascii-width" min="40" max="200" value="100" onchange="generateAscii()">
@@ -2829,9 +2924,27 @@
             const grids = document.querySelectorAll('#main-grid .tools-grid[data-section]');
             const container = document.getElementById('all-tools-container');
 
+            // Remove detail-view from all grids
+            grids.forEach(g => g.classList.remove('detail-view'));
+
             if (currentSort === 'category') {
                 container.style.display = 'none';
                 filterCategory(currentCategory);
+                return;
+            }
+
+            if (currentSort === 'detail') {
+                // Detail view - show categories with descriptions
+                container.style.display = 'none';
+                sections.forEach(s => s.style.display = '');
+                grids.forEach(g => {
+                    g.style.display = '';
+                    g.classList.add('detail-view');
+                });
+                if (currentCategory !== 'all') {
+                    sections.forEach(s => s.style.display = s.dataset.section === currentCategory ? '' : 'none');
+                    grids.forEach(g => g.style.display = g.dataset.section === currentCategory ? '' : 'none');
+                }
                 return;
             }
 
@@ -3026,8 +3139,72 @@
             } catch(e) { result.innerHTML = `<div style="color:#a55;margin-top:10px;">오류: ${e.message}</div>`; }
         }
 
-        // PDF Merge
+        // Generic Drop Zone Setup
+        function setupDropZone(dropZoneId, inputId, callback) {
+            const dropZone = document.getElementById(dropZoneId);
+            const input = document.getElementById(inputId);
+            if (!dropZone || !input) return;
+            dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+            dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+            dropZone.addEventListener('drop', e => {
+                e.preventDefault();
+                dropZone.classList.remove('drag-over');
+                const files = e.dataTransfer.files;
+                if (files.length) {
+                    if (callback) {
+                        callback(files);
+                    } else {
+                        // Trigger input's onchange by setting files
+                        const dataTransfer = new DataTransfer();
+                        for (let i = 0; i < files.length; i++) {
+                            dataTransfer.items.add(files[i]);
+                        }
+                        input.files = dataTransfer.files;
+                        input.dispatchEvent(new Event('change'));
+                    }
+                }
+            });
+        }
+
+        // File arrays for multi-file tools (declared early for drop zones)
         let pdfFiles = [];
+        let imgFiles = [];
+
+        // Setup all drop zones
+        setupDropZone('drop-pdf-files', 'pdf-files', files => {
+            const validFiles = Array.from(files).filter(f => f.type === 'application/pdf');
+            if (validFiles.length) {
+                pdfFiles = [...pdfFiles, ...validFiles];
+                document.getElementById('pdf-file-list').innerHTML = pdfFiles.map((f,i) => `<div class="file-item"><span>${f.name}</span><button onclick="pdfFiles.splice(${i},1);this.parentElement.remove()">×</button></div>`).join('');
+            }
+        });
+        setupDropZone('drop-convert-files', 'convert-files', files => {
+            const validFiles = Array.from(files).filter(f => f.type.startsWith('image/'));
+            if (validFiles.length) {
+                imgFiles = [...imgFiles, ...validFiles];
+                document.getElementById('convert-file-list').innerHTML = imgFiles.map(f => `<div class="file-item"><span>${f.name}</span></div>`).join('');
+            }
+        });
+        setupDropZone('drop-imgpdf-files', 'imgpdf-files');
+        setupDropZone('drop-resize-file', 'resize-file');
+        setupDropZone('drop-compress-file', 'compress-file');
+        setupDropZone('drop-imgconv-file', 'imgconv-file');
+        setupDropZone('drop-imgb64-file', 'imgb64-file');
+        setupDropZone('drop-crop-file', 'crop-file');
+        setupDropZone('drop-favicon-file', 'favicon-file');
+        setupDropZone('drop-bgremove-file', 'bgremove-file');
+        setupDropZone('drop-ocr-file', 'ocr-file');
+        setupDropZone('drop-rotate-file', 'rotate-file');
+        setupDropZone('drop-filter-file', 'filter-file');
+        setupDropZone('drop-wm-file', 'wm-file');
+        setupDropZone('drop-ce-file', 'ce-file');
+        setupDropZone('drop-exif-file', 'exif-file');
+        setupDropZone('drop-autopal-file', 'autopal-file');
+        setupDropZone('drop-pixel-file', 'pixel-file');
+        setupDropZone('drop-ascii-file', 'ascii-file');
+        setupDropZone('drop-imgedit-file', 'imgedit-file');
+
+        // PDF Merge
         document.getElementById('pdf-files').addEventListener('change', e => {
             pdfFiles = Array.from(e.target.files);
             document.getElementById('pdf-file-list').innerHTML = pdfFiles.map((f,i) => `<div class="file-item"><span>${f.name}</span><button onclick="pdfFiles.splice(${i},1);this.parentElement.remove()">×</button></div>`).join('');
@@ -3048,7 +3225,6 @@
         }
 
         // PDF Convert
-        let imgFiles = [];
         document.getElementById('convert-files').addEventListener('change', e => {
             imgFiles = Array.from(e.target.files);
             document.getElementById('convert-file-list').innerHTML = imgFiles.map(f => `<div class="file-item"><span>${f.name}</span></div>`).join('');
@@ -5966,6 +6142,590 @@
                 const payload = JSON.parse(atob(parts[1]));
                 document.getElementById('enc-result').textContent = 'Header:\n' + JSON.stringify(header, null, 2) + '\n\nPayload:\n' + JSON.stringify(payload, null, 2);
             } catch(e) { document.getElementById('enc-result').textContent = '유효하지 않은 JWT'; }
+        }
+
+        // Data Convert Combined
+        const dataConvertTemplates = {
+            'json-xml': `<textarea id="dc-input" placeholder="JSON 또는 XML 입력" rows="8"></textarea>
+                <button class="btn" onclick="dcJsonXml('toXml')">JSON → XML</button>
+                <button class="btn" onclick="dcJsonXml('toJson')">XML → JSON</button>
+                <div class="result-box"><pre id="dc-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
+                <button class="copy-btn" onclick="copyText('dc-result')">복사</button>`,
+            'yaml-json': `<textarea id="dc-input" placeholder="YAML 또는 JSON 입력" rows="8"></textarea>
+                <button class="btn" onclick="dcYamlJson('toJson')">YAML → JSON</button>
+                <button class="btn" onclick="dcYamlJson('toYaml')">JSON → YAML</button>
+                <div class="result-box"><pre id="dc-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
+                <button class="copy-btn" onclick="copyText('dc-result')">복사</button>`,
+            'csv-json': `<textarea id="dc-input" placeholder="CSV 또는 JSON 입력" rows="8"></textarea>
+                <button class="btn" onclick="dcCsvJson('toJson')">CSV → JSON</button>
+                <button class="btn" onclick="dcCsvJson('toCsv')">JSON → CSV</button>
+                <div class="result-box"><pre id="dc-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
+                <button class="copy-btn" onclick="copyText('dc-result')">복사</button>`,
+            'json-ts': `<textarea id="dc-input" placeholder="JSON 입력" rows="8"></textarea>
+                <button class="btn btn-primary" onclick="dcJsonTs()">TypeScript 인터페이스 생성</button>
+                <div class="result-box"><pre id="dc-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
+                <button class="copy-btn" onclick="copyText('dc-result')">복사</button>`
+        };
+        function showDataConvertType() {
+            const type = document.getElementById('data-convert-type').value;
+            document.getElementById('data-convert-content').innerHTML = dataConvertTemplates[type] || '';
+        }
+        showDataConvertType();
+        function dcJsonXml(dir) {
+            const v = document.getElementById('dc-input').value.trim();
+            try {
+                if (dir === 'toXml') {
+                    const obj = JSON.parse(v);
+                    const toXml = (o, name = 'root') => {
+                        if (Array.isArray(o)) return o.map(i => toXml(i, 'item')).join('');
+                        if (typeof o === 'object' && o !== null) {
+                            return `<${name}>${Object.entries(o).map(([k, v]) => toXml(v, k)).join('')}</${name}>`;
+                        }
+                        return `<${name}>${o}</${name}>`;
+                    };
+                    document.getElementById('dc-result').textContent = '<?xml version="1.0"?>\n' + toXml(obj);
+                } else {
+                    const parser = new DOMParser();
+                    const xml = parser.parseFromString(v, 'text/xml');
+                    const toObj = (node) => {
+                        if (node.children.length === 0) return node.textContent;
+                        const obj = {};
+                        for (const child of node.children) {
+                            const key = child.tagName;
+                            const val = toObj(child);
+                            if (obj[key]) {
+                                if (!Array.isArray(obj[key])) obj[key] = [obj[key]];
+                                obj[key].push(val);
+                            } else obj[key] = val;
+                        }
+                        return obj;
+                    };
+                    document.getElementById('dc-result').textContent = JSON.stringify(toObj(xml.documentElement), null, 2);
+                }
+            } catch(e) { document.getElementById('dc-result').textContent = '오류: ' + e.message; }
+        }
+        function dcYamlJson(dir) {
+            const v = document.getElementById('dc-input').value.trim();
+            try {
+                if (dir === 'toJson') {
+                    // Simple YAML parser
+                    const lines = v.split('\n');
+                    const result = {};
+                    let current = result;
+                    for (const line of lines) {
+                        const match = line.match(/^(\s*)([^:]+):\s*(.*)$/);
+                        if (match) {
+                            const [, , key, val] = match;
+                            current[key.trim()] = val.trim() || {};
+                        }
+                    }
+                    document.getElementById('dc-result').textContent = JSON.stringify(result, null, 2);
+                } else {
+                    const obj = JSON.parse(v);
+                    const toYaml = (o, indent = 0) => {
+                        let result = '';
+                        const sp = '  '.repeat(indent);
+                        for (const [k, v] of Object.entries(o)) {
+                            if (typeof v === 'object' && v !== null && !Array.isArray(v)) {
+                                result += `${sp}${k}:\n${toYaml(v, indent + 1)}`;
+                            } else if (Array.isArray(v)) {
+                                result += `${sp}${k}:\n${v.map(i => `${sp}  - ${typeof i === 'object' ? JSON.stringify(i) : i}`).join('\n')}\n`;
+                            } else {
+                                result += `${sp}${k}: ${v}\n`;
+                            }
+                        }
+                        return result;
+                    };
+                    document.getElementById('dc-result').textContent = toYaml(obj);
+                }
+            } catch(e) { document.getElementById('dc-result').textContent = '오류: ' + e.message; }
+        }
+        function dcCsvJson(dir) {
+            const v = document.getElementById('dc-input').value.trim();
+            try {
+                if (dir === 'toJson') {
+                    const lines = v.split('\n').map(l => l.split(',').map(c => c.trim()));
+                    const headers = lines[0];
+                    const result = lines.slice(1).map(row => {
+                        const obj = {};
+                        headers.forEach((h, i) => obj[h] = row[i] || '');
+                        return obj;
+                    });
+                    document.getElementById('dc-result').textContent = JSON.stringify(result, null, 2);
+                } else {
+                    const arr = JSON.parse(v);
+                    if (!Array.isArray(arr) || !arr.length) throw new Error('배열 필요');
+                    const headers = Object.keys(arr[0]);
+                    const csv = [headers.join(','), ...arr.map(o => headers.map(h => o[h] || '').join(','))].join('\n');
+                    document.getElementById('dc-result').textContent = csv;
+                }
+            } catch(e) { document.getElementById('dc-result').textContent = '오류: ' + e.message; }
+        }
+        function dcJsonTs() {
+            const v = document.getElementById('dc-input').value.trim();
+            try {
+                const obj = JSON.parse(v);
+                const getType = (val) => {
+                    if (val === null) return 'null';
+                    if (Array.isArray(val)) return val.length ? `${getType(val[0])}[]` : 'any[]';
+                    return typeof val;
+                };
+                const toInterface = (o, name = 'Root') => {
+                    let result = `interface ${name} {\n`;
+                    for (const [k, v] of Object.entries(o)) {
+                        if (typeof v === 'object' && v !== null && !Array.isArray(v)) {
+                            result += `  ${k}: ${k.charAt(0).toUpperCase() + k.slice(1)};\n`;
+                        } else {
+                            result += `  ${k}: ${getType(v)};\n`;
+                        }
+                    }
+                    result += '}\n';
+                    for (const [k, v] of Object.entries(o)) {
+                        if (typeof v === 'object' && v !== null && !Array.isArray(v)) {
+                            result += '\n' + toInterface(v, k.charAt(0).toUpperCase() + k.slice(1));
+                        }
+                    }
+                    return result;
+                };
+                document.getElementById('dc-result').textContent = toInterface(obj);
+            } catch(e) { document.getElementById('dc-result').textContent = '오류: ' + e.message; }
+        }
+
+        // CSS Generator Combined
+        const cssGenTemplates = {
+            gradient: `<div class="row"><input type="color" id="cg-c1" value="#667eea" onchange="cgGradient()"><input type="color" id="cg-c2" value="#764ba2" onchange="cgGradient()"></div>
+                <select id="cg-dir" onchange="cgGradient()"><option value="to right">→</option><option value="to left">←</option><option value="to bottom">↓</option><option value="to top">↑</option><option value="to bottom right">↘</option><option value="45deg">45°</option></select>
+                <div class="gradient-preview" id="cg-preview"></div>
+                <div class="result-box"><code id="cg-result">-</code></div>
+                <button class="copy-btn" onclick="copyText('cg-result')">복사</button>`,
+            shadow: `<div class="slider-row"><span>X:</span><input type="range" id="cg-sx" min="-50" max="50" value="5" oninput="cgShadow()"><span id="cg-sx-v">5px</span></div>
+                <div class="slider-row"><span>Y:</span><input type="range" id="cg-sy" min="-50" max="50" value="5" oninput="cgShadow()"><span id="cg-sy-v">5px</span></div>
+                <div class="slider-row"><span>Blur:</span><input type="range" id="cg-sb" min="0" max="100" value="10" oninput="cgShadow()"><span id="cg-sb-v">10px</span></div>
+                <div class="slider-row"><span>Spread:</span><input type="range" id="cg-ss" min="-50" max="50" value="0" oninput="cgShadow()"><span id="cg-ss-v">0px</span></div>
+                <input type="color" id="cg-sc" value="#000000" onchange="cgShadow()">
+                <div class="shadow-preview" id="cg-preview"></div>
+                <div class="result-box"><code id="cg-result">-</code></div>
+                <button class="copy-btn" onclick="copyText('cg-result')">복사</button>`,
+            'border-radius': `<div class="slider-row"><span>전체:</span><input type="range" id="cg-br" min="0" max="100" value="10" oninput="cgBorderRadius()"><span id="cg-br-v">10px</span></div>
+                <div style="width:100px;height:100px;background:#666;margin:20px auto;" id="cg-preview"></div>
+                <div class="result-box"><code id="cg-result">border-radius: 10px;</code></div>
+                <button class="copy-btn" onclick="copyText('cg-result')">복사</button>`,
+            'text-shadow': `<div class="slider-row"><span>X:</span><input type="range" id="cg-tx" min="-20" max="20" value="2" oninput="cgTextShadow()"><span id="cg-tx-v">2px</span></div>
+                <div class="slider-row"><span>Y:</span><input type="range" id="cg-ty" min="-20" max="20" value="2" oninput="cgTextShadow()"><span id="cg-ty-v">2px</span></div>
+                <div class="slider-row"><span>Blur:</span><input type="range" id="cg-tb" min="0" max="20" value="4" oninput="cgTextShadow()"><span id="cg-tb-v">4px</span></div>
+                <input type="color" id="cg-tc" value="#000000" onchange="cgTextShadow()">
+                <div style="font-size:2rem;text-align:center;padding:20px;color:#fff;" id="cg-preview">Text Shadow</div>
+                <div class="result-box"><code id="cg-result">-</code></div>
+                <button class="copy-btn" onclick="copyText('cg-result')">복사</button>`,
+            flexbox: `<select id="cg-fd" onchange="cgFlex()"><option value="row">row</option><option value="column">column</option></select>
+                <select id="cg-jc" onchange="cgFlex()"><option value="flex-start">flex-start</option><option value="center">center</option><option value="flex-end">flex-end</option><option value="space-between">space-between</option><option value="space-around">space-around</option></select>
+                <select id="cg-ai" onchange="cgFlex()"><option value="stretch">stretch</option><option value="flex-start">flex-start</option><option value="center">center</option><option value="flex-end">flex-end</option></select>
+                <div style="display:flex;background:#1a1a1a;padding:10px;min-height:100px;gap:5px;" id="cg-preview"><div style="background:#666;padding:10px;">1</div><div style="background:#666;padding:10px;">2</div><div style="background:#666;padding:10px;">3</div></div>
+                <div class="result-box"><code id="cg-result">-</code></div>
+                <button class="copy-btn" onclick="copyText('cg-result')">복사</button>`,
+            grid: `<div class="row"><input type="number" id="cg-gc" value="3" min="1" max="12" onchange="cgGrid()"><input type="number" id="cg-gr" value="2" min="1" max="12" onchange="cgGrid()"></div>
+                <div class="slider-row"><span>Gap:</span><input type="range" id="cg-gg" min="0" max="30" value="10" oninput="cgGrid()"><span id="cg-gg-v">10px</span></div>
+                <div id="cg-preview" style="display:grid;background:#1a1a1a;padding:10px;"></div>
+                <div class="result-box"><code id="cg-result">-</code></div>
+                <button class="copy-btn" onclick="copyText('cg-result')">복사</button>`,
+            neumorphism: `<input type="color" id="cg-nc" value="#e0e0e0" onchange="cgNeumorphism()">
+                <div class="slider-row"><span>Size:</span><input type="range" id="cg-ns" min="5" max="50" value="20" oninput="cgNeumorphism()"><span id="cg-ns-v">20px</span></div>
+                <div style="width:150px;height:150px;margin:30px auto;border-radius:20px;" id="cg-preview"></div>
+                <div class="result-box"><code id="cg-result">-</code></div>
+                <button class="copy-btn" onclick="copyText('cg-result')">복사</button>`,
+            glassmorphism: `<div class="slider-row"><span>Blur:</span><input type="range" id="cg-gb" min="1" max="30" value="10" oninput="cgGlass()"><span id="cg-gb-v">10px</span></div>
+                <div class="slider-row"><span>투명도:</span><input type="range" id="cg-go" min="0" max="100" value="20" oninput="cgGlass()"><span id="cg-go-v">20%</span></div>
+                <div style="background:linear-gradient(135deg,#667eea,#764ba2);padding:40px;border-radius:10px;">
+                    <div style="width:150px;height:100px;margin:auto;border-radius:15px;border:1px solid rgba(255,255,255,0.2);" id="cg-preview"></div>
+                </div>
+                <div class="result-box"><code id="cg-result">-</code></div>
+                <button class="copy-btn" onclick="copyText('cg-result')">복사</button>`
+        };
+        function showCssGenType() {
+            const type = document.getElementById('css-gen-type').value;
+            document.getElementById('css-gen-content').innerHTML = cssGenTemplates[type] || '';
+            if (type === 'gradient') cgGradient();
+            else if (type === 'shadow') cgShadow();
+            else if (type === 'text-shadow') cgTextShadow();
+            else if (type === 'flexbox') cgFlex();
+            else if (type === 'grid') cgGrid();
+            else if (type === 'neumorphism') cgNeumorphism();
+            else if (type === 'glassmorphism') cgGlass();
+        }
+        showCssGenType();
+        function cgGradient() {
+            const c1 = document.getElementById('cg-c1').value;
+            const c2 = document.getElementById('cg-c2').value;
+            const dir = document.getElementById('cg-dir').value;
+            const css = `linear-gradient(${dir}, ${c1}, ${c2})`;
+            document.getElementById('cg-preview').style.background = css;
+            document.getElementById('cg-result').textContent = `background: ${css};`;
+        }
+        function cgShadow() {
+            const x = document.getElementById('cg-sx').value;
+            const y = document.getElementById('cg-sy').value;
+            const b = document.getElementById('cg-sb').value;
+            const s = document.getElementById('cg-ss').value;
+            const c = document.getElementById('cg-sc').value;
+            document.getElementById('cg-sx-v').textContent = x + 'px';
+            document.getElementById('cg-sy-v').textContent = y + 'px';
+            document.getElementById('cg-sb-v').textContent = b + 'px';
+            document.getElementById('cg-ss-v').textContent = s + 'px';
+            const css = `${x}px ${y}px ${b}px ${s}px ${c}`;
+            document.getElementById('cg-preview').style.boxShadow = css;
+            document.getElementById('cg-result').textContent = `box-shadow: ${css};`;
+        }
+        function cgBorderRadius() {
+            const r = document.getElementById('cg-br').value;
+            document.getElementById('cg-br-v').textContent = r + 'px';
+            document.getElementById('cg-preview').style.borderRadius = r + 'px';
+            document.getElementById('cg-result').textContent = `border-radius: ${r}px;`;
+        }
+        function cgTextShadow() {
+            const x = document.getElementById('cg-tx').value;
+            const y = document.getElementById('cg-ty').value;
+            const b = document.getElementById('cg-tb').value;
+            const c = document.getElementById('cg-tc').value;
+            document.getElementById('cg-tx-v').textContent = x + 'px';
+            document.getElementById('cg-ty-v').textContent = y + 'px';
+            document.getElementById('cg-tb-v').textContent = b + 'px';
+            const css = `${x}px ${y}px ${b}px ${c}`;
+            document.getElementById('cg-preview').style.textShadow = css;
+            document.getElementById('cg-result').textContent = `text-shadow: ${css};`;
+        }
+        function cgFlex() {
+            const fd = document.getElementById('cg-fd').value;
+            const jc = document.getElementById('cg-jc').value;
+            const ai = document.getElementById('cg-ai').value;
+            const preview = document.getElementById('cg-preview');
+            preview.style.flexDirection = fd;
+            preview.style.justifyContent = jc;
+            preview.style.alignItems = ai;
+            document.getElementById('cg-result').textContent = `display: flex;\nflex-direction: ${fd};\njustify-content: ${jc};\nalign-items: ${ai};`;
+        }
+        function cgGrid() {
+            const c = document.getElementById('cg-gc').value;
+            const r = document.getElementById('cg-gr').value;
+            const g = document.getElementById('cg-gg').value;
+            document.getElementById('cg-gg-v').textContent = g + 'px';
+            const preview = document.getElementById('cg-preview');
+            preview.style.gridTemplateColumns = `repeat(${c}, 1fr)`;
+            preview.style.gridTemplateRows = `repeat(${r}, 50px)`;
+            preview.style.gap = g + 'px';
+            preview.innerHTML = Array(c * r).fill('<div style="background:#666;"></div>').join('');
+            document.getElementById('cg-result').textContent = `display: grid;\ngrid-template-columns: repeat(${c}, 1fr);\ngrid-template-rows: repeat(${r}, 1fr);\ngap: ${g}px;`;
+        }
+        function cgNeumorphism() {
+            const c = document.getElementById('cg-nc').value;
+            const s = document.getElementById('cg-ns').value;
+            document.getElementById('cg-ns-v').textContent = s + 'px';
+            const r = parseInt(c.slice(1, 3), 16);
+            const g = parseInt(c.slice(3, 5), 16);
+            const b = parseInt(c.slice(5, 7), 16);
+            const light = `rgb(${Math.min(255, r + 30)},${Math.min(255, g + 30)},${Math.min(255, b + 30)})`;
+            const dark = `rgb(${Math.max(0, r - 30)},${Math.max(0, g - 30)},${Math.max(0, b - 30)})`;
+            const preview = document.getElementById('cg-preview');
+            preview.style.background = c;
+            preview.style.boxShadow = `${s}px ${s}px ${s * 2}px ${dark}, -${s}px -${s}px ${s * 2}px ${light}`;
+            document.getElementById('cg-result').textContent = `background: ${c};\nbox-shadow: ${s}px ${s}px ${s * 2}px ${dark},\n  -${s}px -${s}px ${s * 2}px ${light};`;
+        }
+        function cgGlass() {
+            const blur = document.getElementById('cg-gb').value;
+            const opacity = document.getElementById('cg-go').value;
+            document.getElementById('cg-gb-v').textContent = blur + 'px';
+            document.getElementById('cg-go-v').textContent = opacity + '%';
+            const preview = document.getElementById('cg-preview');
+            preview.style.background = `rgba(255,255,255,${opacity / 100})`;
+            preview.style.backdropFilter = `blur(${blur}px)`;
+            document.getElementById('cg-result').textContent = `background: rgba(255, 255, 255, ${(opacity / 100).toFixed(2)});\nbackdrop-filter: blur(${blur}px);\n-webkit-backdrop-filter: blur(${blur}px);`;
+        }
+
+        // SEO Tools Combined
+        const seoTemplates = {
+            meta: `<input type="text" id="seo-title" placeholder="페이지 제목">
+                <textarea id="seo-desc" placeholder="페이지 설명 (150자 권장)" rows="3"></textarea>
+                <input type="text" id="seo-keywords" placeholder="키워드 (쉼표로 구분)">
+                <input type="text" id="seo-url" placeholder="페이지 URL">
+                <input type="text" id="seo-image" placeholder="OG 이미지 URL">
+                <button class="btn btn-primary" onclick="seoMeta()">메타 태그 생성</button>
+                <div class="result-box"><pre id="seo-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
+                <button class="copy-btn" onclick="copyText('seo-result')">복사</button>`,
+            robots: `<div class="options">
+                <label><input type="checkbox" id="seo-idx" checked> 인덱싱 허용</label>
+                <label><input type="checkbox" id="seo-follow" checked> 링크 팔로우</label>
+                </div>
+                <textarea id="seo-disallow" placeholder="차단할 경로 (줄바꿈으로 구분)" rows="4"></textarea>
+                <input type="text" id="seo-sitemap-url" placeholder="sitemap.xml URL">
+                <button class="btn btn-primary" onclick="seoRobots()">robots.txt 생성</button>
+                <div class="result-box"><pre id="seo-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
+                <button class="copy-btn" onclick="copyText('seo-result')">복사</button>`,
+            sitemap: `<textarea id="seo-urls" placeholder="URL 목록 (줄바꿈으로 구분)" rows="6"></textarea>
+                <button class="btn btn-primary" onclick="seoSitemap()">sitemap.xml 생성</button>
+                <div class="result-box"><pre id="seo-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
+                <button class="copy-btn" onclick="copyText('seo-result')">복사</button>`,
+            htaccess: `<div class="options">
+                <label><input type="checkbox" id="seo-https"> HTTPS 리다이렉트</label>
+                <label><input type="checkbox" id="seo-www"> www 리다이렉트</label>
+                <label><input type="checkbox" id="seo-gzip"> Gzip 압축</label>
+                <label><input type="checkbox" id="seo-cache"> 브라우저 캐싱</label>
+                </div>
+                <button class="btn btn-primary" onclick="seoHtaccess()">.htaccess 생성</button>
+                <div class="result-box"><pre id="seo-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
+                <button class="copy-btn" onclick="copyText('seo-result')">복사</button>`,
+            slug: `<input type="text" id="seo-slug-input" placeholder="제목 입력" oninput="seoSlug()">
+                <div class="result-box"><div id="seo-result">-</div></div>
+                <button class="copy-btn" onclick="copyText('seo-result')">복사</button>`
+        };
+        function showSeoType() {
+            const type = document.getElementById('seo-type').value;
+            document.getElementById('seo-content').innerHTML = seoTemplates[type] || '';
+        }
+        showSeoType();
+        function seoMeta() {
+            const title = document.getElementById('seo-title').value;
+            const desc = document.getElementById('seo-desc').value;
+            const keywords = document.getElementById('seo-keywords').value;
+            const url = document.getElementById('seo-url').value;
+            const image = document.getElementById('seo-image').value;
+            let result = `<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n`;
+            if (title) result += `<title>${title}</title>\n<meta property="og:title" content="${title}">\n`;
+            if (desc) result += `<meta name="description" content="${desc}">\n<meta property="og:description" content="${desc}">\n`;
+            if (keywords) result += `<meta name="keywords" content="${keywords}">\n`;
+            if (url) result += `<meta property="og:url" content="${url}">\n<link rel="canonical" href="${url}">\n`;
+            if (image) result += `<meta property="og:image" content="${image}">\n`;
+            result += `<meta property="og:type" content="website">`;
+            document.getElementById('seo-result').textContent = result;
+        }
+        function seoRobots() {
+            const idx = document.getElementById('seo-idx').checked;
+            const follow = document.getElementById('seo-follow').checked;
+            const disallow = document.getElementById('seo-disallow').value.trim().split('\n').filter(l => l);
+            const sitemap = document.getElementById('seo-sitemap-url').value;
+            let result = `User-agent: *\n`;
+            if (!idx) result += `Disallow: /\n`;
+            else {
+                disallow.forEach(path => result += `Disallow: ${path}\n`);
+            }
+            if (sitemap) result += `\nSitemap: ${sitemap}`;
+            document.getElementById('seo-result').textContent = result;
+        }
+        function seoSitemap() {
+            const urls = document.getElementById('seo-urls').value.trim().split('\n').filter(u => u);
+            let result = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+            urls.forEach(url => {
+                result += `  <url>\n    <loc>${url}</loc>\n    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n  </url>\n`;
+            });
+            result += `</urlset>`;
+            document.getElementById('seo-result').textContent = result;
+        }
+        function seoHtaccess() {
+            let result = '';
+            if (document.getElementById('seo-https').checked) {
+                result += `# HTTPS Redirect\nRewriteEngine On\nRewriteCond %{HTTPS} off\nRewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]\n\n`;
+            }
+            if (document.getElementById('seo-www').checked) {
+                result += `# WWW Redirect\nRewriteCond %{HTTP_HOST} !^www\\.\nRewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]\n\n`;
+            }
+            if (document.getElementById('seo-gzip').checked) {
+                result += `# Gzip Compression\n<IfModule mod_deflate.c>\nAddOutputFilterByType DEFLATE text/html text/css application/javascript\n</IfModule>\n\n`;
+            }
+            if (document.getElementById('seo-cache').checked) {
+                result += `# Browser Caching\n<IfModule mod_expires.c>\nExpiresActive On\nExpiresByType image/jpg "access plus 1 year"\nExpiresByType image/png "access plus 1 year"\nExpiresByType text/css "access plus 1 month"\nExpiresByType application/javascript "access plus 1 month"\n</IfModule>`;
+            }
+            document.getElementById('seo-result').textContent = result || '옵션을 선택하세요';
+        }
+        function seoSlug() {
+            const input = document.getElementById('seo-slug-input').value;
+            const slug = input.toLowerCase().trim()
+                .replace(/[가-힣]/g, '') // Remove Korean
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-')
+                .replace(/^-|-$/g, '');
+            document.getElementById('seo-result').textContent = slug || '-';
+        }
+
+        // Dev Info Combined
+        const devInfoTemplates = {
+            http: `<div class="info-box" style="border-left-color:#5b8def;">
+                <strong>1xx 정보</strong><br>100 Continue, 101 Switching Protocols<br><br>
+                <strong>2xx 성공</strong><br>200 OK, 201 Created, 204 No Content<br><br>
+                <strong>3xx 리다이렉션</strong><br>301 Moved Permanently, 302 Found, 304 Not Modified<br><br>
+                <strong>4xx 클라이언트 오류</strong><br>400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 429 Too Many Requests<br><br>
+                <strong>5xx 서버 오류</strong><br>500 Internal Server Error, 502 Bad Gateway, 503 Service Unavailable
+                </div>`,
+            ip: `<div class="result-box"><div id="di-ip">확인 중...</div></div>
+                <button class="btn" onclick="getIpInfo()">IP 정보 새로고침</button>`,
+            useragent: `<div class="result-box"><pre id="di-ua" style="white-space:pre-wrap;margin:0;">-</pre></div>`,
+            'css-unit': `<div class="row">
+                <input type="number" id="di-px" placeholder="px" value="16" oninput="diCssUnit()">
+                <input type="number" id="di-base" placeholder="Base (px)" value="16" oninput="diCssUnit()">
+                </div>
+                <div class="result-box">
+                <div><span style="color:#666;">rem:</span> <span id="di-rem">1</span></div>
+                <div><span style="color:#666;">em:</span> <span id="di-em">1</span></div>
+                <div><span style="color:#666;">%:</span> <span id="di-pct">100%</span></div>
+                <div><span style="color:#666;">vw (1920px 기준):</span> <span id="di-vw">0.83vw</span></div>
+                </div>`
+        };
+        function showDevInfoType() {
+            const type = document.getElementById('devinfo-type').value;
+            document.getElementById('devinfo-content').innerHTML = devInfoTemplates[type] || '';
+            if (type === 'ip') getIpInfo();
+            else if (type === 'useragent') showUaInfo();
+            else if (type === 'css-unit') diCssUnit();
+        }
+        showDevInfoType();
+        async function getIpInfo() {
+            try {
+                const res = await fetch('https://api.ipify.org?format=json');
+                const data = await res.json();
+                document.getElementById('di-ip').innerHTML = `<strong>공인 IP:</strong> ${data.ip}`;
+            } catch(e) { document.getElementById('di-ip').textContent = '확인 실패'; }
+        }
+        function showUaInfo() {
+            const ua = navigator.userAgent;
+            const info = {
+                'User Agent': ua,
+                'Platform': navigator.platform,
+                'Language': navigator.language,
+                'Cookies Enabled': navigator.cookieEnabled,
+                'Online': navigator.onLine,
+                'Screen': `${screen.width}x${screen.height}`,
+                'Color Depth': screen.colorDepth + 'bit'
+            };
+            document.getElementById('di-ua').textContent = Object.entries(info).map(([k, v]) => `${k}: ${v}`).join('\n');
+        }
+        function diCssUnit() {
+            const px = parseFloat(document.getElementById('di-px').value) || 16;
+            const base = parseFloat(document.getElementById('di-base').value) || 16;
+            document.getElementById('di-rem').textContent = (px / base).toFixed(4) + 'rem';
+            document.getElementById('di-em').textContent = (px / base).toFixed(4) + 'em';
+            document.getElementById('di-pct').textContent = ((px / base) * 100).toFixed(2) + '%';
+            document.getElementById('di-vw').textContent = ((px / 1920) * 100).toFixed(4) + 'vw';
+        }
+
+        // Image Edit Combined
+        let imgEditImg = null;
+        let imgEditCanvas = null;
+        let imgEditCtx = null;
+        function loadImgEdit(input) {
+            const file = input.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    imgEditImg = img;
+                    document.getElementById('imgedit-preview').src = e.target.result;
+                    document.getElementById('imgedit-preview').style.display = 'block';
+                    showImgEditType();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+        const imgEditTemplates = {
+            resize: `<div class="row">
+                <input type="number" id="ie-width" placeholder="너비 (px)">
+                <input type="number" id="ie-height" placeholder="높이 (px)">
+                </div>
+                <label><input type="checkbox" id="ie-ratio" checked> 비율 유지</label>
+                <button class="btn btn-primary" onclick="ieResize()">크기 조절</button>`,
+            crop: `<div class="row">
+                <input type="number" id="ie-cx" placeholder="X" value="0">
+                <input type="number" id="ie-cy" placeholder="Y" value="0">
+                </div>
+                <div class="row">
+                <input type="number" id="ie-cw" placeholder="너비">
+                <input type="number" id="ie-ch" placeholder="높이">
+                </div>
+                <button class="btn btn-primary" onclick="ieCrop()">자르기</button>`,
+            rotate: `<button class="btn" onclick="ieRotate(90)">90° 회전</button>
+                <button class="btn" onclick="ieRotate(-90)">-90° 회전</button>
+                <button class="btn" onclick="ieFlip('h')">좌우 반전</button>
+                <button class="btn" onclick="ieFlip('v')">상하 반전</button>`,
+            compress: `<div class="slider-row"><span>품질:</span><input type="range" id="ie-quality" min="10" max="100" value="80" oninput="document.getElementById('ie-q-v').textContent=this.value+'%'"><span id="ie-q-v">80%</span></div>
+                <button class="btn btn-primary" onclick="ieCompress()">압축</button>`
+        };
+        function showImgEditType() {
+            const type = document.getElementById('imgedit-type').value;
+            document.getElementById('imgedit-content').innerHTML = imgEditTemplates[type] || '';
+            document.getElementById('imgedit-download').style.display = 'none';
+            if (imgEditImg && type === 'resize') {
+                document.getElementById('ie-width').value = imgEditImg.width;
+                document.getElementById('ie-height').value = imgEditImg.height;
+            }
+        }
+        function ieSetupCanvas(w, h) {
+            imgEditCanvas = document.getElementById('imgedit-canvas');
+            imgEditCanvas.width = w;
+            imgEditCanvas.height = h;
+            imgEditCtx = imgEditCanvas.getContext('2d');
+        }
+        function ieDownload() {
+            const link = document.getElementById('imgedit-download');
+            link.href = imgEditCanvas.toDataURL('image/png');
+            link.download = 'edited.png';
+            link.style.display = 'inline-block';
+        }
+        function ieResize() {
+            if (!imgEditImg) return alert('이미지를 선택하세요');
+            let w = parseInt(document.getElementById('ie-width').value) || imgEditImg.width;
+            let h = parseInt(document.getElementById('ie-height').value) || imgEditImg.height;
+            ieSetupCanvas(w, h);
+            imgEditCtx.drawImage(imgEditImg, 0, 0, w, h);
+            document.getElementById('imgedit-preview').src = imgEditCanvas.toDataURL();
+            ieDownload();
+        }
+        function ieCrop() {
+            if (!imgEditImg) return alert('이미지를 선택하세요');
+            const x = parseInt(document.getElementById('ie-cx').value) || 0;
+            const y = parseInt(document.getElementById('ie-cy').value) || 0;
+            const w = parseInt(document.getElementById('ie-cw').value) || imgEditImg.width;
+            const h = parseInt(document.getElementById('ie-ch').value) || imgEditImg.height;
+            ieSetupCanvas(w, h);
+            imgEditCtx.drawImage(imgEditImg, x, y, w, h, 0, 0, w, h);
+            document.getElementById('imgedit-preview').src = imgEditCanvas.toDataURL();
+            ieDownload();
+        }
+        function ieRotate(deg) {
+            if (!imgEditImg) return alert('이미지를 선택하세요');
+            const rad = deg * Math.PI / 180;
+            const sin = Math.abs(Math.sin(rad));
+            const cos = Math.abs(Math.cos(rad));
+            const w = imgEditImg.width * cos + imgEditImg.height * sin;
+            const h = imgEditImg.width * sin + imgEditImg.height * cos;
+            ieSetupCanvas(w, h);
+            imgEditCtx.translate(w / 2, h / 2);
+            imgEditCtx.rotate(rad);
+            imgEditCtx.drawImage(imgEditImg, -imgEditImg.width / 2, -imgEditImg.height / 2);
+            document.getElementById('imgedit-preview').src = imgEditCanvas.toDataURL();
+            ieDownload();
+        }
+        function ieFlip(dir) {
+            if (!imgEditImg) return alert('이미지를 선택하세요');
+            ieSetupCanvas(imgEditImg.width, imgEditImg.height);
+            if (dir === 'h') {
+                imgEditCtx.scale(-1, 1);
+                imgEditCtx.drawImage(imgEditImg, -imgEditImg.width, 0);
+            } else {
+                imgEditCtx.scale(1, -1);
+                imgEditCtx.drawImage(imgEditImg, 0, -imgEditImg.height);
+            }
+            document.getElementById('imgedit-preview').src = imgEditCanvas.toDataURL();
+            ieDownload();
+        }
+        function ieCompress() {
+            if (!imgEditImg) return alert('이미지를 선택하세요');
+            const q = parseInt(document.getElementById('ie-quality').value) / 100;
+            ieSetupCanvas(imgEditImg.width, imgEditImg.height);
+            imgEditCtx.drawImage(imgEditImg, 0, 0);
+            const link = document.getElementById('imgedit-download');
+            link.href = imgEditCanvas.toDataURL('image/jpeg', q);
+            link.download = 'compressed.jpg';
+            link.style.display = 'inline-block';
+            document.getElementById('imgedit-preview').src = link.href;
         }
 
         // Number Convert Combined
