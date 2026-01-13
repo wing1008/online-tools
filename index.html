@@ -3496,7 +3496,7 @@
             document.getElementById('byte-count').textContent = new Blob([t]).size;
             const koreanChars = (t.match(/[\uAC00-\uD7AF]/g) || []).length;
             const isKorean = koreanChars > charsNoSpace * 0.3;
-            const readTime = isKorean ? Math.ceil(charsNoSpace / 500) : Math.ceil(words / 200);
+            const readTime = isKorean ? Math.ceil(charsNoSpace / 400) : Math.ceil(words / 150);
             document.getElementById('read-time').textContent = readTime;
         }
 
