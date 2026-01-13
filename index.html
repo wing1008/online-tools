@@ -353,16 +353,26 @@
 
                 <div style="color:#888;font-size:0.85rem;margin-bottom:10px;">적용할 도구 선택 (순서대로 실행됨)</div>
                 <div class="batch-tools">
-                    <button class="batch-tool-btn" onclick="addBatchStep('resize')">📐 크기 조절</button>
+                    <button class="batch-tool-btn" onclick="addBatchStep('resize')">📐 너비 조절</button>
+                    <button class="batch-tool-btn" onclick="addBatchStep('resizeHeight')">📏 높이 조절</button>
+                    <button class="batch-tool-btn" onclick="addBatchStep('resizePercent')">🔢 비율 조절</button>
                     <button class="batch-tool-btn" onclick="addBatchStep('rotate')">🔄 회전</button>
                     <button class="batch-tool-btn" onclick="addBatchStep('flip')">↔️ 뒤집기</button>
                     <button class="batch-tool-btn" onclick="addBatchStep('grayscale')">⬛ 흑백</button>
                     <button class="batch-tool-btn" onclick="addBatchStep('sepia')">🟤 세피아</button>
-                    <button class="batch-tool-btn" onclick="addBatchStep('blur')">🌫️ 블러</button>
+                    <button class="batch-tool-btn" onclick="addBatchStep('invert')">🔲 색상 반전</button>
                     <button class="batch-tool-btn" onclick="addBatchStep('brightness')">☀️ 밝기</button>
                     <button class="batch-tool-btn" onclick="addBatchStep('contrast')">🎚️ 대비</button>
+                    <button class="batch-tool-btn" onclick="addBatchStep('saturate')">🎨 채도</button>
+                    <button class="batch-tool-btn" onclick="addBatchStep('hue')">🌈 색조</button>
+                    <button class="batch-tool-btn" onclick="addBatchStep('opacity')">👁️ 투명도</button>
                     <button class="batch-tool-btn" onclick="addBatchStep('watermark')">💧 워터마크</button>
-                    <button class="batch-tool-btn" onclick="addBatchStep('format')">🔄 포맷 변환</button>
+                    <button class="batch-tool-btn" onclick="addBatchStep('watermarkPos')">📍 워터마크 위치</button>
+                    <button class="batch-tool-btn" onclick="addBatchStep('border')">🖼️ 테두리</button>
+                    <button class="batch-tool-btn" onclick="addBatchStep('borderColor')">🎨 테두리 색상</button>
+                    <button class="batch-tool-btn" onclick="addBatchStep('round')">⭕ 둥근 모서리</button>
+                    <button class="batch-tool-btn" onclick="addBatchStep('bgRemove')" style="border-color:#f59e0b55;">🪄 누끼</button>
+                    <button class="batch-tool-btn" onclick="addBatchStep('format')">📁 포맷 변환</button>
                     <button class="batch-tool-btn" onclick="addBatchStep('compress')">📦 압축</button>
                 </div>
 
@@ -503,6 +513,7 @@
                 <div class="tool-card" data-cat="pdf" data-tool="pdf-merge" data-name="PDF 병합" onclick="openTool('pdf-merge')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('pdf-merge')">☆</button><div class="icon">📑</div><h3>PDF 병합</h3><p>여러 PDF 파일을 하나로 합치기</p></div>
                 <div class="tool-card" data-cat="pdf" data-tool="pdf-convert" data-name="PDF 변환" onclick="openTool('pdf-convert')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('pdf-convert')">☆</button><div class="icon">🔄</div><h3>PDF 변환</h3><p>이미지 파일을 PDF로 변환</p></div>
                 <div class="tool-card" data-cat="pdf" data-tool="pdf-to-img" data-name="PDF→이미지" onclick="openTool('pdf-to-img')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('pdf-to-img')">☆</button><div class="icon">🖼️</div><h3>PDF→이미지</h3><p>PDF 페이지를 이미지로 추출</p></div>
+                <div class="tool-card" data-cat="pdf" data-tool="pdf-split" data-name="PDF 분할" onclick="openTool('pdf-split')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('pdf-split')">☆</button><div class="icon">✂️</div><h3>PDF 분할</h3><p>PDF 페이지를 개별 파일로 분할</p></div>
             </div>
         </div>
 
@@ -2387,6 +2398,36 @@
             <div id="pdf-img-result" style="margin-top:15px;display:flex;flex-wrap:wrap;gap:10px;"></div>
         </div>
 
+        <!-- PDF Split -->
+        <div class="tool-section" id="tool-pdf-split">
+            <button class="back-btn" onclick="showMain()">← 목록</button>
+            <h2>PDF 분할</h2>
+            <div class="info-box" style="margin-bottom:15px;">PDF를 페이지별로 분할하거나 특정 범위만 추출합니다.</div>
+            <div class="drop-zone" onclick="document.getElementById('pdf-split-file').click()">
+                <div class="drop-zone-icon">📄</div>
+                <div class="drop-zone-text">PDF 파일을 선택하세요</div>
+                <input type="file" id="pdf-split-file" accept=".pdf" onchange="loadPdfForSplit(this)">
+            </div>
+            <div id="pdf-split-info" style="margin-top:10px;color:#666;"></div>
+            <div id="pdf-split-options" style="display:none;margin-top:15px;">
+                <div style="margin-bottom:10px;">
+                    <label style="display:flex;align-items:center;gap:8px;color:#888;">
+                        <input type="radio" name="split-mode" value="all" checked onchange="updateSplitMode()"> 모든 페이지 개별 분할
+                    </label>
+                    <label style="display:flex;align-items:center;gap:8px;color:#888;margin-top:5px;">
+                        <input type="radio" name="split-mode" value="range" onchange="updateSplitMode()"> 특정 페이지만 추출
+                    </label>
+                </div>
+                <div id="split-range-input" style="display:none;margin-bottom:15px;">
+                    <input type="text" id="pdf-split-range" placeholder="페이지 범위 (예: 1-3, 5, 7-9)" style="width:100%;">
+                    <div style="font-size:0.75rem;color:#666;margin-top:5px;">쉼표로 구분, 범위는 하이픈 사용</div>
+                </div>
+                <button class="btn btn-primary" onclick="splitPdf()">분할하기</button>
+            </div>
+            <div id="pdf-split-status" style="margin-top:10px;color:#666;"></div>
+            <div id="pdf-split-result" style="margin-top:15px;"></div>
+        </div>
+
         <!-- Code to Image -->
         <div class="tool-section" id="tool-code-img">
             <button class="back-btn" onclick="showMain()">← 목록</button>
@@ -3514,17 +3555,29 @@
         let batchFiles = [];
         let batchSteps = [];
         const batchToolConfig = {
-            resize: { name: '크기 조절', config: '너비', defaultVal: 800 },
-            rotate: { name: '회전', config: '각도', defaultVal: 90, options: [90, 180, 270] },
-            flip: { name: '뒤집기', config: '방향', defaultVal: 'horizontal', options: ['horizontal', 'vertical'] },
-            grayscale: { name: '흑백', config: null },
-            sepia: { name: '세피아', config: null },
-            blur: { name: '블러', config: '강도', defaultVal: 5 },
-            brightness: { name: '밝기', config: '%', defaultVal: 120 },
-            contrast: { name: '대비', config: '%', defaultVal: 120 },
-            watermark: { name: '워터마크', config: '텍스트', defaultVal: 'watermark' },
-            format: { name: '포맷 변환', config: '형식', defaultVal: 'png', options: ['png', 'jpeg', 'webp'] },
-            compress: { name: '압축', config: '품질', defaultVal: 70 }
+            resize: { name: '크기 조절', label: '너비 (px)', defaultVal: 800, min: 10, max: 4000 },
+            resizeHeight: { name: '높이 조절', label: '높이 (px)', defaultVal: 600, min: 10, max: 4000 },
+            resizePercent: { name: '비율 조절', label: '비율 (%)', defaultVal: 50, min: 1, max: 500 },
+            rotate: { name: '회전', label: '각도', defaultVal: 90, options: [{v:90,l:'90° (시계)'},{v:180,l:'180°'},{v:270,l:'270° (반시계)'}] },
+            flip: { name: '뒤집기', label: '방향', defaultVal: 'horizontal', options: [{v:'horizontal',l:'좌우 뒤집기'},{v:'vertical',l:'상하 뒤집기'}] },
+            grayscale: { name: '흑백', label: null },
+            sepia: { name: '세피아', label: null },
+            invert: { name: '색상 반전', label: null },
+            blur: { name: '블러', label: '강도 (1-20)', defaultVal: 5, min: 1, max: 20 },
+            sharpen: { name: '선명하게', label: '강도 (1-10)', defaultVal: 3, min: 1, max: 10 },
+            brightness: { name: '밝기', label: '밝기 (50-200%)', defaultVal: 120, min: 50, max: 200 },
+            contrast: { name: '대비', label: '대비 (50-200%)', defaultVal: 120, min: 50, max: 200 },
+            saturate: { name: '채도', label: '채도 (0-200%)', defaultVal: 150, min: 0, max: 200 },
+            hue: { name: '색조', label: '색조 (0-360°)', defaultVal: 180, min: 0, max: 360 },
+            opacity: { name: '투명도', label: '투명도 (0-100%)', defaultVal: 80, min: 0, max: 100 },
+            watermark: { name: '워터마크', label: '텍스트 입력', defaultVal: 'watermark' },
+            watermarkPos: { name: '워터마크 위치', label: '위치', defaultVal: 'center', options: [{v:'center',l:'중앙'},{v:'topleft',l:'좌상단'},{v:'topright',l:'우상단'},{v:'bottomleft',l:'좌하단'},{v:'bottomright',l:'우하단'}] },
+            bgRemove: { name: '누끼 (배경제거)', label: null, async: true },
+            format: { name: '포맷 변환', label: '출력 형식', defaultVal: 'png', options: [{v:'png',l:'PNG'},{v:'jpeg',l:'JPG'},{v:'webp',l:'WebP'}] },
+            compress: { name: '압축', label: '품질 (1-100%)', defaultVal: 70, min: 1, max: 100 },
+            border: { name: '테두리', label: '두께 (px)', defaultVal: 5, min: 1, max: 50 },
+            borderColor: { name: '테두리 색상', label: '색상 (#HEX)', defaultVal: '#000000', type: 'color' },
+            round: { name: '둥근 모서리', label: '반지름 (px)', defaultVal: 20, min: 0, max: 200 }
         };
 
         function switchTab(tab) {
@@ -3568,7 +3621,7 @@
         function addBatchStep(tool) {
             const config = batchToolConfig[tool];
             let value = config.defaultVal;
-            if (config.options) value = config.options[0];
+            if (config.options) value = config.options[0].v;
             batchSteps.push({ tool, value });
             renderBatchSteps();
         }
@@ -3582,15 +3635,24 @@
             container.innerHTML = batchSteps.map((step, i) => {
                 const config = batchToolConfig[step.tool];
                 let configHtml = '';
-                if (config.config) {
+                if (config.label) {
                     if (config.options) {
-                        configHtml = `<select onchange="batchSteps[${i}].value=this.value" style="padding:4px;font-size:0.75rem;">
-                            ${config.options.map(o => `<option value="${o}" ${step.value === o ? 'selected' : ''}>${o}</option>`).join('')}
+                        configHtml = `<span style="color:#666;font-size:0.7rem;margin-right:5px;">${config.label}:</span>
+                            <select onchange="batchSteps[${i}].value=this.value" style="padding:4px;font-size:0.75rem;">
+                            ${config.options.map(o => `<option value="${o.v}" ${step.value == o.v ? 'selected' : ''}>${o.l}</option>`).join('')}
                         </select>`;
+                    } else if (config.type === 'color') {
+                        configHtml = `<span style="color:#666;font-size:0.7rem;margin-right:5px;">${config.label}:</span>
+                            <input type="color" value="${step.value}" onchange="batchSteps[${i}].value=this.value" style="width:40px;height:24px;padding:0;border:none;cursor:pointer;">`;
                     } else {
-                        configHtml = `<input type="${typeof config.defaultVal === 'number' ? 'number' : 'text'}" value="${step.value}"
-                            onchange="batchSteps[${i}].value=this.value" style="width:80px;padding:4px;font-size:0.75rem;" placeholder="${config.config}">`;
+                        const inputType = typeof config.defaultVal === 'number' ? 'number' : 'text';
+                        const minMax = config.min !== undefined ? `min="${config.min}" max="${config.max}"` : '';
+                        configHtml = `<span style="color:#666;font-size:0.7rem;margin-right:5px;">${config.label}:</span>
+                            <input type="${inputType}" value="${step.value}" ${minMax}
+                            onchange="batchSteps[${i}].value=this.value" style="width:70px;padding:4px;font-size:0.75rem;">`;
                     }
+                } else if (config.async) {
+                    configHtml = '<span style="color:#f59e0b;font-size:0.7rem;">⚠️ AI 처리 (느림)</span>';
                 }
                 return `<div class="batch-step">
                     <span class="step-num">${i + 1}</span>
@@ -3649,7 +3711,7 @@
 
                 // Apply each step
                 for (const step of batchSteps) {
-                    const result = await applyBatchStep(canvas, ctx, step);
+                    const result = await applyBatchStep(canvas, ctx, step, status);
                     canvas = result.canvas;
                     ctx = result.ctx;
                 }
@@ -3674,21 +3736,40 @@
             status.textContent = `완료! ${total}개 이미지 처리됨`;
         }
 
-        async function applyBatchStep(canvas, ctx, step) {
+        async function applyBatchStep(canvas, ctx, step, statusEl) {
             const { tool, value } = step;
             let newCanvas = canvas;
             let newCtx = ctx;
 
             switch (tool) {
-                case 'resize':
+                case 'resize': {
                     const ratio = parseInt(value) / canvas.width;
                     newCanvas = document.createElement('canvas');
                     newCanvas.width = parseInt(value);
-                    newCanvas.height = canvas.height * ratio;
+                    newCanvas.height = Math.round(canvas.height * ratio);
                     newCtx = newCanvas.getContext('2d');
                     newCtx.drawImage(canvas, 0, 0, newCanvas.width, newCanvas.height);
                     break;
-                case 'rotate':
+                }
+                case 'resizeHeight': {
+                    const ratio = parseInt(value) / canvas.height;
+                    newCanvas = document.createElement('canvas');
+                    newCanvas.width = Math.round(canvas.width * ratio);
+                    newCanvas.height = parseInt(value);
+                    newCtx = newCanvas.getContext('2d');
+                    newCtx.drawImage(canvas, 0, 0, newCanvas.width, newCanvas.height);
+                    break;
+                }
+                case 'resizePercent': {
+                    const ratio = parseInt(value) / 100;
+                    newCanvas = document.createElement('canvas');
+                    newCanvas.width = Math.round(canvas.width * ratio);
+                    newCanvas.height = Math.round(canvas.height * ratio);
+                    newCtx = newCanvas.getContext('2d');
+                    newCtx.drawImage(canvas, 0, 0, newCanvas.width, newCanvas.height);
+                    break;
+                }
+                case 'rotate': {
                     const angle = parseInt(value) * Math.PI / 180;
                     newCanvas = document.createElement('canvas');
                     if (value == 90 || value == 270) {
@@ -3703,7 +3784,8 @@
                     newCtx.rotate(angle);
                     newCtx.drawImage(canvas, -canvas.width / 2, -canvas.height / 2);
                     break;
-                case 'flip':
+                }
+                case 'flip': {
                     newCanvas = document.createElement('canvas');
                     newCanvas.width = canvas.width;
                     newCanvas.height = canvas.height;
@@ -3717,11 +3799,14 @@
                     }
                     newCtx.drawImage(canvas, 0, 0);
                     break;
+                }
                 case 'grayscale':
                 case 'sepia':
-                case 'blur':
+                case 'invert':
                 case 'brightness':
                 case 'contrast':
+                case 'saturate':
+                case 'opacity': {
                     const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
                     const data = imgData.data;
                     for (let i = 0; i < data.length; i += 4) {
@@ -3733,29 +3818,163 @@
                             data[i] = Math.min(255, r * 0.393 + g * 0.769 + b * 0.189);
                             data[i + 1] = Math.min(255, r * 0.349 + g * 0.686 + b * 0.168);
                             data[i + 2] = Math.min(255, r * 0.272 + g * 0.534 + b * 0.131);
+                        } else if (tool === 'invert') {
+                            data[i] = 255 - data[i];
+                            data[i + 1] = 255 - data[i + 1];
+                            data[i + 2] = 255 - data[i + 2];
                         } else if (tool === 'brightness') {
                             const factor = parseInt(value) / 100;
                             data[i] = Math.min(255, data[i] * factor);
                             data[i + 1] = Math.min(255, data[i + 1] * factor);
                             data[i + 2] = Math.min(255, data[i + 2] * factor);
                         } else if (tool === 'contrast') {
-                            const factor = (parseInt(value) / 100 - 1) * 255;
-                            data[i] = Math.min(255, Math.max(0, data[i] + factor));
-                            data[i + 1] = Math.min(255, Math.max(0, data[i + 1] + factor));
-                            data[i + 2] = Math.min(255, Math.max(0, data[i + 2] + factor));
+                            const factor = (parseInt(value) - 100) * 2.55;
+                            data[i] = Math.min(255, Math.max(0, ((data[i] - 128) * (parseInt(value) / 100)) + 128));
+                            data[i + 1] = Math.min(255, Math.max(0, ((data[i + 1] - 128) * (parseInt(value) / 100)) + 128));
+                            data[i + 2] = Math.min(255, Math.max(0, ((data[i + 2] - 128) * (parseInt(value) / 100)) + 128));
+                        } else if (tool === 'saturate') {
+                            const sat = parseInt(value) / 100;
+                            const gray = 0.2989 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+                            data[i] = Math.min(255, Math.max(0, gray + sat * (data[i] - gray)));
+                            data[i + 1] = Math.min(255, Math.max(0, gray + sat * (data[i + 1] - gray)));
+                            data[i + 2] = Math.min(255, Math.max(0, gray + sat * (data[i + 2] - gray)));
+                        } else if (tool === 'opacity') {
+                            data[i + 3] = Math.round(data[i + 3] * parseInt(value) / 100);
                         }
                     }
                     ctx.putImageData(imgData, 0, 0);
                     break;
-                case 'watermark':
-                    const text = value || 'watermark';
-                    ctx.font = `${Math.max(canvas.width / 20, 16)}px Arial`;
-                    ctx.fillStyle = 'rgba(255,255,255,0.5)';
-                    ctx.textAlign = 'center';
-                    ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+                }
+                case 'hue': {
+                    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                    const data = imgData.data;
+                    const shift = parseInt(value);
+                    for (let i = 0; i < data.length; i += 4) {
+                        const [h, s, l] = rgbToHsl(data[i], data[i + 1], data[i + 2]);
+                        const [r, g, b] = hslToRgb((h + shift / 360) % 1, s, l);
+                        data[i] = r; data[i + 1] = g; data[i + 2] = b;
+                    }
+                    ctx.putImageData(imgData, 0, 0);
                     break;
+                }
+                case 'watermark':
+                case 'watermarkPos': {
+                    // watermarkPos는 watermark와 함께 처리됨
+                    if (tool === 'watermarkPos') break;
+                    const text = value || 'watermark';
+                    const posStep = batchSteps.find(s => s.tool === 'watermarkPos');
+                    const pos = posStep?.value || 'center';
+                    const fontSize = Math.max(canvas.width / 20, 16);
+                    ctx.font = `${fontSize}px Arial`;
+                    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+                    let x, y;
+                    const padding = 20;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    switch (pos) {
+                        case 'topleft': x = padding + ctx.measureText(text).width / 2; y = padding + fontSize / 2; break;
+                        case 'topright': x = canvas.width - padding - ctx.measureText(text).width / 2; y = padding + fontSize / 2; break;
+                        case 'bottomleft': x = padding + ctx.measureText(text).width / 2; y = canvas.height - padding - fontSize / 2; break;
+                        case 'bottomright': x = canvas.width - padding - ctx.measureText(text).width / 2; y = canvas.height - padding - fontSize / 2; break;
+                        default: x = canvas.width / 2; y = canvas.height / 2;
+                    }
+                    ctx.fillText(text, x, y);
+                    break;
+                }
+                case 'border': {
+                    const thickness = parseInt(value);
+                    newCanvas = document.createElement('canvas');
+                    newCanvas.width = canvas.width + thickness * 2;
+                    newCanvas.height = canvas.height + thickness * 2;
+                    newCtx = newCanvas.getContext('2d');
+                    const colorStep = batchSteps.find(s => s.tool === 'borderColor');
+                    newCtx.fillStyle = colorStep?.value || '#000000';
+                    newCtx.fillRect(0, 0, newCanvas.width, newCanvas.height);
+                    newCtx.drawImage(canvas, thickness, thickness);
+                    break;
+                }
+                case 'borderColor': break; // border와 함께 처리
+                case 'round': {
+                    const radius = parseInt(value);
+                    newCanvas = document.createElement('canvas');
+                    newCanvas.width = canvas.width;
+                    newCanvas.height = canvas.height;
+                    newCtx = newCanvas.getContext('2d');
+                    newCtx.beginPath();
+                    newCtx.roundRect(0, 0, canvas.width, canvas.height, radius);
+                    newCtx.clip();
+                    newCtx.drawImage(canvas, 0, 0);
+                    break;
+                }
+                case 'bgRemove': {
+                    if (statusEl) statusEl.textContent += ' (누끼 처리 중...)';
+                    if (!window.imglyRemoveBackground) {
+                        const script = document.createElement('script');
+                        script.type = 'module';
+                        script.textContent = `import { removeBackground } from 'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.5.1/+esm'; window.imglyRemoveBackground = removeBackground;`;
+                        document.head.appendChild(script);
+                        await new Promise(r => setTimeout(r, 2000));
+                    }
+                    try {
+                        const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+                        const result = await window.imglyRemoveBackground(blob);
+                        const img = new Image();
+                        await new Promise((resolve, reject) => {
+                            img.onload = resolve;
+                            img.onerror = reject;
+                            img.src = URL.createObjectURL(result);
+                        });
+                        newCanvas = document.createElement('canvas');
+                        newCanvas.width = img.width;
+                        newCanvas.height = img.height;
+                        newCtx = newCanvas.getContext('2d');
+                        newCtx.drawImage(img, 0, 0);
+                        URL.revokeObjectURL(img.src);
+                    } catch (e) {
+                        console.error('Background removal failed:', e);
+                    }
+                    break;
+                }
             }
             return { canvas: newCanvas, ctx: newCtx };
+        }
+
+        // HSL 변환 헬퍼
+        function rgbToHsl(r, g, b) {
+            r /= 255; g /= 255; b /= 255;
+            const max = Math.max(r, g, b), min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+            if (max === min) { h = s = 0; }
+            else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+                    case g: h = ((b - r) / d + 2) / 6; break;
+                    case b: h = ((r - g) / d + 4) / 6; break;
+                }
+            }
+            return [h, s, l];
+        }
+        function hslToRgb(h, s, l) {
+            let r, g, b;
+            if (s === 0) { r = g = b = l; }
+            else {
+                const hue2rgb = (p, q, t) => {
+                    if (t < 0) t += 1;
+                    if (t > 1) t -= 1;
+                    if (t < 1/6) return p + (q - p) * 6 * t;
+                    if (t < 1/2) return q;
+                    if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                    return p;
+                };
+                const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                const p = 2 * l - q;
+                r = hue2rgb(p, q, h + 1/3);
+                g = hue2rgb(p, q, h);
+                b = hue2rgb(p, q, h - 1/3);
+            }
+            return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
         }
 
         // Drag & drop for batch
@@ -8219,6 +8438,93 @@
                 result.appendChild(div);
             }
             status.textContent = `완료! ${pdf.numPages}페이지`;
+        }
+
+        // PDF Split
+        let splitPdfData = null;
+        let splitPdfDoc = null;
+        async function loadPdfForSplit(input) {
+            const file = input.files[0]; if (!file) return;
+            const info = document.getElementById('pdf-split-info');
+            const options = document.getElementById('pdf-split-options');
+            info.textContent = 'PDF.js 로딩 중...';
+            if (!window.pdfjsLib) {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js';
+                document.head.appendChild(script);
+                await new Promise(r => script.onload = r);
+                pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+            }
+            if (!window.PDFLib) {
+                const script2 = document.createElement('script');
+                script2.src = 'https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js';
+                document.head.appendChild(script2);
+                await new Promise(r => script2.onload = r);
+            }
+            info.textContent = 'PDF 분석 중...';
+            splitPdfData = await file.arrayBuffer();
+            splitPdfDoc = await pdfjsLib.getDocument(splitPdfData.slice(0)).promise;
+            info.textContent = `${file.name} - 총 ${splitPdfDoc.numPages}페이지`;
+            options.style.display = 'block';
+        }
+        function updateSplitMode() {
+            const mode = document.querySelector('input[name="split-mode"]:checked').value;
+            document.getElementById('split-range-input').style.display = mode === 'range' ? 'block' : 'none';
+        }
+        function parsePageRange(rangeStr, maxPage) {
+            const pages = new Set();
+            const parts = rangeStr.split(',').map(s => s.trim()).filter(s => s);
+            for (const part of parts) {
+                if (part.includes('-')) {
+                    const [start, end] = part.split('-').map(n => parseInt(n.trim()));
+                    for (let i = Math.max(1, start); i <= Math.min(maxPage, end); i++) pages.add(i);
+                } else {
+                    const p = parseInt(part);
+                    if (p >= 1 && p <= maxPage) pages.add(p);
+                }
+            }
+            return Array.from(pages).sort((a, b) => a - b);
+        }
+        async function splitPdf() {
+            if (!splitPdfData || !splitPdfDoc) { alert('PDF 파일을 먼저 선택해주세요.'); return; }
+            const status = document.getElementById('pdf-split-status');
+            const result = document.getElementById('pdf-split-result');
+            const mode = document.querySelector('input[name="split-mode"]:checked').value;
+            result.innerHTML = '';
+
+            const srcPdf = await PDFLib.PDFDocument.load(splitPdfData.slice(0));
+            const numPages = srcPdf.getPageCount();
+
+            if (mode === 'all') {
+                status.textContent = '페이지별 분할 중...';
+                for (let i = 0; i < numPages; i++) {
+                    status.textContent = `분할 중: ${i + 1}/${numPages}`;
+                    const newPdf = await PDFLib.PDFDocument.create();
+                    const [page] = await newPdf.copyPages(srcPdf, [i]);
+                    newPdf.addPage(page);
+                    const pdfBytes = await newPdf.save();
+                    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+                    const url = URL.createObjectURL(blob);
+                    result.innerHTML += `<div style="display:inline-block;margin:5px;"><a href="${url}" download="page-${i + 1}.pdf" class="btn" style="font-size:0.8rem;">📄 ${i + 1}페이지</a></div>`;
+                }
+                status.textContent = `완료! ${numPages}개 파일 생성됨`;
+            } else {
+                const rangeStr = document.getElementById('pdf-split-range').value;
+                if (!rangeStr.trim()) { alert('페이지 범위를 입력해주세요.'); return; }
+                const pages = parsePageRange(rangeStr, numPages);
+                if (pages.length === 0) { alert('유효한 페이지 번호가 없습니다.'); return; }
+                status.textContent = '추출 중...';
+                const newPdf = await PDFLib.PDFDocument.create();
+                for (const p of pages) {
+                    const [page] = await newPdf.copyPages(srcPdf, [p - 1]);
+                    newPdf.addPage(page);
+                }
+                const pdfBytes = await newPdf.save();
+                const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+                const url = URL.createObjectURL(blob);
+                result.innerHTML = `<a href="${url}" download="extracted-pages.pdf" class="btn btn-primary">📄 추출된 PDF 다운로드 (${pages.length}페이지)</a>`;
+                status.textContent = `완료! ${pages.join(', ')} 페이지 추출됨`;
+            }
         }
 
         // Code to Image
