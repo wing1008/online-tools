@@ -50,9 +50,6 @@
         .tool-card[data-cat="util"] { border-color: #ec489955; }
         .tool-card[data-cat="test"] { border-color: #14b8a655; }
         .tool-card[data-cat="pdf"] { border-color: #ef444455; }
-        /* Letter Group Divider */
-        .letter-divider { grid-column: 1 / -1; padding: 8px 0 6px 0; font-size: 0.7rem; font-weight: 600; color: #666; letter-spacing: 1px; margin-top: 12px; border-bottom: 2px solid #444; width: 40%; min-width: 200px; max-width: 400px; }
-        .letter-divider:first-child { margin-top: 0; }
         .tool-card:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,0.3); }
         .tool-card[data-cat="text"]:hover { border-color: #5b8def88; }
         .tool-card[data-cat="image"]:hover { border-color: #4ade8088; }
@@ -179,7 +176,6 @@
         body.light .lang-modal-content { background: #fff; border-color: #ddd; }
         body.light .lang-modal h3 { color: #222; }
         body.light .lang-option { background: #f5f5f5; border-color: #ddd; color: #333; }
-        body.light .letter-divider { color: #888; }
     </style>
 </head>
 <body>
@@ -220,8 +216,7 @@
                 </div>
                 <select class="sort-select" id="sort-select" onchange="sortTools()">
                     <option value="category">카테고리순</option>
-                    <option value="name">가나다순</option>
-                    <option value="name-en">ABC순</option>
+                    <option value="name">이름순</option>
                 </select>
             </div>
         </header>
@@ -240,7 +235,7 @@
             </div>
 
             <!-- All Tools (for sorting) -->
-            <div id="all-tools-grid" class="tools-grid" style="display:none;"></div>
+            <div id="all-tools-container" style="display:none;"></div>
 
             <div class="section-title" data-section="text">텍스트</div>
             <div class="tools-grid" data-section="text">
@@ -2743,19 +2738,19 @@
 
             const sections = document.querySelectorAll('#main-grid .section-title[data-section]');
             const grids = document.querySelectorAll('#main-grid .tools-grid[data-section]');
-            const allToolsGrid = document.getElementById('all-tools-grid');
+            const container = document.getElementById('all-tools-container');
 
             if (currentSort !== 'category') {
                 sections.forEach(s => s.style.display = 'none');
                 grids.forEach(g => g.style.display = 'none');
-                allToolsGrid.style.display = '';
+                container.style.display = '';
                 sortTools();
             } else if (cat === 'all') {
-                allToolsGrid.style.display = 'none';
+                container.style.display = 'none';
                 sections.forEach(s => s.style.display = '');
                 grids.forEach(g => g.style.display = '');
             } else {
-                allToolsGrid.style.display = 'none';
+                container.style.display = 'none';
                 sections.forEach(s => s.style.display = s.dataset.section === cat ? '' : 'none');
                 grids.forEach(g => g.style.display = g.dataset.section === cat ? '' : 'none');
             }
@@ -2793,18 +2788,18 @@
             currentSort = document.getElementById('sort-select').value;
             const sections = document.querySelectorAll('#main-grid .section-title[data-section]');
             const grids = document.querySelectorAll('#main-grid .tools-grid[data-section]');
-            const allToolsGrid = document.getElementById('all-tools-grid');
+            const container = document.getElementById('all-tools-container');
 
             if (currentSort === 'category') {
-                allToolsGrid.style.display = 'none';
+                container.style.display = 'none';
                 filterCategory(currentCategory);
                 return;
             }
 
-            // Hide category sections, show all-tools-grid
+            // Hide category sections, show container
             sections.forEach(s => s.style.display = 'none');
             grids.forEach(g => g.style.display = 'none');
-            allToolsGrid.style.display = '';
+            container.style.display = '';
 
             // Collect all tool cards
             let cards = Array.from(document.querySelectorAll('#main-grid .tools-grid[data-section] .tool-card'));
@@ -2814,46 +2809,69 @@
                 cards = cards.filter(c => c.dataset.cat === currentCategory);
             }
 
-            const isKorean = currentSort === 'name';
+            const isKorean = currentLang === 'ko';
 
-            // Sort
-            if (currentSort === 'name') {
-                cards.sort((a, b) => (a.dataset.name || '').localeCompare(b.dataset.name || '', 'ko'));
-            } else if (currentSort === 'name-en') {
+            // Sort based on language
+            if (isKorean) {
+                // Korean first: ㄱㄴㄷ... then A-Z
                 cards.sort((a, b) => {
-                    const aName = a.querySelector('h3')?.textContent || '';
-                    const bName = b.querySelector('h3')?.textContent || '';
-                    return aName.localeCompare(bName, 'en');
+                    const aName = a.dataset.name || '';
+                    const bName = b.dataset.name || '';
+                    const aIsKor = /^[가-힣]/.test(aName);
+                    const bIsKor = /^[가-힣]/.test(bName);
+                    if (aIsKor && !bIsKor) return -1;
+                    if (!aIsKor && bIsKor) return 1;
+                    return aName.localeCompare(bName, aIsKor ? 'ko' : 'en');
+                });
+            } else {
+                // English first: A-Z then ㄱㄴㄷ...
+                cards.sort((a, b) => {
+                    const aName = a.dataset.name || '';
+                    const bName = b.dataset.name || '';
+                    const aIsKor = /^[가-힣]/.test(aName);
+                    const bIsKor = /^[가-힣]/.test(bName);
+                    if (!aIsKor && bIsKor) return -1;
+                    if (aIsKor && !bIsKor) return 1;
+                    return aName.localeCompare(bName, aIsKor ? 'ko' : 'en');
                 });
             }
 
-            // Group by first letter and render
-            allToolsGrid.innerHTML = '';
-            let currentLetter = null;
+            // Group by first letter and render vertically like categories
+            container.innerHTML = '';
+            let currentLetterGroup = null;
+            let currentGrid = null;
 
             cards.forEach(card => {
-                const name = isKorean ? (card.dataset.name || '') : (card.querySelector('h3')?.textContent || '');
-                const letter = getFirstLetter(name, isKorean);
+                const name = card.dataset.name || '';
+                const letter = getFirstLetter(name, /^[가-힣]/.test(name));
 
-                // Add letter divider if new group
-                if (letter !== currentLetter) {
-                    currentLetter = letter;
-                    const divider = document.createElement('div');
-                    divider.className = 'letter-divider';
-                    divider.textContent = letter;
-                    divider.style.borderBottomColor = letterColors[letter] || '#666';
-                    allToolsGrid.appendChild(divider);
+                // Create new section for new letter
+                if (letter !== currentLetterGroup) {
+                    currentLetterGroup = letter;
+                    const color = letterColors[letter] || '#666';
+
+                    // Section title
+                    const title = document.createElement('div');
+                    title.className = 'section-title';
+                    title.textContent = letter;
+                    title.style.borderBottomColor = color;
+                    container.appendChild(title);
+
+                    // Tools grid
+                    currentGrid = document.createElement('div');
+                    currentGrid.className = 'tools-grid';
+                    container.appendChild(currentGrid);
                 }
 
                 const clone = card.cloneNode(true);
-                const color = letterColors[letter] || '#666';
+                const color = letterColors[currentLetterGroup] || '#666';
                 clone.style.borderColor = color + '55';
                 clone.onclick = () => openTool(card.dataset.tool);
                 const favBtn = clone.querySelector('.fav-btn');
                 if (favBtn) {
                     favBtn.onclick = (e) => { e.stopPropagation(); toggleFav(card.dataset.tool); };
                 }
-                allToolsGrid.appendChild(clone);
+                currentGrid.appendChild(clone);
             });
             updateFavButtons();
         }
