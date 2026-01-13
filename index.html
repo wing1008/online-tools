@@ -35,7 +35,7 @@
         .nav-search:focus { outline: none; border-color: #333; }
         .nav-search-wrap { position: relative; }
         .nav-search-wrap::before { content: '⌕'; position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #444; font-size: 0.9rem; }
-        .nav-tabs { display: flex; gap: 16px; }
+        .nav-tabs { display: flex; gap: 16px; margin-left: -8px; margin-top: -4px; }
         .nav-tab { padding: 0 0 8px 0; background: transparent; border: none; color: #555; font-size: 0.85rem; cursor: pointer; transition: all 0.15s; position: relative; }
         .nav-tab:hover { color: #999; }
         .nav-tab.active { color: #fff; }
@@ -112,7 +112,7 @@
         .tools-grid.detail-view .tool-card { flex-direction: column; align-items: center; padding: 14px 12px; gap: 6px; min-height: 100px; }
         .tools-grid.detail-view .tool-card .icon { font-size: 1.2rem; }
         .tools-grid.detail-view .tool-card h3 { font-size: 0.9rem; font-weight: 500; color: #ccc; }
-        .tools-grid.detail-view .tool-card p { display: block; font-size: 0.75rem; color: #666; margin-top: 4px; line-height: 1.4; }
+        .tools-grid.detail-view .tool-card p { display: block; font-size: 1.5rem; color: #666; margin-top: 4px; line-height: 1.4; }
         body.light .tools-grid.detail-view .tool-card p { color: #888; }
         .tool-section { display: none; background: #111; border-radius: 10px; padding: 25px; margin: 20px 0; border: 1px solid #1a1a1a; }
         .tool-section.active { display: block; }
@@ -332,8 +332,8 @@
                         <button class="sort-btn" data-sort="name" onclick="setSort('name')">이름순</button>
                     </div>
                     <div class="sort-group">
-                        <button class="sort-btn active" data-view="normal" onclick="setView('normal')">일반</button>
-                        <button class="sort-btn" data-view="detail" onclick="setView('detail')">상세</button>
+                        <button class="sort-btn" data-view="normal" onclick="setView('normal')">일반</button>
+                        <button class="sort-btn active" data-view="detail" onclick="setView('detail')">상세</button>
                     </div>
                 </div>
             </div>
@@ -405,20 +405,20 @@
             <!-- Favorites Section -->
             <div class="special-section" id="favorites-section" style="display:none;">
                 <div class="section-title">즐겨찾기</div>
-                <div class="tools-grid" id="favorites-grid"></div>
+                <div class="tools-grid detail-view" id="favorites-grid"></div>
             </div>
 
             <!-- Recent Section -->
             <div class="special-section" id="recent-section" style="display:none;">
                 <div class="section-title">최근 사용</div>
-                <div class="tools-grid" id="recent-grid"></div>
+                <div class="tools-grid detail-view" id="recent-grid"></div>
             </div>
 
             <!-- All Tools (for sorting) -->
             <div id="all-tools-container" style="display:none;"></div>
 
             <div class="section-title" data-section="text">텍스트</div>
-            <div class="tools-grid" data-section="text">
+            <div class="tools-grid detail-view" data-section="text">
                 <div class="tool-card" data-cat="text" data-tool="text" data-name="글자수 세기" onclick="openTool('text')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('text')">☆</button><div class="icon">📊</div><h3>글자수 세기</h3><p>글자, 단어, 문장, 공백 포함/제외, 바이트 수 계산</p></div>
                 <div class="tool-card" data-cat="text" data-tool="text-convert" data-name="텍스트 변환" onclick="openTool('text-convert')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('text-convert')">☆</button><div class="icon">🔄</div><h3>텍스트 변환</h3><p>대소문자, 뒤집기, 모스부호, 이모지 제거</p></div>
                 <div class="tool-card" data-cat="text" data-tool="replace" data-name="찾아 바꾸기" onclick="openTool('replace')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('replace')">☆</button><div class="icon">🔍</div><h3>찾아 바꾸기</h3><p>문자열 검색 및 일괄 치환</p></div>
@@ -435,7 +435,7 @@
             </div>
 
             <div class="section-title" data-section="image">이미지</div>
-            <div class="tools-grid" data-section="image">
+            <div class="tools-grid detail-view" data-section="image">
                 <div class="tool-card" data-cat="image" data-tool="img-edit" data-name="이미지 편집" onclick="openTool('img-edit')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('img-edit')">☆</button><div class="icon">✂️</div><h3>이미지 편집</h3><p>크기 조절, 자르기, 회전, 압축</p></div>
                 <div class="tool-card" data-cat="image" data-tool="img-filter" data-name="이미지 필터" onclick="openTool('img-filter')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('img-filter')">☆</button><div class="icon">🎨</div><h3>이미지 필터</h3><p>흑백, 세피아, 반전, 블러 필터 적용</p></div>
                 <div class="tool-card" data-cat="image" data-tool="img-convert" data-name="포맷 변환" onclick="openTool('img-convert')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('img-convert')">☆</button><div class="icon">🔄</div><h3>포맷 변환</h3><p>JPG, PNG, WebP 간 변환</p></div>
@@ -451,7 +451,7 @@
             </div>
 
             <div class="section-title" data-section="dev">개발</div>
-            <div class="tools-grid" data-section="dev">
+            <div class="tools-grid detail-view" data-section="dev">
                 <div class="tool-card" data-cat="dev" data-tool="encoder" data-name="인코더" onclick="openTool('encoder')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('encoder')">☆</button><div class="icon">🔢</div><h3>인코더</h3><p>Base64, URL 인코딩, MD5/SHA 해시</p></div>
                 <div class="tool-card" data-cat="dev" data-tool="data-convert" data-name="데이터 변환" onclick="openTool('data-convert')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('data-convert')">☆</button><div class="icon">🔀</div><h3>데이터 변환</h3><p>JSON↔XML, YAML↔JSON, CSV 변환</p></div>
                 <div class="tool-card" data-cat="dev" data-tool="json" data-name="JSON 도구" onclick="openTool('json')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('json')">☆</button><div class="icon">📦</div><h3>JSON 도구</h3><p>포맷팅, 경로 추출, TypeScript 변환</p></div>
@@ -471,7 +471,7 @@
             </div>
 
             <div class="section-title" data-section="calc">계산</div>
-            <div class="tools-grid" data-section="calc">
+            <div class="tools-grid detail-view" data-section="calc">
                 <div class="tool-card" data-cat="calc" data-tool="calculator" data-name="종합 계산기" onclick="openTool('calculator')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('calculator')">☆</button><div class="icon">🧮</div><h3>종합 계산기</h3><p>일반, 금융, BMI 등 다양한 계산</p></div>
                 <div class="tool-card" data-cat="calc" data-tool="unit" data-name="단위 변환" onclick="openTool('unit')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('unit')">☆</button><div class="icon">📐</div><h3>단위 변환</h3><p>길이, 무게, 온도, 면적 단위 변환</p></div>
                 <div class="tool-card" data-cat="calc" data-tool="number-convert" data-name="숫자 변환" onclick="openTool('number-convert')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('number-convert')">☆</button><div class="icon">🔢</div><h3>숫자 변환</h3><p>2/8/16진법, 로마자, 한글 숫자</p></div>
@@ -486,7 +486,7 @@
             </div>
 
             <div class="section-title" data-section="util">유틸리티</div>
-            <div class="tools-grid" data-section="util">
+            <div class="tools-grid detail-view" data-section="util">
                 <div class="tool-card" data-cat="util" data-tool="timer" data-name="타이머" onclick="openTool('timer')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('timer')">☆</button><div class="icon">⏲️</div><h3>타이머</h3><p>뽀모도로 타이머, 스톱워치, 카운트다운</p></div>
                 <div class="tool-card" data-cat="util" data-tool="worldclock" data-name="세계 시간" onclick="openTool('worldclock')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('worldclock')">☆</button><div class="icon">🌍</div><h3>세계 시간</h3><p>전 세계 도시별 현재 시간 조회</p></div>
                 <div class="tool-card" data-cat="util" data-tool="password" data-name="비밀번호" onclick="openTool('password')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('password')">☆</button><div class="icon">🔒</div><h3>비밀번호</h3><p>안전한 비밀번호 생성 및 강도 측정</p></div>
@@ -505,7 +505,7 @@
             </div>
 
             <div class="section-title" data-section="test">테스트</div>
-            <div class="tools-grid" data-section="test">
+            <div class="tools-grid detail-view" data-section="test">
                 <div class="tool-card" data-cat="test" data-tool="input-test" data-name="입력 테스트" onclick="openTool('input-test')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('input-test')">☆</button><div class="icon">⌨️</div><h3>입력 테스트</h3><p>키보드 입력, 마우스 클릭, 타이핑 속도</p></div>
                 <div class="tool-card" data-cat="test" data-tool="device-test" data-name="장치 테스트" onclick="openTool('device-test')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('device-test')">☆</button><div class="icon">📷</div><h3>장치 테스트</h3><p>웹캠, 마이크, 인터넷 속도 테스트</p></div>
                 <div class="tool-card" data-cat="test" data-tool="browser-info" data-name="브라우저 정보" onclick="openTool('browser-info')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('browser-info')">☆</button><div class="icon">🌐</div><h3>브라우저 정보</h3><p>화면 해상도, 쿠키, 로컬 저장소 정보</p></div>
@@ -515,7 +515,7 @@
             </div>
 
             <div class="section-title" data-section="pdf">PDF</div>
-            <div class="tools-grid" data-section="pdf">
+            <div class="tools-grid detail-view" data-section="pdf">
                 <div class="tool-card" data-cat="pdf" data-tool="pdf-merge" data-name="PDF 병합" onclick="openTool('pdf-merge')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('pdf-merge')">☆</button><div class="icon">📑</div><h3>PDF 병합</h3><p>여러 PDF 파일을 하나로 합치기</p></div>
                 <div class="tool-card" data-cat="pdf" data-tool="pdf-convert" data-name="PDF 변환" onclick="openTool('pdf-convert')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('pdf-convert')">☆</button><div class="icon">🔄</div><h3>PDF 변환</h3><p>이미지 파일을 PDF로 변환</p></div>
                 <div class="tool-card" data-cat="pdf" data-tool="pdf-to-img" data-name="PDF→이미지" onclick="openTool('pdf-to-img')"><button class="fav-btn" onclick="event.stopPropagation();toggleFav('pdf-to-img')">☆</button><div class="icon">🖼️</div><h3>PDF→이미지</h3><p>PDF 페이지를 이미지로 추출</p></div>
@@ -3405,7 +3405,7 @@
         // Category Filter & Sort
         let currentCategory = 'all';
         let currentSort = 'category';
-        let currentView = 'normal';
+        let currentView = 'detail';
 
         function setSort(sort) {
             currentSort = sort;
