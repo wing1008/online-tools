@@ -2763,6 +2763,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script>
+        // Security: HTML escape to prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
         // Language
         let currentLang = localStorage.getItem('lang') || 'ko';
         function setLang(lang) { currentLang = lang; localStorage.setItem('lang', lang); document.getElementById('current-lang').textContent = lang.toUpperCase(); toggleLangModal(); }
@@ -3069,7 +3076,7 @@
         }
         function updateZipFileList() {
             document.getElementById('zip-file-list').innerHTML = zipFiles.map((f,i) =>
-                `<div class="file-item"><span>${f.name}</span><button onclick="zipFiles.splice(${i},1);updateZipFileList()">×</button></div>`
+                `<div class="file-item"><span>${escapeHtml(f.name)}</span><button onclick="zipFiles.splice(${i},1);updateZipFileList()">×</button></div>`
             ).join('');
         }
         document.getElementById('zip-files').addEventListener('change', e => {
@@ -3171,14 +3178,14 @@
             const validFiles = Array.from(files).filter(f => f.type === 'application/pdf');
             if (validFiles.length) {
                 pdfFiles = [...pdfFiles, ...validFiles];
-                document.getElementById('pdf-file-list').innerHTML = pdfFiles.map((f,i) => `<div class="file-item"><span>${f.name}</span><button onclick="pdfFiles.splice(${i},1);this.parentElement.remove()">×</button></div>`).join('');
+                document.getElementById('pdf-file-list').innerHTML = pdfFiles.map((f,i) => `<div class="file-item"><span>${escapeHtml(f.name)}</span><button onclick="pdfFiles.splice(${i},1);this.parentElement.remove()">×</button></div>`).join('');
             }
         });
         setupDropZone('drop-convert-files', 'convert-files', files => {
             const validFiles = Array.from(files).filter(f => f.type.startsWith('image/'));
             if (validFiles.length) {
                 imgFiles = [...imgFiles, ...validFiles];
-                document.getElementById('convert-file-list').innerHTML = imgFiles.map(f => `<div class="file-item"><span>${f.name}</span></div>`).join('');
+                document.getElementById('convert-file-list').innerHTML = imgFiles.map(f => `<div class="file-item"><span>${escapeHtml(f.name)}</span></div>`).join('');
             }
         });
         setupDropZone('drop-imgpdf-files', 'imgpdf-files');
@@ -3203,7 +3210,7 @@
         // PDF Merge
         document.getElementById('pdf-files').addEventListener('change', e => {
             pdfFiles = Array.from(e.target.files);
-            document.getElementById('pdf-file-list').innerHTML = pdfFiles.map((f,i) => `<div class="file-item"><span>${f.name}</span><button onclick="pdfFiles.splice(${i},1);this.parentElement.remove()">×</button></div>`).join('');
+            document.getElementById('pdf-file-list').innerHTML = pdfFiles.map((f,i) => `<div class="file-item"><span>${escapeHtml(f.name)}</span><button onclick="pdfFiles.splice(${i},1);this.parentElement.remove()">×</button></div>`).join('');
         });
         async function mergePDFs() {
             if (pdfFiles.length < 2) return alert('2개 이상 선택');
@@ -3223,7 +3230,7 @@
         // PDF Convert
         document.getElementById('convert-files').addEventListener('change', e => {
             imgFiles = Array.from(e.target.files);
-            document.getElementById('convert-file-list').innerHTML = imgFiles.map(f => `<div class="file-item"><span>${f.name}</span></div>`).join('');
+            document.getElementById('convert-file-list').innerHTML = imgFiles.map(f => `<div class="file-item"><span>${escapeHtml(f.name)}</span></div>`).join('');
         });
         async function convertToPDF() {
             if (!imgFiles.length) return alert('이미지 선택');
@@ -5429,9 +5436,9 @@
                 document.getElementById('exif-preview').style.display = 'block';
                 const view = new DataView(e.target.result);
                 let html = '<div class="info-box">';
-                html += `<div>파일명: ${file.name}</div>`;
+                html += `<div>파일명: ${escapeHtml(file.name)}</div>`;
                 html += `<div>크기: ${(file.size / 1024).toFixed(2)} KB</div>`;
-                html += `<div>타입: ${file.type}</div>`;
+                html += `<div>타입: ${escapeHtml(file.type)}</div>`;
                 html += `<div>수정일: ${new Date(file.lastModified).toLocaleString()}</div>`;
                 html += '</div>';
                 document.getElementById('exif-result').innerHTML = html;
@@ -5510,7 +5517,7 @@
             const list = document.getElementById('imgpdf-file-list');
             list.innerHTML = '';
             Array.from(this.files).forEach(f => {
-                list.innerHTML += `<div class="file-item"><span>${f.name}</span></div>`;
+                list.innerHTML += `<div class="file-item"><span>${escapeHtml(f.name)}</span></div>`;
             });
         });
         async function imagesToPdf() {
