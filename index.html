@@ -291,7 +291,7 @@
             <div class="nav-tabs">
                 <button class="nav-tab active" data-tab="main" onclick="switchTab('main')">메인</button>
                 <button class="nav-tab" data-tab="batch" onclick="switchTab('batch')">반복루트</button>
-                <button class="nav-tab" onclick="showTool('contact')">문의</button>
+                <button class="nav-tab" data-tab="contact" onclick="showTool('contact')">문의</button>
             </div>
             <div class="nav-center">
                 <div class="nav-search-wrap">
@@ -4006,8 +4006,10 @@
             document.getElementById('main-grid').style.display = 'none';
             document.getElementById('main-header').style.display = 'none';
             document.getElementById('batch-section').style.display = 'none';
-            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-            document.querySelector('.nav-tab[data-tab="main"]').classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+            const targetTab = t === 'contact' ? 'contact' : 'main';
+            const tabEl = document.querySelector(`.nav-tab[data-tab="${targetTab}"]`);
+            if (tabEl) tabEl.classList.add('active');
             document.querySelectorAll('.tool-section').forEach(s => s.classList.remove('active'));
             document.getElementById('tool-' + t).classList.add('active');
             window.scrollTo(0, 0);
