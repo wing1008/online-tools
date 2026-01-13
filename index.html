@@ -203,11 +203,6 @@
         body.light .lang-modal-content { background: #fff; border-color: #ddd; }
         body.light .lang-modal h3 { color: #222; }
         body.light .lang-option { background: #f5f5f5; border-color: #ddd; color: #333; }
-        .contact-card:hover { background: #252525 !important; border-color: #444 !important; transform: translateX(4px); }
-        body.light .contact-card { background: #f9f9f9 !important; border-color: #e5e5e5 !important; }
-        body.light .contact-card:hover { background: #f0f0f0 !important; border-color: #ccc !important; }
-        body.light .contact-card div div:first-child { color: #333 !important; }
-        body.light .contact-card div div:last-child { color: #888 !important; }
     </style>
 </head>
 <body>
@@ -2660,39 +2655,14 @@
         <div class="tool-section" id="tool-contact">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>문의</h2>
-            <p style="color:#666;line-height:1.8;margin-bottom:20px;">WingsTool에 대한 의견을 보내주세요. 아래 버튼을 클릭하면 GitHub Issues 페이지로 이동합니다.</p>
+            <p style="color:#666;line-height:1.8;margin-bottom:20px;">WingsTool에 대한 의견을 보내주세요.</p>
 
-            <div style="display:grid;gap:12px;max-width:500px;">
-                <a href="https://github.com/wing1008/online-tools/issues/new?labels=feature&title=%5B%EA%B8%B0%EB%8A%A5%EC%9A%94%EC%B2%AD%5D%20" target="_blank" class="contact-card" style="display:flex;align-items:center;gap:12px;padding:16px;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:8px;text-decoration:none;transition:all 0.15s;">
-                    <span style="font-size:1.5rem;">💡</span>
-                    <div>
-                        <div style="color:#ddd;font-weight:500;">기능 요청</div>
-                        <div style="color:#666;font-size:0.8rem;">추가되면 좋겠는 기능 제안</div>
-                    </div>
-                </a>
-                <a href="https://github.com/wing1008/online-tools/issues/new?labels=bug&title=%5B%EB%B2%84%EA%B7%B8%5D%20" target="_blank" class="contact-card" style="display:flex;align-items:center;gap:12px;padding:16px;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:8px;text-decoration:none;transition:all 0.15s;">
-                    <span style="font-size:1.5rem;">🐛</span>
-                    <div>
-                        <div style="color:#ddd;font-weight:500;">버그 신고</div>
-                        <div style="color:#666;font-size:0.8rem;">오류나 문제점 알려주기</div>
-                    </div>
-                </a>
-                <a href="https://github.com/wing1008/online-tools/issues/new?labels=improvement&title=%5B%EA%B0%9C%EC%84%A0%5D%20" target="_blank" class="contact-card" style="display:flex;align-items:center;gap:12px;padding:16px;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:8px;text-decoration:none;transition:all 0.15s;">
-                    <span style="font-size:1.5rem;">✨</span>
-                    <div>
-                        <div style="color:#ddd;font-weight:500;">개선 제안</div>
-                        <div style="color:#666;font-size:0.8rem;">기존 기능 개선 아이디어</div>
-                    </div>
-                </a>
-                <a href="https://github.com/wing1008/online-tools/issues" target="_blank" class="contact-card" style="display:flex;align-items:center;gap:12px;padding:16px;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:8px;text-decoration:none;transition:all 0.15s;">
-                    <span style="font-size:1.5rem;">📋</span>
-                    <div>
-                        <div style="color:#ddd;font-weight:500;">전체 목록 보기</div>
-                        <div style="color:#666;font-size:0.8rem;">다른 사람들의 의견도 확인</div>
-                    </div>
-                </a>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+                <a href="https://github.com/wing1008/online-tools/issues/new?labels=feature&title=%5B%EA%B8%B0%EB%8A%A5%EC%9A%94%EC%B2%AD%5D%20" target="_blank" style="color:#6a9fb5;text-decoration:underline;font-size:0.95rem;">기능 요청</a>
+                <a href="https://github.com/wing1008/online-tools/issues/new?labels=bug&title=%5B%EB%B2%84%EA%B7%B8%5D%20" target="_blank" style="color:#6a9fb5;text-decoration:underline;font-size:0.95rem;">버그 신고</a>
+                <a href="https://github.com/wing1008/online-tools/issues/new?labels=improvement&title=%5B%EA%B0%9C%EC%84%A0%5D%20" target="_blank" style="color:#6a9fb5;text-decoration:underline;font-size:0.95rem;">개선 제안</a>
+                <a href="https://github.com/wing1008/online-tools/issues" target="_blank" style="color:#6a9fb5;text-decoration:underline;font-size:0.95rem;">전체 목록 보기</a>
             </div>
-
         </div>
 
         <footer>
