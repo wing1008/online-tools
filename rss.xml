@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>WATK (Wing's All-in-one ToolKit)</title>
+    <link>https://online-tools-nu.vercel.app/</link>
+    <description>100+ free online tools. No login, no sign-up, completely free.</description>
+    <language>ko</language>
+    <lastBuildDate>Tue, 14 Jan 2025 00:00:00 +0900</lastBuildDate>
+    <atom:link href="https://online-tools-nu.vercel.app/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>QR코드 생성기</title>
+      <link>https://online-tools-nu.vercel.app/#tool-qr</link>
+      <description>텍스트나 URL을 QR코드로 변환합니다.</description>
+      <guid>https://online-tools-nu.vercel.app/#tool-qr</guid>
+    </item>
+    <item>
+      <title>PDF 병합</title>
+      <link>https://online-tools-nu.vercel.app/#tool-pdf-merge</link>
+      <description>여러 PDF 파일을 하나로 합칩니다.</description>
+      <guid>https://online-tools-nu.vercel.app/#tool-pdf-merge</guid>
+    </item>
+    <item>
+      <title>PDF 분할</title>
+      <link>https://online-tools-nu.vercel.app/#tool-pdf-split</link>
+      <description>PDF 파일을 페이지별로 분할합니다.</description>
+      <guid>https://online-tools-nu.vercel.app/#tool-pdf-split</guid>
+    </item>
+    <item>
+      <title>이미지 변환</title>
+      <link>https://online-tools-nu.vercel.app/#tool-img-convert</link>
+      <description>이미지 포맷을 변환합니다. (PNG, JPG, WebP 등)</description>
+      <guid>https://online-tools-nu.vercel.app/#tool-img-convert</guid>
+    </item>
+    <item>
+      <title>글자수 세기</title>
+      <link>https://online-tools-nu.vercel.app/#tool-text</link>
+      <description>텍스트의 글자수, 단어수, 바이트를 계산합니다.</description>
+      <guid>https://online-tools-nu.vercel.app/#tool-text</guid>
+    </item>
+    <item>
+      <title>색상 변환</title>
+      <link>https://online-tools-nu.vercel.app/#tool-color</link>
+      <description>HEX, RGB, HSL 색상 코드를 변환합니다.</description>
+      <guid>https://online-tools-nu.vercel.app/#tool-color</guid>
+    </item>
+    <item>
+      <title>단위 변환</title>
+      <link>https://online-tools-nu.vercel.app/#tool-unit</link>
+      <description>길이, 무게, 온도 등 다양한 단위를 변환합니다.</description>
+      <guid>https://online-tools-nu.vercel.app/#tool-unit</guid>
+    </item>
+    <item>
+      <title>인코더/디코더</title>
+      <link>https://online-tools-nu.vercel.app/#tool-encoder</link>
+      <description>Base64, URL, HTML 인코딩/디코딩을 수행합니다.</description>
+      <guid>https://online-tools-nu.vercel.app/#tool-encoder</guid>
+    </item>
+    <item>
+      <title>JSON 포맷터</title>
+      <link>https://online-tools-nu.vercel.app/#tool-json</link>
+      <description>JSON 데이터를 보기 좋게 정리합니다.</description>
+      <guid>https://online-tools-nu.vercel.app/#tool-json</guid>
+    </item>
+    <item>
+      <title>비밀번호 생성기</title>
+      <link>https://online-tools-nu.vercel.app/#tool-password</link>
+      <description>안전한 랜덤 비밀번호를 생성합니다.</description>
+      <guid>https://online-tools-nu.vercel.app/#tool-password</guid>
+    </item>
+    <item>
+      <title>계산기</title>
+      <link>https://online-tools-nu.vercel.app/#tool-calculator</link>
+      <description>기본 계산 및 공학용 계산기입니다.</description>
+      <guid>https://online-tools-nu.vercel.app/#tool-calculator</guid>
+    </item>
+    <item>
+      <title>타이머/스톱워치</title>
+      <link>https://online-tools-nu.vercel.app/#tool-timer</link>
+      <description>타이머와 스톱워치 기능을 제공합니다.</description>
+      <guid>https://online-tools-nu.vercel.app/#tool-timer</guid>
+    </item>
+    <item>
+      <title>정규식 테스터</title>
+      <link>https://online-tools-nu.vercel.app/#tool-regex</link>
+      <description>정규표현식을 테스트하고 매칭 결과를 확인합니다.</description>
+      <guid>https://online-tools-nu.vercel.app/#tool-regex</guid>
+    </item>
+    <item>
+      <title>마크다운 에디터</title>
+      <link>https://online-tools-nu.vercel.app/#tool-markdown</link>
+      <description>마크다운을 작성하고 미리보기합니다.</description>
+      <guid>https://online-tools-nu.vercel.app/#tool-markdown</guid>
+    </item>
+    <item>
+      <title>UUID 생성기</title>
+      <link>https://online-tools-nu.vercel.app/#tool-uuid</link>
+      <description>고유한 UUID를 생성합니다.</description>
+      <guid>https://online-tools-nu.vercel.app/#tool-uuid</guid>
+    </item>
+  </channel>
+</rss>

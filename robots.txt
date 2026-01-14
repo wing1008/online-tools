@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://online-tools-nu.vercel.app/sitemap.xml
+RSS: https://online-tools-nu.vercel.app/rss.xml
