@@ -4048,7 +4048,7 @@
         function addRecent(toolId) {
             recentTools = recentTools.filter(t => t !== toolId);
             recentTools.unshift(toolId);
-            if (recentTools.length > 5) recentTools = recentTools.slice(0, 5);
+            if (recentTools.length > 6) recentTools = recentTools.slice(0, 6);
             localStorage.setItem('recentTools', JSON.stringify(recentTools));
             renderRecent();
         }
@@ -4090,7 +4090,8 @@
             });
             if (filtered.length === 0) { section.style.display = 'none'; return; }
             section.style.display = 'block';
-            grid.innerHTML = filtered.map(toolId => {
+            const maxItems = currentView === 'detail' ? 5 : 6;
+            grid.innerHTML = filtered.slice(0, maxItems).map(toolId => {
                 const card = document.querySelector(`.tools-grid[data-section] .tool-card[data-tool="${toolId}"]`);
                 if (!card) return '';
                 const clone = card.cloneNode(true);
@@ -4187,6 +4188,7 @@
             // 즐겨찾기, 최근사용에도 적용
             document.getElementById('favorites-grid').classList.toggle('detail-view', view === 'detail');
             document.getElementById('recent-grid').classList.toggle('detail-view', view === 'detail');
+            renderRecent();
             applyView();
         }
 
