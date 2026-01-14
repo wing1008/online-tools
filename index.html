@@ -105,6 +105,11 @@
         .tool-card[data-cat="util"]:hover { border-color: #ec489988; }
         .tool-card[data-cat="test"]:hover { border-color: #14b8a688; }
         .tool-card[data-cat="pdf"]:hover { border-color: #ef444488; }
+        .tool-card.toggle-card { background: transparent; border: 1px dashed #444; color: #666; font-size: 1.3rem; min-height: auto; }
+        .tool-card.toggle-card:hover { background: #1a1a1a; border-color: #555; color: #888; transform: none; box-shadow: none; }
+        .tools-grid.detail-view .tool-card.toggle-card { min-height: 100px; font-size: 1.5rem; }
+        body.light .tool-card.toggle-card { border-color: #ccc; color: #999; }
+        body.light .tool-card.toggle-card:hover { background: #f5f5f5; border-color: #aaa; color: #666; }
         .tool-card h3 { font-size: 0.9rem; color: #bbb; font-weight: 400; }
         .tool-card p { display: none; }
         .tool-card .icon { font-size: 1rem; }
@@ -120,6 +125,18 @@
         .tool-section h2 { font-size: 1.1rem; color: #ddd; font-weight: 500; margin-bottom: 20px; }
         .back-btn { background: transparent; border: 1px solid #222; color: #666; padding: 6px 12px; border-radius: 5px; cursor: pointer; margin-bottom: 15px; font-size: 0.8rem; }
         .back-btn:hover { border-color: #333; color: #888; }
+        .help-btn { background: transparent; border: 1px solid #222; color: #666; padding: 6px 10px; border-radius: 5px; cursor: pointer; margin-left: 8px; margin-bottom: 15px; font-size: 0.8rem; }
+        .help-btn:hover { border-color: #4ade80; color: #4ade80; }
+        .help-btn.active { border-color: #4ade80; color: #4ade80; }
+        .help-content { display: none; background: #0a0a0a; border: 1px solid #2a2a2a; border-left: 3px solid #4ade80; border-radius: 6px; padding: 15px 18px; margin-bottom: 20px; line-height: 1.7; color: #aaa; font-size: 0.88rem; }
+        .help-content.active { display: block; }
+        .help-content strong { color: #4ade80; }
+        .help-content ul { margin: 10px 0 10px 20px; }
+        .help-content li { margin: 5px 0; }
+        body.light .help-btn { border-color: #ddd; color: #888; }
+        body.light .help-btn:hover, body.light .help-btn.active { border-color: #22c55e; color: #22c55e; }
+        body.light .help-content { background: #f8f8f8; border-color: #e5e5e5; border-left-color: #22c55e; color: #555; }
+        body.light .help-content strong { color: #16a34a; }
         input, textarea, select { width: 100%; padding: 12px 14px; border-radius: 6px; border: 1px solid #222; background: #0a0a0a; color: #ccc; font-size: 0.9rem; margin-bottom: 10px; font-family: inherit; }
         input:focus, textarea:focus { outline: none; border-color: #333; }
         textarea { min-height: 100px; resize: vertical; }
@@ -2264,6 +2281,10 @@
                 <option value="hourly">시급/일급</option>
             </select>
             <div id="calc-content"></div>
+            <div id="calc-history" style="margin-top:30px;border-top:1px solid #333;padding-top:15px;display:none;">
+                <div style="color:#888;font-size:0.85rem;margin-bottom:10px;">📜 계산 기록 (최근 10개)</div>
+                <div id="calc-history-list" style="font-size:0.9rem;"></div>
+            </div>
         </div>
 
         <!-- Roman Numerals -->
@@ -3415,30 +3436,20 @@
             <h2>업데이트 로그</h2>
             <div style="color:#888;line-height:1.8;font-size:0.9rem;">
                 <div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #222;">
-                    <div style="color:#4ade80;font-size:0.85rem;margin-bottom:5px;">2025.01</div>
+                    <div style="color:#4ade80;font-size:0.85rem;margin-bottom:5px;">2026.01.14</div>
                     <ul style="margin-left:20px;">
-                        <li>이모지 검색 카테고리 대폭 확장</li>
-                        <li>문의 페이지 추가 (GitHub Issues 연동)</li>
-                        <li>개인정보처리방침 페이지 추가</li>
-                        <li>FAQ, 가이드, 업데이트 로그 페이지 추가</li>
+                        <li>모든 입력 필드에 라벨 추가 (60개 이상 도구)</li>
+                        <li>즐겨찾기/최근사용 보기 모드 전환 지원</li>
                     </ul>
                 </div>
                 <div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #222;">
-                    <div style="color:#4ade80;font-size:0.85rem;margin-bottom:5px;">2024.12</div>
+                    <div style="color:#4ade80;font-size:0.85rem;margin-bottom:5px;">2026.01.13</div>
                     <ul style="margin-left:20px;">
-                        <li>이미지 편집 비율 유지 기능 수정</li>
-                        <li>중복 도구 섹션 제거</li>
-                        <li>XSS 보안 취약점 수정</li>
-                        <li>MIT 라이선스 추가</li>
-                    </ul>
-                </div>
-                <div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #222;">
-                    <div style="color:#4ade80;font-size:0.85rem;margin-bottom:5px;">2024.11</div>
-                    <ul style="margin-left:20px;">
-                        <li>사이드바 hover 확장 효과 추가</li>
-                        <li>상세 보기 모드 추가</li>
-                        <li>ZIP 압축/해제 도구 추가</li>
-                        <li>사이트 이름 변경: ToolBox → wings-tool</li>
+                        <li>도구 설명글 전면 개선</li>
+                        <li>메모장 다운로드 기능 추가 (txt, md, html, json, csv, xml)</li>
+                        <li>PDF/GIF 도구 드래그앤드롭 수정</li>
+                        <li>파일 다운로드 UI 개선 (체크박스 선택)</li>
+                        <li>즐겨찾기 별표 표시 개선</li>
                     </ul>
                 </div>
             </div>
@@ -3501,6 +3512,32 @@
         let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
         let recentTools = JSON.parse(localStorage.getItem('recentTools') || '[]');
 
+        // Calculator History
+        let calcHistory = JSON.parse(localStorage.getItem('calcHistory') || '[]');
+
+        function addCalcHistory(formula, result) {
+            calcHistory.unshift({ formula, result, time: new Date().toLocaleTimeString() });
+            if (calcHistory.length > 10) calcHistory.pop();
+            localStorage.setItem('calcHistory', JSON.stringify(calcHistory));
+            renderCalcHistory();
+        }
+
+        function renderCalcHistory() {
+            const container = document.getElementById('calc-history');
+            const list = document.getElementById('calc-history-list');
+            if (calcHistory.length === 0) {
+                container.style.display = 'none';
+                return;
+            }
+            container.style.display = 'block';
+            list.innerHTML = calcHistory.map((h, i) => `
+                <div style="padding:8px 0;${i < calcHistory.length - 1 ? 'border-bottom:1px solid #333;' : ''}">
+                    <div style="color:#aaa;">${h.formula}</div>
+                    <div style="color:#4ade80;font-weight:bold;">= ${h.result}</div>
+                </div>
+            `).join('');
+        }
+
         function toggleFav(toolId) {
             const idx = favorites.indexOf(toolId);
             if (idx >= 0) favorites.splice(idx, 1);
@@ -3534,8 +3571,14 @@
             const section = document.getElementById('favorites-section');
             const grid = document.getElementById('favorites-grid');
             if (favorites.length === 0) { section.style.display = 'none'; return; }
+            const filtered = favorites.filter(toolId => {
+                if (currentCategory === 'all') return true;
+                const card = document.querySelector(`.tools-grid[data-section] .tool-card[data-tool="${toolId}"]`);
+                return card && card.dataset.cat === currentCategory;
+            });
+            if (filtered.length === 0) { section.style.display = 'none'; return; }
             section.style.display = 'block';
-            grid.innerHTML = favorites.map(toolId => {
+            grid.innerHTML = filtered.map(toolId => {
                 const card = document.querySelector(`.tools-grid[data-section] .tool-card[data-tool="${toolId}"]`);
                 if (!card) return '';
                 const clone = card.cloneNode(true);
@@ -3554,8 +3597,14 @@
             const section = document.getElementById('recent-section');
             const grid = document.getElementById('recent-grid');
             if (recentTools.length === 0) { section.style.display = 'none'; return; }
+            const filtered = recentTools.filter(toolId => {
+                if (currentCategory === 'all') return true;
+                const card = document.querySelector(`.tools-grid[data-section] .tool-card[data-tool="${toolId}"]`);
+                return card && card.dataset.cat === currentCategory;
+            });
+            if (filtered.length === 0) { section.style.display = 'none'; return; }
             section.style.display = 'block';
-            grid.innerHTML = recentTools.map(toolId => {
+            grid.innerHTML = filtered.map(toolId => {
                 const card = document.querySelector(`.tools-grid[data-section] .tool-card[data-tool="${toolId}"]`);
                 if (!card) return '';
                 const clone = card.cloneNode(true);
@@ -3584,6 +3633,7 @@
                 cards.forEach(c => c.style.display = '');
                 sections.forEach(s => s.style.display = '');
                 grids.forEach(g => g.style.display = '');
+                applyView();
                 return;
             }
 
@@ -3609,6 +3659,35 @@
         let currentCategory = 'all';
         let currentSort = 'category';
         let currentView = 'detail';
+        let collapsedSections = JSON.parse(localStorage.getItem('collapsedSections') || '{}');
+
+        function toggleSection(section) {
+            collapsedSections[section] = !collapsedSections[section];
+            localStorage.setItem('collapsedSections', JSON.stringify(collapsedSections));
+            applyView();
+        }
+
+        function updateToggleCards() {
+            document.querySelectorAll('.tools-grid[data-section]').forEach(grid => {
+                const section = grid.dataset.section;
+                let toggleCard = grid.querySelector('.toggle-card');
+                if (!toggleCard) {
+                    toggleCard = document.createElement('div');
+                    toggleCard.className = 'tool-card toggle-card';
+                    toggleCard.onclick = () => toggleSection(section);
+                    grid.appendChild(toggleCard);
+                }
+                const isCollapsed = collapsedSections[section];
+                toggleCard.textContent = isCollapsed ? '◲' : '◰';
+
+                const cards = Array.from(grid.querySelectorAll('.tool-card:not(.toggle-card)'));
+                const visibleCount = currentView === 'detail' ? 4 : 5;
+
+                cards.forEach((card, i) => {
+                    card.style.display = (isCollapsed && i >= visibleCount) ? 'none' : '';
+                });
+            });
+        }
 
         function setSort(sort) {
             currentSort = sort;
@@ -3619,12 +3698,17 @@
         function setView(view) {
             currentView = view;
             document.querySelectorAll('.sort-btn[data-view]').forEach(b => b.classList.toggle('active', b.dataset.view === view));
+            // 즐겨찾기, 최근사용에도 적용
+            document.getElementById('favorites-grid').classList.toggle('detail-view', view === 'detail');
+            document.getElementById('recent-grid').classList.toggle('detail-view', view === 'detail');
             applyView();
         }
 
         function filterCategory(cat) {
             currentCategory = cat;
             document.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
+            renderFavorites();
+            renderRecent();
             applyView();
         }
 
@@ -3651,6 +3735,7 @@
                 if (currentView === 'detail') {
                     grids.forEach(g => g.classList.add('detail-view'));
                 }
+                updateToggleCards();
             } else {
                 // Name sort
                 sections.forEach(s => s.style.display = 'none');
@@ -3662,7 +3747,7 @@
 
         function renderNameSort() {
             const container = document.getElementById('all-tools-container');
-            let cards = Array.from(document.querySelectorAll('#main-grid .tools-grid[data-section] .tool-card'));
+            let cards = Array.from(document.querySelectorAll('#main-grid .tools-grid[data-section] .tool-card:not(.toggle-card)'));
 
             if (currentCategory !== 'all') {
                 cards = cards.filter(c => c.dataset.cat === currentCategory);
@@ -3694,6 +3779,7 @@
             container.innerHTML = '';
             let currentLetterGroup = null;
             let currentGrid = null;
+            let letterGroups = {};
 
             cards.forEach(card => {
                 const name = card.dataset.name || '';
@@ -3711,7 +3797,9 @@
 
                     currentGrid = document.createElement('div');
                     currentGrid.className = 'tools-grid' + (currentView === 'detail' ? ' detail-view' : '');
+                    currentGrid.dataset.letter = letter;
                     container.appendChild(currentGrid);
+                    letterGroups[letter] = { grid: currentGrid, cards: [] };
                 }
 
                 const clone = card.cloneNode(true);
@@ -3723,7 +3811,29 @@
                     favBtn.onclick = (e) => { e.stopPropagation(); toggleFav(card.dataset.tool); };
                 }
                 currentGrid.appendChild(clone);
+                letterGroups[currentLetterGroup].cards.push(clone);
             });
+
+            // Add toggle cards to each letter group
+            Object.keys(letterGroups).forEach(letter => {
+                const { grid, cards: groupCards } = letterGroups[letter];
+                const toggleCard = document.createElement('div');
+                toggleCard.className = 'tool-card toggle-card';
+                const isCollapsed = collapsedSections['name-' + letter];
+                toggleCard.textContent = isCollapsed ? '◲' : '◰';
+                toggleCard.onclick = () => {
+                    collapsedSections['name-' + letter] = !collapsedSections['name-' + letter];
+                    localStorage.setItem('collapsedSections', JSON.stringify(collapsedSections));
+                    applyView();
+                };
+                grid.appendChild(toggleCard);
+
+                const visibleCount = currentView === 'detail' ? 4 : 5;
+                groupCards.forEach((card, i) => {
+                    card.style.display = (isCollapsed && i >= visibleCount) ? 'none' : '';
+                });
+            });
+
             updateFavButtons();
         }
 
@@ -4217,6 +4327,7 @@
             document.getElementById('tool-' + t).classList.add('active');
             window.scrollTo(0, 0);
             if (t === 'browser-info') loadBrowserInfo();
+            if (t === 'calculator') renderCalcHistory();
         }
         function showMain() {
             switchTab('main');
@@ -4229,6 +4340,140 @@
         updateFavButtons();
         renderFavorites();
         renderRecent();
+        applyView();
+
+        // Help System
+        const helpTexts = {
+            'text': '<strong>글자수 세기</strong> 도움말<ul><li>텍스트를 입력하면 실시간으로 글자수, 단어수, 문장수를 계산합니다</li><li>공백 포함/제외 글자수를 모두 확인할 수 있습니다</li><li>바이트 수도 함께 표시됩니다 (UTF-8 기준)</li></ul>',
+            'text-convert': '<strong>텍스트 변환</strong> 도움말<ul><li>대문자/소문자 변환, 첫글자 대문자 등 다양한 변환을 지원합니다</li><li>변환 유형을 선택하고 텍스트를 입력하세요</li><li>결과를 클릭하면 클립보드에 복사됩니다</li></ul>',
+            'replace': '<strong>찾아 바꾸기</strong> 도움말<ul><li>찾을 텍스트와 바꿀 텍스트를 입력하세요</li><li>정규식 사용 시 체크박스를 활성화하세요</li><li>대소문자 구분 옵션도 제공됩니다</li></ul>',
+            'diff': '<strong>텍스트 비교</strong> 도움말<ul><li>두 텍스트의 차이점을 시각적으로 비교합니다</li><li>추가된 부분은 초록색, 삭제된 부분은 빨간색으로 표시됩니다</li><li>줄 단위로 비교 결과를 확인할 수 있습니다</li></ul>',
+            'duplicate': '<strong>중복/정렬</strong> 도움말<ul><li>줄 단위로 중복을 제거하거나 정렬합니다</li><li>오름차순/내림차순 정렬을 선택할 수 있습니다</li><li>빈 줄 제거 옵션도 제공됩니다</li></ul>',
+            'encrypt': '<strong>암호화</strong> 도움말<ul><li>텍스트를 AES 방식으로 암호화/복호화합니다</li><li>비밀번호를 입력하고 암호화 버튼을 누르세요</li><li>같은 비밀번호로만 복호화할 수 있습니다</li></ul>',
+            'word-freq': '<strong>단어 분석</strong> 도움말<ul><li>텍스트에서 단어 빈도를 분석합니다</li><li>가장 많이 사용된 단어 순으로 정렬됩니다</li><li>예상 읽기 시간도 함께 계산됩니다</li></ul>',
+            'special': '<strong>특수문자</strong> 도움말<ul><li>다양한 특수문자를 카테고리별로 모아놨습니다</li><li>문자를 클릭하면 클립보드에 복사됩니다</li><li>화살표, 수학기호, 이모지 등을 지원합니다</li></ul>',
+            'lorem': '<strong>더미 텍스트</strong> 도움말<ul><li>디자인 테스트용 Lorem Ipsum 텍스트를 생성합니다</li><li>문단 수와 언어(영어/한글)를 선택하세요</li><li>생성된 텍스트를 복사해서 사용하세요</li></ul>',
+            'markdown': '<strong>Markdown</strong> 도움말<ul><li>마크다운 문법을 실시간으로 미리보기합니다</li><li>왼쪽에 마크다운을 입력하면 오른쪽에 결과가 표시됩니다</li><li>제목, 목록, 링크, 이미지 등 기본 문법을 지원합니다</li></ul>',
+            'ocr': '<strong>OCR</strong> 도움말<ul><li>이미지에서 텍스트를 추출합니다</li><li>이미지를 업로드하거나 드래그앤드롭하세요</li><li>한글, 영어 등 다양한 언어를 인식합니다</li></ul>',
+            'romanize': '<strong>로마자 변환</strong> 도움말<ul><li>한글을 로마자(영문)로 변환합니다</li><li>국립국어원 로마자 표기법을 따릅니다</li><li>이름, 주소 등을 영문으로 변환할 때 유용합니다</li></ul>',
+            'jamo': '<strong>자모 분리</strong> 도움말<ul><li>한글을 자음과 모음으로 분리합니다</li><li>예: "한글" → "ㅎㅏㄴㄱㅡㄹ"</li><li>분리된 자모를 다시 조합할 수도 있습니다</li></ul>',
+            'img-edit': '<strong>이미지 편집</strong> 도움말<ul><li>이미지 자르기, 회전, 크기 조절을 지원합니다</li><li>이미지를 업로드한 후 편집 도구를 사용하세요</li><li>편집 완료 후 다운로드 버튼으로 저장하세요</li></ul>',
+            'img-filter': '<strong>이미지 필터</strong> 도움말<ul><li>이미지에 다양한 필터를 적용합니다</li><li>밝기, 대비, 채도, 흑백 등을 조절할 수 있습니다</li><li>슬라이더로 강도를 조절하세요</li></ul>',
+            'img-convert': '<strong>포맷 변환</strong> 도움말<ul><li>이미지 포맷을 JPG, PNG, WebP로 변환합니다</li><li>품질 설정으로 파일 크기를 조절할 수 있습니다</li><li>여러 이미지를 한 번에 변환할 수 있습니다</li></ul>',
+            'bg-remove': '<strong>누끼</strong> 도움말<ul><li>AI가 자동으로 배경을 제거합니다</li><li>인물, 제품 등의 이미지에 효과적입니다</li><li>처리 후 PNG로 다운로드됩니다</li></ul>',
+            'img-watermark': '<strong>워터마크</strong> 도움말<ul><li>이미지에 텍스트 워터마크를 추가합니다</li><li>위치, 크기, 투명도를 조절할 수 있습니다</li><li>저작권 표시에 유용합니다</li></ul>',
+            'color-extract': '<strong>색상 추출</strong> 도움말<ul><li>이미지에서 주요 색상을 추출합니다</li><li>추출된 색상의 HEX, RGB 코드를 확인할 수 있습니다</li><li>색상을 클릭하면 코드가 복사됩니다</li></ul>',
+            'favicon': '<strong>파비콘</strong> 도움말<ul><li>웹사이트용 파비콘을 생성합니다</li><li>이미지를 업로드하면 여러 크기로 변환됩니다</li><li>16x16, 32x32, 48x48 등 다양한 크기를 지원합니다</li></ul>',
+            'placeholder': '<strong>플레이스홀더</strong> 도움말<ul><li>원하는 크기의 더미 이미지를 생성합니다</li><li>너비, 높이, 배경색, 텍스트를 설정하세요</li><li>웹 디자인 목업에 유용합니다</li></ul>',
+            'qr': '<strong>QR/바코드</strong> 도움말<ul><li>텍스트나 URL로 QR코드를 생성합니다</li><li>생성된 QR코드를 이미지로 다운로드할 수 있습니다</li><li>바코드 스캔 기능도 제공됩니다</li></ul>',
+            'ascii-art': '<strong>ASCII 아트</strong> 도움말<ul><li>이미지를 문자(ASCII)로 변환합니다</li><li>문자 크기와 밀도를 조절할 수 있습니다</li><li>결과를 텍스트로 복사할 수 있습니다</li></ul>',
+            'gif-maker': '<strong>GIF 만들기</strong> 도움말<ul><li>여러 이미지를 합쳐 GIF 애니메이션을 만듭니다</li><li>이미지를 순서대로 추가하세요</li><li>프레임 속도를 조절할 수 있습니다</li></ul>',
+            'exif': '<strong>EXIF 정보</strong> 도움말<ul><li>사진의 메타데이터(EXIF)를 확인합니다</li><li>촬영 날짜, 카메라 정보, GPS 위치 등을 볼 수 있습니다</li><li>개인정보 확인 후 공유 전 삭제하세요</li></ul>',
+            'encoder': '<strong>인코더</strong> 도움말<ul><li>Base64, URL 인코딩/디코딩을 지원합니다</li><li>MD5, SHA-1, SHA-256 해시도 생성할 수 있습니다</li><li>개발 및 디버깅에 유용합니다</li></ul>',
+            'data-convert': '<strong>데이터 변환</strong> 도움말<ul><li>JSON, XML, YAML, CSV 간 변환을 지원합니다</li><li>데이터를 붙여넣고 변환할 형식을 선택하세요</li><li>API 개발 시 유용합니다</li></ul>',
+            'json': '<strong>JSON 도구</strong> 도움말<ul><li>JSON을 보기 좋게 정리(포맷)합니다</li><li>압축(Minify) 기능도 제공됩니다</li><li>문법 오류도 자동으로 확인합니다</li></ul>',
+            'css-gen': '<strong>CSS 생성기</strong> 도움말<ul><li>그라데이션, 박스 그림자 CSS를 생성합니다</li><li>슬라이더로 값을 조절하세요</li><li>생성된 코드를 복사해서 사용하세요</li></ul>',
+            'seo-tools': '<strong>SEO 도구</strong> 도움말<ul><li>메타태그, Open Graph 태그를 생성합니다</li><li>sitemap.xml 생성도 지원합니다</li><li>검색엔진 최적화에 필요한 태그를 만들어줍니다</li></ul>',
+            'regex': '<strong>정규식</strong> 도움말<ul><li>정규표현식을 테스트하고 매칭 결과를 확인합니다</li><li>패턴을 입력하고 테스트 문자열을 넣으세요</li><li>매칭된 부분이 하이라이트됩니다</li></ul>',
+            'minify': '<strong>코드 압축</strong> 도움말<ul><li>JavaScript, CSS, HTML 코드를 압축합니다</li><li>불필요한 공백과 주석을 제거합니다</li><li>웹사이트 로딩 속도 개선에 도움됩니다</li></ul>',
+            'code-diff': '<strong>코드 비교</strong> 도움말<ul><li>두 코드의 차이점을 비교합니다</li><li>추가/삭제/수정된 줄이 색상으로 표시됩니다</li><li>코드 리뷰나 버전 비교에 유용합니다</li></ul>',
+            'timestamp': '<strong>타임스탬프</strong> 도움말<ul><li>Unix 타임스탬프와 날짜를 상호 변환합니다</li><li>현재 시간의 타임스탬프도 확인할 수 있습니다</li><li>다양한 날짜 형식을 지원합니다</li></ul>',
+            'uuid': '<strong>UUID</strong> 도움말<ul><li>고유 식별자(UUID)를 생성합니다</li><li>버전 4 (랜덤) UUID를 생성합니다</li><li>여러 개를 한 번에 생성할 수 있습니다</li></ul>',
+            'jwt': '<strong>JWT</strong> 도움말<ul><li>JWT 토큰을 디코딩하여 내용을 확인합니다</li><li>Header, Payload 정보를 보기 쉽게 표시합니다</li><li>토큰 디버깅에 유용합니다</li></ul>',
+            'sql': '<strong>SQL 포맷</strong> 도움말<ul><li>SQL 쿼리를 보기 좋게 정리합니다</li><li>들여쓰기와 줄바꿈을 자동으로 적용합니다</li><li>복잡한 쿼리를 읽기 쉽게 만들어줍니다</li></ul>',
+            'json-path': '<strong>JSON Path</strong> 도움말<ul><li>JSONPath 표현식으로 데이터를 추출합니다</li><li>예: $.store.book[0].title</li><li>복잡한 JSON에서 원하는 값을 찾을 때 유용합니다</li></ul>',
+            'json-ts': '<strong>JSON→타입</strong> 도움말<ul><li>JSON 데이터로 TypeScript 타입을 생성합니다</li><li>JSON을 붙여넣으면 자동으로 타입이 생성됩니다</li><li>TypeScript 개발 시 유용합니다</li></ul>',
+            'robots': '<strong>robots.txt</strong> 도움말<ul><li>robots.txt 파일을 생성합니다</li><li>검색엔진 크롤러 접근을 제어합니다</li><li>Allow/Disallow 규칙을 설정하세요</li></ul>',
+            'sitemap': '<strong>Sitemap</strong> 도움말<ul><li>sitemap.xml 파일을 생성합니다</li><li>URL 목록을 입력하면 XML 형식으로 변환됩니다</li><li>검색엔진 등록에 필요합니다</li></ul>',
+            'htaccess': '<strong>.htaccess</strong> 도움말<ul><li>Apache 서버용 .htaccess 파일을 생성합니다</li><li>리다이렉트, 캐싱 등의 규칙을 만들 수 있습니다</li><li>템플릿을 선택하고 수정하세요</li></ul>',
+            'calculator': '<strong>종합 계산기</strong> 도움말<ul><li>다양한 계산 기능을 제공합니다</li><li>퍼센트, BMI, 대출이자, 환율 등을 계산합니다</li><li>계산 유형을 선택하고 값을 입력하세요</li></ul>',
+            'roman': '<strong>로마숫자 변환</strong> 도움말<ul><li>아라비아 숫자와 로마숫자를 변환합니다</li><li>1~3999 범위를 지원합니다</li><li>숫자나 로마숫자를 입력하면 자동 변환됩니다</li></ul>',
+            'unit': '<strong>단위 변환</strong> 도움말<ul><li>길이, 무게, 온도 등 다양한 단위를 변환합니다</li><li>카테고리를 선택하고 값을 입력하세요</li><li>실시간으로 변환 결과가 표시됩니다</li></ul>',
+            'color': '<strong>색상 변환</strong> 도움말<ul><li>HEX, RGB, HSL 색상 코드를 상호 변환합니다</li><li>색상 피커로 직접 색상을 선택할 수 있습니다</li><li>색상 코드를 클릭하면 복사됩니다</li></ul>',
+            'random': '<strong>랜덤 생성</strong> 도움말<ul><li>랜덤 숫자, 비밀번호, 문자열을 생성합니다</li><li>범위와 옵션을 설정할 수 있습니다</li><li>안전한 비밀번호 생성에 유용합니다</li></ul>',
+            'timer': '<strong>타이머</strong> 도움말<ul><li>스톱워치와 카운트다운 타이머를 제공합니다</li><li>시간을 설정하고 시작 버튼을 누르세요</li><li>알림음이 울립니다 (소리 켜기 필요)</li></ul>',
+            'notepad': '<strong>메모장</strong> 도움말<ul><li>간단한 메모를 작성하고 저장합니다</li><li>내용은 브라우저에 자동 저장됩니다</li><li>TXT, MD, HTML 등으로 다운로드할 수 있습니다</li></ul>',
+            'calendar': '<strong>달력</strong> 도움말<ul><li>날짜 계산과 D-Day를 확인합니다</li><li>두 날짜 사이의 일수를 계산합니다</li><li>특정 날짜까지 며칠 남았는지 확인하세요</li></ul>',
+            'todo': '<strong>할일 목록</strong> 도움말<ul><li>할일을 추가하고 관리합니다</li><li>완료한 항목은 체크하세요</li><li>데이터는 브라우저에 저장됩니다</li></ul>',
+            'tts': '<strong>TTS</strong> 도움말<ul><li>텍스트를 음성으로 변환합니다</li><li>언어와 속도를 선택할 수 있습니다</li><li>브라우저의 음성 합성 기능을 사용합니다</li></ul>',
+            'stt': '<strong>STT</strong> 도움말<ul><li>음성을 텍스트로 변환합니다</li><li>마이크 권한을 허용해주세요</li><li>브라우저의 음성 인식 기능을 사용합니다</li></ul>',
+            'zip': '<strong>ZIP 압축</strong> 도움말<ul><li>파일을 ZIP으로 압축하거나 압축을 해제합니다</li><li>여러 파일을 선택해서 압축할 수 있습니다</li><li>압축 해제 시 파일 목록이 표시됩니다</li></ul>',
+            'pdf': '<strong>PDF 도구</strong> 도움말<ul><li>PDF 병합, 분할, 이미지 변환을 지원합니다</li><li>여러 PDF를 하나로 합치거나 페이지를 분리하세요</li><li>모든 처리는 브라우저에서 이루어집니다</li></ul>',
+            'browser-info': '<strong>브라우저 정보</strong> 도움말<ul><li>현재 브라우저와 시스템 정보를 표시합니다</li><li>User Agent, 화면 크기, 언어 등을 확인할 수 있습니다</li><li>개발 및 디버깅에 유용합니다</li></ul>',
+            'input-test': '<strong>입력 테스트</strong> 도움말<ul><li>키보드, 마우스 입력을 테스트합니다</li><li>눌린 키의 코드와 이름이 표시됩니다</li><li>키보드 이벤트 디버깅에 유용합니다</li></ul>',
+            'device-test': '<strong>기기 테스트</strong> 도움말<ul><li>카메라, 마이크, 스피커를 테스트합니다</li><li>각 장치의 권한을 허용해주세요</li><li>화상회의 전 장치 확인에 유용합니다</li></ul>',
+            'signature': '<strong>서명</strong> 도움말<ul><li>마우스나 터치로 서명을 그립니다</li><li>선 굵기와 색상을 변경할 수 있습니다</li><li>PNG 이미지로 다운로드됩니다</li></ul>',
+            'card': '<strong>명함</strong> 도움말<ul><li>간단한 명함을 만들고 저장합니다</li><li>이름, 연락처, 이메일 등을 입력하세요</li><li>이미지로 다운로드할 수 있습니다</li></ul>',
+            'chart': '<strong>차트</strong> 도움말<ul><li>데이터로 차트를 생성합니다</li><li>막대, 선, 원형 차트를 지원합니다</li><li>이미지로 다운로드할 수 있습니다</li></ul>',
+            'resume': '<strong>이력서</strong> 도움말<ul><li>간단한 이력서를 작성합니다</li><li>항목을 입력하고 미리보기를 확인하세요</li><li>PDF로 다운로드할 수 있습니다</li></ul>',
+            'statistics': '<strong>통계</strong> 도움말<ul><li>숫자 데이터의 통계를 계산합니다</li><li>평균, 중앙값, 표준편차 등을 구합니다</li><li>쉼표나 줄바꿈으로 숫자를 구분하세요</li></ul>',
+            'programmer-calc': '<strong>진법 계산기</strong> 도움말<ul><li>2진수, 8진수, 10진수, 16진수를 변환합니다</li><li>비트 연산(AND, OR, XOR 등)도 지원합니다</li><li>프로그래밍 개발에 유용합니다</li></ul>',
+            'salary': '<strong>연봉 계산기</strong> 도움말<ul><li>연봉에서 실수령액을 계산합니다</li><li>4대보험, 소득세 등을 예상 공제합니다</li><li>대략적인 참고용으로 사용하세요</li></ul>',
+            'code-img': '<strong>코드→이미지</strong> 도움말<ul><li>코드를 예쁜 이미지로 변환합니다</li><li>테마와 언어를 선택할 수 있습니다</li><li>SNS 공유용 코드 이미지를 만들 수 있습니다</li></ul>',
+            'og-preview': '<strong>OG 미리보기</strong> 도움말<ul><li>URL의 Open Graph 정보를 미리봅니다</li><li>SNS 공유 시 어떻게 보이는지 확인합니다</li><li>URL을 입력하고 확인 버튼을 누르세요</li></ul>',
+            'palette': '<strong>색상 팔레트</strong> 도움말<ul><li>조화로운 색상 팔레트를 생성합니다</li><li>기준 색상을 선택하면 어울리는 색상을 추천합니다</li><li>색상을 클릭하면 코드가 복사됩니다</li></ul>',
+            'emoji': '<strong>이모지 검색</strong> 도움말<ul><li>이모지를 검색하고 복사합니다</li><li>카테고리별로 이모지를 찾을 수 있습니다</li><li>이모지를 클릭하면 복사됩니다</li></ul>',
+            'eng-kor': '<strong>영타→한글</strong> 도움말<ul><li>영어 자판으로 친 한글을 변환합니다</li><li>예: "dkssud" → "안녕"</li><li>반대로 한글→영타 변환도 가능합니다</li></ul>',
+            'vertical': '<strong>세로쓰기</strong> 도움말<ul><li>텍스트를 세로로 변환합니다</li><li>한 글자씩 세로로 배치됩니다</li><li>결과를 복사해서 사용하세요</li></ul>',
+            'morse': '<strong>모스부호</strong> 도움말<ul><li>텍스트를 모스부호로 변환합니다</li><li>모스부호를 텍스트로 복원할 수도 있습니다</li><li>영문과 숫자를 지원합니다</li></ul>',
+            'binary': '<strong>이진수 변환</strong> 도움말<ul><li>텍스트를 이진수(0과 1)로 변환합니다</li><li>이진수를 텍스트로 복원할 수도 있습니다</li><li>ASCII 코드 기반으로 변환됩니다</li></ul>',
+            'num-korean': '<strong>숫자→한글</strong> 도움말<ul><li>숫자를 한글로 변환합니다</li><li>예: 12345 → 일만이천삼백사십오</li><li>금액 표기에 유용합니다</li></ul>',
+            'readability': '<strong>가독성 검사</strong> 도움말<ul><li>텍스트의 가독성을 분석합니다</li><li>문장 길이, 단어 난이도 등을 확인합니다</li><li>글쓰기 개선에 도움이 됩니다</li></ul>',
+            'pixel': '<strong>픽셀 아트</strong> 도움말<ul><li>간단한 픽셀 아트를 그립니다</li><li>색상을 선택하고 칸을 클릭하세요</li><li>이미지로 다운로드할 수 있습니다</li></ul>',
+            'neumorphism': '<strong>뉴모피즘</strong> 도움말<ul><li>뉴모피즘 스타일 CSS를 생성합니다</li><li>색상, 크기, 그림자를 조절하세요</li><li>부드러운 3D 효과를 만들 수 있습니다</li></ul>',
+            'glassmorphism': '<strong>글래스모피즘</strong> 도움말<ul><li>유리 효과 CSS를 생성합니다</li><li>투명도, 블러, 테두리를 조절하세요</li><li>반투명 UI 디자인에 유용합니다</li></ul>',
+            'ratio': '<strong>비율 계산기</strong> 도움말<ul><li>비율을 계산하고 변환합니다</li><li>16:9 → 1920x? 같은 계산이 가능합니다</li><li>이미지, 영상 크기 계산에 유용합니다</li></ul>',
+            'cron': '<strong>Cron 표현식</strong> 도움말<ul><li>Cron 표현식을 생성하고 해석합니다</li><li>스케줄 작업 설정에 사용됩니다</li><li>표현식의 의미를 한글로 설명합니다</li></ul>',
+            'meta-tag': '<strong>메타태그</strong> 도움말<ul><li>HTML 메타태그를 생성합니다</li><li>SEO에 필요한 기본 태그를 만들어줍니다</li><li>생성된 코드를 복사해서 사용하세요</li></ul>',
+            'css-unit': '<strong>CSS 단위</strong> 도움말<ul><li>CSS 단위(px, rem, em, %)를 변환합니다</li><li>기준값을 설정하고 변환할 값을 입력하세요</li><li>반응형 디자인에 유용합니다</li></ul>',
+            'number-convert': '<strong>숫자 변환</strong> 도움말<ul><li>다양한 숫자 형식을 변환합니다</li><li>천단위 쉼표 추가, 제거 등을 지원합니다</li><li>숫자 포맷팅에 유용합니다</li></ul>',
+            'changelog': '<strong>업데이트 로그</strong> - Wings Tool의 업데이트 내역입니다.',
+            'faq': '<strong>FAQ</strong> - 자주 묻는 질문과 답변입니다.',
+            'contact': '<strong>문의</strong> - 버그 제보, 기능 제안, 문의사항을 보내주세요.'
+        };
+
+        function initHelpSystem() {
+            document.querySelectorAll('.tool-section').forEach(section => {
+                const toolId = section.id.replace('tool-', '');
+                const helpText = helpTexts[toolId];
+                if (!helpText) return;
+
+                const backBtn = section.querySelector('.back-btn');
+                if (!backBtn) return;
+
+                // Create help button
+                const helpBtn = document.createElement('button');
+                helpBtn.className = 'help-btn';
+                helpBtn.textContent = '?';
+                helpBtn.onclick = () => toggleHelp(toolId);
+                backBtn.after(helpBtn);
+
+                // Create help content
+                const helpContent = document.createElement('div');
+                helpContent.className = 'help-content';
+                helpContent.id = 'help-' + toolId;
+                helpContent.innerHTML = helpText;
+
+                const h2 = section.querySelector('h2');
+                if (h2) {
+                    h2.after(helpContent);
+                } else {
+                    helpBtn.after(helpContent);
+                }
+            });
+        }
+
+        function toggleHelp(toolId) {
+            const section = document.getElementById('tool-' + toolId);
+            const helpContent = document.getElementById('help-' + toolId);
+            const helpBtn = section?.querySelector('.help-btn');
+            if (helpContent) {
+                helpContent.classList.toggle('active');
+                if (helpBtn) helpBtn.classList.toggle('active');
+            }
+        }
+
+        initHelpSystem();
 
         // ZIP Compress/Extract
         let zipFiles = [];
@@ -6199,7 +6444,11 @@
             if(type === 'percent') {
                 const n = +document.getElementById('cc-p1').value;
                 const p = +document.getElementById('cc-p2').value;
-                r.textContent = n && p ? `${n}의 ${p}% = ${(n * p / 100).toLocaleString()}` : '-';
+                if(n && p) {
+                    const result = (n * p / 100).toLocaleString();
+                    r.textContent = `${n}의 ${p}% = ${result}`;
+                    addCalcHistory(`${n}의 ${p}%`, result);
+                } else { r.textContent = '-'; }
             } else if(type === 'bmi') {
                 const h = +document.getElementById('cc-h').value / 100;
                 const w = +document.getElementById('cc-w').value;
@@ -6207,19 +6456,26 @@
                     const bmi = w / (h * h);
                     const status = bmi < 18.5 ? '저체중' : bmi < 23 ? '정상' : bmi < 25 ? '과체중' : '비만';
                     r.textContent = `BMI: ${bmi.toFixed(1)} (${status})`;
+                    addCalcHistory(`BMI (${(h*100)}cm, ${w}kg)`, `${bmi.toFixed(1)} (${status})`);
                 }
             } else if(type === 'loan') {
                 const p = +document.getElementById('cc-la').value;
-                const rate = +document.getElementById('cc-lr').value / 100 / 12;
+                const rateInput = +document.getElementById('cc-lr').value;
+                const rate = rateInput / 100 / 12;
                 const n = +document.getElementById('cc-lm').value;
                 if(p && rate && n) {
                     const monthly = p * rate * Math.pow(1 + rate, n) / (Math.pow(1 + rate, n) - 1);
                     r.innerHTML = `월 납입금: ${Math.round(monthly).toLocaleString()}원<br>총 상환액: ${Math.round(monthly * n).toLocaleString()}원<br>총 이자: ${Math.round(monthly * n - p).toLocaleString()}원`;
+                    addCalcHistory(`대출 ${p.toLocaleString()}원, ${rateInput}%, ${n}개월`, `월 ${Math.round(monthly).toLocaleString()}원`);
                 }
             } else if(type === 'discount') {
                 const o = +document.getElementById('cc-do').value;
                 const d = +document.getElementById('cc-dr').value;
-                if(o) r.innerHTML = `할인가: ${Math.round(o * (1 - d/100)).toLocaleString()}원<br>할인액: ${Math.round(o * d / 100).toLocaleString()}원`;
+                if(o) {
+                    const discounted = Math.round(o * (1 - d/100));
+                    r.innerHTML = `할인가: ${discounted.toLocaleString()}원<br>할인액: ${Math.round(o * d / 100).toLocaleString()}원`;
+                    addCalcHistory(`${o.toLocaleString()}원의 ${d}% 할인`, `${discounted.toLocaleString()}원`);
+                }
             } else if(type === 'tip') {
                 const a = +document.getElementById('cc-ta').value;
                 const t = +document.getElementById('cc-tr').value;
@@ -6227,6 +6483,7 @@
                 if(a) {
                     const total = a * (1 + t/100);
                     r.innerHTML = `총액: ${Math.round(total).toLocaleString()}원<br>1인당: ${Math.round(total/p).toLocaleString()}원`;
+                    addCalcHistory(`${a.toLocaleString()}원 + 팁${t}% ÷ ${p}명`, `1인당 ${Math.round(total/p).toLocaleString()}원`);
                 }
             } else if(type === 'vat') {
                 const a = +document.getElementById('cc-va').value;
@@ -6236,6 +6493,7 @@
                     const tax = t === 'ex' ? Math.round(a * 0.1) : a - supply;
                     const total = supply + tax;
                     r.innerHTML = `공급가: ${supply.toLocaleString()}원<br>부가세: ${tax.toLocaleString()}원<br>합계: ${total.toLocaleString()}원`;
+                    addCalcHistory(`부가세 (${t === 'ex' ? '별도' : '포함'}) ${a.toLocaleString()}원`, `합계 ${total.toLocaleString()}원`);
                 }
             } else if(type === 'currency') {
                 const a = +document.getElementById('cc-ca').value;
@@ -6245,7 +6503,9 @@
                     try {
                         const res = await fetch(`https://api.exchangerate-api.com/v4/latest/${f}`);
                         const data = await res.json();
-                        r.textContent = `${a.toLocaleString()} ${f} = ${(a * data.rates[t]).toLocaleString(undefined, {maximumFractionDigits:2})} ${t}`;
+                        const converted = (a * data.rates[t]).toLocaleString(undefined, {maximumFractionDigits:2});
+                        r.textContent = `${a.toLocaleString()} ${f} = ${converted} ${t}`;
+                        addCalcHistory(`${a.toLocaleString()} ${f} → ${t}`, `${converted} ${t}`);
                     } catch(e) { r.textContent = '환율 조회 실패'; }
                 }
             } else if(type === 'salary') {
@@ -6255,6 +6515,7 @@
                     const m = y / 12;
                     const net = withTax ? m * 0.91 : m;
                     r.innerHTML = `월급: ${Math.round(m).toLocaleString()}원<br>실수령(예상): ${Math.round(net).toLocaleString()}원`;
+                    addCalcHistory(`연봉 ${y.toLocaleString()}원`, `월 실수령 ${Math.round(net).toLocaleString()}원`);
                 }
             } else if(type === 'severance') {
                 const s = new Date(document.getElementById('cc-ss').value);
@@ -6263,17 +6524,22 @@
                 if(s && e && m) {
                     const days = Math.floor((e - s) / 86400000);
                     const years = days / 365;
-                    r.innerHTML = `근속연수: ${years.toFixed(1)}년<br>퇴직금: ${Math.round(m * 30 * years).toLocaleString()}원`;
+                    const severance = Math.round(m * 30 * years);
+                    r.innerHTML = `근속연수: ${years.toFixed(1)}년<br>퇴직금: ${severance.toLocaleString()}원`;
+                    addCalcHistory(`퇴직금 (${years.toFixed(1)}년, 월급 ${m.toLocaleString()}원)`, `${severance.toLocaleString()}원`);
                 }
             } else if(type === 'savings') {
                 const a = +document.getElementById('cc-sva').value;
-                const rate = +document.getElementById('cc-svr').value / 100;
+                const rateInput = +document.getElementById('cc-svr').value;
+                const rate = rateInput / 100;
                 const n = +document.getElementById('cc-svm').value;
                 if(a && rate && n) {
                     const principal = a * n;
                     let interest = 0;
                     for(let i = 1; i <= n; i++) interest += a * rate / 12 * (n - i + 1);
-                    r.innerHTML = `원금합계: ${principal.toLocaleString()}원<br>이자(세전): ${Math.round(interest).toLocaleString()}원<br>만기금액: ${Math.round(principal + interest * 0.846).toLocaleString()}원`;
+                    const total = Math.round(principal + interest * 0.846);
+                    r.innerHTML = `원금합계: ${principal.toLocaleString()}원<br>이자(세전): ${Math.round(interest).toLocaleString()}원<br>만기금액: ${total.toLocaleString()}원`;
+                    addCalcHistory(`적금 월${a.toLocaleString()}원 × ${n}개월 (${rateInput}%)`, `만기 ${total.toLocaleString()}원`);
                 }
             } else if(type === 'stock') {
                 const b = +document.getElementById('cc-stb').value;
@@ -6283,6 +6549,7 @@
                     const profit = (s - b) * q;
                     const rate = ((s - b) / b * 100).toFixed(2);
                     r.innerHTML = `<span style="color:${profit >= 0 ? '#5a5' : '#c55'}">수익금: ${profit.toLocaleString()}원<br>수익률: ${rate}%</span>`;
+                    addCalcHistory(`주식 ${b.toLocaleString()}→${s.toLocaleString()}원 × ${q}주`, `${profit >= 0 ? '+' : ''}${profit.toLocaleString()}원 (${rate}%)`);
                 }
             } else if(type === 'age') {
                 const b = new Date(document.getElementById('cc-ab').value);
@@ -6292,6 +6559,7 @@
                     let full = today.getFullYear() - b.getFullYear();
                     if(today.getMonth() < b.getMonth() || (today.getMonth() === b.getMonth() && today.getDate() < b.getDate())) full--;
                     r.innerHTML = `만 나이: ${full}세<br>한국 나이: ${korean}세`;
+                    addCalcHistory(`나이 (${b.getFullYear()}년생)`, `만 ${full}세 / 한국 ${korean}세`);
                 }
             } else if(type === 'calorie') {
                 const g = document.querySelector('input[name="cc-cg"]:checked').value;
@@ -6301,15 +6569,24 @@
                 if(a && h && w) {
                     const bmr = g === 'm' ? 66.47 + (13.75 * w) + (5 * h) - (6.76 * a) : 655.1 + (9.56 * w) + (1.85 * h) - (4.68 * a);
                     r.textContent = `기초대사량: ${Math.round(bmr)} kcal/일`;
+                    addCalcHistory(`기초대사량 (${g === 'm' ? '남' : '여'}, ${a}세, ${h}cm, ${w}kg)`, `${Math.round(bmr)} kcal/일`);
                 }
             } else if(type === 'fuel') {
                 const d = +document.getElementById('cc-fd').value;
                 const f = +document.getElementById('cc-ff').value;
-                if(d && f) r.textContent = `연비: ${(d / f).toFixed(2)} km/L`;
+                if(d && f) {
+                    const efficiency = (d / f).toFixed(2);
+                    r.textContent = `연비: ${efficiency} km/L`;
+                    addCalcHistory(`연비 (${d}km ÷ ${f}L)`, `${efficiency} km/L`);
+                }
             } else if(type === 'hourly') {
                 const h = +document.getElementById('cc-hh').value;
                 const t = +document.getElementById('cc-ht').value;
-                if(h && t) r.innerHTML = `일급: ${(h * t).toLocaleString()}원<br>주급(5일): ${(h * t * 5).toLocaleString()}원<br>월급(22일): ${(h * t * 22).toLocaleString()}원`;
+                if(h && t) {
+                    const daily = h * t;
+                    r.innerHTML = `일급: ${daily.toLocaleString()}원<br>주급(5일): ${(daily * 5).toLocaleString()}원<br>월급(22일): ${(daily * 22).toLocaleString()}원`;
+                    addCalcHistory(`시급 ${h.toLocaleString()}원 × ${t}시간`, `일급 ${daily.toLocaleString()}원`);
+                }
             }
         }
 
