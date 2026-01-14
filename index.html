@@ -4200,12 +4200,17 @@
             applyView();
         }
 
-        function filterCategory(cat) {
+        function filterCategory(cat, updateHash = true) {
             currentCategory = cat;
             document.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
             renderFavorites();
             renderRecent();
             applyView();
+            if (updateHash && cat !== 'all') {
+                history.replaceState(null, '', '#' + cat);
+            } else if (updateHash && cat === 'all') {
+                history.replaceState(null, '', window.location.pathname);
+            }
         }
 
         function applyView() {
@@ -5075,6 +5080,47 @@
 
         initHelpSystem();
         applyLang();
+
+        // Category deep linking
+        const categoryMeta = {
+            all: { ko: '전체 도구', en: 'All Tools' },
+            text: { ko: '텍스트 도구', en: 'Text Tools' },
+            image: { ko: '이미지 도구', en: 'Image Tools' },
+            dev: { ko: '개발 도구', en: 'Dev Tools' },
+            calc: { ko: '계산 도구', en: 'Calculator Tools' },
+            util: { ko: '유틸리티', en: 'Utility Tools' },
+            test: { ko: '테스트 도구', en: 'Test Tools' },
+            pdf: { ko: 'PDF 도구', en: 'PDF Tools' }
+        };
+
+        function updateCategoryMeta(cat) {
+            if (cat === 'all') {
+                document.title = i18n.meta[currentLang].title;
+            } else if (categoryMeta[cat]) {
+                const catName = categoryMeta[cat][currentLang];
+                document.title = 'WATK - ' + catName;
+                const desc = currentLang === 'ko'
+                    ? catName + ' 모음. 로그인 없이 무료로 사용하세요.'
+                    : catName + ' collection. Free, no login required.';
+                document.querySelector('meta[name="description"]').setAttribute('content', desc);
+            }
+        }
+
+        function handleHashChange() {
+            const hash = window.location.hash.replace('#', '');
+            const categories = ['text', 'image', 'dev', 'calc', 'util', 'test', 'pdf'];
+            if (categories.includes(hash)) {
+                filterCategory(hash, false);
+                updateCategoryMeta(hash);
+            } else if (hash.startsWith('tool-')) {
+                const toolId = hash.replace('tool-', '');
+                openTool(toolId);
+            }
+        }
+
+        // Check hash on page load
+        handleHashChange();
+        window.addEventListener('hashchange', handleHashChange);
 
         // ZIP Compress/Extract
         let zipFiles = [];
