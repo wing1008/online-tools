@@ -132,13 +132,24 @@
         .section-title[data-section="hw"] { border-bottom-color: #64748b; }
         .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; transition: all 0.3s; }
         .tools-grid.hidden { display: none; }
+        /* 상세 뷰 (기본) */
+        .tools-grid.detail-view { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
+        .tools-grid.detail-view .tool-card { min-height: 130px; padding: 20px; }
+        .tools-grid.detail-view .tool-card p { display: block; }
+        /* 일반 뷰 (컴팩트) */
+        .tools-grid:not(.detail-view) { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+        .tools-grid:not(.detail-view) .tool-card { min-height: 90px; padding: 15px; }
+        .tools-grid:not(.detail-view) .tool-card p { display: none; }
+        .tools-grid:not(.detail-view) .tool-card .icon { font-size: 1.4rem; margin-bottom: 2px; }
+        .tools-grid:not(.detail-view) .tool-card h3 { font-size: 0.9rem; }
         .tool-card { background: #111; border-radius: 10px; padding: 20px; cursor: pointer; border: 1px solid #222; transition: all 0.2s; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-height: 130px; position: relative; user-select: none; }
         .tool-card:hover { transform: translateY(-4px); background: #161616; border-color: #444; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
         .tool-card h3 { font-size: 1rem; color: #eee; font-weight: 600; }
         .tool-card p { font-size: 0.85rem; color: #666; line-height: 1.4; word-break: keep-all; display: block; }
         .tool-card .icon { font-size: 1.6rem; margin-bottom: 4px; }
-        .tool-card.toggle-card { background: transparent; border: 1px dashed #444; color: #666; font-size: 1.5rem; min-height: 130px; justify-content: center; align-items: center; }
+        .tool-card.toggle-card { background: transparent; border: 1px dashed #444; color: #666; font-size: 1.5rem; justify-content: center; align-items: center; }
         .tool-card.toggle-card:hover { background: #1a1a1a; border-color: #555; color: #888; transform: none; box-shadow: none; }
+        .tools-grid:not(.detail-view) .tool-card.toggle-card { font-size: 1.2rem; }
         body.light .tool-card.toggle-card { border-color: #ccc; color: #999; }
         body.light .tool-card.toggle-card:hover { background: #f5f5f5; border-color: #aaa; color: #666; }
         .tool-section { display: none; background: #111; border-radius: 10px; padding: 25px; margin: 20px 0; border: 1px solid #1a1a1a; }
@@ -470,7 +481,7 @@
             <div id="all-tools-container" style="display:none;"></div>
 
             <div class="section-title" data-section="text" onclick="toggleSection('text')">텍스트 & 변환</div>
-            <div class="tools-grid" data-section="text">
+            <div class="tools-grid detail-view" data-section="text">
                 <div class="tool-card" data-cat="text" data-tool="text" data-name="글자수 세기" onclick="openTool('text')"><a href="#tool-text" class="seo-link"></a><button class="fav-btn" onclick="event.stopPropagation();toggleFav('text')">☆</button><div class="icon">📊</div><h3>글자수 세기</h3><p>글자수와 단어를 정확하게 세어보세요.</p></div>
                 <div class="tool-card" data-cat="text" data-tool="text-convert" data-name="텍스트 변환" onclick="openTool('text-convert')"><a href="#tool-text-convert" class="seo-link"></a><button class="fav-btn" onclick="event.stopPropagation();toggleFav('text-convert')">☆</button><div class="icon">🔄</div><h3>텍스트 변환</h3><p>대소문자, 모스부호 등 다양하게 변환하세요.</p></div>
                 <div class="tool-card" data-cat="text" data-tool="replace" data-name="찾아 바꾸기" onclick="openTool('replace')"><a href="#tool-replace" class="seo-link"></a><button class="fav-btn" onclick="event.stopPropagation();toggleFav('replace')">☆</button><div class="icon">🔍</div><h3>찾아 바꾸기</h3><p>텍스트를 찾아 한 번에 바꿔보세요.</p></div>
@@ -490,7 +501,7 @@
             </div>
 
             <div class="section-title" data-section="image" onclick="toggleSection('image')">이미지 & 미디어</div>
-            <div class="tools-grid" data-section="image">
+            <div class="tools-grid detail-view" data-section="image">
                 <div class="tool-card" data-cat="image" data-tool="img-edit" data-name="이미지 편집" onclick="openTool('img-edit')"><a href="#tool-img-edit" class="seo-link"></a><button class="fav-btn" onclick="event.stopPropagation();toggleFav('img-edit')">☆</button><div class="icon">✂️</div><h3>이미지 편집</h3><p>이미지를 자르고 크기를 조절하세요.</p></div>
                 <div class="tool-card" data-cat="image" data-tool="img-filter" data-name="이미지 필터" onclick="openTool('img-filter')"><a href="#tool-img-filter" class="seo-link"></a><button class="fav-btn" onclick="event.stopPropagation();toggleFav('img-filter')">☆</button><div class="icon">🎨</div><h3>이미지 필터</h3><p>다양한 필터로 이미지를 꾸며보세요.</p></div>
                 <div class="tool-card" data-cat="image" data-tool="img-convert" data-name="포맷 변환" onclick="openTool('img-convert')"><a href="#tool-img-convert" class="seo-link"></a><button class="fav-btn" onclick="event.stopPropagation();toggleFav('img-convert')">☆</button><div class="icon">🔄</div><h3>포맷 변환</h3><p>JPG, PNG, WebP로 간편하게 변환하세요.</p></div>
@@ -505,7 +516,7 @@
             </div>
 
             <div class="section-title" data-section="dev" onclick="toggleSection('dev')">개발 & 데이터</div>
-            <div class="tools-grid" data-section="dev">
+            <div class="tools-grid detail-view" data-section="dev">
                 <div class="tool-card" data-cat="dev" data-tool="encoder" data-name="인코더" onclick="openTool('encoder')"><a href="#tool-encoder" class="seo-link"></a><button class="fav-btn" onclick="event.stopPropagation();toggleFav('encoder')">☆</button><div class="icon">🔢</div><h3>인코더</h3><p>Base64, URL, 해시 인코딩을 지원해요.</p></div>
                 <div class="tool-card" data-cat="dev" data-tool="data-convert" data-name="데이터 변환" onclick="openTool('data-convert')"><a href="#tool-data-convert" class="seo-link"></a><button class="fav-btn" onclick="event.stopPropagation();toggleFav('data-convert')">☆</button><div class="icon">🔀</div><h3>데이터 변환</h3><p>JSON, XML, YAML, CSV를 변환하세요.</p></div>
                 <div class="tool-card" data-cat="dev" data-tool="json" data-name="JSON 도구" onclick="openTool('json')"><a href="#tool-json" class="seo-link"></a><button class="fav-btn" onclick="event.stopPropagation();toggleFav('json')">☆</button><div class="icon">📦</div><h3>JSON 도구</h3><p>JSON을 깔끔하게 정리하세요.</p></div>
@@ -525,7 +536,7 @@
             </div>
 
             <div class="section-title" data-section="calc" onclick="toggleSection('calc')">계산 & 날짜</div>
-            <div class="tools-grid" data-section="calc">
+            <div class="tools-grid detail-view" data-section="calc">
                 <div class="tool-card" data-cat="calc" data-tool="calculator" data-name="종합 계산기" onclick="openTool('calculator')"><a href="#tool-calculator" class="seo-link"></a><button class="fav-btn" onclick="event.stopPropagation();toggleFav('calculator')">☆</button><div class="icon">🧮</div><h3>종합 계산기</h3><p>다양한 계산을 한 곳에서 해보세요.</p></div>
                 <div class="tool-card" data-cat="calc" data-tool="unit" data-name="단위 변환" onclick="openTool('unit')"><a href="#tool-unit" class="seo-link"></a><button class="fav-btn" onclick="event.stopPropagation();toggleFav('unit')">☆</button><div class="icon">📐</div><h3>단위 변환</h3><p>길이, 무게, 온도를 쉽게 변환하세요.</p></div>
                 <div class="tool-card" data-cat="calc" data-tool="number-convert" data-name="숫자 변환" onclick="openTool('number-convert')"><a href="#tool-number-convert" class="seo-link"></a><button class="fav-btn" onclick="event.stopPropagation();toggleFav('number-convert')">☆</button><div class="icon">🔢</div><h3>숫자 변환</h3><p>진법, 로마자, 한글 숫자로 변환하세요.</p></div>
@@ -542,7 +553,7 @@
             </div>
 
             <div class="section-title" data-section="work" onclick="toggleSection('work')">업무 & PDF</div>
-            <div class="tools-grid" data-section="work">
+            <div class="tools-grid detail-view" data-section="work">
                 <div class="tool-card" data-cat="work" data-tool="pdf-merge" data-name="PDF 병합" onclick="openTool('pdf-merge')"><a href="#tool-pdf-merge" class="seo-link"></a><button class="fav-btn" onclick="event.stopPropagation();toggleFav('pdf-merge')">☆</button><div class="icon">📑</div><h3>PDF 병합</h3><p>여러 PDF를 하나로 합쳐보세요.</p></div>
                 <div class="tool-card" data-cat="work" data-tool="pdf-split" data-name="PDF 분할" onclick="openTool('pdf-split')"><a href="#tool-pdf-split" class="seo-link"></a><button class="fav-btn" onclick="event.stopPropagation();toggleFav('pdf-split')">☆</button><div class="icon">✂️</div><h3>PDF 분할</h3><p>PDF를 페이지별로 분할하세요.</p></div>
                 <div class="tool-card" data-cat="work" data-tool="pdf-to-img" data-name="PDF→이미지" onclick="openTool('pdf-to-img')"><a href="#tool-pdf-to-img" class="seo-link"></a><button class="fav-btn" onclick="event.stopPropagation();toggleFav('pdf-to-img')">☆</button><div class="icon">🖼️</div><h3>PDF→이미지</h3><p>PDF를 이미지로 추출하세요.</p></div>
@@ -555,7 +566,7 @@
             </div>
 
             <div class="section-title" data-section="life" onclick="toggleSection('life')">생활 & 편의</div>
-            <div class="tools-grid" data-section="life">
+            <div class="tools-grid detail-view" data-section="life">
                 <div class="tool-card" data-cat="life" data-tool="timer" data-name="타이머" onclick="openTool('timer')"><a href="#tool-timer" class="seo-link"></a><button class="fav-btn" onclick="event.stopPropagation();toggleFav('timer')">☆</button><div class="icon">⏲️</div><h3>타이머</h3><p>타이머와 스톱워치를 사용하세요.</p></div>
                 <div class="tool-card" data-cat="life" data-tool="qr" data-name="QR 바코드" onclick="openTool('qr')"><a href="#tool-qr" class="seo-link"></a><button class="fav-btn" onclick="event.stopPropagation();toggleFav('qr')">☆</button><div class="icon">📱</div><h3>QR/바코드</h3><p>QR코드를 빠르게 만들어보세요.</p></div>
                 <div class="tool-card" data-cat="life" data-tool="qr-scan" data-name="QR 스캔" onclick="openTool('qr-scan')"><a href="#tool-qr-scan" class="seo-link"></a><button class="fav-btn" onclick="event.stopPropagation();toggleFav('qr-scan')">☆</button><div class="icon">📸</div><h3>QR 스캔</h3><p>카메라로 QR코드를 스캔하세요.</p></div>
@@ -567,7 +578,7 @@
             </div>
 
             <div class="section-title" data-section="hw" onclick="toggleSection('hw')">하드웨어 & 테스트</div>
-            <div class="tools-grid" data-section="hw">
+            <div class="tools-grid detail-view" data-section="hw">
                 <div class="tool-card" data-cat="hw" data-tool="input-test" data-name="입력 테스트" onclick="openTool('input-test')"><a href="#tool-input-test" class="seo-link"></a><button class="fav-btn" onclick="event.stopPropagation();toggleFav('input-test')">☆</button><div class="icon">⌨️</div><h3>입력 테스트</h3><p>키보드와 마우스 입력을 테스트하세요.</p></div>
                 <div class="tool-card" data-cat="hw" data-tool="device-test" data-name="장치 테스트" onclick="openTool('device-test')"><a href="#tool-device-test" class="seo-link"></a><button class="fav-btn" onclick="event.stopPropagation();toggleFav('device-test')">☆</button><div class="icon">📷</div><h3>장치 테스트</h3><p>웹캠, 마이크, 인터넷 속도를 테스트하세요.</p></div>
                 <div class="tool-card" data-cat="hw" data-tool="browser-info" data-name="브라우저 정보" onclick="openTool('browser-info')"><a href="#tool-browser-info" class="seo-link"></a><button class="fav-btn" onclick="event.stopPropagation();toggleFav('browser-info')">☆</button><div class="icon">🌐</div><h3>브라우저 정보</h3><p>브라우저와 화면 정보를 확인하세요.</p></div>
