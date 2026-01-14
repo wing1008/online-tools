@@ -3488,7 +3488,13 @@
         }
 
         // Language
-        let currentLang = localStorage.getItem('lang') || 'ko';
+        function detectLang() {
+            const saved = localStorage.getItem('lang');
+            if (saved) return saved;
+            const browserLang = navigator.language || navigator.userLanguage || 'ko';
+            return browserLang.startsWith('ko') ? 'ko' : 'en';
+        }
+        let currentLang = detectLang();
 
         const i18n = {
             categories: {
