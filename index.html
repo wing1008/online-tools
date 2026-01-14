@@ -65,7 +65,10 @@
         body { font-family: 'Pretendard', -apple-system, sans-serif; background: #0a0a0a; min-height: 100vh; color: #888; line-height: 1.4; font-size: 14px; }
         .container { max-width: 960px; margin: 0 auto; padding: 16px; }
         nav { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #1a1a1a; margin-bottom: 16px; gap: 12px; flex-wrap: wrap; }
-        .logo { font-size: 1rem; font-weight: 700; color: #fff; letter-spacing: -0.5px; cursor: pointer; }
+        .logo { cursor: pointer; }
+        .logo img { height: 32px; width: auto; }
+        .logo .logo-dark { display: block; }
+        .logo .logo-light { display: none; }
         .nav-center { flex: 1; max-width: 280px; }
         .nav-search { width: 100%; padding: 7px 12px 7px 32px; border-radius: 4px; border: 1px solid #222; background: #111; color: #ccc; font-size: 0.8rem; }
         .nav-search:focus { outline: none; border-color: #333; }
@@ -274,7 +277,8 @@
         /* Light Mode */
         body.light { background: #fafafa; color: #666; }
         body.light nav { border-color: #e5e5e5; }
-        body.light .logo { color: #222; }
+        body.light .logo .logo-dark { display: none; }
+        body.light .logo .logo-light { display: block; }
         body.light nav a, body.light .icon-btn { color: #888; }
         body.light .nav-search { background: #fff; border-color: #ddd; color: #333; }
         body.light .section-title { color: #888; }
@@ -348,7 +352,10 @@
     <div class="toast" id="toast">복사되었습니다</div>
     <div class="container">
         <nav>
-            <div class="logo" onclick="showMain()">WATK</div>
+            <div class="logo" onclick="showMain()">
+                <img src="logo-dark.png" alt="WATK" class="logo-dark">
+                <img src="logo-light.png" alt="WATK" class="logo-light">
+            </div>
             <div class="nav-tabs">
                 <button class="nav-tab active" data-tab="main" onclick="switchTab('main')">메인</button>
                 <button class="nav-tab" data-tab="batch" onclick="switchTab('batch')">반복루트</button>
