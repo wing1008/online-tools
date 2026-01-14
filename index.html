@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>wings-tool - 온라인 도구 모음</title>
-    <meta name="description" content="자주 쓰는 온라인 도구들을 모아봤습니다. QR코드, 글자수 세기, PDF 변환 등 무료로 사용하세요.">
+    <title>WATK (Wing's All-in-one ToolKit) - 100+ Free Online Tools</title>
+    <meta name="description" content="No login, no sign-up, completely free.">
     <meta name="google-site-verification" content="8-710rPHIPud95_b_MtQGbK-7oJrH9jP3CTtTruxRPM" />
     <meta name="naver-site-verification" content="4bee6e815402d1c8f958bf701bbce6a652d32cb9" />
-    <meta property="og:title" content="wings-tool - 온라인 도구 모음">
-    <meta property="og:description" content="QR코드, PDF 병합, 글자수 세기 등 무료 온라인 도구">
+    <meta property="og:title" content="WATK (Wing's All-in-one ToolKit) - 100+ Free Online Tools">
+    <meta property="og:description" content="No login, no sign-up, completely free.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://online-tools-nu.vercel.app/">
     <meta property="og:locale" content="ko_KR">
-    <meta property="og:site_name" content="wings-tool">
+    <meta property="og:site_name" content="WATK">
     <meta property="og:image" content="https://online-tools-nu.vercel.app/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="wings-tool - 온라인 도구 모음">
-    <meta name="twitter:description" content="QR코드, PDF 병합, 글자수 세기 등 무료 온라인 도구">
+    <meta name="twitter:title" content="WATK (Wing's All-in-one ToolKit) - 100+ Free Online Tools">
+    <meta name="twitter:description" content="No login, no sign-up, completely free.">
     <meta name="twitter:image" content="https://online-tools-nu.vercel.app/og-image.png">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%232563eb'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='%23fff' font-family='Arial' font-weight='bold'>W</text></svg>">
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%232563eb'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='%23fff' font-family='Arial' font-weight='bold'>W</text></svg>">
@@ -311,7 +311,7 @@
     <div class="toast" id="toast">복사되었습니다</div>
     <div class="container">
         <nav>
-            <div class="logo" onclick="showMain()">wings-tool</div>
+            <div class="logo" onclick="showMain()">WATK</div>
             <div class="nav-tabs">
                 <button class="nav-tab active" data-tab="main" onclick="switchTab('main')">메인</button>
                 <button class="nav-tab" data-tab="batch" onclick="switchTab('batch')">반복루트</button>
@@ -3312,7 +3312,7 @@
         <div class="tool-section" id="tool-contact">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>문의</h2>
-            <p style="color:#666;line-height:1.8;margin-bottom:20px;">wings-tool에 대한 의견을 보내주세요.</p>
+            <p style="color:#666;line-height:1.8;margin-bottom:20px;">WATK에 대한 의견을 보내주세요.</p>
 
             <div style="display:flex;flex-direction:column;gap:14px;">
                 <a href="https://github.com/wing1008/online-tools/issues/new?labels=feature&title=%5B%EA%B8%B0%EB%8A%A5%EC%9A%94%EC%B2%AD%5D%20" target="_blank" class="contact-link feature">💡 기능 요청 <span>- 추가되면 좋겠는 기능 제안</span></a>
@@ -3327,7 +3327,7 @@
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>개인정보처리방침</h2>
             <div style="color:#888;line-height:1.9;font-size:0.9rem;">
-                <p style="margin-bottom:15px;">wings-tool(이하 '사이트')은 이용자의 개인정보를 중요시하며, 관련 법령을 준수합니다.</p>
+                <p style="margin-bottom:15px;">WATK(이하 '사이트')은 이용자의 개인정보를 중요시하며, 관련 법령을 준수합니다.</p>
 
                 <h3 style="color:#ccc;font-size:1rem;margin:20px 0 10px;">1. 수집하는 개인정보</h3>
                 <p>본 사이트는 <strong style="color:#4ade80;">개인정보를 수집하지 않습니다.</strong></p>
@@ -3497,6 +3497,10 @@
         let currentLang = detectLang();
 
         const i18n = {
+            meta: {
+                ko: { title: 'WATK (Wing's All-in-one ToolKit) - 100개 이상의 무료 온라인 도구', desc: '로그인 없이, 가입 없이, 완전 무료.' },
+                en: { title: 'WATK (Wing's All-in-one ToolKit) - 100+ Free Online Tools', desc: 'No login, no sign-up, completely free.' }
+            },
             categories: {
                 ko: { text: '텍스트', image: '이미지', dev: '개발', calc: '계산', util: '유틸리티', test: '테스트', pdf: 'PDF' },
                 en: { text: 'Text', image: 'Image', dev: 'Dev', calc: 'Calc', util: 'Utility', test: 'Test', pdf: 'PDF' }
@@ -3516,7 +3520,7 @@
             pages: {
                 ko: {
                     about: { title: '소개', desc: '자주 쓰는 도구들이 있는데, 매번 찾아다니기 귀찮아서 모아봤습니다. 모든 처리는 브라우저에서 이루어지고, 서버로 데이터가 전송되지 않습니다.' },
-                    contact: { title: '문의', desc: 'wings-tool에 대한 의견을 보내주세요.', feature: '💡 기능 요청', featureDesc: '- 추가되면 좋겠는 기능 제안', bug: '🐛 버그 신고', bugDesc: '- 오류나 문제점 알려주기', improve: '✨ 개선 제안', improveDesc: '- 기존 기능 개선 아이디어', list: '📋 전체 목록 보기', listDesc: '- 다른 사람들의 의견도 확인' },
+                    contact: { title: '문의', desc: 'WATK에 대한 의견을 보내주세요.', feature: '💡 기능 요청', featureDesc: '- 추가되면 좋겠는 기능 제안', bug: '🐛 버그 신고', bugDesc: '- 오류나 문제점 알려주기', improve: '✨ 개선 제안', improveDesc: '- 기존 기능 개선 아이디어', list: '📋 전체 목록 보기', listDesc: '- 다른 사람들의 의견도 확인' },
                     privacy: { title: '개인정보처리방침 / Privacy Policy' },
                     faq: { title: '자주 묻는 질문', items: [
                         { q: 'Q. 파일이 서버로 전송되나요?', a: '아니요. 모든 처리는 브라우저에서 이루어지며, 파일은 절대 외부로 전송되지 않습니다.' },
@@ -3538,7 +3542,7 @@
                 },
                 en: {
                     about: { title: 'About', desc: 'I gathered tools I use frequently because it was annoying to search for them every time. All processing happens in your browser, and no data is sent to any server.' },
-                    contact: { title: 'Contact', desc: 'Send us your feedback about wings-tool.', feature: '💡 Feature Request', featureDesc: '- Suggest new features', bug: '🐛 Bug Report', bugDesc: '- Report errors or issues', improve: '✨ Improvement', improveDesc: '- Ideas to improve existing features', list: '📋 View All', listDesc: '- See what others are saying' },
+                    contact: { title: 'Contact', desc: 'Send us your feedback about WATK.', feature: '💡 Feature Request', featureDesc: '- Suggest new features', bug: '🐛 Bug Report', bugDesc: '- Report errors or issues', improve: '✨ Improvement', improveDesc: '- Ideas to improve existing features', list: '📋 View All', listDesc: '- See what others are saying' },
                     privacy: { title: '개인정보처리방침 / Privacy Policy' },
                     faq: { title: 'FAQ', items: [
                         { q: 'Q. Are files sent to a server?', a: 'No. All processing happens in your browser, and files are never sent externally.' },
@@ -3787,6 +3791,13 @@
             const n = i18n.nav[lang];
             const ft = i18n.footer[lang];
             const p = i18n.pages[lang];
+            const m = i18n.meta[lang];
+
+            // Update meta tags
+            document.title = m.title;
+            document.querySelector('meta[name="description"]').setAttribute('content', m.desc);
+            document.querySelector('meta[property="og:title"]').setAttribute('content', m.title);
+            document.querySelector('meta[property="og:description"]').setAttribute('content', m.desc);
 
             // Update tool cards
             document.querySelectorAll('.tool-card[data-tool]').forEach(card => {
@@ -3928,7 +3939,7 @@
         let isDark = localStorage.getItem('theme') !== 'light';
         function shareSite() {
             const shareData = {
-                title: 'wings-tool',
+                title: 'WATK',
                 text: '자주 쓰는 온라인 도구 모음',
                 url: 'https://online-tools-nu.vercel.app/'
             };
@@ -4874,7 +4885,7 @@
                 'age': '<strong>나이 계산</strong> 도움말<ul><li>생년월일로 만 나이와 한국 나이를 계산합니다</li><li>띠와 별자리도 함께 확인할 수 있습니다</li><li>날짜를 선택하면 자동 계산됩니다</li></ul>',
                 'loan': '<strong>대출 계산</strong> 도움말<ul><li>대출 원금, 이자율, 기간으로 월 상환액을 계산합니다</li><li>원리금균등/원금균등 방식을 지원합니다</li><li>총 이자와 상환 스케줄을 확인하세요</li></ul>',
                 'vat': '<strong>부가세 계산</strong> 도움말<ul><li>공급가액과 부가세를 계산합니다</li><li>부가세 포함/별도 가격을 변환합니다</li><li>세금계산서 작성 시 유용합니다</li></ul>',
-                'changelog': '<strong>업데이트 로그</strong> - Wings Tool의 업데이트 내역입니다.',
+                'changelog': '<strong>업데이트 로그</strong> - WATK의 업데이트 내역입니다.',
                 'faq': '<strong>FAQ</strong> - 자주 묻는 질문과 답변입니다.',
                 'contact': '<strong>문의</strong> - 버그 제보, 기능 제안, 문의사항을 보내주세요.'
             },
@@ -4969,7 +4980,7 @@
                 'age': '<strong>Age Calculator</strong> Help<ul><li>Calculate age from birth date</li><li>Also shows zodiac and horoscope</li><li>Auto-calculates when date selected</li></ul>',
                 'loan': '<strong>Loan Calculator</strong> Help<ul><li>Calculate monthly payment from principal, rate, term</li><li>Supports equal principal/equal payment methods</li><li>Check total interest and repayment schedule</li></ul>',
                 'vat': '<strong>VAT Calculator</strong> Help<ul><li>Calculate supply price and VAT</li><li>Convert VAT included/excluded prices</li><li>Useful for tax invoices</li></ul>',
-                'changelog': '<strong>Changelog</strong> - Update history for Wings Tool.',
+                'changelog': '<strong>Changelog</strong> - Update history for WATK.',
                 'faq': '<strong>FAQ</strong> - Frequently asked questions and answers.',
                 'contact': '<strong>Contact</strong> - Report bugs, suggest features, or send inquiries.'
             }
