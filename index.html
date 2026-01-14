@@ -88,7 +88,7 @@
         .section-title[data-section="test"] { border-bottom-color: #14b8a6; }
         .section-title[data-section="pdf"] { border-bottom-color: #ef4444; }
         .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
-        .tool-card { background: #111; border-radius: 5px; padding: 10px 12px; cursor: pointer; border: 1px solid #333; transition: all 0.12s; display: flex; align-items: center; justify-content: center; gap: 7px; text-align: center; }
+        .tool-card { background: #111; border-radius: 5px; padding: 10px 12px; cursor: pointer; border: 1px solid #333; transition: all 0.12s; display: flex; align-items: center; justify-content: center; gap: 7px; text-align: center; user-select: none; }
         /* Card Category Border Colors */
         .tool-card[data-cat="text"] { border-color: #5b8def55; }
         .tool-card[data-cat="image"] { border-color: #4ade8055; }
@@ -126,7 +126,7 @@
         input[type="file"] { padding: 10px; }
         input[type="color"] { padding: 5px; height: 45px; }
         input[type="range"] { padding: 0; }
-        .btn { background: #1a1a1a; border: 1px solid #2a2a2a; color: #aaa; padding: 10px 18px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: all 0.15s; margin-right: 6px; margin-bottom: 6px; }
+        .btn { background: #1a1a1a; border: 1px solid #2a2a2a; color: #aaa; padding: 10px 18px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: all 0.15s; margin-right: 6px; margin-bottom: 6px; user-select: none; }
         .btn:hover { background: #222; border-color: #333; color: #ccc; }
         .btn:active { background: #333; border-color: #444; color: #fff; transform: scale(0.97); }
         .btn-primary { background: #2a2a2a; border-color: #333; color: #ddd; }
@@ -177,13 +177,18 @@
         .diff-old { background: #2a1515; }
         .diff-new { background: #152a15; }
         /* Drop Zone */
-        .drop-zone { border: 2px dashed #333; border-radius: 8px; padding: 30px; text-align: center; color: #555; cursor: pointer; transition: all 0.2s; margin-bottom: 10px; }
+        .drop-zone { border: 2px dashed #333; border-radius: 8px; padding: 30px; text-align: center; color: #555; cursor: pointer; transition: all 0.2s; margin-bottom: 10px; user-select: none; }
         .drop-zone:hover, .drop-zone.drag-over { border-color: #666; background: #151515; color: #888; }
         .drop-zone input[type="file"] { display: none; }
         .drop-zone-icon { font-size: 2rem; margin-bottom: 8px; }
         .drop-zone-text { font-size: 0.85rem; }
         body.light .drop-zone { border-color: #ccc; color: #888; }
         body.light .drop-zone:hover, body.light .drop-zone.drag-over { border-color: #999; background: #f5f5f5; }
+        .download-item { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 6px; margin: 5px 0; user-select: none; }
+        .download-item input[type="checkbox"] { cursor: pointer; }
+        .download-item img { max-width: 80px; max-height: 60px; border-radius: 4px; }
+        .download-item .file-name { flex: 1; color: #aaa; font-size: 0.85rem; }
+        .download-item .btn { font-size: 0.75rem; padding: 4px 10px; }
         footer { text-align: center; padding: 40px 0 30px; border-top: 1px solid #111; margin-top: 50px; }
         footer p { color: #333; font-size: 0.8rem; }
         footer a { color: #444; text-decoration: none; margin: 0 8px; font-size: 0.8rem; }
@@ -209,7 +214,7 @@
         /* Favorite Button - Hidden by default */
         .tool-card { position: relative; }
         .tool-card .fav-btn { display: none; position: absolute; top: 2px; right: 4px; background: none; border: none; font-size: 0.8rem; cursor: pointer; color: #555; }
-        .tool-card:hover .fav-btn { display: block; }
+        .tool-card:hover .fav-btn, .tool-card .fav-btn.active { display: block; }
         .tool-card .fav-btn:hover, .tool-card .fav-btn.active { color: #f5c518; }
 
         /* Light Mode */
@@ -231,6 +236,8 @@
         body.light .btn:active { background: #d0d0d0; border-color: #bbb; color: #222; transform: scale(0.97); }
         body.light .copy-btn:active { background: #ddd; color: #222; transform: scale(0.95); }
         body.light .result-box { background: #f9f9f9; border-color: #e5e5e5; }
+        body.light #pdf-img-controls, body.light #pdf-split-controls { background: #f5f5f5; }
+        body.light .download-item { background: #f9f9f9; border-color: #e5e5e5; }
         body.light .filter-tabs { border-color: #e5e5e5; }
         body.light .filter-tab { color: #888; }
         body.light .filter-tab.active { color: #222; border-bottom-color: #222; }
@@ -531,6 +538,7 @@
         <div class="tool-section" id="tool-text-convert">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>텍스트 변환</h2>
+            <label style="color:#888;font-size:0.85rem;">변환 유형
             <select id="text-convert-type" onchange="showTextConvertType()">
                 <option value="case">대소문자 변환</option>
                 <option value="reverse">문장 뒤집기</option>
@@ -542,7 +550,7 @@
                 <option value="numkor">숫자 → 한글</option>
                 <option value="ascii">ASCII Art</option>
                 <option value="vertical">세로쓰기</option>
-            </select>
+            </select></label>
             <div id="text-convert-content"></div>
         </div>
 
@@ -556,12 +564,13 @@
                 <input type="file" id="imgedit-file" accept="image/*" onchange="loadImgEdit(this)">
             </div>
             <img id="imgedit-preview" class="img-preview" style="display:none;">
+            <label style="color:#888;font-size:0.85rem;">편집 유형
             <select id="imgedit-type" onchange="showImgEditType()">
                 <option value="resize">크기 조절</option>
                 <option value="crop">자르기</option>
                 <option value="rotate">회전/뒤집기</option>
                 <option value="compress">압축</option>
-            </select>
+            </select></label>
             <div id="imgedit-content"></div>
             <canvas id="imgedit-canvas" style="display:none;"></canvas>
             <a id="imgedit-download" class="btn" style="display:none;text-decoration:none;">다운로드</a>
@@ -571,13 +580,14 @@
         <div class="tool-section" id="tool-encoder">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>인코더/디코더</h2>
+            <label style="color:#888;font-size:0.85rem;">인코딩 유형
             <select id="encoder-type" onchange="showEncoderType()">
                 <option value="base64">Base64</option>
                 <option value="url">URL 인코딩</option>
                 <option value="html">HTML 이스케이프</option>
                 <option value="hash">해시 (MD5, SHA)</option>
                 <option value="jwt">JWT 디코더</option>
-            </select>
+            </select></label>
             <div id="encoder-content"></div>
         </div>
 
@@ -585,12 +595,13 @@
         <div class="tool-section" id="tool-data-convert">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>데이터 변환</h2>
+            <label style="color:#888;font-size:0.85rem;">변환 유형
             <select id="data-convert-type" onchange="showDataConvertType()">
                 <option value="json-xml">JSON ↔ XML</option>
                 <option value="yaml-json">YAML ↔ JSON</option>
                 <option value="csv-json">CSV ↔ JSON</option>
                 <option value="json-ts">JSON → TypeScript</option>
-            </select>
+            </select></label>
             <div id="data-convert-content"></div>
         </div>
 
@@ -598,6 +609,7 @@
         <div class="tool-section" id="tool-css-gen">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>CSS 생성기</h2>
+            <label style="color:#888;font-size:0.85rem;">CSS 유형
             <select id="css-gen-type" onchange="showCssGenType()">
                 <option value="gradient">그라데이션</option>
                 <option value="shadow">박스 쉐도우</option>
@@ -607,7 +619,7 @@
                 <option value="grid">Grid</option>
                 <option value="neumorphism">Neumorphism</option>
                 <option value="glassmorphism">Glassmorphism</option>
-            </select>
+            </select></label>
             <div id="css-gen-content"></div>
         </div>
 
@@ -615,13 +627,14 @@
         <div class="tool-section" id="tool-seo-tools">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>SEO 도구</h2>
+            <label style="color:#888;font-size:0.85rem;">SEO 유형
             <select id="seo-type" onchange="showSeoType()">
                 <option value="meta">메타 태그 생성</option>
                 <option value="robots">robots.txt</option>
                 <option value="sitemap">sitemap.xml</option>
                 <option value="htaccess">.htaccess</option>
                 <option value="slug">Slug 생성</option>
-            </select>
+            </select></label>
             <div id="seo-content"></div>
         </div>
 
@@ -629,12 +642,13 @@
         <div class="tool-section" id="tool-dev-info">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>개발 정보</h2>
+            <label style="color:#888;font-size:0.85rem;">정보 유형
             <select id="devinfo-type" onchange="showDevInfoType()">
                 <option value="http">HTTP 상태코드</option>
                 <option value="ip">내 IP 주소</option>
                 <option value="useragent">User-Agent</option>
                 <option value="css-unit">CSS 단위 변환</option>
-            </select>
+            </select></label>
             <div id="devinfo-content"></div>
         </div>
 
@@ -642,12 +656,13 @@
         <div class="tool-section" id="tool-number-convert">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>숫자 변환</h2>
+            <label style="color:#888;font-size:0.85rem;">변환 유형
             <select id="numconv-type" onchange="showNumConvType()">
                 <option value="base">진법 변환 (2,8,10,16)</option>
                 <option value="roman">로마숫자</option>
                 <option value="korean">한글 숫자</option>
                 <option value="filesize">파일 크기</option>
-            </select>
+            </select></label>
             <div id="numconv-content"></div>
         </div>
 
@@ -655,11 +670,12 @@
         <div class="tool-section" id="tool-timer">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>타이머</h2>
+            <label style="color:#888;font-size:0.85rem;">타이머 유형
             <select id="timer-type" onchange="showTimerType()">
                 <option value="pomodoro">뽀모도로</option>
                 <option value="stopwatch">스톱워치</option>
                 <option value="countdown">카운트다운</option>
-            </select>
+            </select></label>
             <div id="timer-content"></div>
         </div>
 
@@ -667,12 +683,13 @@
         <div class="tool-section" id="tool-input-test">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>입력 테스트</h2>
+            <label style="color:#888;font-size:0.85rem;">테스트 유형
             <select id="inputtest-type" onchange="showInputTestType()">
                 <option value="keyboard">키보드</option>
                 <option value="cps">CPS (클릭 속도)</option>
                 <option value="reaction">반응속도</option>
                 <option value="typing">타이핑 속도</option>
-            </select>
+            </select></label>
             <div id="inputtest-content"></div>
         </div>
 
@@ -680,12 +697,13 @@
         <div class="tool-section" id="tool-device-test">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>장치 테스트</h2>
+            <label style="color:#888;font-size:0.85rem;">테스트 유형
             <select id="devicetest-type" onchange="showDeviceTestType()">
                 <option value="camera">카메라</option>
                 <option value="mic">마이크</option>
                 <option value="speed">네트워크 속도</option>
                 <option value="screen">화면 정보</option>
-            </select>
+            </select></label>
             <div id="devicetest-content"></div>
         </div>
 
@@ -722,7 +740,8 @@
         <div class="tool-section" id="tool-qr">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>QR코드 생성</h2>
-            <input type="text" id="qr-input" placeholder="URL 또는 텍스트">
+            <label style="color:#888;font-size:0.85rem;">URL 또는 텍스트
+            <input type="text" id="qr-input" placeholder="URL 또는 텍스트"></label>
             <button class="btn btn-primary" onclick="generateQR()">생성</button>
             <div id="qrcode"></div>
             <div style="text-align:center;"><button class="copy-btn" onclick="downloadQR()" style="display:none;" id="download-qr">다운로드</button></div>
@@ -732,8 +751,9 @@
         <div class="tool-section" id="tool-password">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>비밀번호 생성</h2>
-            <input type="number" id="pw-length" value="16" min="4" max="128">
-            <div class="options">
+            <label style="color:#888;font-size:0.85rem;">비밀번호 길이
+            <input type="number" id="pw-length" value="16" min="4" max="128"></label>
+            <div class="options" style="margin-top:10px;"><span style="color:#888;font-size:0.85rem;">포함할 문자:</span>
                 <label><input type="checkbox" id="pw-upper" checked> 대문자</label>
                 <label><input type="checkbox" id="pw-lower" checked> 소문자</label>
                 <label><input type="checkbox" id="pw-number" checked> 숫자</label>
@@ -748,7 +768,8 @@
         <div class="tool-section" id="tool-lorem">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>Lorem Ipsum</h2>
-            <input type="number" id="lorem-count" value="3" min="1" max="20">
+            <label style="color:#888;font-size:0.85rem;">문단 개수
+            <input type="number" id="lorem-count" value="3" min="1" max="20"></label>
             <button class="btn btn-primary" onclick="generateLorem()">생성</button>
             <div class="result-box"><div id="lorem-result">-</div></div>
             <button class="copy-btn" onclick="copyText('lorem-result')">복사</button>
@@ -825,7 +846,8 @@
         <div class="tool-section" id="tool-text">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>글자수 세기</h2>
-            <textarea id="text-input" oninput="analyzeText()"></textarea>
+            <label style="color:#888;font-size:0.85rem;">분석할 텍스트
+            <textarea id="text-input" oninput="analyzeText()" placeholder="여기에 텍스트를 입력하세요"></textarea></label>
             <div class="stats-row">
                 <div class="stat-box"><div class="number" id="char-count">0</div><div class="label">글자(공백포함)</div></div>
                 <div class="stat-box"><div class="number" id="char-no-space">0</div><div class="label">글자(공백제외)</div></div>
@@ -840,7 +862,8 @@
         <div class="tool-section" id="tool-case">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>대소문자 변환</h2>
-            <textarea id="case-input"></textarea>
+            <label style="color:#888;font-size:0.85rem;">텍스트 입력
+            <textarea id="case-input" placeholder="텍스트 입력"></textarea></label>
             <div>
                 <button class="btn" onclick="convertCase('upper')">대문자</button>
                 <button class="btn" onclick="convertCase('lower')">소문자</button>
@@ -855,10 +878,13 @@
         <div class="tool-section" id="tool-replace">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>텍스트 치환</h2>
-            <textarea id="replace-input"></textarea>
+            <label style="color:#888;font-size:0.85rem;">원본 텍스트
+            <textarea id="replace-input" placeholder="텍스트를 입력하세요"></textarea></label>
             <div class="row">
-                <input type="text" id="replace-find" placeholder="찾을 텍스트">
-                <input type="text" id="replace-with" placeholder="바꿀 텍스트">
+                <label style="color:#888;font-size:0.85rem;">찾을 텍스트
+                <input type="text" id="replace-find" placeholder="찾을 텍스트"></label>
+                <label style="color:#888;font-size:0.85rem;">바꿀 텍스트
+                <input type="text" id="replace-with" placeholder="바꿀 텍스트"></label>
             </div>
             <button class="btn btn-primary" onclick="replaceText()">치환</button>
             <div class="result-box"><div id="replace-result">-</div></div>
@@ -869,7 +895,8 @@
         <div class="tool-section" id="tool-markdown">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>Markdown Preview</h2>
-            <textarea id="markdown-input" oninput="renderMarkdown()" placeholder="# Hello World"></textarea>
+            <label style="color:#888;font-size:0.85rem;">마크다운 입력
+            <textarea id="markdown-input" oninput="renderMarkdown()" placeholder="# Hello World"></textarea></label>
             <div class="markdown-preview" id="markdown-result"></div>
         </div>
 
@@ -877,7 +904,8 @@
         <div class="tool-section" id="tool-duplicate">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>중복 줄 제거</h2>
-            <textarea id="dup-input" placeholder="각 줄에 하나씩 입력"></textarea>
+            <label style="color:#888;font-size:0.85rem;">텍스트 입력 (각 줄에 하나씩)
+            <textarea id="dup-input" placeholder="각 줄에 하나씩 입력"></textarea></label>
             <button class="btn btn-primary" onclick="removeDuplicates()">중복 제거</button>
             <div class="result-box"><pre id="dup-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
             <button class="copy-btn" onclick="copyText('dup-result')">복사</button>
@@ -887,7 +915,8 @@
         <div class="tool-section" id="tool-sort">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>줄 정렬</h2>
-            <textarea id="sort-input" placeholder="각 줄에 하나씩 입력"></textarea>
+            <label style="color:#888;font-size:0.85rem;">텍스트 입력 (각 줄에 하나씩)
+            <textarea id="sort-input" placeholder="각 줄에 하나씩 입력"></textarea></label>
             <div>
                 <button class="btn" onclick="sortLines('asc')">오름차순</button>
                 <button class="btn" onclick="sortLines('desc')">내림차순</button>
@@ -903,8 +932,10 @@
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>텍스트 비교</h2>
             <div class="row">
-                <textarea id="diff-input1" placeholder="원본 텍스트"></textarea>
-                <textarea id="diff-input2" placeholder="비교 텍스트"></textarea>
+                <label style="color:#888;font-size:0.85rem;">원본 텍스트
+                <textarea id="diff-input1" placeholder="원본 텍스트"></textarea></label>
+                <label style="color:#888;font-size:0.85rem;">비교 텍스트
+                <textarea id="diff-input2" placeholder="비교 텍스트"></textarea></label>
             </div>
             <button class="btn btn-primary" onclick="compareText()">비교</button>
             <div class="diff-result" id="diff-result" style="display:none;">
@@ -925,8 +956,10 @@
             <canvas id="resize-canvas" style="display:none;"></canvas>
             <img id="resize-preview" class="img-preview" style="display:none;">
             <div class="row" style="margin-top:10px;">
-                <input type="number" id="resize-width" placeholder="Width" oninput="updateResizeHeight()">
-                <input type="number" id="resize-height" placeholder="Height" oninput="updateResizeWidth()">
+                <label style="color:#888;font-size:0.85rem;">너비 (px)
+                <input type="number" id="resize-width" placeholder="너비" oninput="updateResizeHeight()"></label>
+                <label style="color:#888;font-size:0.85rem;">높이 (px)
+                <input type="number" id="resize-height" placeholder="높이" oninput="updateResizeWidth()"></label>
             </div>
             <label style="color:#666;font-size:0.8rem;"><input type="checkbox" id="resize-ratio" checked> 비율 유지</label>
             <div style="margin-top:10px;">
@@ -944,7 +977,7 @@
                 <input type="file" id="compress-file" accept="image/*" onchange="loadCompressImage(this)">
             </div>
             <img id="compress-preview" class="img-preview" style="display:none;">
-            <div class="slider-row"><span>품질:</span><input type="range" id="compress-quality" min="10" max="100" value="80" oninput="updateQualityLabel()"><span id="quality-label">80%</span></div>
+            <div class="slider-row"><label style="color:#888;font-size:0.85rem;">압축 품질:</label><input type="range" id="compress-quality" min="10" max="100" value="80" oninput="updateQualityLabel()"><span id="quality-label">80%</span></div>
             <div id="compress-info" style="color:#666;font-size:0.85rem;margin:10px 0;"></div>
             <button class="btn btn-primary" onclick="compressImage()">압축</button>
             <a id="compress-download" class="btn" style="display:none;text-decoration:none;">다운로드</a>
@@ -959,11 +992,12 @@
                 <input type="file" id="imgconv-file" accept="image/*" onchange="loadConvertImage(this)">
             </div>
             <img id="imgconv-preview" class="img-preview" style="display:none;">
+            <label style="color:#888;font-size:0.85rem;">출력 포맷
             <select id="imgconv-format">
                 <option value="image/jpeg">JPG</option>
                 <option value="image/png">PNG</option>
                 <option value="image/webp">WebP</option>
-            </select>
+            </select></label>
             <button class="btn btn-primary" onclick="convertImage()">변환</button>
             <a id="imgconv-download" class="btn" style="display:none;text-decoration:none;">다운로드</a>
         </div>
@@ -991,10 +1025,14 @@
             </div>
             <img id="crop-preview" class="img-preview" style="display:none;">
             <div class="row" style="margin-top:10px;">
-                <input type="number" id="crop-x" placeholder="X" value="0">
-                <input type="number" id="crop-y" placeholder="Y" value="0">
-                <input type="number" id="crop-w" placeholder="Width">
-                <input type="number" id="crop-h" placeholder="Height">
+                <label style="color:#888;font-size:0.85rem;">X
+                <input type="number" id="crop-x" placeholder="X" value="0"></label>
+                <label style="color:#888;font-size:0.85rem;">Y
+                <input type="number" id="crop-y" placeholder="Y" value="0"></label>
+                <label style="color:#888;font-size:0.85rem;">너비
+                <input type="number" id="crop-w" placeholder="너비"></label>
+                <label style="color:#888;font-size:0.85rem;">높이
+                <input type="number" id="crop-h" placeholder="높이"></label>
             </div>
             <button class="btn btn-primary" onclick="cropImage()">자르기</button>
             <a id="crop-download" class="btn" style="display:none;text-decoration:none;">다운로드</a>
@@ -1038,14 +1076,19 @@
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>플레이스홀더 이미지</h2>
             <div class="row">
-                <input type="number" id="ph-width" value="400" placeholder="Width">
-                <input type="number" id="ph-height" value="300" placeholder="Height">
+                <label style="color:#888;font-size:0.85rem;">너비 (px)
+                <input type="number" id="ph-width" value="400"></label>
+                <label style="color:#888;font-size:0.85rem;">높이 (px)
+                <input type="number" id="ph-height" value="300"></label>
             </div>
             <div class="row">
-                <input type="color" id="ph-bg" value="#333333">
-                <input type="color" id="ph-text" value="#666666">
+                <label style="color:#888;font-size:0.85rem;">배경색
+                <input type="color" id="ph-bg" value="#333333"></label>
+                <label style="color:#888;font-size:0.85rem;">텍스트색
+                <input type="color" id="ph-text" value="#666666"></label>
             </div>
-            <input type="text" id="ph-label" placeholder="텍스트 (비우면 크기 표시)">
+            <label style="color:#888;font-size:0.85rem;">텍스트 (비우면 크기 표시)
+            <input type="text" id="ph-label" placeholder="텍스트"></label>
             <button class="btn btn-primary" onclick="generatePlaceholder()">생성</button>
             <canvas id="ph-canvas" style="display:none;"></canvas>
             <img id="ph-preview" class="img-preview" style="display:none;margin-top:15px;">
@@ -1056,7 +1099,8 @@
         <div class="tool-section" id="tool-base64">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>Base64</h2>
-            <textarea id="base64-input"></textarea>
+            <label style="color:#888;font-size:0.85rem;">텍스트 입력
+            <textarea id="base64-input" placeholder="텍스트 입력"></textarea></label>
             <button class="btn" onclick="encodeBase64()">인코딩</button>
             <button class="btn" onclick="decodeBase64()">디코딩</button>
             <div class="result-box"><div id="base64-result">-</div></div>
@@ -1066,7 +1110,8 @@
         <div class="tool-section" id="tool-url">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>URL Encode/Decode</h2>
-            <textarea id="url-input"></textarea>
+            <label style="color:#888;font-size:0.85rem;">URL 또는 텍스트
+            <textarea id="url-input" placeholder="URL 또는 텍스트"></textarea></label>
             <button class="btn" onclick="encodeURL()">인코딩</button>
             <button class="btn" onclick="decodeURL()">디코딩</button>
             <div class="result-box"><div id="url-result">-</div></div>
@@ -1076,7 +1121,8 @@
         <div class="tool-section" id="tool-hash">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>해시 생성</h2>
-            <textarea id="hash-input" oninput="generateHash()"></textarea>
+            <label style="color:#888;font-size:0.85rem;">텍스트 입력
+            <textarea id="hash-input" oninput="generateHash()" placeholder="텍스트 입력"></textarea></label>
             <div class="result-box">
                 <div style="margin-bottom:8px;"><span style="color:#555;">MD5:</span> <span id="md5-result">-</span></div>
                 <div style="margin-bottom:8px;"><span style="color:#555;">SHA-1:</span> <span id="sha1-result">-</span></div>
@@ -1087,7 +1133,8 @@
         <div class="tool-section" id="tool-html">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>HTML Escape</h2>
-            <textarea id="html-input"></textarea>
+            <label style="color:#888;font-size:0.85rem;">HTML 텍스트
+            <textarea id="html-input" placeholder="HTML 텍스트"></textarea></label>
             <button class="btn" onclick="escapeHTML()">Escape</button>
             <button class="btn" onclick="unescapeHTML()">Unescape</button>
             <div class="result-box"><div id="html-result">-</div></div>
@@ -1097,7 +1144,8 @@
         <div class="tool-section" id="tool-jwt">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>JWT 디코더</h2>
-            <textarea id="jwt-input" placeholder="eyJhbGciOiJIUzI1NiIs..."></textarea>
+            <label style="color:#888;font-size:0.85rem;">JWT 토큰
+            <textarea id="jwt-input" placeholder="eyJhbGciOiJIUzI1NiIs..."></textarea></label>
             <button class="btn btn-primary" onclick="decodeJWT()">디코딩</button>
             <div class="result-box">
                 <div style="margin-bottom:10px;"><strong style="color:#6a9fb5;">Header:</strong><pre id="jwt-header" style="margin:5px 0;white-space:pre-wrap;">-</pre></div>
@@ -1109,7 +1157,8 @@
         <div class="tool-section" id="tool-json">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>JSON Formatter</h2>
-            <textarea id="json-input" placeholder='{"key": "value"}'></textarea>
+            <label style="color:#888;font-size:0.85rem;">JSON 입력
+            <textarea id="json-input" placeholder='{"key": "value"}'></textarea></label>
             <button class="btn" onclick="formatJSON()">정리</button>
             <button class="btn" onclick="minifyJSON()">압축</button>
             <div class="result-box"><pre id="json-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
@@ -1119,7 +1168,8 @@
         <div class="tool-section" id="tool-json-xml">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>JSON ↔ XML</h2>
-            <textarea id="jsonxml-input" placeholder="JSON 또는 XML 입력"></textarea>
+            <label style="color:#888;font-size:0.85rem;">JSON 또는 XML 입력
+            <textarea id="jsonxml-input" placeholder="JSON 또는 XML 입력"></textarea></label>
             <button class="btn" onclick="jsonToXml()">JSON → XML</button>
             <button class="btn" onclick="xmlToJson()">XML → JSON</button>
             <div class="result-box"><pre id="jsonxml-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
@@ -1129,12 +1179,14 @@
         <div class="tool-section" id="tool-minify">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>코드 압축/정리</h2>
+            <label style="color:#888;font-size:0.85rem;">코드 유형
             <select id="minify-type">
                 <option value="js">JavaScript</option>
                 <option value="css">CSS</option>
                 <option value="html">HTML</option>
-            </select>
-            <textarea id="minify-input" placeholder="코드 입력"></textarea>
+            </select></label>
+            <label style="color:#888;font-size:0.85rem;">코드 입력
+            <textarea id="minify-input" placeholder="코드 입력"></textarea></label>
             <button class="btn" onclick="minifyCode()">압축</button>
             <button class="btn" onclick="beautifyCode()">정리</button>
             <div class="result-box"><pre id="minify-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
@@ -1145,8 +1197,10 @@
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>타임스탬프</h2>
             <div class="row">
-                <div><input type="number" id="ts-unix" placeholder="Unix Timestamp"><button class="btn" onclick="unixToDate()">→ Date</button></div>
-                <div><input type="datetime-local" id="ts-date"><button class="btn" onclick="dateToUnix()">→ Unix</button></div>
+                <div><label style="color:#888;font-size:0.85rem;">Unix Timestamp
+                <input type="number" id="ts-unix" placeholder="Unix Timestamp"></label><button class="btn" onclick="unixToDate()">→ Date</button></div>
+                <div><label style="color:#888;font-size:0.85rem;">날짜/시간
+                <input type="datetime-local" id="ts-date"></label><button class="btn" onclick="dateToUnix()">→ Unix</button></div>
             </div>
             <div class="result-box">
                 <div>현재: <span id="current-ts">-</span></div>
@@ -1157,7 +1211,8 @@
         <div class="tool-section" id="tool-color">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>색상 변환</h2>
-            <input type="color" id="color-picker" value="#888888" onchange="convertColor()">
+            <label style="color:#888;font-size:0.85rem;">색상 선택
+            <input type="color" id="color-picker" value="#888888" onchange="convertColor()"></label>
             <div class="color-preview" id="color-preview" style="background:#888;"></div>
             <div class="color-info">
                 <div><span class="label">HEX</span><span id="hex-value">#888888</span></div>
@@ -1170,10 +1225,13 @@
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>정규식 테스트</h2>
             <div class="row">
-                <input type="text" id="regex-pattern" placeholder="Pattern" oninput="testRegex()">
-                <input type="text" id="regex-flags" value="g" placeholder="Flags" style="max-width:80px;" oninput="testRegex()">
+                <label style="color:#888;font-size:0.85rem;">패턴
+                <input type="text" id="regex-pattern" placeholder="Pattern" oninput="testRegex()"></label>
+                <label style="color:#888;font-size:0.85rem;">플래그
+                <input type="text" id="regex-flags" value="g" placeholder="Flags" style="max-width:80px;" oninput="testRegex()"></label>
             </div>
-            <textarea id="regex-text" placeholder="Test text" oninput="testRegex()"></textarea>
+            <label style="color:#888;font-size:0.85rem;">테스트 텍스트
+            <textarea id="regex-text" placeholder="테스트할 텍스트" oninput="testRegex()"></textarea></label>
             <div class="result-box"><div id="regex-result">-</div></div>
         </div>
 
@@ -1181,11 +1239,16 @@
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>Cron 표현식</h2>
             <div class="row">
-                <input type="text" id="cron-min" value="*" placeholder="분">
-                <input type="text" id="cron-hour" value="*" placeholder="시">
-                <input type="text" id="cron-day" value="*" placeholder="일">
-                <input type="text" id="cron-month" value="*" placeholder="월">
-                <input type="text" id="cron-week" value="*" placeholder="요일">
+                <label style="color:#888;font-size:0.85rem;">분
+                <input type="text" id="cron-min" value="*" placeholder="분"></label>
+                <label style="color:#888;font-size:0.85rem;">시
+                <input type="text" id="cron-hour" value="*" placeholder="시"></label>
+                <label style="color:#888;font-size:0.85rem;">일
+                <input type="text" id="cron-day" value="*" placeholder="일"></label>
+                <label style="color:#888;font-size:0.85rem;">월
+                <input type="text" id="cron-month" value="*" placeholder="월"></label>
+                <label style="color:#888;font-size:0.85rem;">요일
+                <input type="text" id="cron-week" value="*" placeholder="요일"></label>
             </div>
             <div class="info-box">분(0-59) 시(0-23) 일(1-31) 월(1-12) 요일(0-6, 0=일요일)<br>* = 매번, */5 = 5마다, 1,15 = 1과 15</div>
             <button class="btn btn-primary" onclick="generateCron()">생성</button>
@@ -1197,10 +1260,14 @@
         <div class="tool-section" id="tool-meta">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>메타 태그 생성기</h2>
-            <input type="text" id="meta-title" placeholder="제목">
-            <textarea id="meta-desc" placeholder="설명 (150자 권장)"></textarea>
-            <input type="text" id="meta-url" placeholder="URL">
-            <input type="text" id="meta-image" placeholder="이미지 URL">
+            <label style="color:#888;font-size:0.85rem;">제목
+            <input type="text" id="meta-title" placeholder="제목"></label>
+            <label style="color:#888;font-size:0.85rem;">설명 (150자 권장)
+            <textarea id="meta-desc" placeholder="설명"></textarea></label>
+            <label style="color:#888;font-size:0.85rem;">URL
+            <input type="text" id="meta-url" placeholder="URL"></label>
+            <label style="color:#888;font-size:0.85rem;">이미지 URL
+            <input type="text" id="meta-image" placeholder="이미지 URL"></label>
             <button class="btn btn-primary" onclick="generateMeta()">생성</button>
             <div class="result-box"><pre id="meta-result" style="white-space:pre-wrap;margin:0;font-size:0.75rem;">-</pre></div>
             <button class="copy-btn" onclick="copyText('meta-result')">복사</button>
@@ -1212,7 +1279,9 @@
             <h2>CSS 단위 변환</h2>
             <div class="info-box">기본 폰트 크기: 16px (브라우저 기본값)</div>
             <div class="row">
-                <input type="number" id="css-value" value="16" placeholder="값" oninput="convertCssUnit()">
+                <label style="color:#888;font-size:0.85rem;">값
+                <input type="number" id="css-value" value="16" placeholder="값" oninput="convertCssUnit()"></label>
+                <label style="color:#888;font-size:0.85rem;">단위
                 <select id="css-from" onchange="convertCssUnit()">
                     <option value="px">px</option>
                     <option value="rem">rem</option>
@@ -1315,18 +1384,22 @@
         <div class="tool-section" id="tool-unit">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>단위 변환</h2>
+            <label style="color:#888;font-size:0.85rem;">단위 종류
             <select id="unit-type" onchange="updateUnitOptions()">
                 <option value="length">길이</option>
                 <option value="weight">무게</option>
                 <option value="temp">온도</option>
                 <option value="data">데이터</option>
-            </select>
+            </select></label>
             <div class="row" style="align-items:center;">
-                <input type="number" id="unit-value" placeholder="Value" oninput="convertUnit()">
-                <select id="unit-from" onchange="convertUnit()"></select>
+                <label style="color:#888;font-size:0.85rem;">값
+                <input type="number" id="unit-value" placeholder="숫자 입력" oninput="convertUnit()"></label>
+                <label style="color:#888;font-size:0.85rem;">변환 전
+                <select id="unit-from" onchange="convertUnit()"></select></label>
                 <span style="color:#444;">=</span>
                 <span id="unit-result" style="color:#ddd;font-weight:600;font-size:1.1rem;">?</span>
-                <select id="unit-to" onchange="convertUnit()"></select>
+                <label style="color:#888;font-size:0.85rem;">변환 후
+                <select id="unit-to" onchange="convertUnit()"></select></label>
             </div>
         </div>
 
@@ -1334,7 +1407,9 @@
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>진법 변환</h2>
             <div class="row">
-                <input type="text" id="num-input" placeholder="Number" oninput="convertBase()">
+                <label style="color:#888;font-size:0.85rem;">숫자 입력
+                <input type="text" id="num-input" placeholder="숫자" oninput="convertBase()"></label>
+                <label style="color:#888;font-size:0.85rem;">입력 진법
                 <select id="num-base" onchange="convertBase()">
                     <option value="10">Decimal</option>
                     <option value="2">Binary</option>
@@ -1354,15 +1429,18 @@
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>날짜 계산</h2>
             <div style="margin-bottom:20px;">
-                <div style="color:#555;font-size:0.8rem;margin-bottom:5px;">D-Day</div>
-                <input type="date" id="date-target">
+                <div style="color:#888;font-size:0.85rem;margin-bottom:5px;">D-Day 계산</div>
+                <label style="color:#888;font-size:0.85rem;">목표 날짜
+                <input type="date" id="date-target"></label>
                 <div id="dday-result" style="color:#ddd;font-size:1.2rem;font-weight:600;margin-top:8px;"></div>
             </div>
             <div>
-                <div style="color:#555;font-size:0.8rem;margin-bottom:5px;">두 날짜 사이</div>
+                <div style="color:#888;font-size:0.85rem;margin-bottom:5px;">두 날짜 사이 계산</div>
                 <div class="row">
-                    <input type="date" id="date-from">
-                    <input type="date" id="date-to">
+                    <label style="color:#888;font-size:0.85rem;">시작일
+                    <input type="date" id="date-from"></label>
+                    <label style="color:#888;font-size:0.85rem;">종료일
+                    <input type="date" id="date-to"></label>
                 </div>
                 <button class="btn" onclick="calcDateDiff()">계산</button>
                 <div id="date-diff-result" style="color:#ddd;margin-top:8px;"></div>
@@ -1488,9 +1566,23 @@
             <h2>메모장</h2>
             <div class="info-box">브라우저 로컬 저장소에 자동 저장됩니다.</div>
             <textarea id="notepad-input" style="min-height:300px;" oninput="saveNotepad()"></textarea>
-            <div style="display:flex;justify-content:space-between;margin-top:10px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;flex-wrap:wrap;gap:10px;">
                 <span style="color:#555;font-size:0.8rem;" id="notepad-status">저장됨</span>
-                <button class="btn btn-danger" onclick="clearNotepad()">삭제</button>
+                <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                    <label style="color:#888;font-size:0.85rem;">파일 형식
+                    <select id="notepad-format" style="padding:8px 12px;min-width:120px;">
+                        <option value="txt">.txt (텍스트)</option>
+                        <option value="md">.md (마크다운)</option>
+                        <option value="html">.html (HTML)</option>
+                        <option value="json">.json (JSON)</option>
+                        <option value="csv">.csv (CSV)</option>
+                        <option value="xml">.xml (XML)</option>
+                    </select></label>
+                    <label style="color:#888;font-size:0.85rem;">파일명
+                    <input type="text" id="notepad-filename" placeholder="파일명" value="memo" style="width:120px;padding:8px 12px;"></label>
+                    <button class="btn btn-primary" onclick="downloadNotepad()">다운로드</button>
+                    <button class="btn btn-danger" onclick="clearNotepad()">삭제</button>
+                </div>
             </div>
         </div>
 
@@ -1498,7 +1590,8 @@
         <div class="tool-section" id="tool-palette">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>색상 팔레트 생성</h2>
-            <input type="color" id="palette-base" value="#667eea" onchange="generatePalette()">
+            <label style="color:#888;font-size:0.85rem;">기준 색상
+            <input type="color" id="palette-base" value="#667eea" onchange="generatePalette()"></label>
             <div class="options">
                 <label><input type="radio" name="palette-type" value="analogous" checked onchange="generatePalette()"> 유사색</label>
                 <label><input type="radio" name="palette-type" value="complementary" onchange="generatePalette()"> 보색</label>
@@ -1512,7 +1605,8 @@
         <div class="tool-section" id="tool-emoji">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>이모지 검색</h2>
-            <input type="text" id="emoji-search" placeholder="검색 (예: smile, heart, arrow, symbol)" oninput="searchEmoji()">
+            <label style="color:#888;font-size:0.85rem;">검색어 입력
+            <input type="text" id="emoji-search" placeholder="예: smile, heart, arrow, symbol" oninput="searchEmoji()"></label>
             <div id="emoji-result" style="margin-top:15px;"></div>
             <div id="emoji-copied" style="text-align:center;color:#5a5;margin-top:10px;display:none;">복사됨!</div>
         </div>
@@ -1522,7 +1616,8 @@
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>한↔영 변환 (오타 교정)</h2>
             <div class="info-box">영문 자판으로 한글을 치거나, 한글 자판으로 영문을 쳤을 때 변환합니다.</div>
-            <textarea id="engkor-input" placeholder="ㅗ디ㅣㅐ or gksrmfdl"></textarea>
+            <label style="color:#888;font-size:0.85rem;">텍스트 입력
+            <textarea id="engkor-input" placeholder="ㅗ디ㅣㅐ or gksrmfdl"></textarea></label>
             <div>
                 <button class="btn" onclick="convertEngToKor()">영→한</button>
                 <button class="btn" onclick="convertKorToEng()">한→영</button>
@@ -1552,7 +1647,8 @@
         <div class="tool-section" id="tool-vertical">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>세로쓰기 변환</h2>
-            <textarea id="vertical-input" placeholder="텍스트 입력" oninput="convertVertical()"></textarea>
+            <label style="color:#888;font-size:0.85rem;">텍스트 입력
+            <textarea id="vertical-input" placeholder="텍스트 입력" oninput="convertVertical()"></textarea></label>
             <div class="result-box"><pre id="vertical-result" style="white-space:pre-wrap;margin:0;writing-mode:vertical-rl;">-</pre></div>
             <button class="copy-btn" onclick="copyText('vertical-result')">복사</button>
         </div>
@@ -1885,8 +1981,10 @@
         <div class="tool-section" id="tool-encrypt">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>텍스트 암호화</h2>
-            <textarea id="encrypt-input" placeholder="텍스트 입력"></textarea>
-            <input type="password" id="encrypt-key" placeholder="암호 키">
+            <label style="color:#888;font-size:0.85rem;">암호화할 텍스트
+            <textarea id="encrypt-input" placeholder="텍스트를 입력하세요"></textarea></label>
+            <label style="color:#888;font-size:0.85rem;">암호 키
+            <input type="password" id="encrypt-key" placeholder="비밀번호 입력"></label>
             <button class="btn" onclick="encryptText()">암호화</button>
             <button class="btn" onclick="decryptText()">복호화</button>
             <div class="result-box"><div id="encrypt-result">-</div></div>
@@ -1946,7 +2044,8 @@
         <div class="tool-section" id="tool-ascii">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>ASCII Art 생성</h2>
-            <input type="text" id="ascii-input" placeholder="텍스트 입력" oninput="generateAsciiArt()">
+            <label style="color:#888;font-size:0.85rem;">텍스트 입력
+            <input type="text" id="ascii-input" placeholder="텍스트 입력" oninput="generateAsciiArt()"></label>
             <div class="result-box"><pre id="ascii-result" style="white-space:pre;margin:0;font-size:0.6rem;line-height:1;">-</pre></div>
             <button class="copy-btn" onclick="copyText('ascii-result')">복사</button>
         </div>
@@ -2003,24 +2102,28 @@
                 <input type="file" id="wm-file" accept="image/*" onchange="loadWatermarkImage(this)">
             </div>
             <img id="wm-preview" class="img-preview" style="display:none;">
-            <input type="text" id="wm-text" placeholder="워터마크 텍스트">
+            <label style="color:#888;font-size:0.85rem;">워터마크 텍스트
+            <input type="text" id="wm-text" placeholder="워터마크 텍스트"></label>
             <div class="row">
+                <label style="color:#888;font-size:0.85rem;">패턴
                 <select id="wm-pattern">
                     <option value="single">단일</option>
                     <option value="tile">타일 (반복)</option>
                     <option value="diagonal">대각선 반복</option>
                     <option value="center-big">중앙 크게</option>
                     <option value="border">테두리</option>
-                </select>
+                </select></label>
+                <label style="color:#888;font-size:0.85rem;">위치
                 <select id="wm-position">
                     <option value="br">우하단</option>
                     <option value="bl">좌하단</option>
                     <option value="tr">우상단</option>
                     <option value="tl">좌상단</option>
                     <option value="center">중앙</option>
-                </select>
+                </select></label>
             </div>
             <div class="row">
+                <label style="color:#888;font-size:0.85rem;">폰트
                 <select id="wm-font">
                     <option value="Arial">Arial</option>
                     <option value="Georgia">Georgia (세리프)</option>
@@ -2033,18 +2136,22 @@
                     <option value="Palatino Linotype">Palatino</option>
                     <option value="Lucida Console">Lucida Console</option>
                     <option value="Pretendard">Pretendard (한글)</option>
-                </select>
+                </select></label>
+                <label style="color:#888;font-size:0.85rem;">스타일
                 <select id="wm-style">
                     <option value="normal">기본</option>
                     <option value="bold">굵게</option>
                     <option value="italic">기울임</option>
                     <option value="bold italic">굵은 기울임</option>
-                </select>
+                </select></label>
             </div>
             <div class="row">
-                <input type="color" id="wm-color" value="#ffffff" title="글자 색상">
-                <input type="number" id="wm-opacity" value="50" min="10" max="100" placeholder="투명도 %">
-                <input type="number" id="wm-size" value="0" min="0" max="200" placeholder="크기 (0=자동)">
+                <label style="color:#888;font-size:0.85rem;">글자 색상
+                <input type="color" id="wm-color" value="#ffffff"></label>
+                <label style="color:#888;font-size:0.85rem;">투명도 (%)
+                <input type="number" id="wm-opacity" value="50" min="10" max="100"></label>
+                <label style="color:#888;font-size:0.85rem;">크기 (0=자동)
+                <input type="number" id="wm-size" value="0" min="0" max="200"></label>
             </div>
             <button class="btn btn-primary" onclick="addWatermark()">워터마크 추가</button>
             <canvas id="wm-canvas" style="display:none;"></canvas>
@@ -2234,10 +2341,13 @@
         <div class="tool-section" id="tool-tts">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>텍스트 → 음성 (TTS)</h2>
-            <textarea id="tts-input" placeholder="읽을 텍스트 입력"></textarea>
+            <label style="color:#888;font-size:0.85rem;">읽을 텍스트
+            <textarea id="tts-input" placeholder="읽을 텍스트 입력"></textarea></label>
             <div class="row">
-                <select id="tts-voice"></select>
-                <input type="range" id="tts-rate" min="0.5" max="2" step="0.1" value="1">
+                <label style="color:#888;font-size:0.85rem;">음성 선택
+                <select id="tts-voice"></select></label>
+                <label style="color:#888;font-size:0.85rem;">속도
+                <input type="range" id="tts-rate" min="0.5" max="2" step="0.1" value="1"></label>
             </div>
             <button class="btn btn-primary" onclick="speakText()">읽기</button>
             <button class="btn" onclick="stopSpeech()">정지</button>
@@ -2261,12 +2371,13 @@
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>음성 → 텍스트</h2>
             <div class="info-box">마이크 권한이 필요합니다. 브라우저 내장 음성인식을 사용합니다.</div>
+            <label style="color:#888;font-size:0.85rem;">인식 언어
             <select id="stt-lang">
                 <option value="ko-KR">한국어</option>
                 <option value="en-US">English (US)</option>
                 <option value="ja-JP">日本語</option>
                 <option value="zh-CN">中文</option>
-            </select>
+            </select></label>
             <div style="margin:15px 0;">
                 <button class="btn btn-primary" id="stt-btn" onclick="toggleSTT()">🎤 녹음 시작</button>
             </div>
@@ -2281,8 +2392,10 @@
             <div class="info-box">마우스 또는 터치로 서명하세요</div>
             <canvas id="sig-canvas" style="width:100%;height:200px;border:1px solid #333;border-radius:8px;background:#fff;touch-action:none;"></canvas>
             <div class="row" style="margin-top:15px;">
-                <input type="color" id="sig-color" value="#000000" title="펜 색상">
-                <input type="range" id="sig-width" min="1" max="10" value="3" title="펜 굵기">
+                <label style="color:#888;font-size:0.85rem;">펜 색상
+                <input type="color" id="sig-color" value="#000000"></label>
+                <label style="color:#888;font-size:0.85rem;">펜 굵기
+                <input type="range" id="sig-width" min="1" max="10" value="3"></label>
                 <button class="btn" onclick="clearSignature()">지우기</button>
                 <button class="btn btn-primary" onclick="downloadSignature()">다운로드</button>
             </div>
@@ -2293,24 +2406,32 @@
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>명함 생성기</h2>
             <div class="row">
-                <input type="text" id="bc-name" placeholder="이름">
-                <input type="text" id="bc-title" placeholder="직함">
+                <label style="color:#888;font-size:0.85rem;">이름
+                <input type="text" id="bc-name" placeholder="이름"></label>
+                <label style="color:#888;font-size:0.85rem;">직함
+                <input type="text" id="bc-title" placeholder="직함"></label>
             </div>
             <div class="row">
-                <input type="text" id="bc-company" placeholder="회사명">
-                <input type="text" id="bc-email" placeholder="이메일">
+                <label style="color:#888;font-size:0.85rem;">회사명
+                <input type="text" id="bc-company" placeholder="회사명"></label>
+                <label style="color:#888;font-size:0.85rem;">이메일
+                <input type="text" id="bc-email" placeholder="이메일"></label>
             </div>
             <div class="row">
-                <input type="text" id="bc-phone" placeholder="전화번호">
-                <input type="text" id="bc-website" placeholder="웹사이트">
+                <label style="color:#888;font-size:0.85rem;">전화번호
+                <input type="text" id="bc-phone" placeholder="전화번호"></label>
+                <label style="color:#888;font-size:0.85rem;">웹사이트
+                <input type="text" id="bc-website" placeholder="웹사이트"></label>
             </div>
             <div class="row">
+                <label style="color:#888;font-size:0.85rem;">스타일
                 <select id="bc-style">
                     <option value="simple">심플</option>
                     <option value="modern">모던</option>
                     <option value="classic">클래식</option>
-                </select>
-                <input type="color" id="bc-color" value="#2563eb" title="포인트 색상">
+                </select></label>
+                <label style="color:#888;font-size:0.85rem;">포인트 색상
+                <input type="color" id="bc-color" value="#2563eb"></label>
             </div>
             <button class="btn btn-primary" onclick="generateBusinessCard()">생성</button>
             <canvas id="bc-canvas" style="display:none;"></canvas>
@@ -2322,6 +2443,7 @@
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>가짜 데이터 생성</h2>
             <div class="row">
+                <label style="color:#888;font-size:0.85rem;">데이터 유형
                 <select id="fake-type">
                     <option value="name">이름</option>
                     <option value="email">이메일</option>
@@ -2333,8 +2455,9 @@
                     <option value="ip">IP 주소</option>
                     <option value="card">카드번호</option>
                     <option value="user">사용자 전체</option>
-                </select>
-                <input type="number" id="fake-count" value="10" min="1" max="100" placeholder="개수">
+                </select></label>
+                <label style="color:#888;font-size:0.85rem;">생성 개수
+                <input type="number" id="fake-count" value="10" min="1" max="100"></label>
             </div>
             <button class="btn btn-primary" onclick="generateFakeData()">생성</button>
             <div class="result-box"><pre id="fake-result" style="white-space:pre-wrap;">-</pre></div>
@@ -2346,16 +2469,20 @@
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>차트 생성기</h2>
             <div class="row">
+                <label style="color:#888;font-size:0.85rem;">차트 유형
                 <select id="chart-type">
                     <option value="bar">막대 차트</option>
                     <option value="line">선 차트</option>
                     <option value="pie">원형 차트</option>
                     <option value="doughnut">도넛 차트</option>
-                </select>
+                </select></label>
             </div>
-            <textarea id="chart-labels" placeholder="라벨 (쉼표 구분): 1월, 2월, 3월" rows="2"></textarea>
-            <textarea id="chart-data" placeholder="데이터 (쉼표 구분): 10, 20, 30" rows="2"></textarea>
-            <input type="text" id="chart-title" placeholder="차트 제목">
+            <label style="color:#888;font-size:0.85rem;">라벨 (쉼표 구분)
+            <textarea id="chart-labels" placeholder="예: 1월, 2월, 3월" rows="2"></textarea></label>
+            <label style="color:#888;font-size:0.85rem;">데이터 (쉼표 구분)
+            <textarea id="chart-data" placeholder="예: 10, 20, 30" rows="2"></textarea></label>
+            <label style="color:#888;font-size:0.85rem;">차트 제목
+            <input type="text" id="chart-title" placeholder="차트 제목"></label>
             <button class="btn btn-primary" onclick="generateChart()">생성</button>
             <canvas id="chart-canvas" style="max-width:100%;margin-top:15px;"></canvas>
             <a id="chart-download" class="btn" style="display:none;text-decoration:none;margin-top:10px;">다운로드</a>
@@ -2365,45 +2492,42 @@
         <div class="tool-section" id="tool-gif-maker">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>GIF 만들기</h2>
-            <div class="drop-zone" onclick="document.getElementById('gif-files').click()">
+            <div class="drop-zone" id="drop-gif-files" onclick="document.getElementById('gif-files').click()">
                 <div class="drop-zone-icon">🎞️</div>
-                <div class="drop-zone-text">이미지들을 선택하세요 (순서대로 GIF 생성)</div>
+                <div class="drop-zone-text">이미지를 여기에 드래그하거나 클릭하여 선택 (순서대로 GIF 생성)</div>
                 <input type="file" id="gif-files" accept="image/*" multiple onchange="loadGifImages(this)">
             </div>
             <div id="gif-preview" style="display:flex;flex-wrap:wrap;gap:5px;margin:10px 0;"></div>
             <div class="row">
-                <input type="number" id="gif-delay" value="500" min="100" max="3000" placeholder="프레임 간격 (ms)">
-                <input type="number" id="gif-width" value="400" min="50" max="800" placeholder="너비">
+                <label style="color:#888;font-size:0.85rem;">프레임 간격 (ms)
+                <input type="number" id="gif-delay" value="500" min="100" max="3000"></label>
+                <label style="color:#888;font-size:0.85rem;">너비 (px)
+                <input type="number" id="gif-width" value="400" min="50" max="800"></label>
             </div>
             <button class="btn btn-primary" onclick="createGif()">GIF 생성</button>
             <div id="gif-status" style="margin-top:10px;color:#666;"></div>
             <div id="gif-result" style="margin-top:15px;"></div>
         </div>
 
-        <!-- EXIF -->
-        <div class="tool-section" id="tool-exif">
-            <button class="back-btn" onclick="showMain()">← 목록</button>
-            <h2>EXIF 정보</h2>
-            <div class="drop-zone" onclick="document.getElementById('exif-file').click()">
-                <div class="drop-zone-icon">📷</div>
-                <div class="drop-zone-text">이미지를 선택하세요</div>
-                <input type="file" id="exif-file" accept="image/*" onchange="loadExifImage(this)">
-            </div>
-            <img id="exif-preview" class="img-preview" style="display:none;">
-            <div id="exif-result" style="margin-top:15px;"></div>
-        </div>
-
         <!-- PDF to Image -->
         <div class="tool-section" id="tool-pdf-to-img">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>PDF → 이미지</h2>
-            <div class="drop-zone" onclick="document.getElementById('pdf-img-file').click()">
+            <div class="drop-zone" id="drop-pdf-img-file" onclick="document.getElementById('pdf-img-file').click()">
                 <div class="drop-zone-icon">📄</div>
-                <div class="drop-zone-text">PDF 파일을 선택하세요</div>
+                <div class="drop-zone-text">PDF 파일을 여기에 드래그하거나 클릭하여 선택</div>
                 <input type="file" id="pdf-img-file" accept=".pdf" onchange="loadPdfForImage(this)">
             </div>
             <div id="pdf-img-status" style="margin-top:10px;color:#666;"></div>
+            <div id="pdf-img-controls" style="display:none;margin-top:15px;padding:10px;background:#1a1a1a;border-radius:8px;">
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer;color:#888;">
+                    <input type="checkbox" id="pdf-img-check-all" onchange="toggleAllDownloadChecks('pdf-img')"> 모두 선택
+                </label>
+            </div>
             <div id="pdf-img-result" style="margin-top:15px;display:flex;flex-wrap:wrap;gap:10px;"></div>
+            <div id="pdf-img-download-bar" style="display:none;margin-top:15px;">
+                <button class="btn btn-primary" onclick="downloadSelectedFiles('pdf-img')">선택한 파일 다운로드</button>
+            </div>
         </div>
 
         <!-- PDF Split -->
@@ -2411,9 +2535,9 @@
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>PDF 분할</h2>
             <div class="info-box" style="margin-bottom:15px;">PDF를 페이지별로 분할하거나 특정 범위만 추출합니다.</div>
-            <div class="drop-zone" onclick="document.getElementById('pdf-split-file').click()">
+            <div class="drop-zone" id="drop-pdf-split-file" onclick="document.getElementById('pdf-split-file').click()">
                 <div class="drop-zone-icon">📄</div>
-                <div class="drop-zone-text">PDF 파일을 선택하세요</div>
+                <div class="drop-zone-text">PDF 파일을 여기에 드래그하거나 클릭하여 선택</div>
                 <input type="file" id="pdf-split-file" accept=".pdf" onchange="loadPdfForSplit(this)">
             </div>
             <div id="pdf-split-info" style="margin-top:10px;color:#666;"></div>
@@ -2441,21 +2565,32 @@
                 <button class="btn btn-primary" onclick="splitPdf()">분할하기</button>
             </div>
             <div id="pdf-split-status" style="margin-top:10px;color:#666;"></div>
+            <div id="pdf-split-controls" style="display:none;margin-top:15px;padding:10px;background:#1a1a1a;border-radius:8px;">
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer;color:#888;">
+                    <input type="checkbox" id="pdf-split-check-all" onchange="toggleAllDownloadChecks('pdf-split')"> 모두 선택
+                </label>
+            </div>
             <div id="pdf-split-result" style="margin-top:15px;"></div>
+            <div id="pdf-split-download-bar" style="display:none;margin-top:15px;">
+                <button class="btn btn-primary" onclick="downloadSelectedFiles('pdf-split')">선택한 파일 다운로드</button>
+            </div>
         </div>
 
         <!-- Code to Image -->
         <div class="tool-section" id="tool-code-img">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>코드 → 이미지</h2>
-            <textarea id="code-img-input" placeholder="코드를 입력하세요" rows="10" style="font-family:monospace;"></textarea>
+            <label style="color:#888;font-size:0.85rem;">코드 입력
+            <textarea id="code-img-input" placeholder="코드를 입력하세요" rows="10" style="font-family:monospace;"></textarea></label>
             <div class="row">
+                <label style="color:#888;font-size:0.85rem;">테마
                 <select id="code-img-theme">
                     <option value="dark">다크</option>
                     <option value="light">라이트</option>
                     <option value="monokai">모노카이</option>
                     <option value="github">깃허브</option>
-                </select>
+                </select></label>
+                <label style="color:#888;font-size:0.85rem;">언어
                 <select id="code-img-lang">
                     <option value="javascript">JavaScript</option>
                     <option value="python">Python</option>
@@ -2463,8 +2598,9 @@
                     <option value="css">CSS</option>
                     <option value="java">Java</option>
                     <option value="text">Plain Text</option>
-                </select>
-                <input type="number" id="code-img-fontsize" value="14" min="10" max="24" placeholder="폰트 크기">
+                </select></label>
+                <label style="color:#888;font-size:0.85rem;">폰트 크기
+                <input type="number" id="code-img-fontsize" value="14" min="10" max="24"></label>
             </div>
             <button class="btn btn-primary" onclick="generateCodeImage()">이미지 생성</button>
             <div id="code-img-result" style="margin-top:15px;"></div>
@@ -2476,21 +2612,30 @@
             <h2>이력서 생성</h2>
             <div class="info-box" style="margin-bottom:15px;">간단한 이력서를 작성하고 PDF로 저장할 수 있습니다.</div>
             <div style="display:grid;gap:10px;">
-                <input type="text" id="resume-name" placeholder="이름">
-                <input type="email" id="resume-email" placeholder="이메일">
-                <input type="tel" id="resume-phone" placeholder="연락처 (예: 010-1234-5678)">
-                <input type="text" id="resume-address" placeholder="주소 (선택)">
-                <textarea id="resume-intro" placeholder="간단한 자기소개 (2-3문장)" rows="3"></textarea>
-                <input type="text" id="resume-education" placeholder="학력 (예: OO대학교 컴퓨터공학과 졸업)">
-                <textarea id="resume-experience" placeholder="경력 사항 (줄바꿈으로 구분)" rows="4"></textarea>
-                <textarea id="resume-skills" placeholder="보유 기술 (쉼표로 구분, 예: JavaScript, Python, React)" rows="2"></textarea>
+                <label style="color:#888;font-size:0.85rem;">이름
+                <input type="text" id="resume-name" placeholder="이름"></label>
+                <label style="color:#888;font-size:0.85rem;">이메일
+                <input type="email" id="resume-email" placeholder="이메일"></label>
+                <label style="color:#888;font-size:0.85rem;">연락처
+                <input type="tel" id="resume-phone" placeholder="예: 010-1234-5678"></label>
+                <label style="color:#888;font-size:0.85rem;">주소 (선택)
+                <input type="text" id="resume-address" placeholder="주소"></label>
+                <label style="color:#888;font-size:0.85rem;">자기소개
+                <textarea id="resume-intro" placeholder="간단한 자기소개 (2-3문장)" rows="3"></textarea></label>
+                <label style="color:#888;font-size:0.85rem;">학력
+                <input type="text" id="resume-education" placeholder="예: OO대학교 컴퓨터공학과 졸업"></label>
+                <label style="color:#888;font-size:0.85rem;">경력 사항
+                <textarea id="resume-experience" placeholder="줄바꿈으로 구분" rows="4"></textarea></label>
+                <label style="color:#888;font-size:0.85rem;">보유 기술
+                <textarea id="resume-skills" placeholder="쉼표로 구분 (예: JavaScript, Python, React)" rows="2"></textarea></label>
             </div>
             <div class="row" style="margin-top:15px;">
+                <label style="color:#888;font-size:0.85rem;">템플릿
                 <select id="resume-template">
                     <option value="simple">심플</option>
                     <option value="modern">모던</option>
                     <option value="classic">클래식</option>
-                </select>
+                </select></label>
                 <button class="btn btn-primary" onclick="generateResume()">미리보기</button>
                 <button class="btn" onclick="downloadResumePDF()">PDF 저장</button>
             </div>
@@ -2501,7 +2646,8 @@
         <div class="tool-section" id="tool-morse">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>모스 부호 변환</h2>
-            <textarea id="morse-input" placeholder="텍스트 또는 모스 부호 (· -)"></textarea>
+            <label style="color:#888;font-size:0.85rem;">텍스트 또는 모스 부호
+            <textarea id="morse-input" placeholder="텍스트 또는 모스 부호 (· -)"></textarea></label>
             <button class="btn" onclick="textToMorse()">텍스트→모스</button>
             <button class="btn" onclick="morseToText()">모스→텍스트</button>
             <div class="result-box"><div id="morse-result">-</div></div>
@@ -2512,7 +2658,8 @@
         <div class="tool-section" id="tool-binary-text">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>이진수 텍스트 변환</h2>
-            <textarea id="binary-input" placeholder="텍스트 또는 이진수 (01001000 ...)"></textarea>
+            <label style="color:#888;font-size:0.85rem;">텍스트 또는 이진수
+            <textarea id="binary-input" placeholder="텍스트 또는 이진수 (01001000 ...)"></textarea></label>
             <button class="btn" onclick="textToBinary()">텍스트→이진수</button>
             <button class="btn" onclick="binaryToText()">이진수→텍스트</button>
             <div class="result-box"><div id="binary-result">-</div></div>
@@ -2523,7 +2670,8 @@
         <div class="tool-section" id="tool-num-korean">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>숫자 한글 변환</h2>
-            <input type="text" id="numkor-input" placeholder="숫자 입력 (예: 12345)" oninput="convertNumKorean()">
+            <label style="color:#888;font-size:0.85rem;">숫자 입력
+            <input type="text" id="numkor-input" placeholder="예: 12345" oninput="convertNumKorean()"></label>
             <div class="result-box">
                 <div style="margin-bottom:10px;"><span style="color:#555;">자리별:</span> <span id="numkor-digit">-</span></div>
                 <div><span style="color:#555;">읽기:</span> <span id="numkor-read">-</span></div>
@@ -2534,7 +2682,8 @@
         <div class="tool-section" id="tool-word-freq">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>단어 빈도 분석</h2>
-            <textarea id="wordfreq-input" placeholder="텍스트 입력"></textarea>
+            <label style="color:#888;font-size:0.85rem;">분석할 텍스트
+            <textarea id="wordfreq-input" placeholder="텍스트를 입력하세요"></textarea></label>
             <button class="btn btn-primary" onclick="analyzeWordFreq()">분석</button>
             <div id="wordfreq-result" style="margin-top:15px;"></div>
         </div>
@@ -2543,7 +2692,8 @@
         <div class="tool-section" id="tool-readability">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>읽기 수준 분석</h2>
-            <textarea id="readable-input" placeholder="영어 텍스트 입력"></textarea>
+            <label style="color:#888;font-size:0.85rem;">영어 텍스트 입력
+            <textarea id="readable-input" placeholder="영어 텍스트 입력"></textarea></label>
             <button class="btn btn-primary" onclick="analyzeReadability()">분석</button>
             <div class="stats-row" id="readable-result" style="margin-top:15px;"></div>
         </div>
@@ -2584,7 +2734,7 @@
                 <input type="file" id="pixel-file" accept="image/*" onchange="loadPixelImage(this)">
             </div>
             <img id="pixel-preview" class="img-preview" style="display:none;">
-            <div class="slider-row"><span>크기:</span><input type="range" id="pixel-size" min="2" max="50" value="10"><span id="pixel-size-val">10px</span></div>
+            <div class="slider-row"><label style="color:#888;font-size:0.85rem;">픽셀 크기:</label><input type="range" id="pixel-size" min="2" max="50" value="10"><span id="pixel-size-val">10px</span></div>
             <button class="btn btn-primary" onclick="applyPixelate()">적용</button>
             <canvas id="pixel-canvas" style="display:none;"></canvas>
             <a id="pixel-download" class="btn" style="display:none;text-decoration:none;">다운로드</a>
@@ -2608,8 +2758,10 @@
         <div class="tool-section" id="tool-json-ts">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>JSON → TypeScript Interface</h2>
-            <textarea id="jsonts-input" placeholder='{"name": "John", "age": 30}'></textarea>
-            <input type="text" id="jsonts-name" placeholder="Interface 이름" value="MyInterface">
+            <label style="color:#888;font-size:0.85rem;">JSON 입력
+            <textarea id="jsonts-input" placeholder='{"name": "John", "age": 30}'></textarea></label>
+            <label style="color:#888;font-size:0.85rem;">Interface 이름
+            <input type="text" id="jsonts-name" placeholder="Interface 이름" value="MyInterface"></label>
             <button class="btn btn-primary" onclick="jsonToTs()">변환</button>
             <div class="result-box"><pre id="jsonts-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
             <button class="copy-btn" onclick="copyText('jsonts-result')">복사</button>
@@ -2619,12 +2771,14 @@
         <div class="tool-section" id="tool-robots">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>robots.txt 생성기</h2>
-            <input type="text" id="robots-sitemap" placeholder="Sitemap URL (선택)">
+            <label style="color:#888;font-size:0.85rem;">Sitemap URL (선택)
+            <input type="text" id="robots-sitemap" placeholder="Sitemap URL"></label>
             <div class="options">
                 <label><input type="checkbox" id="robots-all" checked> 모든 봇 허용</label>
                 <label><input type="checkbox" id="robots-google"> Googlebot만 허용</label>
             </div>
-            <textarea id="robots-disallow" placeholder="차단할 경로 (한 줄에 하나)"></textarea>
+            <label style="color:#888;font-size:0.85rem;">차단할 경로 (한 줄에 하나)
+            <textarea id="robots-disallow" placeholder="차단할 경로"></textarea></label>
             <button class="btn btn-primary" onclick="generateRobots()">생성</button>
             <div class="result-box"><pre id="robots-result" style="white-space:pre-wrap;margin:0;">-</pre></div>
             <button class="copy-btn" onclick="copyText('robots-result')">복사</button>
@@ -2634,8 +2788,10 @@
         <div class="tool-section" id="tool-sitemap">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>sitemap.xml 생성기</h2>
-            <input type="text" id="sitemap-domain" placeholder="도메인 (예: https://example.com)">
-            <textarea id="sitemap-urls" placeholder="URL 목록 (한 줄에 하나, 상대 경로 가능)&#10;/&#10;/about&#10;/contact"></textarea>
+            <label style="color:#888;font-size:0.85rem;">도메인
+            <input type="text" id="sitemap-domain" placeholder="예: https://example.com"></label>
+            <label style="color:#888;font-size:0.85rem;">URL 목록 (한 줄에 하나)
+            <textarea id="sitemap-urls" placeholder="/&#10;/about&#10;/contact"></textarea></label>
             <button class="btn btn-primary" onclick="generateSitemap()">생성</button>
             <div class="result-box"><pre id="sitemap-result" style="white-space:pre-wrap;margin:0;font-size:0.75rem;">-</pre></div>
             <button class="copy-btn" onclick="copyText('sitemap-result')">복사</button>
@@ -2651,7 +2807,8 @@
                 <label><input type="checkbox" id="ht-gzip"> Gzip 압축</label>
                 <label><input type="checkbox" id="ht-cache"> 캐시 설정</label>
             </div>
-            <input type="text" id="ht-404" placeholder="404 페이지 경로 (선택)">
+            <label style="color:#888;font-size:0.85rem;">404 페이지 경로 (선택)
+            <input type="text" id="ht-404" placeholder="예: /404.html"></label>
             <button class="btn btn-primary" onclick="generateHtaccess()">생성</button>
             <div class="result-box"><pre id="htaccess-result" style="white-space:pre-wrap;margin:0;font-size:0.75rem;">-</pre></div>
             <button class="copy-btn" onclick="copyText('htaccess-result')">복사</button>
@@ -2661,8 +2818,10 @@
         <div class="tool-section" id="tool-json-path">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>JSON Path 찾기</h2>
-            <textarea id="jsonpath-input" placeholder='{"user": {"name": "John"}}'></textarea>
-            <input type="text" id="jsonpath-query" placeholder="경로 (예: user.name)">
+            <label style="color:#888;font-size:0.85rem;">JSON 입력
+            <textarea id="jsonpath-input" placeholder='{"user": {"name": "John"}}'></textarea></label>
+            <label style="color:#888;font-size:0.85rem;">경로 입력
+            <input type="text" id="jsonpath-query" placeholder="예: user.name"></label>
             <button class="btn btn-primary" onclick="findJsonPath()">찾기</button>
             <div class="result-box"><div id="jsonpath-result">-</div></div>
         </div>
@@ -2672,8 +2831,10 @@
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>코드 Diff 비교</h2>
             <div class="row">
-                <textarea id="codediff-old" placeholder="원본 코드" style="min-height:150px;font-family:monospace;"></textarea>
-                <textarea id="codediff-new" placeholder="수정된 코드" style="min-height:150px;font-family:monospace;"></textarea>
+                <label style="color:#888;font-size:0.85rem;">원본 코드
+                <textarea id="codediff-old" placeholder="원본 코드" style="min-height:150px;font-family:monospace;"></textarea></label>
+                <label style="color:#888;font-size:0.85rem;">수정된 코드
+                <textarea id="codediff-new" placeholder="수정된 코드" style="min-height:150px;font-family:monospace;"></textarea></label>
             </div>
             <button class="btn btn-primary" onclick="compareCode()">비교</button>
             <div id="codediff-result" style="margin-top:15px;font-family:monospace;font-size:0.8rem;"></div>
@@ -2683,9 +2844,10 @@
         <div class="tool-section" id="tool-neumorphism">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>Neumorphism 생성기</h2>
-            <input type="color" id="neu-color" value="#e0e0e0" onchange="updateNeumorphism()">
-            <div class="slider-row"><span>크기:</span><input type="range" id="neu-size" min="5" max="50" value="20" oninput="updateNeumorphism()"><span id="neu-size-val">20px</span></div>
-            <div class="slider-row"><span>반경:</span><input type="range" id="neu-radius" min="0" max="50" value="15" oninput="updateNeumorphism()"><span id="neu-radius-val">15px</span></div>
+            <label style="color:#888;font-size:0.85rem;">배경 색상
+            <input type="color" id="neu-color" value="#e0e0e0" onchange="updateNeumorphism()"></label>
+            <div class="slider-row"><label style="color:#888;font-size:0.85rem;">그림자 크기:</label><input type="range" id="neu-size" min="5" max="50" value="20" oninput="updateNeumorphism()"><span id="neu-size-val">20px</span></div>
+            <div class="slider-row"><label style="color:#888;font-size:0.85rem;">모서리 반경:</label><input type="range" id="neu-radius" min="0" max="50" value="15" oninput="updateNeumorphism()"><span id="neu-radius-val">15px</span></div>
             <div class="options">
                 <label><input type="radio" name="neu-type" value="flat" checked onchange="updateNeumorphism()"> Flat</label>
                 <label><input type="radio" name="neu-type" value="concave" onchange="updateNeumorphism()"> Concave</label>
@@ -2701,9 +2863,10 @@
         <div class="tool-section" id="tool-glassmorphism">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>Glassmorphism 생성기</h2>
-            <div class="slider-row"><span>블러:</span><input type="range" id="glass-blur" min="0" max="30" value="10" oninput="updateGlassmorphism()"><span id="glass-blur-val">10px</span></div>
-            <div class="slider-row"><span>투명도:</span><input type="range" id="glass-opacity" min="0" max="100" value="25" oninput="updateGlassmorphism()"><span id="glass-opacity-val">25%</span></div>
-            <input type="color" id="glass-color" value="#ffffff" onchange="updateGlassmorphism()">
+            <div class="slider-row"><label style="color:#888;font-size:0.85rem;">블러:</label><input type="range" id="glass-blur" min="0" max="30" value="10" oninput="updateGlassmorphism()"><span id="glass-blur-val">10px</span></div>
+            <div class="slider-row"><label style="color:#888;font-size:0.85rem;">투명도:</label><input type="range" id="glass-opacity" min="0" max="100" value="25" oninput="updateGlassmorphism()"><span id="glass-opacity-val">25%</span></div>
+            <label style="color:#888;font-size:0.85rem;">유리 색상
+            <input type="color" id="glass-color" value="#ffffff" onchange="updateGlassmorphism()"></label>
             <div id="glass-preview" style="width:200px;height:150px;margin:20px auto;border-radius:15px;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;">
                 <div id="glass-box" style="width:120px;height:80px;border-radius:10px;"></div>
             </div>
@@ -2717,13 +2880,17 @@
             <h2>비율 계산기</h2>
             <div class="info-box">A : B = C : ? 형태로 계산합니다</div>
             <div class="row">
-                <input type="number" id="ratio-a" placeholder="A" oninput="calcRatio()">
-                <span style="color:#555;padding-top:12px;">:</span>
-                <input type="number" id="ratio-b" placeholder="B" oninput="calcRatio()">
-                <span style="color:#555;padding-top:12px;">=</span>
-                <input type="number" id="ratio-c" placeholder="C" oninput="calcRatio()">
-                <span style="color:#555;padding-top:12px;">:</span>
-                <input type="text" id="ratio-d" placeholder="?" readonly style="background:#0f0f0f;">
+                <label style="color:#888;font-size:0.85rem;">A
+                <input type="number" id="ratio-a" placeholder="A" oninput="calcRatio()"></label>
+                <span style="color:#555;padding-top:24px;">:</span>
+                <label style="color:#888;font-size:0.85rem;">B
+                <input type="number" id="ratio-b" placeholder="B" oninput="calcRatio()"></label>
+                <span style="color:#555;padding-top:24px;">=</span>
+                <label style="color:#888;font-size:0.85rem;">C
+                <input type="number" id="ratio-c" placeholder="C" oninput="calcRatio()"></label>
+                <span style="color:#555;padding-top:24px;">:</span>
+                <label style="color:#888;font-size:0.85rem;">결과
+                <input type="text" id="ratio-d" placeholder="?" readonly style="background:#0f0f0f;"></label>
             </div>
         </div>
 
@@ -2731,7 +2898,8 @@
         <div class="tool-section" id="tool-statistics">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>평균/표준편차 계산</h2>
-            <textarea id="stat-input" placeholder="숫자들을 입력 (쉼표, 공백, 줄바꿈으로 구분)"></textarea>
+            <label style="color:#888;font-size:0.85rem;">숫자 입력 (쉼표, 공백, 줄바꿈으로 구분)
+            <textarea id="stat-input" placeholder="예: 10, 20, 30, 40, 50"></textarea></label>
             <button class="btn btn-primary" onclick="calcStatistics()">계산</button>
             <div class="stats-row" style="margin-top:15px;">
                 <div class="stat-box"><div class="number" id="stat-count">-</div><div class="label">개수</div></div>
@@ -2761,8 +2929,10 @@
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>화면 비율 계산기</h2>
             <div class="row">
-                <input type="number" id="ar-width" placeholder="너비" oninput="calcAspectRatio()">
-                <input type="number" id="ar-height" placeholder="높이" oninput="calcAspectRatio()">
+                <label style="color:#888;font-size:0.85rem;">너비
+                <input type="number" id="ar-width" placeholder="너비" oninput="calcAspectRatio()"></label>
+                <label style="color:#888;font-size:0.85rem;">높이
+                <input type="number" id="ar-height" placeholder="높이" oninput="calcAspectRatio()"></label>
             </div>
             <div class="result-box"><div id="ar-result">-</div></div>
             <div class="info-box" style="margin-top:15px;">
@@ -2775,13 +2945,15 @@
         <div class="tool-section" id="tool-programmer-calc">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>프로그래머 계산기</h2>
-            <input type="text" id="prog-input" placeholder="숫자 입력" oninput="updateProgCalc()">
+            <label style="color:#888;font-size:0.85rem;">숫자 입력
+            <input type="text" id="prog-input" placeholder="숫자 입력" oninput="updateProgCalc()"></label>
+            <label style="color:#888;font-size:0.85rem;">진법 선택
             <select id="prog-base" onchange="updateProgCalc()">
                 <option value="10">10진수</option>
                 <option value="16">16진수</option>
                 <option value="2">2진수</option>
                 <option value="8">8진수</option>
-            </select>
+            </select></label>
             <div class="result-box" id="prog-result">-</div>
             <div style="margin-top:15px;">
                 <button class="btn" onclick="progBitOp('not')">NOT</button>
@@ -2789,7 +2961,8 @@
                 <button class="btn" onclick="progBitOp('shr')">SHR</button>
             </div>
             <div class="row" style="margin-top:10px;">
-                <input type="text" id="prog-b" placeholder="두번째 피연산자">
+                <label style="color:#888;font-size:0.85rem;">두번째 피연산자
+                <input type="text" id="prog-b" placeholder="두번째 피연산자"></label>
                 <button class="btn" onclick="progBitOp('and')">AND</button>
                 <button class="btn" onclick="progBitOp('or')">OR</button>
                 <button class="btn" onclick="progBitOp('xor')">XOR</button>
@@ -2816,7 +2989,8 @@
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>할 일 목록</h2>
             <div class="row">
-                <input type="text" id="todo-input" placeholder="할 일 입력" onkeypress="if(event.key==='Enter')addTodo()">
+                <label style="color:#888;font-size:0.85rem;flex:1;">할 일 입력
+                <input type="text" id="todo-input" placeholder="할 일 입력" onkeypress="if(event.key==='Enter')addTodo()"></label>
                 <button class="btn btn-primary" onclick="addTodo()">추가</button>
             </div>
             <div id="todo-list" style="margin-top:15px;"></div>
@@ -2828,7 +3002,8 @@
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>비밀번호 유출 확인</h2>
             <div class="info-box">Have I Been Pwned API를 사용합니다. 비밀번호 전체가 전송되지 않고 해시의 앞 5자리만 전송됩니다.</div>
-            <input type="password" id="pwned-input" placeholder="확인할 비밀번호">
+            <label style="color:#888;font-size:0.85rem;">확인할 비밀번호
+            <input type="password" id="pwned-input" placeholder="비밀번호 입력"></label>
             <button class="btn btn-primary" onclick="checkPwned()">확인</button>
             <div class="result-box"><div id="pwned-result">-</div></div>
         </div>
@@ -2838,8 +3013,10 @@
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>나이 계산기</h2>
             <div class="row">
-                <input type="date" id="age-birth" onchange="calcAge()">
-                <input type="date" id="age-base" onchange="calcAge()">
+                <label style="color:#888;font-size:0.85rem;">생년월일
+                <input type="date" id="age-birth" onchange="calcAge()"></label>
+                <label style="color:#888;font-size:0.85rem;">기준일 (선택)
+                <input type="date" id="age-base" onchange="calcAge()"></label>
             </div>
             <p style="color:#555;font-size:0.8rem;margin-bottom:10px;">기준일 비워두면 오늘 기준</p>
             <div class="result-box">
@@ -2854,14 +3031,18 @@
         <div class="tool-section" id="tool-loan">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>대출 계산기</h2>
-            <input type="number" id="loan-amount" placeholder="대출금액 (원)">
-            <input type="number" id="loan-rate" placeholder="연이율 (%)">
-            <input type="number" id="loan-months" placeholder="기간 (개월)">
+            <label style="color:#888;font-size:0.85rem;">대출금액 (원)
+            <input type="number" id="loan-amount" placeholder="예: 100000000"></label>
+            <label style="color:#888;font-size:0.85rem;">연이율 (%)
+            <input type="number" id="loan-rate" placeholder="예: 4.5"></label>
+            <label style="color:#888;font-size:0.85rem;">대출기간 (개월)
+            <input type="number" id="loan-months" placeholder="예: 360"></label>
+            <label style="color:#888;font-size:0.85rem;">상환방식
             <select id="loan-type">
                 <option value="equal">원리금균등상환</option>
                 <option value="principal">원금균등상환</option>
                 <option value="bullet">만기일시상환</option>
-            </select>
+            </select></label>
             <button class="btn btn-primary" onclick="calcLoan()">계산</button>
             <div class="result-box">
                 <div><span style="color:#555;">월 상환액:</span> <span id="loan-monthly">-</span></div>
@@ -2875,10 +3056,11 @@
         <div class="tool-section" id="tool-salary">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>연봉 실수령액 계산기</h2>
-            <input type="number" id="salary-annual" placeholder="연봉 (원)" oninput="calcSalary()">
+            <label style="color:#888;font-size:0.85rem;">연봉 (원)
+            <input type="number" id="salary-annual" placeholder="연봉 (원)" oninput="calcSalary()"></label>
             <div class="options">
                 <label><input type="checkbox" id="salary-non-tax" value="200000" checked> 비과세 20만원</label>
-                <label><input type="number" id="salary-dependents" value="1" min="1" style="width:60px;"> 부양가족</label>
+                <label style="color:#888;font-size:0.85rem;">부양가족 수 <input type="number" id="salary-dependents" value="1" min="1" style="width:60px;"></label>
             </div>
             <div class="result-box">
                 <div><span style="color:#555;">월급 (세전):</span> <span id="salary-gross">-</span></div>
@@ -2896,8 +3078,9 @@
         <div class="tool-section" id="tool-vat">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>부가세 계산기</h2>
-            <input type="number" id="vat-amount" placeholder="금액" oninput="calcVat()">
-            <div class="options">
+            <label style="color:#888;font-size:0.85rem;">금액 (원)
+            <input type="number" id="vat-amount" placeholder="금액을 입력하세요" oninput="calcVat()"></label>
+            <div class="options" style="margin-top:10px;"><span style="color:#888;font-size:0.85rem;">금액 유형:</span>
                 <label><input type="radio" name="vat-type" value="include" checked onchange="calcVat()"> 부가세 포함 금액</label>
                 <label><input type="radio" name="vat-type" value="exclude" onchange="calcVat()"> 부가세 별도 금액</label>
             </div>
@@ -2912,7 +3095,8 @@
         <div class="tool-section" id="tool-zodiac">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>띠 / 별자리 계산기</h2>
-            <input type="date" id="zodiac-date" onchange="calcZodiac()">
+            <label style="color:#888;font-size:0.85rem;">생년월일
+            <input type="date" id="zodiac-date" onchange="calcZodiac()"></label>
             <div class="result-box">
                 <div><span style="color:#555;">띠:</span> <span id="zodiac-animal">-</span></div>
                 <div><span style="color:#555;">별자리:</span> <span id="zodiac-star">-</span></div>
@@ -2942,12 +3126,13 @@
         <div class="tool-section" id="tool-nickname">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>닉네임 생성기</h2>
+            <label style="color:#888;font-size:0.85rem;">스타일 선택
             <select id="nickname-style">
                 <option value="korean">한국어 (형용사+명사)</option>
                 <option value="english">영어 (Adjective+Noun)</option>
                 <option value="game">게임용 (영문+숫자)</option>
                 <option value="cute">귀여운 스타일</option>
-            </select>
+            </select></label>
             <button class="btn btn-primary" onclick="generateNickname()">생성</button>
             <button class="btn" onclick="generateNicknames(10)">10개 생성</button>
             <div class="result-box"><div id="nickname-result">-</div></div>
@@ -2957,7 +3142,8 @@
         <div class="tool-section" id="tool-romanize">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>한글 로마자 변환</h2>
-            <input type="text" id="romanize-input" placeholder="한글 이름 입력 (예: 김철수)" oninput="romanizeKorean()">
+            <label style="color:#888;font-size:0.85rem;">한글 이름 입력
+            <input type="text" id="romanize-input" placeholder="예: 김철수" oninput="romanizeKorean()"></label>
             <div class="result-box">
                 <div><span style="color:#555;">문화부 표기:</span> <span id="romanize-govt">-</span></div>
                 <div><span style="color:#555;">여권용:</span> <span id="romanize-passport">-</span></div>
@@ -2969,7 +3155,8 @@
         <div class="tool-section" id="tool-jamo">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>한글 자모 분리/조합</h2>
-            <textarea id="jamo-input" placeholder="한글 입력"></textarea>
+            <label style="color:#888;font-size:0.85rem;">한글 입력
+            <textarea id="jamo-input" placeholder="한글 입력"></textarea></label>
             <button class="btn" onclick="jamoSplit()">분리 (가→ㄱㅏ)</button>
             <button class="btn" onclick="jamoCombine()">조합 (ㄱㅏ→가)</button>
             <div class="result-box"><div id="jamo-result">-</div><button class="copy-btn" onclick="copy(document.getElementById('jamo-result').textContent)">복사</button></div>
@@ -3006,7 +3193,8 @@
             <button class="btn btn-primary" onclick="generateUUID()">UUID v4 생성</button>
             <button class="btn" onclick="generateUUIDs(10)">10개 생성</button>
             <div class="result-box"><div id="uuid-result">-</div></div>
-            <input type="text" id="uuid-validate" placeholder="UUID 검증" oninput="validateUUID()">
+            <label style="color:#888;font-size:0.85rem;">UUID 검증
+            <input type="text" id="uuid-validate" placeholder="UUID 입력" oninput="validateUUID()"></label>
             <div id="uuid-valid" style="margin-top:5px;font-size:0.85rem;"></div>
         </div>
 
@@ -3014,7 +3202,8 @@
         <div class="tool-section" id="tool-sql">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>SQL 포매터</h2>
-            <textarea id="sql-input" placeholder="SQL 쿼리 입력" style="min-height:150px;font-family:monospace;"></textarea>
+            <label style="color:#888;font-size:0.85rem;">SQL 쿼리 입력
+            <textarea id="sql-input" placeholder="SQL 쿼리 입력" style="min-height:150px;font-family:monospace;"></textarea></label>
             <button class="btn btn-primary" onclick="formatSQL()">정리</button>
             <button class="btn" onclick="minifySQL()">압축</button>
             <textarea id="sql-result" readonly style="min-height:150px;font-family:monospace;margin-top:10px;"></textarea>
@@ -3025,10 +3214,14 @@
         <div class="tool-section" id="tool-og-preview">
             <button class="back-btn" onclick="showMain()">← 목록</button>
             <h2>Open Graph 미리보기</h2>
-            <input type="text" id="og-title" placeholder="og:title" oninput="updateOGPreview()">
-            <textarea id="og-desc" placeholder="og:description" style="min-height:60px;" oninput="updateOGPreview()"></textarea>
-            <input type="text" id="og-image" placeholder="og:image URL" oninput="updateOGPreview()">
-            <input type="text" id="og-url" placeholder="og:url" oninput="updateOGPreview()">
+            <label style="color:#888;font-size:0.85rem;">og:title
+            <input type="text" id="og-title" placeholder="제목" oninput="updateOGPreview()"></label>
+            <label style="color:#888;font-size:0.85rem;">og:description
+            <textarea id="og-desc" placeholder="설명" style="min-height:60px;" oninput="updateOGPreview()"></textarea></label>
+            <label style="color:#888;font-size:0.85rem;">og:image URL
+            <input type="text" id="og-image" placeholder="이미지 URL" oninput="updateOGPreview()"></label>
+            <label style="color:#888;font-size:0.85rem;">og:url
+            <input type="text" id="og-url" placeholder="URL" oninput="updateOGPreview()"></label>
             <div style="margin:20px 0;">
                 <p style="color:#555;font-size:0.8rem;margin-bottom:10px;">미리보기:</p>
                 <div id="og-preview-box" style="border:1px solid #333;border-radius:8px;overflow:hidden;max-width:500px;background:#111;">
@@ -3315,6 +3508,7 @@
             localStorage.setItem('favorites', JSON.stringify(favorites));
             updateFavButtons();
             renderFavorites();
+            renderRecent();
         }
 
         function updateFavButtons() {
@@ -3342,9 +3536,12 @@
             if (favorites.length === 0) { section.style.display = 'none'; return; }
             section.style.display = 'block';
             grid.innerHTML = favorites.map(toolId => {
-                const card = document.querySelector(`.tool-card[data-tool="${toolId}"]`);
+                const card = document.querySelector(`.tools-grid[data-section] .tool-card[data-tool="${toolId}"]`);
                 if (!card) return '';
-                return card.outerHTML;
+                const clone = card.cloneNode(true);
+                const btn = clone.querySelector('.fav-btn');
+                if (btn) { btn.textContent = '★'; btn.classList.add('active'); }
+                return clone.outerHTML;
             }).join('');
             grid.querySelectorAll('.tool-card').forEach(card => {
                 card.onclick = () => openTool(card.dataset.tool);
@@ -3359,9 +3556,15 @@
             if (recentTools.length === 0) { section.style.display = 'none'; return; }
             section.style.display = 'block';
             grid.innerHTML = recentTools.map(toolId => {
-                const card = document.querySelector(`.tool-card[data-tool="${toolId}"]`);
+                const card = document.querySelector(`.tools-grid[data-section] .tool-card[data-tool="${toolId}"]`);
                 if (!card) return '';
-                return card.outerHTML;
+                const clone = card.cloneNode(true);
+                const btn = clone.querySelector('.fav-btn');
+                if (btn) {
+                    btn.textContent = favorites.includes(toolId) ? '★' : '☆';
+                    btn.classList.toggle('active', favorites.includes(toolId));
+                }
+                return clone.outerHTML;
             }).join('');
             grid.querySelectorAll('.tool-card').forEach(card => {
                 card.onclick = () => openTool(card.dataset.tool);
@@ -4167,6 +4370,9 @@
         setupDropZone('drop-pixel-file', 'pixel-file');
         setupDropZone('drop-ascii-file', 'ascii-file');
         setupDropZone('drop-imgedit-file', 'imgedit-file');
+        setupDropZone('drop-gif-files', 'gif-files');
+        setupDropZone('drop-pdf-img-file', 'pdf-img-file');
+        setupDropZone('drop-pdf-split-file', 'pdf-split-file');
 
         // PDF Merge
         document.getElementById('pdf-files').addEventListener('change', e => {
@@ -4882,6 +5088,48 @@
         function loadNotepad() { document.getElementById('notepad-input').value = localStorage.getItem('notepad') || ''; }
         function saveNotepad() { localStorage.setItem('notepad', document.getElementById('notepad-input').value); document.getElementById('notepad-status').textContent = '저장됨 ' + new Date().toLocaleTimeString(); }
         function clearNotepad() { if(confirm('정말 삭제하시겠습니까?')) { localStorage.removeItem('notepad'); document.getElementById('notepad-input').value = ''; } }
+        function downloadNotepad() {
+            const text = document.getElementById('notepad-input').value;
+            if (!text.trim()) { alert('내용을 입력해주세요.'); return; }
+            const format = document.getElementById('notepad-format').value;
+            const filename = document.getElementById('notepad-filename').value.trim() || 'memo';
+            let content, mime;
+            switch (format) {
+                case 'txt':
+                    content = text;
+                    mime = 'text/plain';
+                    break;
+                case 'md':
+                    content = text;
+                    mime = 'text/markdown';
+                    break;
+                case 'html':
+                    content = `<!DOCTYPE html>\n<html lang="ko">\n<head>\n<meta charset="UTF-8">\n<title>${filename}</title>\n</head>\n<body>\n<pre>${text.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</pre>\n</body>\n</html>`;
+                    mime = 'text/html';
+                    break;
+                case 'json':
+                    content = JSON.stringify({ content: text, created: new Date().toISOString(), lines: text.split('\n') }, null, 2);
+                    mime = 'application/json';
+                    break;
+                case 'csv':
+                    content = text.split('\n').map((line, i) => `${i + 1},"${line.replace(/"/g, '""')}"`).join('\n');
+                    content = 'line,content\n' + content;
+                    mime = 'text/csv';
+                    break;
+                case 'xml':
+                    content = `<?xml version="1.0" encoding="UTF-8"?>\n<memo>\n<created>${new Date().toISOString()}</created>\n<content><![CDATA[${text}]]></content>\n</memo>`;
+                    mime = 'application/xml';
+                    break;
+            }
+            const blob = new Blob([content], { type: mime + ';charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${filename}.${format}`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast(`${filename}.${format} 다운로드 완료`);
+        }
         loadNotepad();
 
         // Palette
@@ -8428,7 +8676,11 @@
             const file = input.files[0]; if (!file) return;
             const status = document.getElementById('pdf-img-status');
             const result = document.getElementById('pdf-img-result');
+            const controls = document.getElementById('pdf-img-controls');
+            const downloadBar = document.getElementById('pdf-img-download-bar');
             status.textContent = 'PDF.js 로딩 중...';
+            controls.style.display = 'none';
+            downloadBar.style.display = 'none';
             if (!window.pdfjsLib) {
                 const script = document.createElement('script');
                 script.src = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js';
@@ -8449,11 +8701,17 @@
                 canvas.width = viewport.width; canvas.height = viewport.height;
                 await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
                 const url = canvas.toDataURL();
-                const div = document.createElement('div');
-                div.innerHTML = `<img src="${url}" style="max-width:200px;border-radius:4px;"><br><a href="${url}" download="page-${i}.png" class="btn" style="font-size:0.7rem;padding:4px 8px;">다운로드</a>`;
-                result.appendChild(div);
+                result.innerHTML += `<div class="download-item">
+                    <input type="checkbox" class="download-check" data-url="${url}" data-filename="page-${i}.png" checked>
+                    <img src="${url}">
+                    <span class="file-name">page-${i}.png</span>
+                    <a href="${url}" download="page-${i}.png" class="btn">다운로드</a>
+                </div>`;
             }
             status.textContent = `완료! ${pdf.numPages}페이지`;
+            controls.style.display = 'block';
+            downloadBar.style.display = 'block';
+            document.getElementById('pdf-img-check-all').checked = true;
         }
 
         // PDF Split
@@ -8502,12 +8760,37 @@
             }
             return Array.from(pages).sort((a, b) => a - b);
         }
+        // 다운로드 체크박스 공통 함수
+        function toggleAllDownloadChecks(prefix) {
+            const checkAll = document.getElementById(`${prefix}-check-all`);
+            const result = document.getElementById(`${prefix}-result`);
+            result.querySelectorAll('.download-check').forEach(cb => cb.checked = checkAll.checked);
+        }
+        function downloadSelectedFiles(prefix) {
+            const result = document.getElementById(`${prefix}-result`);
+            const checked = result.querySelectorAll('.download-check:checked');
+            if (checked.length === 0) { alert('다운로드할 파일을 선택해주세요.'); return; }
+            checked.forEach((cb, idx) => {
+                setTimeout(() => {
+                    const a = document.createElement('a');
+                    a.href = cb.dataset.url;
+                    a.download = cb.dataset.filename;
+                    a.click();
+                }, idx * 200);
+            });
+            showToast(`${checked.length}개 파일 다운로드 시작`);
+        }
+
         async function splitPdf() {
             if (!splitPdfData || !splitPdfDoc) { alert('PDF 파일을 먼저 선택해주세요.'); return; }
             const status = document.getElementById('pdf-split-status');
             const result = document.getElementById('pdf-split-result');
+            const controls = document.getElementById('pdf-split-controls');
+            const downloadBar = document.getElementById('pdf-split-download-bar');
             const mode = document.querySelector('input[name="split-mode"]:checked').value;
             result.innerHTML = '';
+            controls.style.display = 'none';
+            downloadBar.style.display = 'none';
 
             const srcPdf = await PDFLib.PDFDocument.load(splitPdfData.slice(0));
             const numPages = srcPdf.getPageCount();
@@ -8523,11 +8806,18 @@
                     const pdfBytes = await newPdf.save();
                     const blob = new Blob([pdfBytes], { type: 'application/pdf' });
                     const url = URL.createObjectURL(blob);
-                    result.innerHTML += `<div style="display:inline-block;margin:5px;"><a href="${url}" download="page-${i + 1}.pdf" class="btn" style="font-size:0.8rem;">📄 ${i + 1}페이지</a></div>`;
+                    result.innerHTML += `<div class="download-item">
+                        <input type="checkbox" class="download-check" data-url="${url}" data-filename="page-${i + 1}.pdf" checked>
+                        <span class="file-name">📄 page-${i + 1}.pdf</span>
+                        <a href="${url}" download="page-${i + 1}.pdf" class="btn">다운로드</a>
+                    </div>`;
                 }
                 status.textContent = `완료! ${numPages}개 파일 생성됨`;
+                controls.style.display = 'block';
+                downloadBar.style.display = 'block';
+                document.getElementById('pdf-split-check-all').checked = true;
             } else if (mode === 'range') {
-                // 지정 페이지만 추출
+                // 지정 페이지만 추출 (단일 파일)
                 const rangeStr = document.getElementById('pdf-split-range').value;
                 if (!rangeStr.trim()) { alert('페이지 범위를 입력해주세요.'); return; }
                 const pages = parsePageRange(rangeStr, numPages);
@@ -8561,9 +8851,16 @@
                     const pdfBytes = await newPdf.save();
                     const blob = new Blob([pdfBytes], { type: 'application/pdf' });
                     const url = URL.createObjectURL(blob);
-                    result.innerHTML += `<div style="display:inline-block;margin:5px;"><a href="${url}" download="part-${fileIdx + 1}.pdf" class="btn" style="font-size:0.8rem;">📄 파트${fileIdx + 1} (${startPage + 1}-${endPage}쪽)</a></div>`;
+                    result.innerHTML += `<div class="download-item">
+                        <input type="checkbox" class="download-check" data-url="${url}" data-filename="part-${fileIdx + 1}.pdf" checked>
+                        <span class="file-name">📄 part-${fileIdx + 1}.pdf (${startPage + 1}-${endPage}쪽)</span>
+                        <a href="${url}" download="part-${fileIdx + 1}.pdf" class="btn">다운로드</a>
+                    </div>`;
                 }
                 status.textContent = `완료! ${totalFiles}개 파일 생성됨 (${countVal}페이지씩)`;
+                controls.style.display = 'block';
+                downloadBar.style.display = 'block';
+                document.getElementById('pdf-split-check-all').checked = true;
             }
         }
 
