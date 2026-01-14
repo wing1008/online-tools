@@ -3913,9 +3913,8 @@
         function setLang(lang) {
             currentLang = lang;
             localStorage.setItem('lang', lang);
-            document.getElementById('current-lang').textContent = lang.toUpperCase();
-            applyLang();
             toggleLangModal();
+            applyLang();
         }
         function toggleLangModal() { document.getElementById('lang-modal').classList.toggle('active'); }
 
