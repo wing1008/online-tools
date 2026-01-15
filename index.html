@@ -135,6 +135,8 @@
         .section-title.collapsed::after { transform: rotate(-90deg); }
         .section-title.collapsed { border-bottom-color: transparent; margin-bottom: 0; color: #555; }
         /* Section Title Colors */
+        .section-title[data-section="favorites"] { border-bottom-color: #fbbf24; }
+        .section-title[data-section="recent"] { border-bottom-color: #38bdf8; }
         .section-title[data-section="text"] { border-bottom-color: #5b8def; }
         .section-title[data-section="image"] { border-bottom-color: #4ade80; }
         .section-title[data-section="dev"] { border-bottom-color: #a78bfa; }
@@ -486,14 +488,14 @@
         <div id="main-grid">
             <!-- Favorites Section -->
             <div class="special-section" id="favorites-section" style="display:none;">
-                <div class="section-title">즐겨찾기</div>
-                <div class="tools-grid detail-view" id="favorites-grid"></div>
+                <div class="section-title" data-section="favorites" onclick="toggleSection('favorites')">즐겨찾기</div>
+                <div class="tools-grid detail-view" id="favorites-grid" data-section="favorites"></div>
             </div>
 
             <!-- Recent Section -->
             <div class="special-section" id="recent-section" style="display:none;">
-                <div class="section-title">최근 사용</div>
-                <div class="tools-grid detail-view" id="recent-grid"></div>
+                <div class="section-title" data-section="recent" onclick="toggleSection('recent')">최근 사용</div>
+                <div class="tools-grid detail-view" id="recent-grid" data-section="recent"></div>
             </div>
 
             <!-- All Tools (for sorting) -->
@@ -4076,6 +4078,7 @@
         function renderFavorites() {
             const section = document.getElementById('favorites-section');
             const grid = document.getElementById('favorites-grid');
+            const title = section.querySelector('.section-title');
             if (favorites.length === 0) { section.style.display = 'none'; return; }
             const filtered = favorites.filter(toolId => {
                 if (currentCategory === 'all') return true;
@@ -4084,6 +4087,9 @@
             });
             if (filtered.length === 0) { section.style.display = 'none'; return; }
             section.style.display = 'block';
+            const isCollapsed = collapsedSections['favorites'];
+            title.classList.toggle('collapsed', isCollapsed);
+            grid.style.display = isCollapsed ? 'none' : '';
             grid.innerHTML = filtered.map(toolId => {
                 const card = document.querySelector(`.tools-grid[data-section] .tool-card[data-tool="${toolId}"]`);
                 if (!card) return '';
@@ -4102,6 +4108,7 @@
         function renderRecent() {
             const section = document.getElementById('recent-section');
             const grid = document.getElementById('recent-grid');
+            const title = section.querySelector('.section-title');
             if (recentTools.length === 0) { section.style.display = 'none'; return; }
             const filtered = recentTools.filter(toolId => {
                 if (currentCategory === 'all') return true;
@@ -4110,6 +4117,9 @@
             });
             if (filtered.length === 0) { section.style.display = 'none'; return; }
             section.style.display = 'block';
+            const isCollapsed = collapsedSections['recent'];
+            title.classList.toggle('collapsed', isCollapsed);
+            grid.style.display = isCollapsed ? 'none' : '';
             const maxItems = currentView === 'detail' ? 5 : 6;
             grid.innerHTML = filtered.slice(0, maxItems).map(toolId => {
                 const card = document.querySelector(`.tools-grid[data-section] .tool-card[data-tool="${toolId}"]`);
