@@ -4342,6 +4342,16 @@
                 } else if (currentView === 'list') {
                     grids.forEach(g => g.classList.add('list-view'));
                 }
+                // Apply collapsed state
+                sections.forEach(s => {
+                    const section = s.dataset.section;
+                    const isCollapsed = collapsedSections[section];
+                    s.classList.toggle('collapsed', isCollapsed);
+                    const grid = document.querySelector(`.tools-grid[data-section="${section}"]`);
+                    if (grid && s.style.display !== 'none') {
+                        grid.style.display = isCollapsed ? 'none' : '';
+                    }
+                });
             } else {
                 // Name sort
                 sections.forEach(s => s.style.display = 'none');
