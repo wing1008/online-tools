@@ -4018,7 +4018,7 @@
 
         // Favorites & Recent
         let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-        let recentTools = JSON.parse(localStorage.getItem('recentTools') || '[]');
+        let recentTools = []; // 새로고침 시 초기화
 
         // Calculator History
         let calcHistory = JSON.parse(localStorage.getItem('calcHistory') || '[]');
@@ -4281,7 +4281,7 @@
         let currentCategory = 'all';
         let currentSort = 'category';
         let currentView = 'detail';
-        let collapsedSections = JSON.parse(localStorage.getItem('collapsedSections') || '{}');
+        let collapsedSections = {}; // 새로고침 시 초기화 (모두 열림)
 
         function toggleSection(section) {
             collapsedSections[section] = !collapsedSections[section];
