@@ -4943,6 +4943,8 @@
         }
 
         // Init
+        // 페이지 로드 시 모든 섹션 화살표 초기화 (열린 상태)
+        document.querySelectorAll('.section-title').forEach(s => s.classList.remove('collapsed'));
         updateFavButtons();
         renderFavorites();
         renderRecent();
