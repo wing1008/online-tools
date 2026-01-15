@@ -4087,9 +4087,9 @@
             });
             if (filtered.length === 0) { section.style.display = 'none'; return; }
             section.style.display = 'block';
-            const isCollapsed = collapsedSections['favorites'];
-            title.classList.toggle('collapsed', isCollapsed);
-            grid.style.display = isCollapsed ? 'none' : '';
+            // collapsed 상태는 toggleSection에서 관리
+            const isCollapsed = !!collapsedSections['favorites'];
+            if (!isCollapsed) grid.style.display = '';
             grid.innerHTML = filtered.map(toolId => {
                 const card = document.querySelector(`.tools-grid[data-section] .tool-card[data-tool="${toolId}"]`);
                 if (!card) return '';
@@ -4108,7 +4108,6 @@
         function renderRecent() {
             const section = document.getElementById('recent-section');
             const grid = document.getElementById('recent-grid');
-            const title = section.querySelector('.section-title');
             if (recentTools.length === 0) { section.style.display = 'none'; return; }
             const filtered = recentTools.filter(toolId => {
                 if (currentCategory === 'all') return true;
@@ -4117,9 +4116,9 @@
             });
             if (filtered.length === 0) { section.style.display = 'none'; return; }
             section.style.display = 'block';
-            const isCollapsed = collapsedSections['recent'];
-            title.classList.toggle('collapsed', isCollapsed);
-            grid.style.display = isCollapsed ? 'none' : '';
+            // collapsed 상태는 toggleSection에서 관리
+            const isCollapsed = !!collapsedSections['recent'];
+            if (!isCollapsed) grid.style.display = '';
             const maxItems = currentView === 'detail' ? 5 : 6;
             grid.innerHTML = filtered.slice(0, maxItems).map(toolId => {
                 const card = document.querySelector(`.tools-grid[data-section] .tool-card[data-tool="${toolId}"]`);
