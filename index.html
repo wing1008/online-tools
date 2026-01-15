@@ -62,18 +62,30 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8968767404465379" crossorigin="anonymous"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Pretendard', -apple-system, sans-serif; background: #0a0a0a; min-height: 100vh; color: #888; line-height: 1.4; font-size: 14px; }
-        .container { max-width: 960px; margin: 0 auto; padding: 16px; }
+        body { font-family: 'Pretendard', -apple-system, sans-serif; background: #0a0a0a; min-height: 100vh; color: #888; line-height: 1.4; font-size: clamp(13px, 1.1vw, 16px); }
+        .container { max-width: clamp(320px, 90vw, 1200px); margin: 0 auto; padding: clamp(12px, 2vw, 24px); }
         nav { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #1a1a1a; margin-bottom: 16px; gap: 12px; flex-wrap: wrap; }
         .logo { cursor: pointer; }
-        .logo img { height: 60px; width: auto; }
+        .logo img { height: clamp(45px, 5vw, 70px); width: auto; }
         .logo .logo-dark { display: block; }
         .logo .logo-light { display: none; }
-        .nav-center { flex: 1; max-width: 280px; }
-        .nav-search { width: 100%; padding: 7px 12px 7px 32px; border-radius: 4px; border: 1px solid #222; background: #111; color: #ccc; font-size: 0.8rem; }
-        .nav-search:focus { outline: none; border-color: #333; }
+        .nav-center { flex: 1; max-width: clamp(280px, 35vw, 450px); }
+        .nav-search { width: 100%; padding: clamp(8px, 0.9vw, 12px) clamp(12px, 1.2vw, 16px) clamp(8px, 0.9vw, 12px) clamp(32px, 3vw, 42px); border-radius: 8px; border: 1px solid #333; background: #111; color: #ccc; font-size: clamp(0.85rem, 0.95vw, 1.05rem); transition: all 0.2s; }
+        .nav-search:focus { outline: none; border-color: #3b82f6; background: #161616; box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
         .nav-search-wrap { position: relative; }
-        .nav-search-wrap::before { content: '⌕'; position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #444; font-size: 0.9rem; }
+        .nav-search-wrap::before { content: '⌕'; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #555; font-size: 1.1rem; z-index: 1; }
+        .search-autocomplete { position: absolute; top: 100%; left: 0; right: 0; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; margin-top: 4px; max-height: 300px; overflow-y: auto; z-index: 100; display: none; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+        .search-autocomplete.show { display: block; }
+        .search-item { padding: 10px 14px; cursor: pointer; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #222; }
+        .search-item:last-child { border-bottom: none; }
+        .search-item:hover, .search-item.selected { background: #252525; }
+        .search-item .icon { font-size: 1.1rem; }
+        .search-item .name { color: #ddd; font-size: 0.9rem; flex: 1; }
+        .search-item .cat { color: #666; font-size: 0.75rem; }
+        body.light .search-autocomplete { background: #fff; border-color: #ddd; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+        body.light .search-item { border-bottom-color: #eee; }
+        body.light .search-item:hover, body.light .search-item.selected { background: #f5f5f5; }
+        body.light .search-item .name { color: #333; }
         .nav-tabs { display: flex; gap: 16px; margin-left: -8px; margin-top: -4px; }
         .nav-tab { padding: 0 0 8px 0; background: transparent; border: none; color: #555; font-size: 0.85rem; cursor: pointer; transition: all 0.15s; position: relative; }
         .nav-tab:hover { color: #999; }
@@ -117,9 +129,9 @@
         body.light .sort-group { background: #f5f5f5; border-color: #ddd; }
         body.light .sort-btn { color: #888; }
         body.light .sort-btn.active { background: #fff; color: #333; }
-        .section-title { color: #ddd; font-size: 1rem; font-weight: 600; margin: 40px 0 15px; padding-bottom: 10px; border-bottom: 2px solid #222; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; transition: 0.2s; }
+        .section-title { color: #ddd; font-size: clamp(0.95rem, 1.1vw, 1.2rem); font-weight: 600; margin: clamp(30px, 3.5vw, 50px) 0 clamp(12px, 1.3vw, 18px); padding-bottom: clamp(8px, 1vw, 12px); border-bottom: 2px solid #222; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; transition: 0.2s; }
         .section-title:hover { color: #fff; border-bottom-color: #444; }
-        .section-title::after { content: "▼"; font-size: 0.7em; color: #666; transition: transform 0.3s; }
+        .section-title::after { content: "▼"; font-size: 0.85em; color: #666; transition: transform 0.3s; }
         .section-title.collapsed::after { transform: rotate(-90deg); }
         .section-title.collapsed { border-bottom-color: transparent; margin-bottom: 0; color: #555; }
         /* Section Title Colors */
@@ -130,28 +142,32 @@
         .section-title[data-section="work"] { border-bottom-color: #ef4444; }
         .section-title[data-section="life"] { border-bottom-color: #ec4899; }
         .section-title[data-section="hw"] { border-bottom-color: #64748b; }
-        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; transition: all 0.3s; }
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(clamp(160px, 15vw, 220px), 1fr)); gap: clamp(12px, 1.5vw, 20px); transition: all 0.3s; }
         .tools-grid.hidden { display: none; }
         /* 상세 뷰 (기본) */
-        .tools-grid.detail-view { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
-        .tools-grid.detail-view .tool-card { min-height: 130px; padding: 20px; }
+        .tools-grid.detail-view { grid-template-columns: repeat(auto-fill, minmax(clamp(160px, 15vw, 220px), 1fr)); gap: clamp(12px, 1.5vw, 20px); }
+        .tools-grid.detail-view .tool-card { min-height: clamp(110px, 12vw, 150px); padding: clamp(16px, 1.8vw, 24px); }
         .tools-grid.detail-view .tool-card p { display: block; }
         /* 일반 뷰 (컴팩트) */
-        .tools-grid:not(.detail-view) { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
-        .tools-grid:not(.detail-view) .tool-card { min-height: 90px; padding: 15px; }
-        .tools-grid:not(.detail-view) .tool-card p { display: none; }
-        .tools-grid:not(.detail-view) .tool-card .icon { font-size: 1.4rem; margin-bottom: 2px; }
-        .tools-grid:not(.detail-view) .tool-card h3 { font-size: 0.9rem; }
-        .tool-card { background: #111; border-radius: 10px; padding: 20px; cursor: pointer; border: 1px solid #222; transition: all 0.2s; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-height: 130px; position: relative; user-select: none; }
+        .tools-grid:not(.detail-view):not(.list-view) { grid-template-columns: repeat(auto-fill, minmax(clamp(120px, 12vw, 160px), 1fr)); gap: clamp(8px, 1vw, 14px); }
+        .tools-grid:not(.detail-view):not(.list-view) .tool-card { min-height: clamp(75px, 8vw, 100px); padding: clamp(12px, 1.2vw, 18px); }
+        .tools-grid:not(.detail-view):not(.list-view) .tool-card p { display: none; }
+        .tools-grid:not(.detail-view):not(.list-view) .tool-card .icon { font-size: clamp(1.2rem, 1.5vw, 1.6rem); margin-bottom: 2px; }
+        .tools-grid:not(.detail-view):not(.list-view) .tool-card h3 { font-size: clamp(0.8rem, 0.9vw, 1rem); }
+        /* 리스트 뷰 */
+        .tools-grid.list-view { display: flex; flex-direction: column; gap: clamp(3px, 0.4vw, 6px); }
+        .tools-grid.list-view .tool-card { flex-direction: row; align-items: center; min-height: auto; padding: clamp(8px, 1vw, 14px) clamp(12px, 1.5vw, 20px); gap: clamp(10px, 1vw, 16px); border-radius: 6px; }
+        .tools-grid.list-view .tool-card .icon { font-size: clamp(1rem, 1.2vw, 1.4rem); margin-bottom: 0; min-width: clamp(24px, 2.5vw, 32px); text-align: center; }
+        .tools-grid.list-view .tool-card h3 { font-size: clamp(0.85rem, 0.95vw, 1.05rem); flex: 1; }
+        .tools-grid.list-view .tool-card p { display: none; }
+        .tools-grid.list-view .tool-card .fav-btn { position: static; opacity: 0.5; font-size: 1rem; }
+        .tools-grid.list-view .tool-card:hover .fav-btn { opacity: 1; }
+        .tools-grid.list-view .tool-card:hover { transform: none; box-shadow: none; }
+        .tool-card { background: #111; border-radius: clamp(8px, 0.8vw, 12px); padding: clamp(16px, 1.8vw, 24px); cursor: pointer; border: 1px solid #222; transition: all 0.2s; display: flex; flex-direction: column; align-items: flex-start; gap: clamp(6px, 0.7vw, 10px); min-height: clamp(110px, 12vw, 150px); position: relative; user-select: none; }
         .tool-card:hover { transform: translateY(-4px); background: #161616; border-color: #444; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        .tool-card h3 { font-size: 1rem; color: #eee; font-weight: 600; }
-        .tool-card p { font-size: 0.85rem; color: #666; line-height: 1.4; word-break: keep-all; display: block; }
-        .tool-card .icon { font-size: 1.6rem; margin-bottom: 4px; }
-        .tool-card.toggle-card { background: transparent; border: 1px dashed #444; color: #666; font-size: 1.5rem; justify-content: center; align-items: center; }
-        .tool-card.toggle-card:hover { background: #1a1a1a; border-color: #555; color: #888; transform: none; box-shadow: none; }
-        .tools-grid:not(.detail-view) .tool-card.toggle-card { font-size: 1.2rem; }
-        body.light .tool-card.toggle-card { border-color: #ccc; color: #999; }
-        body.light .tool-card.toggle-card:hover { background: #f5f5f5; border-color: #aaa; color: #666; }
+        .tool-card h3 { font-size: clamp(0.9rem, 1vw, 1.15rem); color: #eee; font-weight: 600; }
+        .tool-card p { font-size: clamp(0.75rem, 0.85vw, 0.95rem); color: #666; line-height: 1.4; word-break: keep-all; display: block; }
+        .tool-card .icon { font-size: clamp(1.4rem, 1.6vw, 2rem); margin-bottom: clamp(2px, 0.3vw, 6px); }
         .tool-section { display: none; background: #111; border-radius: 10px; padding: 25px; margin: 20px 0; border: 1px solid #1a1a1a; }
         .tool-section.active { display: block; }
         .tool-section h2 { font-size: 1.1rem; color: #ddd; font-weight: 500; margin-bottom: 20px; }
@@ -273,6 +289,7 @@
         body.light .logo .logo-light { display: block; }
         body.light nav a, body.light .icon-btn { color: #888; }
         body.light .nav-search { background: #fff; border-color: #ddd; color: #333; }
+        body.light .nav-search:focus { border-color: #3b82f6; background: #fff; box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
         body.light .section-title { color: #888; }
         body.light .tool-card { background: #fff; border-color: #e5e5e5; }
         body.light .tool-card:hover { box-shadow: 0 3px 8px rgba(0,0,0,0.08); border-color: #ccc; }
@@ -356,7 +373,8 @@
             </div>
             <div class="nav-center">
                 <div class="nav-search-wrap">
-                    <input type="text" class="nav-search" id="search-input" placeholder="검색 (Ctrl+K)" oninput="searchTools()">
+                    <input type="text" class="nav-search" id="search-input" placeholder="도구 검색... (Ctrl+K)" oninput="handleSearchInput()" onkeydown="handleSearchKeydown(event)" onfocus="showAutocomplete()" autocomplete="off">
+                    <div class="search-autocomplete" id="search-autocomplete"></div>
                 </div>
             </div>
         </nav>
@@ -395,6 +413,7 @@
                         <button class="sort-btn" data-sort="name" onclick="setSort('name')">이름순</button>
                     </div>
                     <div class="sort-group">
+                        <button class="sort-btn" data-view="list" onclick="setView('list')">리스트</button>
                         <button class="sort-btn" data-view="normal" onclick="setView('normal')">일반</button>
                         <button class="sort-btn active" data-view="detail" onclick="setView('detail')">상세</button>
                     </div>
@@ -4110,7 +4129,112 @@
             });
         }
 
-        // Search
+        // Search with Autocomplete
+        let selectedSearchIndex = -1;
+        const catNames = { text: '텍스트', image: '이미지', dev: '개발', calc: '계산', work: '업무', life: '생활', hw: '하드웨어' };
+
+        function getAllTools() {
+            const cards = document.querySelectorAll('#main-grid .tools-grid[data-section] .tool-card[data-tool]');
+            return Array.from(cards).map(card => ({
+                id: card.dataset.tool,
+                name: card.dataset.name || '',
+                icon: card.querySelector('.icon')?.textContent || '',
+                cat: card.dataset.cat || ''
+            }));
+        }
+
+        function handleSearchInput() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            updateAutocomplete(query);
+            searchTools();
+        }
+
+        function updateAutocomplete(query) {
+            const container = document.getElementById('search-autocomplete');
+            selectedSearchIndex = -1;
+
+            if (!query) {
+                container.classList.remove('show');
+                return;
+            }
+
+            const tools = getAllTools();
+            const matches = tools.filter(t =>
+                t.name.toLowerCase().includes(query) ||
+                t.id.toLowerCase().includes(query)
+            ).slice(0, 8);
+
+            if (matches.length === 0) {
+                container.classList.remove('show');
+                return;
+            }
+
+            container.innerHTML = matches.map((t, i) => `
+                <div class="search-item" data-tool="${t.id}" onclick="selectSearchItem('${t.id}')">
+                    <span class="icon">${t.icon}</span>
+                    <span class="name">${t.name}</span>
+                    <span class="cat">${catNames[t.cat] || t.cat}</span>
+                </div>
+            `).join('');
+            container.classList.add('show');
+        }
+
+        function showAutocomplete() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            if (query) updateAutocomplete(query);
+        }
+
+        function hideAutocomplete() {
+            document.getElementById('search-autocomplete').classList.remove('show');
+            selectedSearchIndex = -1;
+        }
+
+        function selectSearchItem(toolId) {
+            document.getElementById('search-input').value = '';
+            hideAutocomplete();
+            openTool(toolId);
+        }
+
+        function handleSearchKeydown(e) {
+            const container = document.getElementById('search-autocomplete');
+            const items = container.querySelectorAll('.search-item');
+
+            if (!container.classList.contains('show') || items.length === 0) {
+                if (e.key === 'Escape') {
+                    document.getElementById('search-input').blur();
+                }
+                return;
+            }
+
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                selectedSearchIndex = Math.min(selectedSearchIndex + 1, items.length - 1);
+                updateSelectedItem(items);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                selectedSearchIndex = Math.max(selectedSearchIndex - 1, -1);
+                updateSelectedItem(items);
+            } else if (e.key === 'Enter' && selectedSearchIndex >= 0) {
+                e.preventDefault();
+                selectSearchItem(items[selectedSearchIndex].dataset.tool);
+            } else if (e.key === 'Escape') {
+                hideAutocomplete();
+            }
+        }
+
+        function updateSelectedItem(items) {
+            items.forEach((item, i) => {
+                item.classList.toggle('selected', i === selectedSearchIndex);
+            });
+        }
+
+        // Close autocomplete when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-search-wrap')) {
+                hideAutocomplete();
+            }
+        });
+
         function searchTools() {
             const query = document.getElementById('search-input').value.toLowerCase().trim();
             const cards = document.querySelectorAll('#main-grid .tool-card[data-tool]');
@@ -4155,28 +4279,6 @@
             applyView();
         }
 
-        function updateToggleCards() {
-            document.querySelectorAll('.tools-grid[data-section]').forEach(grid => {
-                const section = grid.dataset.section;
-                let toggleCard = grid.querySelector('.toggle-card');
-                if (!toggleCard) {
-                    toggleCard = document.createElement('div');
-                    toggleCard.className = 'tool-card toggle-card';
-                    toggleCard.onclick = () => toggleSection(section);
-                    grid.appendChild(toggleCard);
-                }
-                const isCollapsed = collapsedSections[section];
-                toggleCard.textContent = isCollapsed ? '◲' : '◰';
-
-                const cards = Array.from(grid.querySelectorAll('.tool-card:not(.toggle-card)'));
-                const visibleCount = currentView === 'detail' ? 4 : 5;
-
-                cards.forEach((card, i) => {
-                    card.style.display = (isCollapsed && i >= visibleCount) ? 'none' : '';
-                });
-            });
-        }
-
         function setSort(sort) {
             currentSort = sort;
             document.querySelectorAll('.sort-btn[data-sort]').forEach(b => b.classList.toggle('active', b.dataset.sort === sort));
@@ -4187,8 +4289,17 @@
             currentView = view;
             document.querySelectorAll('.sort-btn[data-view]').forEach(b => b.classList.toggle('active', b.dataset.view === view));
             // 즐겨찾기, 최근사용에도 적용
-            document.getElementById('favorites-grid').classList.toggle('detail-view', view === 'detail');
-            document.getElementById('recent-grid').classList.toggle('detail-view', view === 'detail');
+            const favGrid = document.getElementById('favorites-grid');
+            const recentGrid = document.getElementById('recent-grid');
+            favGrid.classList.remove('detail-view', 'list-view');
+            recentGrid.classList.remove('detail-view', 'list-view');
+            if (view === 'detail') {
+                favGrid.classList.add('detail-view');
+                recentGrid.classList.add('detail-view');
+            } else if (view === 'list') {
+                favGrid.classList.add('list-view');
+                recentGrid.classList.add('list-view');
+            }
             renderRecent();
             applyView();
         }
@@ -4211,9 +4322,9 @@
             const grids = document.querySelectorAll('#main-grid .tools-grid[data-section]');
             const container = document.getElementById('all-tools-container');
 
-            // Remove detail-view from all grids
-            grids.forEach(g => g.classList.remove('detail-view'));
-            container.querySelectorAll('.tools-grid').forEach(g => g.classList.remove('detail-view'));
+            // Remove all view classes from grids
+            grids.forEach(g => g.classList.remove('detail-view', 'list-view'));
+            container.querySelectorAll('.tools-grid').forEach(g => g.classList.remove('detail-view', 'list-view'));
 
             if (currentSort === 'category') {
                 // Category sort
@@ -4225,11 +4336,12 @@
                     sections.forEach(s => s.style.display = s.dataset.section === currentCategory ? '' : 'none');
                     grids.forEach(g => g.style.display = g.dataset.section === currentCategory ? '' : 'none');
                 }
-                // Apply detail view if needed
+                // Apply view class
                 if (currentView === 'detail') {
                     grids.forEach(g => g.classList.add('detail-view'));
+                } else if (currentView === 'list') {
+                    grids.forEach(g => g.classList.add('list-view'));
                 }
-                updateToggleCards();
             } else {
                 // Name sort
                 sections.forEach(s => s.style.display = 'none');
@@ -4241,7 +4353,7 @@
 
         function renderNameSort() {
             const container = document.getElementById('all-tools-container');
-            let cards = Array.from(document.querySelectorAll('#main-grid .tools-grid[data-section] .tool-card:not(.toggle-card)'));
+            let cards = Array.from(document.querySelectorAll('#main-grid .tools-grid[data-section] .tool-card'));
 
             if (currentCategory !== 'all') {
                 cards = cards.filter(c => c.dataset.cat === currentCategory);
@@ -4290,7 +4402,7 @@
                     container.appendChild(title);
 
                     currentGrid = document.createElement('div');
-                    currentGrid.className = 'tools-grid' + (currentView === 'detail' ? ' detail-view' : '');
+                    currentGrid.className = 'tools-grid' + (currentView === 'detail' ? ' detail-view' : currentView === 'list' ? ' list-view' : '');
                     currentGrid.dataset.letter = letter;
                     container.appendChild(currentGrid);
                     letterGroups[letter] = { grid: currentGrid, cards: [] };
@@ -4306,26 +4418,6 @@
                 }
                 currentGrid.appendChild(clone);
                 letterGroups[currentLetterGroup].cards.push(clone);
-            });
-
-            // Add toggle cards to each letter group
-            Object.keys(letterGroups).forEach(letter => {
-                const { grid, cards: groupCards } = letterGroups[letter];
-                const toggleCard = document.createElement('div');
-                toggleCard.className = 'tool-card toggle-card';
-                const isCollapsed = collapsedSections['name-' + letter];
-                toggleCard.textContent = isCollapsed ? '◲' : '◰';
-                toggleCard.onclick = () => {
-                    collapsedSections['name-' + letter] = !collapsedSections['name-' + letter];
-                    localStorage.setItem('collapsedSections', JSON.stringify(collapsedSections));
-                    applyView();
-                };
-                grid.appendChild(toggleCard);
-
-                const visibleCount = currentView === 'detail' ? 4 : 5;
-                groupCards.forEach((card, i) => {
-                    card.style.display = (isCollapsed && i >= visibleCount) ? 'none' : '';
-                });
             });
 
             updateFavButtons();
