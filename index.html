@@ -4285,8 +4285,20 @@
 
         function toggleSection(section) {
             collapsedSections[section] = !collapsedSections[section];
+            const isCollapsed = collapsedSections[section];
+
+            // 해당 섹션만 직접 업데이트
+            const title = document.querySelector(`.section-title[data-section="${section}"]`);
+            const grid = document.querySelector(`.tools-grid[data-section="${section}"]`);
+
+            if (title) {
+                title.classList.toggle('collapsed', isCollapsed);
+            }
+            if (grid) {
+                grid.style.display = isCollapsed ? 'none' : '';
+            }
+
             localStorage.setItem('collapsedSections', JSON.stringify(collapsedSections));
-            applyView();
         }
 
         function setSort(sort) {
@@ -4352,10 +4364,11 @@
                 } else if (currentView === 'list') {
                     grids.forEach(g => g.classList.add('list-view'));
                 }
-                // Apply collapsed state
+                // Apply collapsed state (즐겨찾기/최근사용 제외 - 별도 처리됨)
                 sections.forEach(s => {
                     const section = s.dataset.section;
-                    const isCollapsed = collapsedSections[section];
+                    if (section === 'favorites' || section === 'recent') return;
+                    const isCollapsed = !!collapsedSections[section];
                     s.classList.toggle('collapsed', isCollapsed);
                     const grid = document.querySelector(`.tools-grid[data-section="${section}"]`);
                     if (grid && s.style.display !== 'none') {
