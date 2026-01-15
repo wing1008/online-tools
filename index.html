@@ -5417,9 +5417,9 @@
         // 초기 히스토리 상태 설정
         history.replaceState({ tab: 'main' }, '', location.hash || '#');
 
-        // 처음 방문 시 가이드 표시
-        if (!localStorage.getItem('hideGuide')) {
-            setTimeout(() => showGuide(), 500);
+        // 새로고침 시 가이드 표시 (다시 보지 않기 선택 시 제외)
+        if (localStorage.getItem('hideGuide') !== 'true') {
+            setTimeout(() => showGuide(), 300);
         }
 
         // Help System
