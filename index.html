@@ -63,14 +63,14 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Pretendard', -apple-system, sans-serif; background: #0a0a0a; min-height: 100vh; color: #888; line-height: 1.4; font-size: clamp(13px, 1.1vw, 16px); }
-        .container { max-width: clamp(320px, 90vw, 1200px); margin: 0 auto; padding: clamp(12px, 2vw, 24px); }
+        .container { max-width: 1400px; margin: 0 auto; padding: 12px 16px; }
         nav { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #1a1a1a; margin-bottom: 16px; gap: 12px; flex-wrap: wrap; }
         .logo { cursor: pointer; }
-        .logo img { height: clamp(45px, 5vw, 70px); width: auto; }
+        .logo img { height: 55px; width: auto; }
         .logo .logo-dark { display: block; }
         .logo .logo-light { display: none; }
-        .nav-center { flex: 1; max-width: clamp(280px, 35vw, 450px); }
-        .nav-search { width: 100%; padding: clamp(8px, 0.9vw, 12px) clamp(12px, 1.2vw, 16px) clamp(8px, 0.9vw, 12px) clamp(32px, 3vw, 42px); border-radius: 8px; border: 1px solid #333; background: #111; color: #ccc; font-size: clamp(0.85rem, 0.95vw, 1.05rem); transition: all 0.2s; }
+        .nav-center { flex: 1; max-width: 320px; }
+        .nav-search { width: 100%; padding: 9px 14px 9px 36px; border-radius: 8px; border: 1px solid #333; background: #111; color: #ccc; font-size: 0.9rem; transition: all 0.2s; }
         .nav-search:focus { outline: none; border-color: #3b82f6; background: #161616; box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
         .nav-search-wrap { position: relative; }
         .nav-search-wrap::before { content: '⌕'; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #555; font-size: 1.1rem; z-index: 1; }
@@ -86,8 +86,8 @@
         body.light .search-item { border-bottom-color: #eee; }
         body.light .search-item:hover, body.light .search-item.selected { background: #f5f5f5; }
         body.light .search-item .name { color: #333; }
-        .nav-tabs { display: flex; gap: 16px; margin-left: -8px; margin-top: -4px; }
-        .nav-tab { padding: 0 0 8px 0; background: transparent; border: none; color: #555; font-size: 0.85rem; cursor: pointer; transition: all 0.15s; position: relative; }
+        .nav-tabs { display: flex; gap: 18px; margin-left: -8px; margin-top: -4px; }
+        .nav-tab { padding: 0 0 8px 0; background: transparent; border: none; color: #555; font-size: 0.9rem; cursor: pointer; transition: all 0.15s; position: relative; }
         .nav-tab:hover { color: #999; }
         .nav-tab.active { color: #fff; }
         .nav-tab.active::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; background: #3b82f6; border-radius: 50%; }
@@ -123,7 +123,7 @@
         .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 8px; flex-wrap: wrap; }
         .sort-controls { display: flex; gap: 8px; }
         .sort-group { display: flex; background: #111; border-radius: 4px; border: 1px solid #222; overflow: hidden; }
-        .sort-btn { padding: 5px 10px; background: transparent; border: none; color: #666; font-size: 0.75rem; cursor: pointer; transition: all 0.15s; }
+        .sort-btn { padding: 6px 12px; background: transparent; border: none; color: #666; font-size: 0.8rem; cursor: pointer; transition: all 0.15s; }
         .sort-btn:hover { color: #999; }
         .sort-btn.active { background: #252525; color: #ccc; }
         body.light .sort-group { background: #f5f5f5; border-color: #ddd; }
@@ -267,8 +267,8 @@
         @media (max-width: 600px) { nav { flex-direction: column; } .nav-center { max-width: 100%; order: 3; width: 100%; } .timer-display { font-size: 2rem; } .filter-tabs { overflow-x: auto; } .fixed-sidebar { right: 8px; gap: 6px; } .fixed-sidebar .sidebar-btn { width: 38px; min-width: 38px; height: 38px; font-size: 1rem; padding: 0; } }
 
         /* Filter Tabs - Pill Style */
-        .filter-tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 20px; border-bottom: 1px solid #1a1a1a; scrollbar-width: none; }
-        .filter-tab { padding: 8px 16px; background: #111; border: 1px solid #222; border-radius: 20px; color: #666; font-size: 0.85rem; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+        .filter-tabs { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 20px; border-bottom: 1px solid #1a1a1a; scrollbar-width: none; }
+        .filter-tab { padding: 8px 18px; background: #111; border: 1px solid #222; border-radius: 20px; color: #666; font-size: 0.9rem; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
         .filter-tab:hover { background: #222; color: #ccc; }
         .filter-tab.active { background: #333; color: #fff; border-color: #444; font-weight: 600; }
 
