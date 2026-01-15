@@ -452,10 +452,91 @@
         .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: rgba(0,0,0,0.8); color: #fff; padding: 12px 24px; border-radius: 8px; font-size: 0.9rem; z-index: 9999; opacity: 0; transition: all 0.3s ease; pointer-events: none; }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
         body.light .toast { background: rgba(50,50,50,0.9); }
+
+        /* Welcome Guide Modal */
+        .guide-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 10000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s; }
+        .guide-overlay.show { opacity: 1; visibility: visible; }
+        .guide-modal { background: #1a1a1a; border-radius: 20px; width: 90%; max-width: 480px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); overflow: hidden; }
+        body.light .guide-modal { background: #fff; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+        .guide-slides { display: flex; transition: transform 0.4s ease; }
+        .guide-slide { min-width: 100%; padding: 40px 30px 30px; text-align: center; }
+        .guide-illust { font-size: 5rem; margin-bottom: 20px; line-height: 1; }
+        .guide-title { font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 12px; }
+        body.light .guide-title { color: #222; }
+        .guide-desc { font-size: 1rem; color: #888; line-height: 1.6; }
+        body.light .guide-desc { color: #666; }
+        .guide-nav { display: flex; justify-content: center; gap: 8px; padding: 0 30px 20px; }
+        .guide-dot { width: 10px; height: 10px; border-radius: 50%; background: #444; border: none; cursor: pointer; transition: all 0.2s; }
+        .guide-dot.active { background: #3b82f6; transform: scale(1.2); }
+        body.light .guide-dot { background: #ddd; }
+        body.light .guide-dot.active { background: #3b82f6; }
+        .guide-btns { display: flex; gap: 10px; padding: 0 30px 30px; }
+        .guide-btn { flex: 1; padding: 14px; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; border: none; }
+        .guide-btn.primary { background: #3b82f6; color: #fff; }
+        .guide-btn.primary:hover { background: #2563eb; }
+        .guide-btn.secondary { background: #333; color: #888; }
+        .guide-btn.secondary:hover { background: #444; color: #ccc; }
+        body.light .guide-btn.secondary { background: #f0f0f0; color: #666; }
+        body.light .guide-btn.secondary:hover { background: #e0e0e0; color: #333; }
+        .guide-arrows { display: flex; justify-content: space-between; padding: 10px 20px; }
+        .guide-arrow { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); border: none; color: #fff; font-size: 1.2rem; cursor: pointer; transition: all 0.2s; }
+        .guide-arrow:hover { background: rgba(255,255,255,0.2); }
+        .guide-arrow:disabled { opacity: 0.3; cursor: default; }
+        body.light .guide-arrow { background: rgba(0,0,0,0.05); color: #333; }
+        body.light .guide-arrow:hover { background: rgba(0,0,0,0.1); }
     </style>
 </head>
 <body>
     <div class="toast" id="toast">복사되었습니다</div>
+
+    <!-- Welcome Guide Modal -->
+    <div class="guide-overlay" id="guide-overlay">
+        <div class="guide-modal">
+            <div class="guide-slides" id="guide-slides">
+                <div class="guide-slide">
+                    <div class="guide-illust">🧰</div>
+                    <h2 class="guide-title">올인원 도구 모음</h2>
+                    <p class="guide-desc">70개 이상의 웹 도구를 한 곳에서!<br>텍스트, 이미지, 개발, 계산 등<br>필요한 모든 도구가 여기 있습니다.</p>
+                </div>
+                <div class="guide-slide">
+                    <div class="guide-illust">⭐</div>
+                    <h2 class="guide-title">나만의 즐겨찾기</h2>
+                    <p class="guide-desc">자주 쓰는 도구를 즐겨찾기에 추가하세요.<br>클릭 한 번으로 나만의 툴박스를<br>쉽게 구성할 수 있습니다.</p>
+                </div>
+                <div class="guide-slide">
+                    <div class="guide-illust">🔓</div>
+                    <h2 class="guide-title">로그인 없이 사용</h2>
+                    <p class="guide-desc">회원가입도, 로그인도 필요 없어요.<br>바로 접속해서 바로 사용하세요.<br>모든 기능이 즉시 열려 있습니다.</p>
+                </div>
+                <div class="guide-slide">
+                    <div class="guide-illust">🔄</div>
+                    <h2 class="guide-title">반복루트 기능</h2>
+                    <p class="guide-desc">반복적인 작업을 자동화하세요.<br>여러 도구를 연결하여 일괄 처리!<br>시간을 아껴드립니다.</p>
+                </div>
+                <div class="guide-slide">
+                    <div class="guide-illust">🎁</div>
+                    <h2 class="guide-title">완전 무료</h2>
+                    <p class="guide-desc">다음 업데이트 전까지 모든 기능이<br>완전 무료로 제공됩니다.<br>지금 바로 시작해보세요!</p>
+                </div>
+            </div>
+            <div class="guide-arrows">
+                <button class="guide-arrow" id="guide-prev" onclick="guideSlide(-1)">◀</button>
+                <button class="guide-arrow" id="guide-next" onclick="guideSlide(1)">▶</button>
+            </div>
+            <div class="guide-nav" id="guide-nav">
+                <button class="guide-dot active" onclick="guideGoTo(0)"></button>
+                <button class="guide-dot" onclick="guideGoTo(1)"></button>
+                <button class="guide-dot" onclick="guideGoTo(2)"></button>
+                <button class="guide-dot" onclick="guideGoTo(3)"></button>
+                <button class="guide-dot" onclick="guideGoTo(4)"></button>
+            </div>
+            <div class="guide-btns">
+                <button class="guide-btn secondary" onclick="closeGuide(true)">다시 보지 않기</button>
+                <button class="guide-btn primary" onclick="closeGuide(false)">시작하기</button>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <nav>
             <div class="nav-left">
@@ -5288,6 +5369,43 @@
             }
         }
 
+        // Welcome Guide
+        let guideIndex = 0;
+        const guideSlides = document.getElementById('guide-slides');
+        const guideDots = document.querySelectorAll('.guide-dot');
+        const guidePrev = document.getElementById('guide-prev');
+        const guideNext = document.getElementById('guide-next');
+
+        function updateGuide() {
+            guideSlides.style.transform = `translateX(-${guideIndex * 100}%)`;
+            guideDots.forEach((d, i) => d.classList.toggle('active', i === guideIndex));
+            guidePrev.disabled = guideIndex === 0;
+            guideNext.disabled = guideIndex === 4;
+        }
+
+        function guideSlide(dir) {
+            guideIndex = Math.max(0, Math.min(4, guideIndex + dir));
+            updateGuide();
+        }
+
+        function guideGoTo(i) {
+            guideIndex = i;
+            updateGuide();
+        }
+
+        function closeGuide(neverShow) {
+            document.getElementById('guide-overlay').classList.remove('show');
+            if (neverShow) {
+                localStorage.setItem('hideGuide', 'true');
+            }
+        }
+
+        function showGuide() {
+            guideIndex = 0;
+            updateGuide();
+            document.getElementById('guide-overlay').classList.add('show');
+        }
+
         // Init
         // 페이지 로드 시 모든 섹션 화살표 초기화 (열린 상태)
         document.querySelectorAll('.section-title').forEach(s => s.classList.remove('collapsed'));
@@ -5298,6 +5416,11 @@
 
         // 초기 히스토리 상태 설정
         history.replaceState({ tab: 'main' }, '', location.hash || '#');
+
+        // 처음 방문 시 가이드 표시
+        if (!localStorage.getItem('hideGuide')) {
+            setTimeout(() => showGuide(), 500);
+        }
 
         // Help System
         const helpTexts = {
