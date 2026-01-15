@@ -65,17 +65,17 @@
         *, *::before, *::after { transition: background-color 0.3s, border-color 0.3s, color 0.3s, box-shadow 0.3s; }
         body { font-family: 'Pretendard', -apple-system, sans-serif; background: #0a0a0a; min-height: 100vh; color: #888; line-height: 1.4; font-size: clamp(13px, 1.1vw, 16px); }
         .container { max-width: 1400px; margin: 0 auto; padding: 12px 16px; }
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; border-bottom: 1px solid #1a1a1a; gap: 16px; flex-wrap: wrap; position: sticky; top: 0; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px); z-index: 100; margin: 0 -20px; }
+        nav { display: flex; justify-content: space-between; align-items: flex-end; padding: 20px 20px 12px; border-bottom: 1px solid #1a1a1a; gap: 16px; flex-wrap: wrap; position: sticky; top: 0; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px); z-index: 100; margin: 0 -20px; }
         body.light nav { background: rgba(255, 255, 255, 0.95); }
         .logo { cursor: pointer; }
         .logo img { height: 55px; width: auto; }
         .logo .logo-dark { display: block; }
         .logo .logo-light { display: none; }
-        .nav-center { flex: 1; max-width: 320px; }
-        .nav-search { width: 100%; padding: 9px 14px 9px 38px; border-radius: 8px; border: 1px solid #333; background: #111; color: #ccc; font-size: 0.9rem; transition: all 0.2s; }
+        .nav-center { flex: 1; max-width: 400px; margin-bottom: 0; }
+        .nav-search { width: 100%; padding: 12px 18px 12px 46px; border-radius: 10px; border: 1px solid #333; background: #111; color: #ccc; font-size: 1rem; transition: all 0.2s; }
         .nav-search:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
         .nav-search-wrap { position: relative; }
-        .nav-search-wrap::before { content: '⌕'; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #555; font-size: 1.1rem; z-index: 1; }
+        .nav-search-wrap::before { content: '⌕'; position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #555; font-size: 1.2rem; z-index: 1; }
         .search-autocomplete { position: absolute; top: 100%; left: 0; right: 0; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; margin-top: 4px; max-height: 300px; overflow-y: auto; z-index: 100; display: none; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
         .search-autocomplete.show { display: block; }
         .search-item { padding: 10px 14px; cursor: pointer; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #252525; }
@@ -96,14 +96,15 @@
         .search-cat-item .cat { color: #3b82f6; }
         body.light .search-cat-item { background: rgba(59,130,246,0.05); }
         body.light .search-cat-item:hover { background: rgba(59,130,246,0.1); }
-        .nav-tabs { display: flex; gap: 18px; }
-        .nav-tab { padding: 8px 0; background: transparent; border: none; color: #555; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; position: relative; }
+        .nav-tabs { display: flex; gap: 40px; margin-bottom: 8px; }
+        .nav-tab { padding: 10px 0; background: transparent; border: none; color: #666; font-size: 1rem; font-weight: 500; cursor: pointer; transition: all 0.2s; position: relative; }
         .nav-tab:hover { color: #ccc; }
         .nav-tab.active { color: #fff; }
-        .nav-tab.active::after { content: ''; position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; background: #3b82f6; border-radius: 50%; }
-        body.light .nav-tab { color: #888; }
-        body.light .nav-tab:hover { color: #333; }
-        body.light .nav-tab.active { color: #333; }
+        .nav-tab.active::after { content: ''; position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; background: #3b82f6; border-radius: 50%; }
+        body.light .nav-tab { color: #555; }
+        body.light .nav-tab:hover { color: #111; }
+        body.light .nav-tab.active { color: #111; font-weight: 600; }
+        .nav-left { display: flex; align-items: center; gap: 150px; }
         .hero-section { text-align: center; padding: 30px 20px 20px; background: linear-gradient(180deg, rgba(59,130,246,0.08) 0%, transparent 100%); border-radius: 0 0 20px 20px; margin-bottom: 30px; }
         .hero-title { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 0 0 14px; }
         .hero-desc { font-size: 1.25rem; color: #888; margin: 0; line-height: 1.6; }
@@ -457,14 +458,17 @@
     <div class="toast" id="toast">복사되었습니다</div>
     <div class="container">
         <nav>
-            <div class="logo" onclick="showMain()">
-                <img src="logo-dark.png" alt="WATK" class="logo-dark">
-                <img src="logo-light.png" alt="WATK" class="logo-light">
-            </div>
-            <div class="nav-tabs">
-                <button class="nav-tab active" data-tab="main" onclick="switchTab('main')">메인</button>
-                <button class="nav-tab" data-tab="batch" onclick="switchTab('batch')">반복루트</button>
-                <button class="nav-tab" data-tab="contact" onclick="showTool('contact')">문의</button>
+            <div class="nav-left">
+                <div class="logo" onclick="showMain()">
+                    <img src="logo-dark.png" alt="WATK" class="logo-dark">
+                    <img src="logo-light.png" alt="WATK" class="logo-light">
+                </div>
+                <div class="nav-tabs">
+                    <button class="nav-tab active" data-tab="main" onclick="switchTab('main')">메인</button>
+                    <button class="nav-tab" data-tab="batch" onclick="switchTab('batch')">반복루트</button>
+                    <button class="nav-tab" data-tab="favorites" onclick="switchTab('favorites')">즐겨찾기</button>
+                    <button class="nav-tab" data-tab="contact" onclick="showTool('contact')">문의</button>
+                </div>
             </div>
             <div class="nav-center">
                 <div class="nav-search-wrap">
@@ -648,6 +652,18 @@
                 <div id="batch-status" style="color:#888;font-size:0.85rem;margin-bottom:15px;"></div>
 
                 <div class="batch-results" id="batch-results"></div>
+            </div>
+        </div>
+
+        <!-- Favorites Page -->
+        <div id="favorites-page" style="display:none;">
+            <h2 style="color:#333;margin-bottom:20px;font-size:1.3rem;">⭐ 내 즐겨찾기</h2>
+            <p style="color:#888;margin-bottom:20px;font-size:0.95rem;">자주 사용하는 도구를 모아뒀어요. 도구의 ☆를 클릭하면 추가/제거할 수 있습니다.</p>
+            <div class="tools-grid detail-view" id="favorites-page-grid"></div>
+            <div id="favorites-empty" style="display:none;text-align:center;padding:60px 20px;color:#888;">
+                <div style="font-size:3rem;margin-bottom:15px;">⭐</div>
+                <p style="font-size:1.1rem;margin-bottom:10px;">즐겨찾기가 비어있습니다</p>
+                <p style="font-size:0.9rem;color:#666;">메인 페이지에서 도구의 ☆를 클릭하여 추가하세요</p>
             </div>
         </div>
 
@@ -4255,46 +4271,29 @@
         }
 
         function renderFavorites() {
+            // 즐겨찾기는 별도 페이지로 분리됨 - 메인에서는 숨김
             const section = document.getElementById('favorites-section');
-            const grid = document.getElementById('favorites-grid');
-            const title = section.querySelector('.section-title');
-            if (favorites.length === 0) { section.style.display = 'none'; return; }
-            const filtered = favorites.filter(toolId => {
-                if (currentCategory === 'all') return true;
-                const card = document.querySelector(`.tools-grid[data-section] .tool-card[data-tool="${toolId}"]`);
-                return card && card.dataset.cat === currentCategory;
-            });
-            if (filtered.length === 0) { section.style.display = 'none'; return; }
-            section.style.display = 'block';
-            // collapsed 상태는 toggleSection에서 관리
-            const isCollapsed = !!collapsedSections['favorites'];
-            if (!isCollapsed) grid.style.display = '';
-            grid.innerHTML = filtered.map(toolId => {
-                const card = document.querySelector(`.tools-grid[data-section] .tool-card[data-tool="${toolId}"]`);
-                if (!card) return '';
-                const clone = card.cloneNode(true);
-                const btn = clone.querySelector('.fav-btn');
-                if (btn) { btn.textContent = '★'; btn.classList.add('active'); }
-                return clone.outerHTML;
-            }).join('');
-            grid.querySelectorAll('.tool-card').forEach(card => {
-                card.onclick = () => openTool(card.dataset.tool);
-                const btn = card.querySelector('.fav-btn');
-                if (btn) btn.onclick = e => { e.stopPropagation(); toggleFav(card.dataset.tool); };
-            });
+            if (section) section.style.display = 'none';
         }
 
         function renderRecent() {
             const section = document.getElementById('recent-section');
             const grid = document.getElementById('recent-grid');
-            if (recentTools.length === 0) { section.style.display = 'none'; return; }
+            section.style.display = 'block';
+
+            if (recentTools.length === 0) {
+                grid.innerHTML = '<p style="color:#666;font-size:0.9rem;padding:20px 0;">아직 사용한 도구가 없습니다.</p>';
+                return;
+            }
             const filtered = recentTools.filter(toolId => {
                 if (currentCategory === 'all') return true;
                 const card = document.querySelector(`.tools-grid[data-section] .tool-card[data-tool="${toolId}"]`);
                 return card && card.dataset.cat === currentCategory;
             });
-            if (filtered.length === 0) { section.style.display = 'none'; return; }
-            section.style.display = 'block';
+            if (filtered.length === 0) {
+                grid.innerHTML = '<p style="color:#666;font-size:0.9rem;padding:20px 0;">해당 카테고리의 최근 사용 도구가 없습니다.</p>';
+                return;
+            }
             // collapsed 상태는 toggleSection에서 관리
             const isCollapsed = !!collapsedSections['recent'];
             if (!isCollapsed) grid.style.display = '';
@@ -4779,10 +4778,27 @@
         });
 
         // Open tool with tracking
-        function openTool(toolId) {
+        function openTool(toolId, pushHistory = true) {
             addRecent(toolId);
             showTool(toolId);
+            if (pushHistory) {
+                history.pushState({ tool: toolId }, '', `#tool-${toolId}`);
+            }
         }
+
+        // Browser back button support
+        window.addEventListener('popstate', (e) => {
+            // 모든 도구 섹션 닫기
+            document.querySelectorAll('.tool-section').forEach(s => s.classList.remove('active'));
+
+            if (e.state && e.state.tool) {
+                openTool(e.state.tool, false);
+            } else if (e.state && e.state.tab) {
+                switchTab(e.state.tab);
+            } else {
+                showMain(false);
+            }
+        });
 
         // Batch Processing (반복 루트)
         let batchFiles = [];
@@ -4815,11 +4831,36 @@
 
         function switchTab(tab) {
             document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-            document.querySelector(`.nav-tab[data-tab="${tab}"]`).classList.add('active');
+            document.querySelector(`.nav-tab[data-tab="${tab}"]`)?.classList.add('active');
             document.getElementById('main-grid').style.display = tab === 'main' ? 'block' : 'none';
             document.getElementById('main-header').style.display = tab === 'main' ? 'block' : 'none';
             document.getElementById('batch-section').style.display = tab === 'batch' ? 'block' : 'none';
+            document.getElementById('favorites-page').style.display = tab === 'favorites' ? 'block' : 'none';
             document.querySelectorAll('.tool-section').forEach(s => s.classList.remove('active'));
+            if (tab === 'favorites') renderFavoritesPage();
+        }
+
+        function renderFavoritesPage() {
+            const grid = document.getElementById('favorites-page-grid');
+            const empty = document.getElementById('favorites-empty');
+            const tools = getAllTools();
+            const favTools = tools.filter(t => favorites.includes(t.id));
+
+            if (favTools.length === 0) {
+                grid.style.display = 'none';
+                empty.style.display = 'block';
+            } else {
+                grid.style.display = '';
+                empty.style.display = 'none';
+                grid.innerHTML = favTools.map(t => `
+                    <div class="tool-card" data-tool="${t.id}" onclick="openTool('${t.id}')">
+                        <button class="fav-btn active" onclick="event.stopPropagation();toggleFav('${t.id}');renderFavoritesPage();">★</button>
+                        <div class="icon">${t.icon}</div>
+                        <h3>${t.name}</h3>
+                        <p>${t.desc || ''}</p>
+                    </div>
+                `).join('');
+            }
         }
 
         function handleBatchFiles(files) {
@@ -5225,6 +5266,7 @@
             document.getElementById('main-grid').style.display = 'none';
             document.getElementById('main-header').style.display = 'none';
             document.getElementById('batch-section').style.display = 'none';
+            document.getElementById('favorites-page').style.display = 'none';
             document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
             const targetTab = t === 'contact' ? 'contact' : 'main';
             const tabEl = document.querySelector(`.nav-tab[data-tab="${targetTab}"]`);
@@ -5235,11 +5277,15 @@
             if (t === 'browser-info') loadBrowserInfo();
             if (t === 'calculator') renderCalcHistory();
         }
-        function showMain() {
+        function showMain(pushHistory = true) {
+            document.querySelectorAll('.tool-section').forEach(s => s.classList.remove('active'));
             switchTab('main');
             updateFavButtons();
             renderFavorites();
             renderRecent();
+            if (pushHistory) {
+                history.pushState({ tab: 'main' }, '', '#');
+            }
         }
 
         // Init
@@ -5249,6 +5295,9 @@
         renderFavorites();
         renderRecent();
         applyView();
+
+        // 초기 히스토리 상태 설정
+        history.replaceState({ tab: 'main' }, '', location.hash || '#');
 
         // Help System
         const helpTexts = {
